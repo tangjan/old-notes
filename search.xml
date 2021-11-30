@@ -15,4 +15,18 @@
         <tag>标签2</tag>
       </tags>
   </entry>
+  <entry>
+    <title>My awesome title</title>
+    <url>/2021/11/30/undefined./</url>
+    <content><![CDATA[<p>HELLO WORLD<br>I AM TANGJIAYAN</p>
+]]></content>
+      <categories>
+        <category>分类1</category>
+        <category>分类2</category>
+      </categories>
+      <tags>
+        <tag>标签1</tag>
+        <tag>标签2</tag>
+      </tags>
+  </entry>
 </search>
