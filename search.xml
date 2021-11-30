@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello, World</title>
+    <title>My awesome title</title>
     <url>/2021/11/30/undefined./</url>
-    <content><![CDATA[<p>HELLO WORLD</p>
-<p>I AM TANGJIAYAN</p>
+    <content><![CDATA[<p>HELLO WORLD<br>I AM TANGJIAYAN</p>
 ]]></content>
       <categories>
         <category>分类1</category>
@@ -17,8 +16,8 @@
   </entry>
   <entry>
     <title>My awesome title</title>
-    <url>/2021/11/30/undefined./</url>
-    <content><![CDATA[<p>HELLO WORLD<br>I AM TANGJIAYAN</p>
+    <url>/2016/10/13/undefined./</url>
+    <content><![CDATA[<p>test</p>
 ]]></content>
       <categories>
         <category>分类1</category>
