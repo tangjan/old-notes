@@ -10,41 +10,29 @@
   <entry>
     <title>Web前端1：概论</title>
     <url>/2021/11/18/web1/</url>
-    <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV1yx411d7Rc?from=search&amp;seid=6709307494925543999&amp;spm_id_from=333.337.0.0">Web前端开发_渡一教育_B站</a></p>
+    <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV1yx411d7Rc?from=search&amp;seid=6709307494925543999&amp;spm_id_from=333.337.0.0">Web前端开发_渡一教育_bilibili</a></p>
 <p>此次学习的小目标是把博客搭建搞明白。<br>博客就当笔记来用了，所以记的东西可能很杂、不是很系统化。</p>
-<br>
-
-<p><strong>1. 什么是Web前端？</strong></p>
-<p><span style="color: red;">Web</span>是“网”的意思，这个网指的是互联网。</p>
+<h2 id="1-什么是Web前端？"><a href="#1-什么是Web前端？" class="headerlink" title="1. 什么是Web前端？"></a><strong>1. 什么是Web前端？</strong></h2><p><span style="color: red;">Web</span>是“网”的意思，这个网指的是互联网。</p>
 <p><span style="color: red;">前端</span>是网页上呈现给用户的部分，前端涉及的技术有很多，最为典型的有3个：HTML、CSS和JavaScript，后续会详细介绍。与此相应的也有后端，即用户看不到的部分，数据库是后端技术中一个典型代表。概略地看，一个网站是由前后端两部分组成的。</p>
-<br>
-
-<p><strong>2. 8020定律</strong></p>
-<p>该定律也称二八定律，在这里解释为：20%的知识，有80%的场景可以用到；而其余80%的知识，只有20%的场景可以用到。  </p>
+<h2 id="2-8020定律"><a href="#2-8020定律" class="headerlink" title="2. 8020定律"></a><strong>2. 8020定律</strong></h2><p>该定律也称二八定律，在这里解释为：20%的知识，有80%的场景可以用到；而其余80%的知识，只有20%的场景可以用到。  </p>
 <p>也就是说，掌握一门技术20%的知识就可以投身到工作中了，但是求职面试时肯定会涉及到另外一些80%的知识，所以这80%的知识决定了你的竞争力以及你的专业程度。 </p>
 <p>个人认为学习编程也应符合二八定律，即20%时间的学理论，80%的时间动手敲代码。</p>
-<br>
-
-<p><strong>3. 关于术语</strong></p>
-<p>可能有的人见到术语就很烦，为什么不用大白话来描述这个东西，而非要编一个术语出来呢？</p>
+<h2 id="3-关于术语"><a href="#3-关于术语" class="headerlink" title="3. 关于术语"></a><strong>3. 关于术语</strong></h2><p>可能有的人见到术语就很烦，为什么不用大白话来描述这个东西，而非要编一个术语出来呢？</p>
 <p>术语的存在肯定是有它的道理的，促使术语出现的核心原因就是：人们懒。相比于术语，用大白话解释一个东西，肯定要花费更多的文字，说起来就要花更多的口舌，所以术语就诞生了，降低了人们的沟通成本。纵观人类的科技发展史，科技进步的主要动力之一也是因为懒，所以懒未必是个贬义词，因为懒而追求高效就会进步。</p>
 <p>这一现象在其他领域也有体现，比如英语发音中的连读、弱读、失爆等。再比如各种网络流行词，喜大普奔、气抖冷、u1s1、yyds……</p>
 <p>为了在业界中和同行沟通，术语的掌握是必须的。</p>
-<br>
-
-<p><strong>4. w3c、MDN、XML</strong></p>
-<p>①w3c，World Wide Web Consortium，万维网联盟，一个非营利性国际组织，主要职能是制定一系列的web标准。HTML、CSS就是由w3c制定的。</p>
+<h2 id="4-w3c、MDN、XML"><a href="#4-w3c、MDN、XML" class="headerlink" title="4. w3c、MDN、XML"></a><strong>4. w3c、MDN、XML</strong></h2><p>①<strong>w3c</strong>，World Wide Web Consortium，万维网联盟，一个非营利性国际组织，主要职能是制定一系列的web标准。HTML、CSS就是由w3c制定的。</p>
 <p>所以以后在学习HTML和CSS的过程中遇到了什么问题，就尽量到w3c的官网（<a href="http://www.w3.org/">www.w3.org</a>）去寻求解决，毕竟是最专业最权威的。</p>
-<p>②MDN，Mozilla Developer Network。w3c网站的内容都是英文的，一些术语看起来可能很吃力，这时就可以去MDN的官网（<a href="https://developer.mozilla.org/zh-CN/">www.mozilla.org</a>）探索，这里大部分是中文的。</p>
-<p>③XML，eXtensible Markup Language，可扩展标记语言，简单地说，就是HTML的升级版，灵活性更高、功能更强大。</p>
-<br>
-
-<p><strong>5. HTML、CSS简介</strong></p>
-<p>①HTML：Hyper Text Markup Language，超文本标记语言，定义网页中有什么。</p>
+<p>②<strong>MDN</strong>，Mozilla Developer Network。w3c网站的内容都是英文的，一些术语看起来可能很吃力，这时就可以去MDN的官网（<a href="https://developer.mozilla.org/zh-CN/">www.mozilla.org</a>）探索，这里大部分是中文的。</p>
+<p>③<strong>XML</strong>，eXtensible Markup Language，可扩展标记语言，简单地说，就是HTML的升级版，灵活性更高、功能更强大。</p>
+<h2 id="5-HTML、CSS简介"><a href="#5-HTML、CSS简介" class="headerlink" title="5. HTML、CSS简介"></a><strong>5. HTML、CSS简介</strong></h2><p>①<strong>HTML</strong>：Hyper Text Markup Language，超文本标记语言，定义网页中有什么。</p>
 <p>“超文本”即“超级文本”，就是用链接的方式，将文字组织到一起。我们可以把一个网页看作是一篇文章，有文字、图片等元素在里面，通过点击其中的某些文字图片，则可以跳转到另一个网页，这样的网页就是由超文本组成的。</p>
-<p>“标记”即”&lt;head&gt;&lt;/head&gt;”这种东西，以后会详细介绍。</p>
-<p><span>②CSS：Cascading Style Sheets，层叠样式表，定义网页中的东西长什么样子。</p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">MDN中的定义</a>为：CSS是一种样式表语言，用来描述HTML或XML文档在屏幕、纸质、音频等其它媒体上的元素应该如何被渲染的问题。</p>
+<p>“标记”即”&lt;head&gt;&lt;/head&gt;”这种东西，以后会挑一些常用的详细介绍。</p>
+<p>②<strong>CSS</strong>：Cascading Style Sheets，层叠样式表，定义网页中的东西长什么样子。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS">MDN中的定义</a>为：</p>
+<blockquote>
+<p>CSS是一种样式表语言，用来描述HTML或XML文档在屏幕、纸质、音频等其它媒体上的元素应该如何被渲染的问题。  </p>
+</blockquote>
 <p>举个例子，比如百度的主页网络正常地进入是这个样子的：</p>
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/baidu_homepage.png" loading="lazy"></p>
 <p>按下F12进入元素审查界面（我用的是Chrome浏览器），将一些CSS代码删除；</p>
@@ -53,10 +41,7 @@
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/baidu_F12_after.png" loading="lazy"></p>
 <p>相信这种界面大家都有见到过，尤其是在网络不好的情况下。早些年的手机版QQ空间也是这样的。</p>
 <p>从这个例子一看，CSS的作用就很形象了。</p>
-<br>
-
-<p><strong>6. 浏览器</strong></p>
-<p>浏览器是由shell（外壳）和core（内核）组成的。国内的很多浏览器，像360浏览器、QQ浏览器，它们没有自己的内核，都是采用别的公司的内核，所以在世界范围内没什么竞争力。</p>
+<h2 id="6-浏览器"><a href="#6-浏览器" class="headerlink" title="6. 浏览器"></a><strong>6. 浏览器</strong></h2><p>浏览器是由shell（外壳）和core（内核）组成的。国内的很多浏览器，像360浏览器、QQ浏览器，它们没有自己的内核，都是采用别的公司的内核，所以在世界范围内没什么竞争力。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/QQbrowser.png" loading="lazy"><em>来源：<a href="https://browser.qq.com/faq/#/detail/1">QQ浏览器帮助中心</a></em></p>
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/360browser.png" loading="lazy"><em>来源：<a href="https://browser.360.cn/se/help/index.html">360安全浏览器帮助中心</a></em></p>
 <p>所以现在提到市面上主流的浏览器，是指<span style="color: red;">有自己独立的内核</span>的浏览器。以下引用自<a href="https://baike.baidu.com/item/%E6%B5%8F%E8%A7%88%E5%99%A8/213911?fr=aladdin">百度百科</a>：</p>
@@ -96,21 +81,12 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 
-<br>
-
-<p><strong>1. 注释</strong></p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- 注释内容 --></span></code></pre>
+<h2 id="1-注释"><a href="#1-注释" class="headerlink" title="1. 注释"></a><strong>1. 注释</strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- 注释内容 --></span></code></pre>
 <p>VScode快捷键：Ctrl + /</p>
-<br>
-
-<p><strong>2. 元素（elements）</strong></p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 糖加盐个人博客 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
-
+<h2 id="2-元素（elements）"><a href="#2-元素（elements）" class="headerlink" title="2. 元素（elements）"></a><strong>2. 元素（elements）</strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 糖加盐个人博客 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
 <p><strong>①元素</strong> = 起始标记 + (元素属性) + 元素内容 + (结束标记) 。<br>元素属性、结束标记不是一定有的，所以加上了括号。<br>在这里，<br><span style="color: red;">起始标记</span>：&lt;a&gt;<br><span style="color: red;">元素属性</span>：href=”http://<span></span>www.<span></span>tangjiayan.<span></span>com”<br><span style="color: red;">元素内容</span>：糖加盐个人博客，<span style="color: red;"><br>结束标记</span>：&lt;/a&gt;<br>不同的元素有不同的功能，具体有哪些元素，可以在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element">这个网页</a>上查看。<br>有些元素比较特殊，如&lt;meta&gt;，可以看到它没有像&lt;/meta&gt;这样的结束标记，我们称这样的元素为<span style="color: red;">空元素</span>，也就是说它没有内容。<br>内容是指开始标记和结束标记之间的东西，连结束标记都没有，当然也就没有内容。  </p>
 <p><strong>②属性</strong> = 属性名 + 属性值 。<br>比如在这里href就是属性名，http://<span></span>www.<span></span>tangjiayan.<span></span>com就是属性值。<br>属性可以分为局部属性和全局属性。局部属性指某些元素特有的属性，全局属性指所有元素都具有这个属性。  </p>
-<br>
-
-<p><strong>3. 元素的嵌套</strong><br>①元素不可以相互嵌套。<br>正：</p>
+<h2 id="3-元素的嵌套"><a href="#3-元素的嵌套" class="headerlink" title="3. 元素的嵌套"></a><strong>3. 元素的嵌套</strong></h2><p>①元素不可以相互嵌套。<br>正：</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
@@ -120,17 +96,10 @@
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
-
 <p>②父元素、子元素、祖先元素、后代元素、兄弟元素<br>看这些名词的字面就能知道其意思了，就不解释了。</p>
-<br>
-
-<p><strong>4. 文档声明</strong></p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span></code></pre>
+<h2 id="4-文档声明"><a href="#4-文档声明" class="headerlink" title="4. 文档声明"></a><strong>4. 文档声明</strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span></code></pre>
 <p>这个东西就是文档声明，也就是HTML代码的第一行。作用是声明当前代码使用的标准，目前是HTML5。  </p>
-<br>
-
-<p><strong>5. &lt;html&gt;、&lt;head&gt;、&lt;body&gt;、&lt;meta&gt;、&lt;title&gt;</strong></p>
-<p>①<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/html">&lt;html&gt;</a><br>表示一个HTML文档的根元素（顶级元素），所有其他元素必须是此元素的后代。在HTML语言中<html>可以省略，但最好还是写上。</p>
+<h2 id="5-lt-html-gt-、-lt-head-gt-、-lt-body-gt-、-lt-meta-gt-、-lt-title-gt"><a href="#5-lt-html-gt-、-lt-head-gt-、-lt-body-gt-、-lt-meta-gt-、-lt-title-gt" class="headerlink" title="5. &lt;html&gt;、&lt;head&gt;、&lt;body&gt;、&lt;meta&gt;、&lt;title&gt;"></a><strong>5. &lt;html&gt;、&lt;head&gt;、&lt;body&gt;、&lt;meta&gt;、&lt;title&gt;</strong></h2><p>①<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/html">&lt;html&gt;</a><br>表示一个HTML文档的根元素（顶级元素），所有其他元素必须是此元素的后代。在HTML语言中<html>可以省略，但最好还是写上。</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 ……
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
@@ -147,9 +116,7 @@
 <p> ④<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/title">&lt;title&gt;</a><br>表示网页标题，显示在浏览器的选项卡上面。</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span> 就是这里 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span></code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/title.png" loading="lazy"></p>
-<br>
-
-<p><strong>6. web语义化</strong><br>语义化可以让页面具有良好的结构与含义，从而让人和机器都能快速理解网页内容。<br>比如你使用a元素给文本加上超链接时，网页中的文本会显示出下划线。这时我们就要严格根据语义化来理解这个事情：<span style="color: red;">不是因为我想要给文本加上下划线才使用a元素，而是我想让这段文字表示超链接才使用a元素</span>。“超链接”是语义化的问题，“下划线”是CSS的问题。也就是说，不是超链接的元素我可以通过CSS加上下划线样式，是超链接的元素我也可以通过CSS删掉下划线样式。<br>具体应用如：  </p>
+<h2 id="6-web语义化"><a href="#6-web语义化" class="headerlink" title="6. web语义化"></a><strong>6. web语义化</strong></h2><p>语义化可以让页面具有良好的结构与含义，从而让人和机器都能快速理解网页内容。<br>比如你使用a元素给文本加上超链接时，网页中的文本会显示出下划线。这时我们就要严格根据语义化来理解这个事情：<span style="color: red;">不是因为我想要给文本加上下划线才使用a元素，而是我想让这段文字表示超链接才使用a元素</span>。“超链接”是语义化的问题，“下划线”是CSS的问题。也就是说，不是超链接的元素我可以通过CSS加上下划线样式，是超链接的元素我也可以通过CSS删掉下划线样式。<br>具体应用如：  </p>
 <ul>
 <li>搜索引擎优化（Search Engine Optimization，SEO）。  </li>
 <li>浏览器的阅读模式、语音模式等。</li>
