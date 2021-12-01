@@ -1,22 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>My awesome title</title>
-    <url>/2016/10/13/undefined./</url>
-    <content><![CDATA[<p>test</p>
-]]></content>
-      <categories>
-        <category>分类1</category>
-        <category>分类2</category>
-      </categories>
-      <tags>
-        <tag>标签1</tag>
-        <tag>标签2</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>My awesome title</title>
-    <url>/2021/11/30/undefined./</url>
+    <title>HELLO WORLD</title>
+    <url>/2016/10/13/hello/</url>
     <content><![CDATA[<p>HELLO WORLD<br>I AM TANGJIAYAN</p>
 ]]></content>
       <categories>
