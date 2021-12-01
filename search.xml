@@ -10,9 +10,7 @@
   <entry>
     <title>Web前端1：概论</title>
     <url>/2021/11/18/web1/</url>
-    <content><![CDATA[<span style="font-size: 14pt;">
-
-<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV1yx411d7Rc?from=search&amp;seid=6709307494925543999&amp;spm_id_from=333.337.0.0">Web前端开发_渡一教育_B站</a></p>
+    <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV1yx411d7Rc?from=search&amp;seid=6709307494925543999&amp;spm_id_from=333.337.0.0">Web前端开发_渡一教育_B站</a></p>
 <p>此次学习的小目标是把博客搭建搞明白。<br>博客就当笔记来用了，所以记的东西可能很杂、不是很系统化。</p>
 <br>
 
@@ -59,10 +57,9 @@
 
 <p><strong>6. 浏览器</strong></p>
 <p>浏览器是由shell（外壳）和core（内核）组成的。国内的很多浏览器，像360浏览器、QQ浏览器，它们没有自己的内核，都是采用别的公司的内核，所以在世界范围内没什么竞争力。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/QQbrowser.png" loading="lazy"></p>
-<p>来源：<a href="https://browser.qq.com/faq/#/detail/1">QQ浏览器帮助中心</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/QQbrowser.png" loading="lazy"><br><em>来源：<a href="https://browser.qq.com/faq/#/detail/1">QQ浏览器帮助中心</a></em></p>
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/360browser.png" loading="lazy"></p>
-<p>来源：<a href="https://browser.360.cn/se/help/index.html">360安全浏览器帮助中心</a></p>
+<p><em>来源：<a href="https://browser.360.cn/se/help/index.html">360安全浏览器帮助中心</a></em></p>
 <p>所以现在提到市面上主流的浏览器，是指有自己<span style="color: red;">独立的内核的浏览器</span>。  以下摘自<a href="https://baike.baidu.com/item/%E6%B5%8F%E8%A7%88%E5%99%A8/213911?fr=aladdin">百度百科</a>：</p>
 <p>浏览器的种类很多，但是主流的内核只有四种，各种不同的浏览器，就是在主流内核的基础上，添加不同的功能构成。</p>
 <p>①<span style="color: red;">Trident内核</span><br>代表产品为Internet Explorer，又称其为IE内核。Trident（又称为MSHTML），是微软开发的一种排版引擎。使用Trident渲染引擎的浏览器有：IE、傲游、世界之窗浏览器、Avant、腾讯TT、Netscape 8、NetCaptor、Sleipnir、GOSURF、GreenBrowser和KKman等。</p>
@@ -75,7 +72,98 @@
 <br>
 <br>
 
-</span>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端2：第一个网页、语义化</title>
+    <url>/2021/11/28/web2/</url>
+    <content><![CDATA[<p>直接拿出网页代码来，然后一点点解释：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=edge<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token comment">&lt;!-- 注释内容 --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 糖加盐的博客 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+
+<br>
+
+<p><strong>1. 注释</strong></p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!-- 注释内容 --></span></code></pre>
+<p>VScode快捷键：Ctrl + /</p>
+<br>
+
+<p><strong>2. 元素（elements）</strong></p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.tangjiayan.xyz<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 糖加盐的小站 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
+
+<p><strong>①元素</strong> = 起始标记 + (元素属性) + 元素内容 + (结束标记) 。<br>元素属性、结束标记不是一定有的，所以加上了括号。<br>在这里，<br><span style="color: red;">起始标记</span>：&lt;a&gt;<br><span style="color: red;">元素属性</span>：href=”http://<span></span><a href="http://www.tangjiayan.xyz&quot;/">www.tangjiayan.xyz&quot;</a><br><span style="color: red;">元素内容</span>：糖加盐的小站，<span style="color: red;"><br>结束标记</span>：&lt;/a&gt;<br>不同的元素有不同的功能，具体有哪些元素，可以在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element">这个网页</a>上查看。<br>有些元素比较特殊，如&lt;meta&gt;，可以看到它没有像&lt;/meta&gt;这样的结束标记，我们称这样的元素为<span style="color: red;">空元素</span>，也就是说它没有内容。<br>内容是指开始标记和结束标记之间的东西，连结束标记都没有，当然也就没有内容。  </p>
+<p><strong>②属性</strong> = 属性名 + 属性值 。<br>比如在这里href就是属性名，http://<span></span><a href="http://www.tangjiayan.com就是属性值./">www.tangjiayan.com就是属性值。</a><br>属性可以分为局部属性和全局属性。局部属性指某些元素特有的属性，全局属性指所有元素都具有这个属性。  </p>
+<br>
+
+<p><strong>3. 元素的嵌套</strong><br>①元素不可以相互嵌套。<br>正：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>误：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+
+<p>②父元素、子元素、祖先元素、后代元素、兄弟元素<br>看这些名词的字面就能知道其意思了，就不解释了。</p>
+<br>
+
+<p><strong>4. 文档声明</strong></p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span></code></pre>
+<p>这个东西就是文档声明，也就是HTML代码的第一行。作用是声明当前代码使用的标准，目前是HTML5。  </p>
+<br>
+
+<p><strong>5. &lt;html&gt;、&lt;head&gt;、&lt;body&gt;、&lt;meta&gt;、&lt;title&gt;</strong></p>
+<p>①<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/html">&lt;html&gt;</a><br>表示一个HTML文档的根元素（顶级元素），所有其他元素必须是此元素的后代。在HTML语言中<html>可以省略，但最好还是写上。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+……
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+<p>在这里，属性lang表示language，表示该HTML文档是由什么语言书写的。比如这里lang的值是en，表示English，对于中文浏览器，如果安装了一些翻译插件，浏览器在加载这个这个页面时就会触发翻译行为。</p>
+<p>②<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/head">&lt;head&gt;</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/body">&lt;body&gt;</a><br>这两个元素必须作为&lt;html&gt;的子元素书写。<br><span style="color: red;">&lt;head&gt;</span>：这个元素里的内容不会显示在网页页面上，它包含一些配置信息（元数据），包括文档的标题，引用的文档样式和脚本等。<br><span style="color: red;">&lt;body&gt;</span>：文档主体元素，页面上所有要显示的内容都在这里。一般我们写代码就从这里开始写。</p>
+<p>③<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/meta">&lt;meta&gt;</a><br>这是一个空元素，用来表示元数据，可以理解为一些附加信息，这些信息不会显示在网页上，而是起到一些其他作用。<br>比如，在VScode的默认HTML模板中，<head>的内容如下：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=edge<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span></code></pre>
+<p>其中，&lt;meta charset=”UTF-8”&gt;是一个字符集声明，声明改文档使用的字符编码是UTF-8。<br>&lt;meta http-equiv=”X-UA-Compatible” content=”IE=edge”&gt;用来专门告诉IE浏览器建议使用edge内核。<br>&lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;用来适配移动端。  </p>
+<p> ④<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/title">&lt;title&gt;</a><br>表示网页标题，显示在浏览器的选项卡上面。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span> 就是这里 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/title.png" loading="lazy"></p>
+<br>
+
+<p><strong>6. web语义化</strong><br>语义化可以让页面具有良好的结构与含义，从而让人和机器都能快速理解网页内容。<br>比如你使用a元素给文本加上超链接时，网页中的文本会显示出下划线。这时我们就要严格根据语义化来理解这个事情：<span style="color: red;">不是因为我想要给文本加上下划线才使用a元素，而是我想让这段文字表示超链接才使用a元素</span>。“超链接”是语义化的问题，“下划线”是CSS的问题。也就是说，不是超链接的元素我可以通过CSS加上下划线样式，是超链接的元素我也可以通过CSS删掉下划线样式。<br>具体应用如：  </p>
+<ul>
+<li>搜索引擎优化（Search Engine Optimization，SEO）。  </li>
+<li>浏览器的阅读模式、语音模式等。</li>
+</ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</div>
 
 <hr>
 ]]></content>
