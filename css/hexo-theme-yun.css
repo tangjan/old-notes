@@ -229,21 +229,6 @@ body::before {
     opacity: 1;
   }
 }
-body {
-  cursor: url("https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/pointer.cur"), auto;
-}
-a {
-  cursor: url("https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur"), auto;
-}
-a:hover {
-  cursor: url("https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur"), auto;
-}
-.hty-icon-button {
-  cursor: url("https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur"), pointer;
-}
-input {
-  cursor: url("https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/text.cur"), auto;
-}
 :root {
   --banner-line-color: #000;
   --banner-char-color: #000;
@@ -811,7 +796,7 @@ input {
 }
 .wordcloud #wordcloud-canvas,
 .wordcloud #wordcloud-sidebar-canvas {
-  cursor: url("https://cdn.jsdelivr.net/gh/YunYouJun/cdn/css/md-cursors/link.cur"), pointer;
+  cursor: url("$cursor-pointer"), pointer;
 }
 .wordcloud #wordbox {
   pointer-events: none;

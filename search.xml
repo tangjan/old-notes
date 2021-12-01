@@ -64,6 +64,62 @@
       </tags>
   </entry>
   <entry>
+    <title>Web前端3：文本元素（h、p、span、pre）、块级元素、行级元素、HTML实体</title>
+    <url>/2021/11/29/web3/</url>
+    <content><![CDATA[<h2 id="1-HTML5元素周期表"><a href="#1-HTML5元素周期表" class="headerlink" title="1. HTML5元素周期表"></a><strong>1. <a href="https://www.xuanfengge.com/funny/html5/element/">HTML5元素周期表</a></strong></h2><h2 id="2-lt-h-gt"><a href="#2-lt-h-gt" class="headerlink" title="2. &lt;h&gt;"></a><strong>2. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Heading_Elements">&lt;h&gt;</a></strong></h2><p>这里&lt;h&gt;表示&lt;h1&gt;~&lt;h6&gt;的统称，分别表示一级标题~六级标题。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>一级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>二级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>三级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">></span></span>四级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h5</span><span class="token punctuation">></span></span>五级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h5</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h6</span><span class="token punctuation">></span></span>六级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h6</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/h1~h6.png" loading="lazy"><br>这里强调一点，根据web<span style="color:red">语义化</span>的概念，一级标题<span style="color:red">未必</span>比二级标题大。<br><span style="color:red">插曲小tip</span>：<br>①在VScode里，Ctrl + Enter可以直接切换光标至下一行行首，不论当前光标在哪（不同于只按Enter）；Shift + Ctrl + Enter直接切换至上一行行首<br>②<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/emmet1.png" loading="lazy"><br>这时按Tab键可以扩展为：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/emmet2.png" loading="lazy"><br>（需要安装Emmet插件，不过一般安装VScode时就这个插件也自动安装好了）</p>
+<h2 id="3-lt-p-gt"><a href="#3-lt-p-gt" class="headerlink" title="3. &lt;p&gt;"></a><strong>3. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/p">&lt;p&gt;</a></strong></h2><p>p即paragraph，表示段落。<br><span style="color:red">插曲小tip</span>：<br>乱数假文：Lorem ipsum。常用来测试排版，“Lorem + 数字”可生成指定个数单词。</p>
+<h2 id="4-lt-span-gt"><a href="#4-lt-span-gt" class="headerlink" title="4. &lt;span&gt;"></a><strong>4. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/span">&lt;span&gt;</a></strong></h2><p>span是一个没有语义的元素。<br>为什么会存在没有语义的元素呢？因为有的时候就是需要将网页中的某些内容设置为一个个没有语义的span，然后再进行处理，如：</p>
+<pre class="language-none"><code class="language-none">光学三原色包含：红、绿、蓝</code></pre>
+<p>现在我们想让“红、绿、蓝”这三个字分别显示为红色、绿色、蓝色，这时就可以用span元素分别将这三个字套起来，然后用CSS设置样式：</p>
+<pre class="language-html" data-language="html"><code class="language-html">光学三原色包含：
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span>red</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>红<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>、
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span>green</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>绿<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>、
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span>blue</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>蓝<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
+<p>实际效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/span.png" loading="lazy"><br>可见“红、绿、蓝”确实没什么语义，但又需要用某个元素将它们分割开，分别设计样式，这就是span的用武之地了。</p>
+<h2 id="5-块级元素、行内元素"><a href="#5-块级元素、行内元素" class="headerlink" title="5. 块级元素、行内元素"></a><strong>5. 块级元素、行内元素</strong></h2><p>块级元素（Block-level Elements）后会另起一个新行，而行内元素（Inline Elements）不会。<br>一般情况下，行内元素只能包含数据和其他行内元素。而块级元素可以包含行内元素和其他块级元素。这种结构上的包含继承区别可以使块级元素创建比行内元素更”大型“的结构。<br>块级元素、行内元素的说法在HTML5中已经弃用，这种区别被一个更复杂的内容类别代替。“块级”类别大致相当于 HTML5 中的流内容类别，而“行内”类别相当于 HTML5 中的措辞内容 类别，不过除了这两个还有其他类别。<br>究其弃用的原因是因为语义化的要求，块级元素和行内元素的主要区别是元素结束后是否另起新行，这已经属于样式的范畴，应由CSS负责，而不应由是什么元素类别决定，元素的含义应该是语义上的，而不是样式上的，所以在HTML5中这种说法被弃用了。  </p>
+<h2 id="6-lt-pre-gt"><a href="#6-lt-pre-gt" class="headerlink" title="6. &lt;pre&gt;"></a><strong>6. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/pre">&lt;pre&gt;</a></strong></h2><p>一般HTML的文档全局中，连续空白的字符（空格、换行）会被折叠为一个，这可称为<span style="color:red">空白折叠</span>规则。<br>这个规则是有原因的，因为我们在书写HTML文档的时候经常会用到行首缩进来增加代码的可读性，有时一行显示不下了我们也会在行尾补充个换行。所以为了区分开代码与页面，产生了这个规则。<br>为了弥补这个规则，就可以使用pre。pre表示预定义格式文本。在该元素中的文本通常按照原文件中的编排，以等宽字体的形式展现出来，文本中的空白符（比如空格和换行符）都会显示出来。（但紧跟在&lt;pre&gt;开始标签后的换行符会被省略）</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>
+        ___ ___         .__  .__                               .__       .___
+        /   |   \   ____ |  | |  |   ____   __  _  _____________|  |    __| _/
+       /    ~    \_/ __ \|  | |  |  /  _ \  \ \/ \/ /  _ \_  __ \  |   / __ | 
+       \    Y    /\  ___/|  |_|  |_(  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>_</span><span class="token punctuation">></span></span> )  \     (  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>_</span><span class="token punctuation">></span></span> )  | \/  |__/ /_/ | 
+        \___|_  /  \___  >____/____/\____/    \/\_/ \____/|__|  |____/\____ | 
+              \/       \/                                                  \/
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/helloworld.png" loading="lazy"><br>pre可用于显示代码，不过通常会在外面再套一层&lt;code&gt;&lt;/code&gt;来增强语义性。</p>
+<h2 id="7-实体（Entity）"><a href="#7-实体（Entity）" class="headerlink" title="7. 实体（Entity）"></a><strong>7. <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Entity">实体（Entity）</a></strong></h2><p>一些符号很难在网页上显示出来，比如你想在网页上显示如下内容：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>表示预定义格式文本元素</code></pre>
+<p>直接输出的话&lt;pre&gt;会被忽略掉：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/entity1.png" loading="lazy"><br>这时就要用到实体了  ，实体的使用通常有两种方式：<br>①<span style="color:red">&amp;字母;</span><br>②<span style="color:red">&amp;#数字;</span><br>注意分号也是要加上的内容。<br>数字不太好记忆，推荐通过字母来使用实体。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token entity named-entity" title="&lt;">&amp;lt;</span>pre<span class="token entity named-entity" title="&gt;">&amp;gt;</span>表示预定义格式文本元素</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/entity2.png" loading="lazy"><br>下面给出一些常用的实体：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>
+    小于号：<span class="token entity named-entity" title="&lt;">&amp;lt;</span>    &amp;：<span class="token entity named-entity" title="&amp;">&amp;amp;</span>        版权符号：<span class="token entity named-entity" title="&copy;">&amp;copy;</span>
+    大于号：<span class="token entity named-entity" title="&gt;">&amp;gt;</span>    空格：<span class="token entity named-entity" title="&nbsp;">&amp;nbsp;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/entity3.png" loading="lazy"></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Web前端2：第一个网页、语义化</title>
     <url>/2021/11/28/web2/</url>
     <content><![CDATA[<p>直接拿出网页代码来，然后一点点解释：</p>
@@ -128,62 +184,6 @@
 <br>
 
 </div>
-
-<hr>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web前端3：文本元素（h、p、span、pre）、块级元素、行级元素、HTML实体</title>
-    <url>/2021/11/29/web3/</url>
-    <content><![CDATA[<h2 id="1-HTML5元素周期表"><a href="#1-HTML5元素周期表" class="headerlink" title="1. HTML5元素周期表"></a><strong>1. <a href="https://www.xuanfengge.com/funny/html5/element/">HTML5元素周期表</a></strong></h2><h2 id="2-lt-h-gt"><a href="#2-lt-h-gt" class="headerlink" title="2. &lt;h&gt;"></a><strong>2. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Heading_Elements">&lt;h&gt;</a></strong></h2><p>这里&lt;h&gt;表示&lt;h1&gt;~&lt;h6&gt;的统称，分别表示一级标题~六级标题。</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>一级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>二级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>三级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">></span></span>四级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h5</span><span class="token punctuation">></span></span>五级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h5</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h6</span><span class="token punctuation">></span></span>六级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h6</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/h1~h6.png" loading="lazy"><br>这里强调一点，根据web<span style="color:red">语义化</span>的概念，一级标题<span style="color:red">未必</span>比二级标题大。<br><span style="color:red">插曲小tip</span>：<br>①在VScode里，Ctrl + Enter可以直接切换光标至下一行行首，不论当前光标在哪（不同于只按Enter）；Shift + Ctrl + Enter直接切换至上一行行首<br>②<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/emmet1.png" loading="lazy"><br>这时按Tab键可以扩展为：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/emmet2.png" loading="lazy"><br>（需要安装Emmet插件，不过一般安装VScode时就这个插件也自动安装好了）</p>
-<h2 id="3-lt-p-gt"><a href="#3-lt-p-gt" class="headerlink" title="3. &lt;p&gt;"></a><strong>3. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/p">&lt;p&gt;</a></strong></h2><p>p即paragraph，表示段落。<br><span style="color:red">插曲小tip</span>：<br>乱数假文：Lorem ipsum。常用来测试排版，“Lorem + 数字”可生成指定个数单词。</p>
-<h2 id="4-lt-span-gt"><a href="#4-lt-span-gt" class="headerlink" title="4. &lt;span&gt;"></a><strong>4. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/span">&lt;span&gt;</a></strong></h2><p>span是一个没有语义的元素。<br>为什么会存在没有语义的元素呢？因为有的时候就是需要将网页中的某些内容设置为一个个没有语义的span，然后再进行处理，如：</p>
-<pre class="language-none"><code class="language-none">光学三原色包含：红、绿、蓝</code></pre>
-<p>现在我们想让“红、绿、蓝”这三个字分别显示为红色、绿色、蓝色，这时就可以用span元素分别将这三个字套起来，然后用CSS设置样式：</p>
-<pre class="language-html" data-language="html"><code class="language-html">光学三原色包含：
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span>red</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>红<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>、
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span>green</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>绿<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>、
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span>blue</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>蓝<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
-<p>实际效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/span.png" loading="lazy"><br>可见“红、绿、蓝”确实没什么语义，但又需要用某个元素将它们分割开，分别设计样式，这就是span的用武之地了。</p>
-<h2 id="5-块级元素、行内元素"><a href="#5-块级元素、行内元素" class="headerlink" title="5. 块级元素、行内元素"></a><strong>5. 块级元素、行内元素</strong></h2><p>块级元素（Block-level Elements）后会另起一个新行，而行内元素（Inline Elements）不会。<br>一般情况下，行内元素只能包含数据和其他行内元素。而块级元素可以包含行内元素和其他块级元素。这种结构上的包含继承区别可以使块级元素创建比行内元素更”大型“的结构。<br>块级元素、行内元素的说法在HTML5中已经弃用，这种区别被一个更复杂的内容类别代替。“块级”类别大致相当于 HTML5 中的流内容类别，而“行内”类别相当于 HTML5 中的措辞内容 类别，不过除了这两个还有其他类别。<br>究其弃用的原因是因为语义化的要求，块级元素和行内元素的主要区别是元素结束后是否另起新行，这已经属于样式的范畴，应由CSS负责，而不应由是什么元素类别决定，元素的含义应该是语义上的，而不是样式上的，所以在HTML5中这种说法被弃用了。  </p>
-<h2 id="6-lt-pre-gt"><a href="#6-lt-pre-gt" class="headerlink" title="6. &lt;pre&gt;"></a><strong>6. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/pre">&lt;pre&gt;</a></strong></h2><p>一般HTML的文档全局中，连续空白的字符（空格、换行）会被折叠为一个，这可称为<span style="color:red">空白折叠</span>规则。<br>这个规则是有原因的，因为我们在书写HTML文档的时候经常会用到行首缩进来增加代码的可读性，有时一行显示不下了我们也会在行尾补充个换行。所以为了区分开代码与页面，产生了这个规则。<br>为了弥补这个规则，就可以使用pre。pre表示预定义格式文本。在该元素中的文本通常按照原文件中的编排，以等宽字体的形式展现出来，文本中的空白符（比如空格和换行符）都会显示出来。（但紧跟在&lt;pre&gt;开始标签后的换行符会被省略）</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>
-        ___ ___         .__  .__                               .__       .___
-        /   |   \   ____ |  | |  |   ____   __  _  _____________|  |    __| _/
-       /    ~    \_/ __ \|  | |  |  /  _ \  \ \/ \/ /  _ \_  __ \  |   / __ | 
-       \    Y    /\  ___/|  |_|  |_(  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>_</span><span class="token punctuation">></span></span> )  \     (  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>_</span><span class="token punctuation">></span></span> )  | \/  |__/ /_/ | 
-        \___|_  /  \___  >____/____/\____/    \/\_/ \____/|__|  |____/\____ | 
-              \/       \/                                                  \/
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/helloworld.png" loading="lazy"><br>pre可用于显示代码，不过通常会在外面再套一层&lt;code&gt;&lt;/code&gt;来增强语义性。</p>
-<h2 id="7-实体（Entity）"><a href="#7-实体（Entity）" class="headerlink" title="7. 实体（Entity）"></a><strong>7. <a href="https://developer.mozilla.org/zh-CN/docs/Glossary/Entity">实体（Entity）</a></strong></h2><p>一些符号很难在网页上显示出来，比如你想在网页上显示如下内容：</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>表示预定义格式文本元素</code></pre>
-<p>直接输出的话&lt;pre&gt;会被忽略掉：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/entity1.png" loading="lazy"><br>这时就要用到实体了  ，实体的使用通常有两种方式：<br>①<span style="color:red">&amp;字母;</span><br>②<span style="color:red">&amp;#数字;</span><br>注意分号也是要加上的内容。<br>数字不太好记忆，推荐通过字母来使用实体。  </p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token entity named-entity" title="&lt;">&amp;lt;</span>pre<span class="token entity named-entity" title="&gt;">&amp;gt;</span>表示预定义格式文本元素</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/entity2.png" loading="lazy"><br>下面给出一些常用的实体：</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pre</span><span class="token punctuation">></span></span>
-    小于号：<span class="token entity named-entity" title="&lt;">&amp;lt;</span>    &amp;：<span class="token entity named-entity" title="&amp;">&amp;amp;</span>        版权符号：<span class="token entity named-entity" title="&copy;">&amp;copy;</span>
-    大于号：<span class="token entity named-entity" title="&gt;">&amp;gt;</span>    空格：<span class="token entity named-entity" title="&nbsp;">&amp;nbsp;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>pre</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/entity3.png" loading="lazy"></p>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 <hr>
 ]]></content>
