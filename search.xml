@@ -57,15 +57,12 @@
 
 <p><strong>6. 浏览器</strong></p>
 <p>浏览器是由shell（外壳）和core（内核）组成的。国内的很多浏览器，像360浏览器、QQ浏览器，它们没有自己的内核，都是采用别的公司的内核，所以在世界范围内没什么竞争力。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/QQbrowser.png" loading="lazy"><br><em>来源：<a href="https://browser.qq.com/faq/#/detail/1">QQ浏览器帮助中心</a></em></p>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/360browser.png" loading="lazy"></p>
-<p><em>来源：<a href="https://browser.360.cn/se/help/index.html">360安全浏览器帮助中心</a></em></p>
-<p>所以现在提到市面上主流的浏览器，是指有自己<span style="color: red;">独立的内核的浏览器</span>。  以下摘自<a href="https://baike.baidu.com/item/%E6%B5%8F%E8%A7%88%E5%99%A8/213911?fr=aladdin">百度百科</a>：</p>
-<p>浏览器的种类很多，但是主流的内核只有四种，各种不同的浏览器，就是在主流内核的基础上，添加不同的功能构成。</p>
-<p>①<span style="color: red;">Trident内核</span><br>代表产品为Internet Explorer，又称其为IE内核。Trident（又称为MSHTML），是微软开发的一种排版引擎。使用Trident渲染引擎的浏览器有：IE、傲游、世界之窗浏览器、Avant、腾讯TT、Netscape 8、NetCaptor、Sleipnir、GOSURF、GreenBrowser和KKman等。</p>
-<p>②<span style="color: red;">Gecko内核</span><br>代表作品为Mozilla Firefox。Gecko是一套开放源代码的、以C++编写的网页排版引擎，是最流行的排版引擎之一，仅次于Trident。使用它的最著名浏览器有Firefox、Netscape6至9。</p>
-<p>③<span style="color: red;">WebKit内核</span><br>代表作品有Safari、Chrome。WebKit是一个开源项目，包含了来自KDE项目和苹果公司的一些组件，主要用于Mac OS系统，它的特点在于源码结构清晰、渲染速度极快。缺点是对网页代码的兼容性不高，导致一些编写不标准的网页无法正常显示。</p>
-<p>④<span style="color: red;">Presto内核</span><br>代表作品Opera。Presto是由Opera Software开发的浏览器排版引擎，供Opera 7.0及以上使用。它取代了旧版Opera 4至6版本使用的Elektra排版引擎，包括加入动态功能，例如网页或其部分可随着DOM及Script语法的事件而重新排版。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/QQbrowser.png" loading="lazy"><em>来源：<a href="https://browser.qq.com/faq/#/detail/1">QQ浏览器帮助中心</a></em></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/360browser.png" loading="lazy"><em>来源：<a href="https://browser.360.cn/se/help/index.html">360安全浏览器帮助中心</a></em></p>
+<p>所以现在提到市面上主流的浏览器，是指<span style="color: red;">有自己独立的内核</span>的浏览器。以下引用自<a href="https://baike.baidu.com/item/%E6%B5%8F%E8%A7%88%E5%99%A8/213911?fr=aladdin">百度百科</a>：</p>
+<blockquote>
+<p>浏览器的种类很多，但是主流的内核只有四种，各种不同的浏览器，就是在主流内核的基础上，添加不同的功能构成。<br>①<span style="color: red;">Trident内核</span><br>代表产品为Internet Explorer，又称其为IE内核。Trident（又称为MSHTML），是微软开发的一种排版引擎。使用Trident渲染引擎的浏览器有：IE、傲游、世界之窗浏览器、Avant、腾讯TT、Netscape 8、NetCaptor、Sleipnir、GOSURF、GreenBrowser和KKman等。<br>②<span style="color: red;">Gecko内核</span><br>代表作品为Mozilla Firefox。Gecko是一套开放源代码的、以C++编写的网页排版引擎，是最流行的排版引擎之一，仅次于Trident。使用它的最著名浏览器有Firefox、Netscape6至9。<br>③<span style="color: red;">WebKit内核</span><br>代表作品有Safari、Chrome。WebKit是一个开源项目，包含了来自KDE项目和苹果公司的一些组件，主要用于Mac OS系统，它的特点在于源码结构清晰、渲染速度极快。缺点是对网页代码的兼容性不高，导致一些编写不标准的网页无法正常显示。<br>④<span style="color: red;">Presto内核</span><br>代表作品Opera。Presto是由Opera Software开发的浏览器排版引擎，供Opera 7.0及以上使用。它取代了旧版Opera 4至6版本使用的Elektra排版引擎，包括加入动态功能，例如网页或其部分可随着DOM及Script语法的事件而重新排版。</p>
+</blockquote>
 <br>
 <br>
 <br>
@@ -95,7 +92,7 @@
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
     <span class="token comment">&lt;!-- 注释内容 --></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 糖加盐的博客 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 糖加盐个人博客 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
 
@@ -107,10 +104,10 @@
 <br>
 
 <p><strong>2. 元素（elements）</strong></p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.tangjiayan.xyz<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 糖加盐的小站 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 糖加盐个人博客 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
 
-<p><strong>①元素</strong> = 起始标记 + (元素属性) + 元素内容 + (结束标记) 。<br>元素属性、结束标记不是一定有的，所以加上了括号。<br>在这里，<br><span style="color: red;">起始标记</span>：&lt;a&gt;<br><span style="color: red;">元素属性</span>：href=”http://<span></span><a href="http://www.tangjiayan.xyz&quot;/">www.tangjiayan.xyz&quot;</a><br><span style="color: red;">元素内容</span>：糖加盐的小站，<span style="color: red;"><br>结束标记</span>：&lt;/a&gt;<br>不同的元素有不同的功能，具体有哪些元素，可以在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element">这个网页</a>上查看。<br>有些元素比较特殊，如&lt;meta&gt;，可以看到它没有像&lt;/meta&gt;这样的结束标记，我们称这样的元素为<span style="color: red;">空元素</span>，也就是说它没有内容。<br>内容是指开始标记和结束标记之间的东西，连结束标记都没有，当然也就没有内容。  </p>
-<p><strong>②属性</strong> = 属性名 + 属性值 。<br>比如在这里href就是属性名，http://<span></span><a href="http://www.tangjiayan.com就是属性值./">www.tangjiayan.com就是属性值。</a><br>属性可以分为局部属性和全局属性。局部属性指某些元素特有的属性，全局属性指所有元素都具有这个属性。  </p>
+<p><strong>①元素</strong> = 起始标记 + (元素属性) + 元素内容 + (结束标记) 。<br>元素属性、结束标记不是一定有的，所以加上了括号。<br>在这里，<br><span style="color: red;">起始标记</span>：&lt;a&gt;<br><span style="color: red;">元素属性</span>：href=”http://<span></span>www.<span></span>tangjiayan.<span></span>com”<br><span style="color: red;">元素内容</span>：糖加盐个人博客，<span style="color: red;"><br>结束标记</span>：&lt;/a&gt;<br>不同的元素有不同的功能，具体有哪些元素，可以在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element">这个网页</a>上查看。<br>有些元素比较特殊，如&lt;meta&gt;，可以看到它没有像&lt;/meta&gt;这样的结束标记，我们称这样的元素为<span style="color: red;">空元素</span>，也就是说它没有内容。<br>内容是指开始标记和结束标记之间的东西，连结束标记都没有，当然也就没有内容。  </p>
+<p><strong>②属性</strong> = 属性名 + 属性值 。<br>比如在这里href就是属性名，http://<span></span>www.<span></span>tangjiayan.<span></span>com就是属性值。<br>属性可以分为局部属性和全局属性。局部属性指某些元素特有的属性，全局属性指所有元素都具有这个属性。  </p>
 <br>
 
 <p><strong>3. 元素的嵌套</strong><br>①元素不可以相互嵌套。<br>正：</p>
@@ -146,7 +143,7 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span></code></pre>
-<p>其中，&lt;meta charset=”UTF-8”&gt;是一个字符集声明，声明改文档使用的字符编码是UTF-8。<br>&lt;meta http-equiv=”X-UA-Compatible” content=”IE=edge”&gt;用来专门告诉IE浏览器建议使用edge内核。<br>&lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;用来适配移动端。  </p>
+<p>其中，<br><span style="color: red;">&lt;meta charset=”UTF-8”&gt;</span>是一个字符集声明，声明改文档使用的字符编码是UTF-8。<br><span style="color: red;">&lt;meta http-equiv=”X-UA-Compatible” content=”IE=edge”&gt;</span>用来专门告诉IE浏览器建议使用edge内核。<br><span style="color: red;">&lt;meta name=”viewport” content=”width=device-width, initial-scale=1.0”&gt;</span>用来适配移动端。  </p>
 <p> ④<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/title">&lt;title&gt;</a><br>表示网页标题，显示在浏览器的选项卡上面。</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span> 就是这里 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span></code></pre>
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/title.png" loading="lazy"></p>
