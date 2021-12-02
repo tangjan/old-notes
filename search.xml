@@ -343,7 +343,10 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   <entry>
     <title>Web前端3：文本元素（h、p、span、pre）、块级元素、行级元素、HTML实体</title>
     <url>/2021/11/29/web3/</url>
-    <content><![CDATA[<h2 id="1-HTML5元素周期表"><a href="#1-HTML5元素周期表" class="headerlink" title="1. HTML5元素周期表"></a><strong>1. <a href="https://www.xuanfengge.com/funny/html5/element/">HTML5元素周期表</a></strong></h2><h2 id="2-lt-h-gt"><a href="#2-lt-h-gt" class="headerlink" title="2. &lt;h&gt;"></a><strong>2. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Heading_Elements">&lt;h&gt;</a></strong></h2><p>这里&lt;h&gt;表示&lt;h1&gt;~&lt;h6&gt;的统称，分别表示一级标题~六级标题。</p>
+    <content><![CDATA[<h2 id="1-HTML5元素周期表"><a href="#1-HTML5元素周期表" class="headerlink" title="1. HTML5元素周期表"></a><strong>1. <a href="https://www.xuanfengge.com/funny/html5/element/">HTML5元素周期表</a></strong></h2><p>可以用来速查元素的语义。</p>
+<br>
+
+<h2 id="2-lt-h-gt"><a href="#2-lt-h-gt" class="headerlink" title="2. &lt;h&gt;"></a><strong>2. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Heading_Elements">&lt;h&gt;</a></strong></h2><p>这里&lt;h&gt;表示&lt;h1&gt;~&lt;h6&gt;的统称，分别表示一级标题~六级标题。</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>一级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>二级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">></span></span>三级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">></span></span>
@@ -640,6 +643,100 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <li>有利于浏览器缓存，提高页面响应速度。  </li>
 <li>代码分离，html代码和css代码分开，更容易阅读和维护。维护代码时肯定是越简洁越好，所以代码分离的作用是很大的。</li>
 </ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端8：常见样式声明</title>
+    <url>/2021/12/02/web8/</url>
+    <content><![CDATA[<h2 id="1-color、background-color"><a href="#1-color、background-color" class="headerlink" title="1. color、background-color"></a><strong>1. <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/color">color</a><strong>、</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-color">background-color</a></strong></h2><p>color是元素内部的文字颜色，background-color是文字的背景颜色。<br>如果只是想测试看看效果的话，不用在html文档中写代码，可以直接在浏览器中按F12在线调试，会方便许多。比如我用的Edge浏览器，选中&lt;div&gt;，然后在右侧图示区域就可以输入CSS代码在线调试。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/color1.png" loading="lazy"><br>颜色属性的取值可以有几种方式：<br><strong>1) 预设值</strong><br>就是在下拉菜单中选。这种方式是有限的，灵活度不够高，在实际项目中应用不是很多。   </p>
+<p><strong>2) 三原色</strong><br>三原色分为颜料三原色和光学三原色两种，在这里我们使用的是光学三原色：红(Red)、绿(Green)、蓝(Blue)，RGB。每个颜色的深浅程度使用16位二进制表示，即0~255的数字，基于此有两种表示方法：  </p>
+<ul>
+<li>RGB表示法<br>如<code>color</code>的取值为<code>rgb(0, 255, 0)</code>就表示绿色，<code>rgb(0, 255, 255)</code>表示青色。<br>rgb参数的选定是设计师是工作。  </li>
+<li>HEX表示法<br>HEX即hexadecimal，十六进制。取值格式为<code>#RRGGBB</code>，如<span style="color:#008c8c;">马尔斯绿</span>是<code>#008c8c</code>。  </li>
+</ul>
+<p>几个常见的颜色：<br><span style="color:#f40;">淘宝红</span>：<code>#ff4400</code>，可以简写为<code>#f40</code><br>黑、白：<code>#000</code>、<code>#fff</code><br>红、绿、蓝：<code>#f00</code>、<code>#0f0</code>、<code>#00f</code><br>黄、青、紫：<code>#ff0</code>、<code>#0ff</code>、<code>#f0f</code><br>灰色：<code>#ccc</code>  </p>
+<p><strong>3) 调色板</strong><br>用鼠标操作调色的那种。  </p>
+<br>
+
+<h2 id="2-font-size"><a href="#2-font-size" class="headerlink" title="2. font-size"></a><strong>2. <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-size">font-size</a></strong></h2><p>元素内部的文字尺寸大小，它有几种单位<br><strong>1) px</strong><br>即pixel，像素。可以简单地理解为文字的高度占多少个像素。注意和<span style="color: red">pt</span>（磅）区分开。  </p>
+<p><strong>2) em</strong><br>即emphasize，这是一个相对单位，是相对父元素的字体大小。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">font-size</span><span class="token punctuation">:</span> 15px<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+    这是body的内容
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">font-size</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+        这是div的内容
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/px.png" loading="lazy"><br>每个元素一定有字体大小，如果没有声明，就会继承父元素的字体大小，如果父元素还是没有声明字体大小，那么就会继续向上继承父元素的父元素的字体大小，以此类推。如果没有父元素，则使用基准字号。也就是说，直到&lt;html&gt;都没声明字体大小，那么html文档中所有元素的文字使用基准字号为基准。<br>基准字号是浏览器设置的，就是这里：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/px2.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/px3.png" loading="lazy"><br>&lt;h&gt;元素的字体大小就是使用em设置的。  </p>
+<p><span style="color: red">插曲小tip</span>：  </p>
+<ul>
+<li>CSS代码中的注释格式是：<pre class="language-css" data-language="css"><code class="language-css"><span class="token comment">/* 注释内容 */</span></code></pre>
+和C语言的注释一样。</li>
+<li>在浏览器的元素审查界面常有UA、User Agent、用户代理的字样，其实就是指浏览器。</li>
+</ul>
+<br>
+
+<h2 id="3-font-weight、font-family、font-style、text-decoration、text-indent"><a href="#3-font-weight、font-family、font-style、text-decoration、text-indent" class="headerlink" title="3. font-weight、font-family、font-style、text-decoration、text-indent"></a><strong>3. <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-weight">font-weight</a><strong>、</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-family">font-family</a><strong>、</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font-style">font-style</a><strong>、</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-decoration">text-decoration</a><strong>、</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-indent">text-indent</a></strong></h2><p><strong>1) font-weight</strong><br>文字粗细程度。可以取值数字、预设值。  预设值normal相当于数字400，bold相当于数字700。<br>数字的取值是离散的，因为字体在制作时不同的粗细分级就确定了，所以无法连续调整。所以一般就是用normal或bold，不用取值数字。<br>&lt;strong&gt;元素内容的字体默认是加粗的。</p>
+<p><strong>2) font-family</strong><br>字体类型。必须取值为用户计算机中存在的字体。所以开发网页时字体不要取自己电脑上独有的，不然你开发出的网页别人加载会出问题。<br>所以常常使用多个字体，以匹配不同环境：  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-family</span><span class="token punctuation">:</span> Arial<span class="token punctuation">,</span> consolas<span class="token punctuation">,</span> 微软雅黑<span class="token punctuation">,</span> sans-serif
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p>如果用户的计算机非常古老（Win97之辈），啥字体都没有，这时就要用到<code>sans-serif</code>。它表示非衬线字体，也就是说字体的边缘没经过修饰，与此相应的像宋体就是衬线字体，常用于印刷，会美观些。<br><code>sans-serif</code>表示让用户计算机自行选择字体，你电脑上有啥字体就用啥。  </p>
+<p><strong>3) font-style</strong><br>字体样式，通常用来设置斜体。取值为<code>italic</code>。有些字体不支持斜体。<br>&lt;i&gt;、&lt;em&gt;元素内容的字体默认是是倾斜的。  </p>
+<p><strong>4) text-decoration</strong><br>文本修饰。也就是给文本加线，如删除线、下划线之类的效果。上划线也能加，不过不太常用。<br>&lt;a&gt;元素的超链接就默认带有下划线。<br>&lt;del&gt;元素表示delete，“删除”，默认样式带有删除线。<br>&lt;s&gt;元素表示过期的内容，默认样式也带有删除线。如淘宝价格就经常用到。    </p>
+<p><strong>5) text-indent</strong><br>表示首行缩进。<br>取值单位可以是<code>px</code>，像素，也可以是<code>em</code>，表示多少个字符。汉字常用<code>2em</code>，表示缩进2个汉字的距离。  </p>
+<br>
+
+<h2 id="4-line-height"><a href="#4-line-height" class="headerlink" title="4. line-height"></a><strong>4. <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/line-height">line-height</a></strong></h2><p>行高。简单地说就是每行文本的高度，该值越大，行间距越大。<br>设置行高为容器的高度，可以让让单行文本垂直居中。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+    <span class="token selector">p</span><span class="token punctuation">&#123;</span>
+        <span class="token property">background-color</span><span class="token punctuation">:</span> #008c8c<span class="token punctuation">;</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span>
+        <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+        <span class="token property">line-height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/line_height.png" loading="lazy"><br>通常不使用绝对大小设置line-height，因为字体大小改变后往往会出问题，比如你字体本身就已经超过了行高：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+    <span class="token selector">p</span><span class="token punctuation">&#123;</span>
+        <span class="token property">font-size</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
+        <span class="token property">line-height</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+    Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+    Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<p>就会变成这个样子：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/line_height2.png" loading="lazy"><br>通常是使用相对大小（纯数字），表示相对于当前元素的字体大小：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+    <span class="token selector">p</span><span class="token punctuation">&#123;</span>
+        <span class="token property">font-size</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
+        <span class="token property">line-height</span><span class="token punctuation">:</span> 1.5<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/line_height3.png" loading="lazy"><br>为什么这里不以em为单位进行设置呢？之后讲到<span style="color:red">继承</span>会有解释。</p>
+<br>
+
+<h2 id="5-width、height、letter-spancing、text-align"><a href="#5-width、height、letter-spancing、text-align" class="headerlink" title="5. width、height、letter-spancing、text-align"></a><strong>5. <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/width">width</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/height">height</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/letter-spacing">letter-spancing</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-align">text-align</a></strong></h2><p><strong>1) width、height</strong><br>宽度、高度。<br>没啥可说的。</p>
+<p><strong>2) letter-spancing</strong><br>文字间隙。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+    <span class="token selector">p</span><span class="token punctuation">&#123;</span>
+        <span class="token property">letter-spacing</span><span class="token punctuation">:</span> 1em<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/letter-spacing.png" loading="lazy">  </p>
+<p><strong>3) text-align</strong><br>水平排列方式。默认靠左。<br>常用的取值有<code>left</code>、<code>center</code>、<code>right</code>等。</p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
