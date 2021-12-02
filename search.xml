@@ -547,4 +547,107 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <tag>MATLAB</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Web前端7：为网页添加样式</title>
+    <url>/2021/12/02/web7/</url>
+    <content><![CDATA[<h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a><strong>简单介绍</strong></h2><p>可以说一个网页的1/4是html，3/4是CSS。（先不提js）<br>html文件body中随便写点东西：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>
+    现在开始添加CSS样式
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span></code></pre>
+
+<p>在html文件的head中插入&lt;style&gt;元素，内容如下：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+    <span class="token selector">h1</span><span class="token punctuation">&#123;</span>
+        <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+        <span class="token property">background-color</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+        <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p>则网页中可以看到，h1的内容红色，背景为浅蓝色，居中显示：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/CSS1.png" loading="lazy"></p>
+<p>术语解释：<br>整个<code>h1&#123; &#125;</code>的内容叫做一条CSS规则。CSS规则 = 选择器 + 声明块  </p>
+<p><span style="color:red">选择器</span>用来选中元素，设置样式适用的范围。比如这里写着<code>h1</code>就选中了h1元素，被选中的元素会被渲染为声明块声明的样式。</p>
+<p><span style="color:red">声明块</span>出现在大括号中，包含CSS样式声明，也可以叫做属性。每一个属性表达某一方面的样式。  学习HTML时主要是学一个个元素，那么学CSS的时候就是学声明块里的一个个属性（样式规则）。</p>
+<br>
+
+<h2 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a><strong>选择器</strong></h2><p>选择器的写法有很多，这里介绍3种最基本的：元素选择器、id选择器、类选择器  </p>
+<h3 id="元素选择器"><a href="#元素选择器" class="headerlink" title="元素选择器"></a><strong>元素选择器</strong></h3><p>写什么元素就设置为什么元素的名字，上面的<code>h1</code>就是元素选择器。会选中<span style="color:red">所有的</span>同名元素。<br>比如我们再加上</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">p</span><span class="token punctuation">&#123;</span>
+      <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/CSS2.png" loading="lazy"></p>
+<h3 id="id选择器"><a href="#id选择器" class="headerlink" title="id选择器"></a><strong>id选择器</strong></h3><p>在上述代码中再加上：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">#test</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> gold<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>test<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  id选择器示例
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/CSS3.png" loading="lazy"><br>id是独一无二的，所以id选择器只能选中一个。通常js用的多。  </p>
+<h3 id="类选择器"><a href="#类选择器" class="headerlink" title="类选择器"></a><strong>类选择器</strong></h3><p>元素选择器范围太广，id选择器范围又太小，所以“中庸之道”类选择器被应用得最多。<br>在上述代码中再加上：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.xxx</span><span class="token punctuation">&#123;</span>
+      <span class="token property">color</span><span class="token punctuation">:</span>hotpink<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 
+    类选择器示例
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    类选择器示例
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/CSS4.png" loading="lazy"></p>
+<p>一个元素可以同时被划分到多个类中，所以也就可以同时应用多个CSS规则，如</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">></span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.big-center</span><span class="token punctuation">&#123;</span>
+      <span class="token property">font-size</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span>
+      <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
+<p><code>2em</code>表示将字符放大到标准字体的2倍。</p>
+<p><span style="color:red;">插曲小tip</span>：<br>两种常用的命名方式:<br>①驼峰命名法，如bigCenter<br>②短横线命名法，如big-center<br>这里采用了短横线命名法。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx big-center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 
+    类选择器示例
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>xxx big-center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    类选择器示例
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/CSS5.png" loading="lazy"></p>
+<br>
+
+<h2 id="CSS代码书写位置"><a href="#CSS代码书写位置" class="headerlink" title="CSS代码书写位置"></a><strong>CSS代码书写位置</strong></h2><p>分3种情况：  </p>
+<h3 id="1-内部样式表"><a href="#1-内部样式表" class="headerlink" title="1) 内部样式表"></a><strong>1) 内部样式表</strong></h3><p>就是写在html文档里。一般放在&lt;style&gt;里面。也不是一定要写在&lt;style&gt;里面，放在&lt;body&gt;里也是允许的。但是我们希望浏览器加载网页时最先把CSS样式加载好。不然的话浏览器如果先加载的是body内容后加载style内容，一开始页面会显示得很丑，然后等样式加载上去了会闪烁一下，很烦。  当然如果是在本地，或网速非常快，那&lt;style&gt;在哪都无所谓。  </p>
+<h3 id="2-内联样式表-元素样式表"><a href="#2-内联样式表-元素样式表" class="headerlink" title="2) 内联样式表/元素样式表"></a><strong>2) 内联样式表/元素样式表</strong></h3><p>把style直接写到想渲染的元素里，这个时候就不需要什么选择器了，毕竟已经直接定位了。我在写博客时就经常用这个技巧把某些字局渲染为红色。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">color</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>插曲小tip<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>：  </code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/CSS6.png" loading="lazy"></p>
+<h3 id="3-外部样式表"><a href="#3-外部样式表" class="headerlink" title="3) 外部样式表"></a><strong>3) 外部样式表</strong></h3><p>将样式书写到独立的CSS文件中，这是开发一个网站最常用的方式。<br>我的网站文件目录：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/waibu1.png" loading="lazy"><br>在&lt;head&gt;中加入：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/css/index.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+<p>注意link是个空元素，以后还会介绍它的其他用法。<br>&lt;link&gt;也不是必须写在head里面，但还是推荐写在head里面，理由和内部样式表一样。<br>&lt;body&gt;中正常写：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>big-blueviolet-center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    外部样式表测试
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/waibu2.png" loading="lazy"><br>实际开发中还是推荐使用外部样式表，原因：  </p>
+<ul>
+<li>外部样式表可以解决多页面样式重复的问题，提高效率。  </li>
+<li>有利于浏览器缓存，提高页面响应速度。  </li>
+<li>代码分离，html代码和css代码分开，更容易阅读和维护。维护代码时肯定是越简洁越好，所以代码分离的作用是很大的。</li>
+</ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>
