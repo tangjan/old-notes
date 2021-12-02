@@ -296,7 +296,7 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>area</span> <span class="token attr-name">shape</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rect<span class="token punctuation">"</span></span> <span class="token attr-name">coords</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>519,281,590,320<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>木星<span class="token punctuation">"</span></span>
           <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E6%9C%A8%E6%98%9F/222105?fr=aladdin<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>map</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mapEffect.gif" loading="lazy">  </p>
+<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mapEffect.gif" loading="lazy">  </p>
 <br>
 
 <h2 id="4-和figure元素联用"><a href="#4-和figure元素联用" class="headerlink" title="4. 和figure元素联用"></a><strong>4. 和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figure">figure元素</a>联用</strong></h2><p>通常用figure元素把图片、图片标题、图片说明等元素打包在一起。用法很简单，但在语义化上的意义很重要。  </p>
@@ -336,6 +336,81 @@
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>对不起，你的浏览器不支持video元素，请换个新一点的浏览器。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">></span></span></code></pre>
 <p>也就是准备多个不同格式的多媒体文件，让浏览器能用哪个就用哪个。<br>如果浏览器太旧，啥都不支持，就提示最后一句话。  </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端6：列表元素（有序列表ol、无序列表ul、定义列表dl）、容器元素、元素包含关系</title>
+    <url>/2021/11/29/web6/</url>
+    <content><![CDATA[<h2 id="1-有序列表ol"><a href="#1-有序列表ol" class="headerlink" title="1. 有序列表ol"></a><strong>1. 有序列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol">ol</a></strong></h2><p>ol即order list，有序列表。<br>li表示list item，即列表条目，是列表的子元素。<br>type属性表示序号的显示方式，取值可以是1、A、a、I、i。<br>但序号长什么样子本来是应该由CSS负责的，所以在MDN中有这样一段注释：</p>
+<blockquote>
+<p>type属性在 HTML4中弃用，但是在 HTML5 中被重新引入。除非列表中序号很重要（比如，在法律或者技术文件中条目通常被需要所引用），否则请使用 CSS list-style-type属性替代。  </p>
+</blockquote>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第一步：抓一只猫，让猫在强烈的政治攻击下承认自己是大象。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第二步：公布计划：生产一种能装进大象的冰箱，动员国民捐款。实际上并不生产。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第三步：收买证人，证明大象已经被装进冰箱里。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第四步：利用媒体优势反复强调“猫是大象的祖先”这一理论，以防后患。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ol1.png" loading="lazy"><br>ol还有一个布尔属性是reversed，作用是将序号倒过来编排。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a<span class="token punctuation">"</span></span> <span class="token attr-name">reversed</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ul_reversed.png" loading="lazy">  </p>
+<br>
+
+<h2 id="2-无序列表ul"><a href="#2-无序列表ul" class="headerlink" title="2. 无序列表ul"></a><strong>2. 无序列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul">ul</a></strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+    七宗罪：
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>色欲<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>暴食<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>贪婪<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>懒惰<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>暴怒<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>嫉妒<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>傲慢<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ul.png" loading="lazy"><br>相比于有序列表，无序列表使用频率更高，常用于菜单、新闻列表等。  </p>
+<br>
+
+<h2 id="3-定义列表dl"><a href="#3-定义列表dl" class="headerlink" title="3. 定义列表dl"></a><strong>3. 定义列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/dl">dl</a></strong></h2><p>dl即definition list，是一个包含术语定义以及描述的列表，通常用于展示词汇表或者元数据 （键-值对列表）。它通常包括两个子元素，分别是dt和dd。<br><span style="color:red">dt</span>，definition table，术语标题。<span style="color:red">dd</span>，definition description，术语描述。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dl</span><span class="token punctuation">></span></span>
+    Web前端的一些术语
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>html<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
+        HTML（HyperText Markup Language，超文本标记语言） 是一种描述语言，用来定义网页结构。
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>css<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
+        层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 或 XML文档的呈现。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+        CSS 描述了在屏幕、纸质、音频等其它媒体上的元素应该如何被渲染的问题。
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>javascript<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
+        JavaScript ( JS ) 是一种具有函数优先的轻量级，解释型或即时编译型的编程语言。
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dl</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/dl.png" loading="lazy"><br>在一些电影网站就有定义列表的应用。  </p>
+<br>
+
+<h2 id="4-容器元素"><a href="#4-容器元素" class="headerlink" title="4. 容器元素"></a><strong>4. 容器元素</strong></h2><p>容器元素表示一个块区域，内部用于放置其他元素。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/div">&lt;div&gt;</a>：一种通用的容器。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header">&lt;header&gt;</a>：用于表示页眉、文章的头部等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer">&lt;footer&gt;</a>：用于表示页脚、文章的尾部等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/article">&lt;article&gt;</a>：用于表示文章等。article一般包含header、div、footer等元素。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section">&lt;section&gt;</a>：用于表示一个文章段落等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/aside">&lt;aside&gt;</a>：用于表示附加信息，比如博客的侧边栏。<br>容器元素通常是和特定语义联系在一起，用来将网页划分区域。  </p>
+<br>
+
+<h2 id="5-元素包含关系"><a href="#5-元素包含关系" class="headerlink" title="5. 元素包含关系"></a>5. 元素包含关系</h2><p>在以前，规则是块级元素可以包含行级元素，行级元素不可以包含块级元素。</p>
+<p>而现在，由于语义化的强调，元素的包含关系由元素的内容类别（语义）决定。</p>
+<p>例如，h1元素能否包含p元素？从语义上看，h1表示标题，而p表示段落，显然标题是不能包含段落的，所以h1元素不能包含p元素。</p>
+<p>想知道什么元素能包含什么元素很简单，MDN一搜就就行了。比如在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul">&lt;ul&gt;</a>页面，有下图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/elementInclude1.png" loading="lazy"><br>“允许的内容”便是ul可以包含的元素了。<br>元素的包含关系在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories">内容分类</a>有详细定义。所有元素的严格包含关系是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/elementInclude2.png" loading="lazy">  </p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
