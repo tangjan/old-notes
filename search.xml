@@ -806,7 +806,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <br>
 
 <h3 id="3）link、visited"><a href="#3）link、visited" class="headerlink" title="3）link、visited"></a><strong>3）<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:link">link</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:visited">visited</a></strong></h3><p>link表示超链接未访问时的状态，visited则是超链接被访问过的状态。</p>
-<p>如果以上4个伪类都要应用的话，一定要按<code>link</code>、<code>visited</code>、<code>hover</code>、<code>active</code>的相对顺序书写，因为它们的优先级不同，不然优先级高的会覆盖优先级低的，使其没有效果。<br>这个规则也叫“爱恨法则”，<span style="color: red">l</span>o<span style="color: red">v</span>e、<span style="color: red">ha</span>te。</p>
+<p>如果以上4个伪类都要应用的话，一定要按<code>link</code>、<code>visited</code>、<code>hover</code>、<code>active</code>的相对顺序书写，原因之后会介绍。<br>这个规则也叫“爱恨法则”，<span style="color: red">l</span>o<span style="color: red">v</span>e、<span style="color: red">ha</span>te。</p>
 <br>
 
 <h2 id="伪元素选择器"><a href="#伪元素选择器" class="headerlink" title="伪元素选择器"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-elements">伪元素选择器</a></strong></h2><p>伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。</p>
@@ -898,7 +898,105 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <p>以上便是选择器的组合。在实际项目中很少使用单个的选择器，基本都是组合起选择器来使用的。</p>
 <br>
 
-<h2 id="选择器的并列"><a href="#选择器的并列" class="headerlink" title="选择器的并列"></a><strong>选择器的并列</strong></h2><p>一句话：多个选择器，用逗号分隔。<br>像这种语法叫<a href="https://baike.baidu.com/item/%E8%AF%AD%E6%B3%95%E7%B3%96/5247005?fr=aladdin">语法糖（Syntactic suga）</a>，指便捷的写法，比如乘法就是加法的语法糖，“u1s1”就是汉字词语“有一说一”的语法糖。<br>使用语法糖可以简化代码，增加程序的可读性，从而减少出错的机会。</p>
+<h2 id="选择器的并列"><a href="#选择器的并列" class="headerlink" title="选择器的并列"></a><strong>选择器的并列</strong></h2><p>一句话：多个选择器，用逗号分隔。<br>像这种语法叫<a href="https://baike.baidu.com/item/%E8%AF%AD%E6%B3%95%E7%B3%96/5247005?fr=aladdin">语法糖（Syntactic sugar）</a>，指便捷的写法，比如乘法就是加法的语法糖，“u1s1”就是汉字词语“有一说一”的语法糖。<br>使用语法糖可以简化代码，增加程序的可读性，从而减少出错的机会。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端10：层叠</title>
+    <url>/2021/12/04/web10/</url>
+    <content><![CDATA[<h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a><strong>简单介绍</strong></h2><p>CSS全称就叫cascading style sheets，<span style="color:red">层叠</span>样式表，所以层叠这个概念是很重要的。<br>先来介绍一个该概念，声明冲突：同一个样式多次应用到了同一个元素。<br>我们自己写的CSS代码可能会和浏览器的CSS样式有冲突：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a</span><span class="token punctuation">&#123;</span>  
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-conflicting-declaration.png" loading="lazy">  </p>
+<p>声明冲突不一定是坏事，实际网站开发中甚至往往用到声明冲突，如：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">span</span><span class="token punctuation">&#123;</span>  
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> 
+<span class="token selector">.selected</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Lorem.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Quae.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Aut!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>selected<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Minus.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Vel.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Sint?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Quibusdam?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Dolorem.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-conflicting-declaration2.png" loading="lazy"><br>这种样式是不是很熟悉？像下面这张截自百度贴吧的图就应用了这种样式：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-conflicting-declaration3.png" loading="lazy"><br>这种应用就是绝大部分元素的样式一样，只有其中某些元素处于特殊的状态（比如鼠标悬停）就更改样式。  </p>
+<p>解决声明冲突的过程就叫<span style="color: red">层叠</span>。<br>层叠不是由我们解决的，是由浏览器自动处理的，我们要学习的就是浏览器如何处理这个冲突过程的。<br>层叠也有很多其他叫法，比如权重计算。它一共经过三步：</p>
+<ol>
+<li>比较重要性</li>
+<li>比较特殊性</li>
+<li>比较原次序  </li>
+</ol>
+<p>经过这三个步骤之后，最后一定只有一个样式胜出，元素就应用那个胜出的样式。<br>下面逐个介绍。</p>
+<br>
+
+<h2 id="1-比较重要性"><a href="#1-比较重要性" class="headerlink" title="1.比较重要性"></a><strong>1.比较重要性</strong></h2><p>比较重要性时考虑的因素很多，没必要全都了解。<br>主要的三个重要性排序为：</p>
+<p><strong>1）作者样式表中的!important样式</strong><br>作者样式表就是开发者书写的样式，包括html文档中的&lt;style&gt;、css文件中的样式等。<br>我们写代码时可以在样式后面加上<span style="color:red">!important</span>，如</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">span</span><span class="token punctuation">&#123;</span>  
+    <span class="token property">color</span><span class="token punctuation">:</span> red <span class="token important">!important</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> </code></pre>
+<p>这样就表示这个样式是重要性最高，最后一定会胜出，被应用。<br>所以这种方法太绝对了，如果哪天网站需求改变了，就很难更改，所以应用得极少。  </p>
+<p><strong>2）作者样式表种的普通样式</strong>  </p>
+<p><strong>3）浏览器（用户代理）默认样式表中的样式</strong>  </p>
+<br>
+
+<h2 id="2-比较特殊性"><a href="#2-比较特殊性" class="headerlink" title="2.比较特殊性"></a><strong>2.比较特殊性</strong></h2><p>当比较重要性结束之后冲突还没有解决，就继续进行比较特殊性这一步骤。<br>总体规则：看选择器，选择器定位的范围越窄就越特殊。<br>具体规则：通过选择器计算一个4位十进制数，也就是权重，这个数越大就越特殊。  </p>
+<p><strong>1）千位</strong><br>如果是内联样式，千位为1，否则为0。 所以内联样式最特殊，优先级最高。<br>浏览器的在线调试就是使用的内联样式。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4-particularity.png" loading="lazy">  </p>
+<p><strong>2）百位</strong><br>等于选择器中所有ID选择器的数量。</p>
+<p><strong>3）十位</strong><br>等于所由选择器中类选择器、伪类选择器、属性选择器的数量。  </p>
+<p><strong>4）个位</strong><br>等于选择器中元素选择器、伪元素选择器的数量。<br>比如<code>a&#123; ... &#125;</code>的权重是0001，<code>body a&#123; ... &#125;</code>的权重是0002，所以后者胜出。</p>
+<p>举例：<br>html：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mydiv<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myul<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myli<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://douban.com<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mylink<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                Lorem ipsum dolor sit amet.
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>css：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">div ul a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">#mydiv #myul a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">#mydiv #myul .mylink</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> gold<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">#mydiv #myul a:link</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> chocolate<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>首先这几个都是作者样式表，所以他们的重要性是一样的，接下来比较特殊性，计算权重。<br>它们都不是内联样式，所以千位都为0。<br><code>a&#123; ... &#125;</code>的权重是<span style="color:red">0001</span>；<br><code>div ul a&#123; ... &#125;</code>的权重是<span style="color:red">0003</span>；<br><code>#mydiv #myul a&#123; ... &#125;</code>的权重是<span style="color:red">0201</span>；<br><code>#mydiv #myul .mylink&#123; ... &#125;</code>的权重是<span style="color:red">0210</span>；<br><code>#mydiv #myul a:link&#123; ... &#125;</code>的权重是<span style="color:red">0211</span>。<br>所以最后者胜出，网页文字被渲染为了chocolate色：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-particularity2.png" loading="lazy"><br>补充：这里的权重四位数不是逢十进一的，而是逢256进一。所以这里的“四位数”是应该加引号的，它本质上是四个数字，从高到低一个个数字比较。</p>
+<br>
+
+<h2 id="3-比较源次序"><a href="#3-比较源次序" class="headerlink" title="3.比较源次序"></a><strong>3.比较源次序</strong></h2><p>当然权重值是完全有可能相同的，所以这时要解决冲突就要继续向下比较，即比较源次序：代码书写靠后的胜出。可以用栈的思维去助记：后进先出，最后读的代码就是最新的，就会被应用。<br>这步比完之后就肯定会揭晓胜负了，不存在平局。  </p>
+<br>
+
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a><strong>应用</strong></h2><p><strong>1）重置样式表</strong><br>不同浏览器的默认差异是有差异的，所以就导致你写的网页在不同浏览器上显示各异。这时可以书写一些作者样式，覆盖浏览器的默认样式。<br>实际项目中应用重置样式表的思想时，往往会创建<span style="color:red">reset.css</span>、<span style="color:red">mystyle.css</span>两个css文件，一个用来通用地重置，一个用来书写自己实际开发要用到的样式。然后在html文件中加入：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/reset.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/mystyle.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+<p>这样由于源次序规则，就会先应用自己写的mystyle.css样式。<br>重置样式的书写方法都是固定的，可以去网络上download下来，如<code>normallize.css</code>、<code>reset.css</code>、<code>meyer.css</code>等。<br>比如可以在<a href="https://meyerweb.com/">meyerweb.com</a>找到相应的css文件，使用绝对地址引用。</p>
+<p><strong>2）爱恨法则</strong><br>对于超链接，要按<code>link</code>、<code>visited</code>、<code>hover</code>、<code>active</code>的相对顺序书写，<span style="color: red">l</span>o<span style="color: red">v</span>e、<span style="color: red">ha</span>te，即“爱恨法则”。<br>为什么是这个顺序呢？因为这样才符合人的意愿。同一个时刻可能有多个状态都符合条件，比如鼠标按下激活（active）时也符合了鼠标悬停（hover）的状态，那么这个时候我们希望的肯定是鼠标按下的状态。所以基于人们的意愿就形成了爱恨法则这样的次序。</p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
