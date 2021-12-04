@@ -747,4 +747,166 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Web前端9：选择器深入介绍</title>
+    <url>/2021/12/04/web9/</url>
+    <content><![CDATA[<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/CSS_Selectors">CSS选择器列表_MDN</a></p>
+<p>ID选择器、元素选择器、类选择器在<a href="http://www.tangjiayan.com/2021/12/02/web7/">这篇博客</a>已经介绍，这里不再赘述。</p>
+<br>
+
+<h2 id="通配符选择器"><a href="#通配符选择器" class="headerlink" title="通配符选择器"></a><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Universal_selectors">通配符选择器</a></h2><p>通配符就是*，表示选中所有元素。也包括&lt;head&gt;元素和&lt;html&gt;元素，不过这两个元素不显示，所以选中并渲染也没什么用。<br>css文件中：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">*</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>html文件中：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/index.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/wildcard.png" loading="lazy"> </p>
+<br>
+
+<h2 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Attribute_selectors">属性选择器</a></strong></h2><p>根据属性名或属性值选中元素。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">[href]</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #f40<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.taobao.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>淘宝<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/attribute_selectors.png" loading="lazy"><br>在以上代码中再加上：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">[href="https://www.sina.com.cn/"]</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 3em<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.sina.com.cn/<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>新浪<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
+<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/attribute_selectors2.png" loading="lazy"><br>从这里也可以看出范围越小的选择器优先级越高。<br>属性选择器还有很多其他用法，比如对于上述的淘宝，它的网站地址也可能是<code>http://www.taobao.com</code>、<code>//www.taobao.com</code>，这时用精确的属性值选择器就匹配不上，这时可以用</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">[href$="taobao.com"]</span><span class="token punctuation">&#123;</span>
+  ……
+<span class="token punctuation">&#125;</span></code></pre>
+<p><code>$=</code>表示选中以<code>taobao.com</code>为结尾的元素。<br>关于属性选择器的更多用法可以参阅MDN的文档，点击这个章节的标题就可以跳转了。<br>其实为了方便深入阅读学习，我几乎每个章节的标题都加上了相应的链接。</p>
+<br>
+
+<h2 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-classes">伪类选择器</a></strong></h2><p>选中某些元素的某种状态。伪类选择器用得超级多。  </p>
+<h3 id="1）hover"><a href="#1）hover" class="headerlink" title="1）hover"></a><strong>1）<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:hover">hover</a></strong></h3><p>表示鼠标悬停在上面的状态。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a:hover</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/hover.gif" loading="lazy"><br>当然不一定非得用在a元素超链接上，其他元素也可以用。</p>
+<br>
+
+<h3 id="2）active"><a href="#2）active" class="headerlink" title="2）active"></a><strong>2）<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:active">active</a></strong></h3><p>表示鼠标按下的状态。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a:active</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> yellow<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/active.gif" loading="lazy">  </p>
+<br>
+
+<h3 id="3）link、visited"><a href="#3）link、visited" class="headerlink" title="3）link、visited"></a><strong>3）<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:link">link</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:visited">visited</a></strong></h3><p>link表示超链接未访问时的状态，visited则是超链接被访问过的状态。</p>
+<p>如果以上4个伪类都要应用的话，一定要按<code>link</code>、<code>visited</code>、<code>hover</code>、<code>active</code>的相对顺序书写，因为它们的优先级不同，不然优先级高的会覆盖优先级低的，使其没有效果。<br>这个规则也叫“爱恨法则”，<span style="color: red">l</span>o<span style="color: red">v</span>e、<span style="color: red">ha</span>te。</p>
+<br>
+
+<h2 id="伪元素选择器"><a href="#伪元素选择器" class="headerlink" title="伪元素选择器"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Pseudo-elements">伪元素选择器</a></strong></h2><p>伪元素是一个附加至选择器末的关键词，允许你对被选择元素的特定部分修改样式。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">span::before</span><span class="token punctuation">&#123;</span>
+    <span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">"《"</span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">span::after</span><span class="token punctuation">&#123;</span>
+    <span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">"》"</span><span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>
+    月亮与六便士
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/pseudo-elements.png" loading="lazy">  </p>
+<br>
+
+<h2 id="选择器的组合"><a href="#选择器的组合" class="headerlink" title="选择器的组合"></a><strong>选择器的组合</strong></h2><p>就是把多个选择器组合起来使用，上面其实已经演示了。</p>
+<h3 id="1）直接拼到一起"><a href="#1）直接拼到一起" class="headerlink" title="1）直接拼到一起"></a><strong>1）直接拼到一起</strong></h3><p>比如：<br>元素选择器<code>span</code>和伪元素选择器<code>::before</code>组合在一起就是<code>span::before</code>；<br>元素选择器<code>a</code>和伪类选择器<code>hover</code>组合在一起就是<code>a:hover</code>。<br>再如：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">p</span><span class="token punctuation">&#123;</span>
+    <span class="token property">text-indent</span><span class="token punctuation">:</span> 2em<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">p.red</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>dolorum facere, illum saepe consequuntur consequatur.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>red<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/selector_combination.png" loading="lazy"><br>可以看到p元素实现了首行缩进，并且带有<code>red</code>属性的p元素被渲染为红色。这种选择器组合方法经常用到。</p>
+<p><span style="color: red">插曲小tip</span>：<br>在VScode中输入<code>p.red.big.center</code>，然后按Tab键可以生成为<code>&lt;p class=&quot;red big center&quot;&gt;&lt;/p&gt;</code>  </p>
+<br>
+
+<h3 id="2）后代元素：空格"><a href="#2）后代元素：空格" class="headerlink" title="2）后代元素：空格"></a><strong>2）后代元素：空格</strong></h3><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.red ul</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #008c8c<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>red<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Lorem ipsum dolor sit amet.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/selector_combination2.png" loading="lazy"><br>不是说一定得前面类选择器后面元素选择器，空格前后什么选择器都可以，只要逻辑正确就行。</p>
+<br>
+
+<h3 id="3）子元素：-gt"><a href="#3）子元素：-gt" class="headerlink" title="3）子元素：&gt;"></a><strong>3）子元素：&gt;</strong></h3><p>不同于后代元素选择器，子元素选择器只能选择子元素，不能选中子元素的子元素之类的。<br>子元素选择器用得不多，因为后代元素选择器就可以实现子元素选择器的功能。<br>输入<code>div&gt;ul&gt;li*3&gt;lorem1</code>按Tab键快速生成（可以看到快速扩展子元素也是使用“&gt;”符号）：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Lorem.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Earum.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Voluptas.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div>ul>li</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>这里写成<code>div&gt;ul li</code>、<code>div ul&gt;li</code>或<code>div ul li</code>也可以，一样符合逻辑。<br>图片就不放了。  </p>
+<br>
+
+<h3 id="4）相邻兄弟元素：-、兄弟元素："><a href="#4）相邻兄弟元素：-、兄弟元素：" class="headerlink" title="4）相邻兄弟元素：+、兄弟元素：~"></a><strong>4）相邻兄弟元素：+、兄弟元素：~</strong></h3><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.special</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.special+li</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>A, odit.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>special<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Dolor, corrupti?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Lorem, ipsum.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Dicta, accusantium.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>Libero, commodi.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/selector_combination3.png" loading="lazy"><br>可见“+”只选择下一个兄弟元素，或许称为“弟弟选择器”更合适。。。  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.special</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.special~li</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/selector_combination4.png" loading="lazy"><br>同理，“~”选中了所有的后面的兄弟元素，或许称为“弟弟们选择器”或许更合适。。。<br>目前可以选择“弟弟元素”，但是CSS还没提供可以选择“哥哥元素”的选择器。  </p>
+<p>以上便是选择器的组合。在实际项目中很少使用单个的选择器，基本都是组合起选择器来使用的。</p>
+<br>
+
+<h2 id="选择器的并列"><a href="#选择器的并列" class="headerlink" title="选择器的并列"></a><strong>选择器的并列</strong></h2><p>一句话：多个选择器，用逗号分隔。<br>像这种语法叫<a href="https://baike.baidu.com/item/%E8%AF%AD%E6%B3%95%E7%B3%96/5247005?fr=aladdin">语法糖（Syntactic suga）</a>，指便捷的写法，比如乘法就是加法的语法糖，“u1s1”就是汉字词语“有一说一”的语法糖。<br>使用语法糖可以简化代码，增加程序的可读性，从而减少出错的机会。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>
