@@ -1118,4 +1118,68 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySQL1：概论、MySQL软件基本使用</title>
+    <url>/2021/12/05/mysql1/</url>
+    <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV12b411K7Zu">MySQL_尚硅谷_bilibili</a>  </p>
+<br>
+
+<h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a><strong>概论</strong></h2><h3 id="为什么要使用数据库"><a href="#为什么要使用数据库" class="headerlink" title="为什么要使用数据库"></a><strong>为什么要使用数据库</strong></h3><p>为什么要用数据库来存取数据呢？数组、集合、文件不也能存取数据吗，功能不够用嘛？<br>数组、集合，最后是把数据存在了<span style="color:red">内存</span>中，而内存最大的缺点就是<span style="color:red">易失性</span>，主机重启数据就没了，数据无法长时间存放。<br><span style="color:red">文件</span>的数据存在外存，能实现长时间存放，但是不适合查询。<br>所以就需要专门开发出一套数据库系统，实现数据持久存放，统一管理</p>
+<h3 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a><strong>数据库相关概念</strong></h3><p><strong>DB</strong>：DataBase，数据库，存储数据的仓库，保存一系列有组织的数据。</p>
+<p><strong>DBMS</strong>：DataBase Management System，数据库管理系统，也可以理解为数据库软件。常见的数据库管理系统有MySQL、Oracle、DB2、SqlServer等。</p>
+<p><strong>SQL</strong>：Structured Query Language，结构化查询语言，专门用来与数据库通信的语言。SQL的优点：</p>
+<ol>
+<li>不是某个特定数据库供应商专有的语言，几乎所有的DBMS都支持SQL。当然各种DBMS可能有自己的“方言”。  </li>
+<li>简单却强大灵活</li>
+</ol>
+<h3 id="数据库的特点"><a href="#数据库的特点" class="headerlink" title="数据库的特点"></a><strong>数据库的特点</strong></h3><ol>
+<li>将数据放到表中，再把表放到库中。</li>
+<li>一个数据库中可以有多张表，每张表都有一个唯一的名字用来标识自己。</li>
+<li>表具有一些特性，这些特性定义了数据在表中如何存储，类似java中“类”的设计。</li>
+<li>表由列组成，我们也称为字段，每一列（字段）类似java中的“属性”。</li>
+<li>表中的数据是按行存储的，每一行类似java中的“对象”。</li>
+</ol>
+<br>
+
+<h2 id="MySQL软件基本使用"><a href="#MySQL软件基本使用" class="headerlink" title="MySQL软件基本使用"></a><strong>MySQL软件基本使用</strong></h2><p>DBMS分为两类：</p>
+<ol>
+<li>基于共享文件系统的DBMS，如Access。</li>
+<li>基于客户机-服务器的DBMS，如MySQL、Oracle、SqlServe。  </li>
+</ol>
+<p>对于第二类数据库软件，我们说安装它，一般是指安装服务器端的软件。  </p>
+<h3 id="MySQL服务的启动和停止"><a href="#MySQL服务的启动和停止" class="headerlink" title="MySQL服务的启动和停止"></a><strong>MySQL服务的启动和停止</strong></h3><p><strong>方式一：图形化接口</strong><br>右击开始菜单 → 计算机管理 → 服务和应用程序 → 服务 → 找到MySQL，手动启动停止<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1.png" loading="lazy">  </p>
+<p><strong>方式二：命令行接口</strong><br>注意应以管理员身份运行命令提示符。<br>停止MySQL：<code>net stop mysql</code><br>启动MySQL：<code>net start mysql</code><br>（这里我没改服务名称，如果更改了服务名称需要<code>net stop 服务名称</code>、<code>net start 服务名称</code>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2.png" loading="lazy">  </p>
+<h3 id="MySQL服务器端的登录和退出"><a href="#MySQL服务器端的登录和退出" class="headerlink" title="MySQL服务器端的登录和退出"></a><strong>MySQL服务器端的登录和退出</strong></h3><p>在进行MySQL服务器端的登录和退出之前，要保证你的MySQL服务是启动的。<br>有两种方式控制MySQL服务器端，一是MySQL安装后自带的控制程序，二是Windows的命令提示符，如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3.png" loading="lazy"><br>前者只能用于root用户的登录使用，所以推荐使用后者。<br>登录命令：<code>mysql -h localhost -P 3306 -u root -p</code><br><code>-h</code>表示要连的主机，<code>localhost</code>即表示本机，它们之间的空格可以省略；<br><code>-P</code>表示端口号，注意这个P是大写的，它后面的空格也可以省略；<br><code>-u</code>表示用户，<code>root</code>即根用户；<br><code>-p</code>表示密码，这个p是小写的。<br>但是如<code>localhost</code>和<code>-P</code>之间的空格不能省略，因为它们是两个命令。<br>登录命令可以简写为<code>mysql -u root -p</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4.png" loading="lazy"><br>退出：<code>exit</code>、<code>quit</code>或者按下Ctrl+c都可以退出。</p>
+<h3 id="MySQL的常见命令概览"><a href="#MySQL的常见命令概览" class="headerlink" title="MySQL的常见命令概览"></a><strong>MySQL的常见命令概览</strong></h3><p>先大致浏览一下，以后会详细深入介绍。   </p>
+<p>显示当前的数据库列表：<code>show databases;</code><br>注意结尾加个分号。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5.png" loading="lazy">   </p>
+<p>打开指定的数据库：<code>use 数据库名称;</code><br>显示数据库中的列表：<code>show tables;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6.png" loading="lazy">     </p>
+<p>显示特定数据库列表：<code>show tables from 数据库名称;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/7.png" loading="lazy">   </p>
+<p>查询当前所使用的数据库：<code>select database();</code><br>这里的<code>database()</code>相当于一个函数。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/8.png" loading="lazy"></p>
+<p>创建表：<code>create table stuinfo(id int, name varchar(20));</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/9.png" loading="lazy">   </p>
+<p>查看表结构：<code>desc 表名称</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/10.png" loading="lazy">   </p>
+<p>在表中插入数据：<code>insert into stuinfo (id,name) values(1,&#39;John&#39;);</code><br>显示表中的数据：<code>select * from stuinfo;</code><br>更新表中的数据：<code>update stuinfo set name=&#39;Mary&#39; where id=1;</code><br>删除表中的数据：<code>delete from stuinfo where id=1;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/11.png" loading="lazy">   </p>
+<p>查看当前MySQL服务器端版本：<br>法一，MySQL命令：mysql&gt; <code>select version();</code><br>法二，DOS命令：C:\Windows\system32&gt;<code>mysql --version</code>（或<code>mysql --V</code>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/12.png" loading="lazy"></p>
+<h3 id="常见命令总结："><a href="#常见命令总结：" class="headerlink" title="常见命令总结："></a><strong>常见命令总结</strong>：</h3><ol>
+<li>查看当前所有的数据库<br> <code>show databases</code></li>
+<li>打开指定的库<br> <code>use 库名称;</code></li>
+<li>查看当前库的所有表<br> <code>show tables;</code></li>
+<li>查看其他库的所有表<br> <code>show tables from 库名称;</code></li>
+<li>创建表 <pre class="language-none"><code class="language-none">create table 表名(
+  列名 列类型;
+  列名 列类型;
+  ...
+)</code></pre></li>
+<li>查看表结构<br> <code>desc 表名称</code></li>
+<li>查看当前版本<br> <code>mysql&gt; select version();</code><br> <code>C:\Windows\system32&gt; mysql --version</code><br> <code>C:\Windows\system32&gt; mysql -V</code>   </li>
+</ol>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
 </search>
