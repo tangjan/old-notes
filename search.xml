@@ -1011,7 +1011,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <title>Web前端11：继承、属性值的计算过程</title>
     <url>/2021/12/05/web11/</url>
     <content><![CDATA[<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/inheritance">继承</a></strong></h2><p>子元素会继承父元素的<span style="color: red">某些</span>css属性。这也意味着有着继承的“连锁反应”，即后代元素会继承祖先元素。<br>这里的“某些”css属性，严格来说要一个个列出来，但那样不利于记忆，我们可以从整体上了解为：通常，跟文字相关的属性会被继承，如<code>color</code>、<code>font-size</code>、<code>font-family</code>、<code>font-weight</code>等。<br>所以一个网页中的字体一般是统一的，字体会被设置在&lt;body&gt;标签中。<br>一个属性是否是继承属性可以在MDN查询，如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/color">color</a>的页面中有写到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-inheritance.png" loading="lazy">   </p>
-<p>插曲小tip：<span style="color: red">简写属性</span><br>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font">font</a>就是一个简写属性，即一次性定义多个属性。其实这就是一个语法糖。</p>
+<p>插曲小tip：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Shorthand_properties">简写属性</a><br>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font">font</a>就是一个简写属性，即一次性定义多个属性。其实这就是一个语法糖。</p>
 <br>
 
 <h2 id="属性值的计算过程"><a href="#属性值的计算过程" class="headerlink" title="属性值的计算过程"></a><strong>属性值的计算过程</strong></h2><p>其实讲的就是页面渲染的过程。<br>浏览器渲染元素是一个元素一个元素依次渲染的，顺序是遍历html文档的树形目录结构，如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-htmltree.png" loading="lazy"><br>渲染每个元素的前提条件：该元素的所有CSS属性必须有值。不是说我们写了哪些属性，就只要哪些属性有值就行了，必须是全部的属性都得有值。比如在浏览器的元素审查界面，可以看到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-computed.png" loading="lazy"><br>一个元素，从所有属性都没有值，到所有属性都有值，就是属性值的计算过程。</p>
@@ -1029,8 +1029,8 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span> span元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
 <p>问：a元素是不是红色？<br>如果你想着：“因为a元素是div的子元素，所以根据继承的规则，a元素应该是红色”，然后回答“Yes”，那么说明你没搞懂属性值的计算过程。<br>眼见为实：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-question.png" loading="lazy"><br>来解释一下。要确定a元素属性的值要经过前已述及的四个步骤：确定声明值、层叠冲突、使用继承、使用默认值。  </p>
-<p>对于<code>&lt;span&gt;</code>元素：<br>首先，a元素没有<code>&lt;a style=&quot;color: red&quot;&gt;</code>、<code>a&#123; color: red; &#125;</code>这样的声明值，第一步没有赋值。<br>第二步，层叠，层叠是发生在有声明冲突的时候的，但a元素连声明都没有，哪来的冲突，所以第二步也没有赋值。<br>第三步，继承，这一步就把<code>&lt;div&gt;</code>的红色继承了过来，赋值成功。</p>
-<p>对于<code>&lt;a&gt;</code>元素：<br>第一步确定声明值，这里虽然我们开发者没有写声明值，但浏览器默认样式表中有默认声明值：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6-question2.png" loading="lazy"><br>所以第一步就确定了颜色属性的值，赋值完成，不再继续进行后续步骤，所以“继承”这一步没有作用。</p>
+<p>对于<code>&lt;span&gt;</code>元素：<br>第一步，声明值，span元素没有<code>&lt;span style=&quot;color: red&quot;&gt;</code>、<code>span&#123; color: red; &#125;</code>这样的声明值，第一步没有赋值。<br>第二步，层叠，层叠是发生在有声明冲突的时候的，但span元素连声明都没有，哪来的冲突，所以第二步也没有赋值。<br>第三步，继承，这一步就把<code>&lt;div&gt;</code>的红色继承了过来，赋值成功。</p>
+<p>对于<code>&lt;a&gt;</code>元素：<br>第一步确定声明值，这里虽然我们开发者没有写声明值，但浏览器默认样式表中有默认声明值：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6-question2.png" loading="lazy"><br>所以第一步就确定了颜色属性的值，赋值完成，不再进行后续步骤，所以“继承”这一步没有作用。</p>
 <p>那么现在我们希望使用重置样式表覆盖浏览器的默认样式，比如希望<code>&lt;a&gt;</code>元素没有下划线，颜色继承父元素。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/reset.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
@@ -1047,6 +1047,67 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <span class="token punctuation">&#125;</span></code></pre>
 <p>这时因为有样式声明冲突，在层叠这一步，我们的作者样式表就会胜出，所以就用我们设置的CSS属性值了。<br>但是继承是层叠的下一步，如果我们在作者样式表reset.css中赋值color，在层叠这一步就会确定属性值了，那样就无法继承了，所以这里<code>color</code>的取值为<code>inherit</code>，表示强制继承、手动继承。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/7-question3.png" loading="lazy"></p>
 <p>除了<code>inherit</code>以外还有一个特殊的属性取值：<code>initial</code>，即默认值，也常用到。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端12：盒模型</title>
+    <url>/2021/12/05/web12/</url>
+    <content><![CDATA[<h2 id="盒子类型"><a href="#盒子类型" class="headerlink" title="盒子类型"></a><strong>盒子类型</strong></h2><p>每个元素在页面中都会生成一个矩形区域（盒子）。元素是html的概念，盒子是css的概念。<br>盒子类型：<br><strong>1）行盒</strong><br>属性<code>display</code>取值为<code>inline</code>的元素。<br>行盒不换行。如<code>&lt;span&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;img&gt;</code>等元素默认就是行盒。<br>display默认值就是inline。</p>
+<p><strong>2）块盒</strong><br>属性<code>display</code>取值为<code>block</code>的元素。<br>块盒最后有个换行，也就是独占一行。如<code>&lt;h&gt;</code>、<code>&lt;div&gt;</code>、<code>&lt;p&gt;</code>等容器元素默认就是块盒。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-box.png" loading="lazy"></p>
+<br>
+
+<h2 id="盒子的组成部分"><a href="#盒子的组成部分" class="headerlink" title="盒子的组成部分"></a><strong>盒子的组成部分</strong></h2><p>无论是行盒还是块盒，从内到外，都是由以下四个部分组成：   </p>
+<h3 id="1）内容（content）"><a href="#1）内容（content）" class="headerlink" title="1）内容（content）"></a><strong>1）内容（content）</strong></h3><p>涉及的属性有<code>width</code>、<code>height</code>等。设置盒子内容的宽高。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-width&height.png" loading="lazy"><br>内容部分叫做整个盒子的内容盒（content-box）。</p>
+<h3 id="2）填充（padding）"><a href="#2）填充（padding）" class="headerlink" title="2）填充（padding）"></a><strong>2）填充（padding）</strong></h3><p>盒子边框到盒子内容的距离，也称作内边距。<br>涉及的属性有<code>padding-left</code>、<code>padding-right</code>、<code>padding-top</code>、<code>padding-bottom</code>等。   </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+  <span class="token property">padding-top</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+  <span class="token property">padding-bottom</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
+  <span class="token property">padding-left</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
+  <span class="token property">padding-right</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-padding.png" loading="lazy"><br>这里也可以用简写属性<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding">padding</a>，写为<code>padding: padding-top、padding-right、padding-bottom、padding-left</code>，即上右下左，顺时针顺序。<br>如图中的属性值可以改写为<code>padding: 20px 5px 40px 80px</code>。<br>padding简写属性还有很多其他写法，比如<code>padding: 50px 20px 50px 20px</code>，上下相同，左右相同，可以简写为<code>padding: 50px 20px</code>。<br>更多的简写方式可以到MDN页面查看。<br>填充区 + 内容区 = 填充盒（padding-box）。</p>
+<h3 id="3）边框（border）"><a href="#3）边框（border）" class="headerlink" title="3）边框（border）"></a><strong>3）边框（border）</strong></h3><p>边框 = 边框样式（<code>border-style</code>） + 边框宽度（<code>border-width</code>） + 边框颜色（<code>border-color</code>）<br>如：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">border-width</span><span class="token punctuation">:</span> 4px<span class="token punctuation">;</span>
+    <span class="token property">border-style</span><span class="token punctuation">:</span> solid<span class="token punctuation">;</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4-border.png" loading="lazy"></p>
+<p>注意仅设置边框宽度而不设置边框样式是不行的，因为<code>border-style</code>的默认取值是<code>none</code>，不会显示。<br>如果没有设置<code>border-color</code>，那么边框颜色默认与字体颜色相同。<br>其实这里的<code>border-width</code>、<code>border-style</code>、<code>border-color</code>都是简写属性，也就是说，还可以写成如：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">border-width</span><span class="token punctuation">:</span> 10px 5px 20px 30px<span class="token punctuation">;</span>
+    <span class="token property">border-style</span><span class="token punctuation">:</span> solid dashed dotted groove <span class="token punctuation">;</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> blueviolet red yellow green<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-border2.png" loading="lazy"><br><code>border</code>本身也是一个简写属性，如可以写<code>border: 4px dashed red</code>，表示上右下左边框都是宽度4像素、虚线、红色。<br>边框区 + 填充区 + 内容区 = 边框盒（border-box）。</p>
+<h3 id="4）外边距（margin）"><a href="#4）外边距（margin）" class="headerlink" title="4）外边距（margin）"></a><strong>4）外边距（margin）</strong></h3><p>表示边框到其他盒子的距离。   </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.div1</span><span class="token punctuation">&#123;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span>10px 5px 30px 40px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6-margin.png" loading="lazy"></p>
+<br>
+
+<p>以上介绍的都是块盒，对于行盒，上面的一些参数有些不同的特性，以后再说。</p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
