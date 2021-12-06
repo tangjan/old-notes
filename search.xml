@@ -1,6 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>HELLO WORLD</title>
+    <url>/2000/01/29/hello/</url>
+    <content><![CDATA[<p>HELLO WORLD</p>
+<p>I AM TANGJIAYAN </p>
+]]></content>
+  </entry>
+  <entry>
+    <title>MySQL1：概论、MySQL软件基本使用</title>
+    <url>/2021/12/05/mysql1/</url>
+    <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV12b411K7Zu">MySQL_尚硅谷_bilibili</a>  </p>
+<br>
+
+<h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a><strong>概论</strong></h2><h3 id="为什么要使用数据库"><a href="#为什么要使用数据库" class="headerlink" title="为什么要使用数据库"></a><strong>为什么要使用数据库</strong></h3><p>为什么要用数据库来存取数据呢？数组、集合、文件不也能存取数据吗，功能不够用嘛？<br>数组、集合，最后是把数据存在了<span style="color:red">内存</span>中，而内存最大的缺点就是<span style="color:red">易失性</span>，主机重启数据就没了，数据无法长时间存放。<br><span style="color:red">文件</span>的数据存在外存，能实现长时间存放，但是不适合查询。<br>所以就需要专门开发出一套数据库系统，实现数据持久存放，统一管理。  </p>
+<h3 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a><strong>数据库相关概念</strong></h3><p><strong>DB</strong>：DataBase，数据库，存储数据的仓库，保存一系列有组织的数据。</p>
+<p><strong>DBMS</strong>：DataBase Management System，数据库管理系统，也可以理解为数据库软件。常见的数据库管理系统有MySQL、Oracle、DB2、SqlServer等。</p>
+<p><strong>SQL</strong>：Structured Query Language，结构化查询语言，专门用来与数据库通信的语言。SQL的优点：</p>
+<ol>
+<li>不是某个特定数据库供应商专有的语言，几乎所有的DBMS都支持SQL。当然各种DBMS可能有自己的“方言”。  </li>
+<li>简单却强大灵活。</li>
+</ol>
+<h3 id="数据库的特点"><a href="#数据库的特点" class="headerlink" title="数据库的特点"></a><strong>数据库的特点</strong></h3><ol>
+<li>将数据放到表中，再把表放到库中。</li>
+<li>一个数据库中可以有多张表，每张表都有一个唯一的名字用来标识自己。</li>
+<li>表具有一些特性，这些特性定义了数据在表中如何存储，类似java中“类”的设计。</li>
+<li>表由列组成，我们也称为字段，每一列（字段）类似java中的“属性”。</li>
+<li>表中的数据是按行存储的，每一行类似java中的“对象”。</li>
+</ol>
+<br>
+
+<h2 id="MySQL软件基本使用"><a href="#MySQL软件基本使用" class="headerlink" title="MySQL软件基本使用"></a><strong>MySQL软件基本使用</strong></h2><p>DBMS分为两类：</p>
+<ol>
+<li>基于共享文件系统的DBMS，如Access。</li>
+<li>基于客户机-服务器的DBMS，如MySQL、Oracle、SqlServe。  </li>
+</ol>
+<p>对于第二类数据库软件，我们说安装它，一般是指安装服务器端的软件。  </p>
+<h3 id="MySQL服务的启动和停止"><a href="#MySQL服务的启动和停止" class="headerlink" title="MySQL服务的启动和停止"></a><strong>MySQL服务的启动和停止</strong></h3><p><strong>方式一：图形化接口</strong><br>右击开始菜单 → 计算机管理 → 服务和应用程序 → 服务 → 找到MySQL，手动启动停止<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1.png" loading="lazy">  </p>
+<p><strong>方式二：命令行接口</strong><br>注意应以管理员身份运行命令提示符。<br>停止MySQL：<code>net stop mysql</code><br>启动MySQL：<code>net start mysql</code><br>（这里我没改服务名称，如果更改了服务名称需要<code>net stop 服务名称</code>、<code>net start 服务名称</code>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2.png" loading="lazy">  </p>
+<h3 id="MySQL服务器端的登录和退出"><a href="#MySQL服务器端的登录和退出" class="headerlink" title="MySQL服务器端的登录和退出"></a><strong>MySQL服务器端的登录和退出</strong></h3><p>在进行MySQL服务器端的登录和退出之前，要保证你的MySQL服务是启动的。<br>有两种方式控制MySQL服务器端，一是MySQL安装后自带的控制程序，二是Windows的命令提示符，如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3.png" loading="lazy"><br>前者只能用于root用户的登录使用，所以推荐使用后者。<br>登录命令：<code>mysql -h localhost -P 3306 -u root -p</code><br><code>-h</code>表示要连的主机，<code>localhost</code>即表示本机，它们之间的空格可以省略；<br><code>-P</code>表示端口号，注意这个P是大写的，它后面的空格也可以省略；<br><code>-u</code>表示用户，<code>root</code>即根用户；<br><code>-p</code>表示密码，这个p是小写的。<br>但是如<code>localhost</code>和<code>-P</code>之间的空格不能省略，因为它们是两个命令。<br>登录命令可以简写为<code>mysql -u root -p</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4.png" loading="lazy"><br>退出：<code>exit</code>、<code>quit</code>或者按下Ctrl+c都可以退出。</p>
+<h3 id="MySQL的常见命令概览"><a href="#MySQL的常见命令概览" class="headerlink" title="MySQL的常见命令概览"></a><strong>MySQL的常见命令概览</strong></h3><p>先大致浏览一下，以后会详细深入介绍。   </p>
+<p>显示当前的数据库列表：<code>show databases;</code><br>注意结尾加个分号。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5.png" loading="lazy">   </p>
+<p>打开指定的数据库：<code>use 数据库名称;</code><br>显示数据库中的列表：<code>show tables;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6.png" loading="lazy">     </p>
+<p>显示特定数据库列表：<code>show tables from 数据库名称;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/7.png" loading="lazy">   </p>
+<p>查询当前所使用的数据库：<code>select database();</code><br>这里的<code>database()</code>相当于一个函数。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/8.png" loading="lazy"></p>
+<p>创建表：<code>create table stuinfo(id int, name varchar(20));</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/9.png" loading="lazy">   </p>
+<p>查看表结构：<code>desc 表名称</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/10.png" loading="lazy">   </p>
+<p>在表中插入数据：<code>insert into stuinfo (id,name) values(1,&#39;John&#39;);</code><br>显示表中的数据：<code>select * from stuinfo;</code><br>更新表中的数据：<code>update stuinfo set name=&#39;Mary&#39; where id=1;</code><br>删除表中的数据：<code>delete from stuinfo where id=1;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/11.png" loading="lazy">   </p>
+<p>查看当前MySQL服务器端版本：<br>法一，MySQL命令：mysql&gt; <code>select version();</code><br>法二，DOS命令：C:\Windows\system32&gt;<code>mysql --version</code>（或<code>mysql --V</code>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/12.png" loading="lazy"></p>
+<h3 id="常见命令总结："><a href="#常见命令总结：" class="headerlink" title="常见命令总结："></a><strong>常见命令总结</strong>：</h3><ol>
+<li>查看当前所有的数据库<br> <code>show databases</code></li>
+<li>打开指定的库<br> <code>use 库名称;</code></li>
+<li>查看当前库的所有表<br> <code>show tables;</code></li>
+<li>查看其他库的所有表<br> <code>show tables from 库名称;</code></li>
+<li>创建表 <pre class="language-none"><code class="language-none">create table 表名(
+  列名 列类型;
+  列名 列类型;
+  ...
+)</code></pre></li>
+<li>查看表结构<br> <code>desc 表名称</code></li>
+<li>查看当前版本<br> <code>mysql&gt; select version();</code><br> <code>C:\Windows\system32&gt; mysql --version</code><br> <code>C:\Windows\system32&gt; mysql -V</code>   </li>
+</ol>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MATLAB拼图游戏设计</title>
     <url>/2021/01/15/matlabJigsaw/</url>
     <content><![CDATA[<p>这是我大三上学期《自动化软件工具》这门课的结课作业，也就是用MATLAB做一个项目出来。<br>参考于<a href="https://wuxian.blog.csdn.net/article/details/79219110">基于MATLAB的拼图游戏设计_思绪无限的博客-CSDN博客</a>。</p>
@@ -127,6 +198,154 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
+    <title>Web前端11：继承、属性值的计算过程</title>
+    <url>/2021/12/05/web11/</url>
+    <content><![CDATA[<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/inheritance">继承</a></strong></h2><p>子元素会继承父元素的<span style="color: red">某些</span>css属性。这也意味着有着继承的“连锁反应”，即后代元素会继承祖先元素。<br>这里的“某些”css属性，严格来说要一个个列出来，但那样不利于记忆，我们可以从整体上了解为：通常，跟文字相关的属性会被继承，如<code>color</code>、<code>font-size</code>、<code>font-family</code>、<code>font-weight</code>等。<br>所以一个网页中的字体一般是统一的，字体会被设置在&lt;body&gt;标签中。<br>一个属性是否是继承属性可以在MDN查询，如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/color">color</a>的页面中有写到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-inheritance.png" loading="lazy">   </p>
+<p>插曲小tip：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Shorthand_properties">简写属性</a><br>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font">font</a>就是一个简写属性，即一次性定义多个属性。其实这就是一个语法糖。</p>
+<br>
+
+<h2 id="属性值的计算过程"><a href="#属性值的计算过程" class="headerlink" title="属性值的计算过程"></a><strong>属性值的计算过程</strong></h2><p>其实讲的就是页面渲染的过程。<br>浏览器渲染元素是一个元素一个元素依次渲染的，顺序是遍历html文档的树形目录结构，如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-htmltree.png" loading="lazy"><br>渲染每个元素的前提条件：该元素的所有CSS属性必须有值。不是说我们写了哪些属性，就只要哪些属性有值就行了，必须是全部的属性都得有值。比如在浏览器的元素审查界面，可以看到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-computed.png" loading="lazy"><br>一个元素，从所有属性都没有值，到所有属性都有值，就是属性值的计算过程。</p>
+<h3 id="属性值计算的四个步骤"><a href="#属性值计算的四个步骤" class="headerlink" title="属性值计算的四个步骤"></a><strong>属性值计算的四个步骤</strong></h3><p><strong>1）确定声明值</strong><br>开发者写的一些样式就是声明值。参考样式表中没有冲突的声明，直接拿来作为属性值。 </p>
+<p><strong>2）层叠冲突</strong><br>对样式表有冲突的声明，使用层叠规则，确定属性值。<br>层叠就是发生在这一步。  </p>
+<p><strong>3）使用继承</strong><br>对于还是没有值的属性，继承父元素的值。<br>继承就是发生在这一步。 </p>
+<p><strong>4）使用默认值</strong><br>剩下的没有值的属性就使用默认值，这个默认值是多少可以在MDN查询。<br>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/width">width</a>的默认值是<code>auto</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4-initial-value.png" loading="lazy"></p>
+<p>根据属性值的计算过程，现在我们来提一个问题：  </p>
+<h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a><strong>Question</strong></h3><p>代码如下：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> a元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span> span元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>问：a元素是不是红色？<br>如果你想着：“因为a元素是div的子元素，所以根据继承的规则，a元素应该是红色”，然后回答“Yes”，那么说明你没搞懂属性值的计算过程。<br>眼见为实：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-question.png" loading="lazy"><br>来解释一下。要确定a元素属性的值要经过前已述及的四个步骤：确定声明值、层叠冲突、使用继承、使用默认值。  </p>
+<p>对于<code>&lt;span&gt;</code>元素：<br>第一步，声明值，span元素没有<code>&lt;span style=&quot;color: red&quot;&gt;</code>、<code>span&#123; color: red; &#125;</code>这样的声明值，第一步没有赋值。<br>第二步，层叠，层叠是发生在有声明冲突的时候的，但span元素连声明都没有，哪来的冲突，所以第二步也没有赋值。<br>第三步，继承，这一步就把<code>&lt;div&gt;</code>的红色继承了过来，赋值成功。</p>
+<p>对于<code>&lt;a&gt;</code>元素：<br>第一步确定声明值，这里虽然我们开发者没有写声明值，但浏览器默认样式表中有默认声明值：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6-question2.png" loading="lazy"><br>所以第一步就确定了颜色属性的值，赋值完成，不再进行后续步骤，所以“继承”这一步没有作用。</p>
+<p>那么现在我们希望使用重置样式表覆盖浏览器的默认样式，比如希望<code>&lt;a&gt;</code>元素没有下划线，颜色继承父元素。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/reset.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> a元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span> span元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>reset.css：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> inherit<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>这时因为有样式声明冲突，在层叠这一步，我们的作者样式表就会胜出，所以就用我们设置的CSS属性值了。<br>但是继承是层叠的下一步，如果我们在作者样式表reset.css中赋值color，在层叠这一步就会确定属性值了，那样就无法继承了，所以这里<code>color</code>的取值为<code>inherit</code>，表示强制继承、手动继承。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/7-question3.png" loading="lazy"></p>
+<p>除了<code>inherit</code>以外还有一个特殊的属性取值：<code>initial</code>，即默认值，也常用到。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端10：层叠</title>
+    <url>/2021/12/04/web10/</url>
+    <content><![CDATA[<h2 id="层叠"><a href="#层叠" class="headerlink" title="层叠"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade">层叠</a></strong></h2><p>CSS全称就叫cascading style sheets，<span style="color:red">层叠</span>样式表，所以层叠这个概念是很重要的。<br>先来介绍一个概念，<span style="color:red">声明冲突</span>：同一个样式多次应用到了同一个元素。<br>我们自己写的CSS代码可能会和浏览器的CSS样式有冲突：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a</span><span class="token punctuation">&#123;</span>  
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-conflicting-declaration.png" loading="lazy">  </p>
+<p>声明冲突不一定是坏事，实际网站开发中甚至往往用到声明冲突，如：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">span</span><span class="token punctuation">&#123;</span>  
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> 
+<span class="token selector">.selected</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Lorem.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Quae.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Aut!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>selected<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Minus.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Vel.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Sint?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Quibusdam?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Dolorem.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-conflicting-declaration2.png" loading="lazy"><br>这种样式是不是很熟悉？像下面这张截自百度贴吧的图就应用了这种样式：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-conflicting-declaration3.png" loading="lazy"><br>这种应用就是绝大部分元素的样式一样，只有其中某些元素处于特殊的状态（比如鼠标悬停）就更改样式。  </p>
+<p>解决声明冲突的过程就叫<span style="color: red">层叠</span>。<br>层叠不是由我们解决的，是由浏览器自动处理的，我们要学习的就是浏览器如何处理这个冲突过程的。<br>层叠也有很多其他叫法，比如权重计算。它一共经过三步：</p>
+<ol>
+<li>比较重要性</li>
+<li>比较特殊性</li>
+<li>比较原次序  </li>
+</ol>
+<p>经过这三个步骤之后，最后一定只有一个样式胜出，元素就应用那个胜出的样式。<br>下面逐个介绍。</p>
+<br>
+
+<h2 id="1-比较重要性"><a href="#1-比较重要性" class="headerlink" title="1.比较重要性"></a><strong>1.比较重要性</strong></h2><p>比较重要性时考虑的因素很多，没必要全都了解。<br>主要的三个重要性排序为：</p>
+<p><strong>1）作者样式表中的!important样式</strong><br>作者样式表就是开发者书写的样式，包括html文档中的&lt;style&gt;、css文件中的样式等。<br>我们写代码时可以在样式后面加上<span style="color:red">!important</span>，如</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">span</span><span class="token punctuation">&#123;</span>  
+    <span class="token property">color</span><span class="token punctuation">:</span> red <span class="token important">!important</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span> </code></pre>
+<p>这样就表示这个样式是重要性最高，最后一定会胜出，被应用。<br>所以这种方法太绝对了，如果哪天网站需求改变了，就很难更改，所以应用得极少。  </p>
+<p><strong>2）作者样式表中的普通样式</strong>  </p>
+<p><strong>3）浏览器（用户代理）默认样式表中的样式</strong>  </p>
+<br>
+
+<h2 id="2-比较特殊性"><a href="#2-比较特殊性" class="headerlink" title="2.比较特殊性"></a><strong>2.比较特殊性</strong></h2><p>当比较重要性结束之后冲突还没有解决，就继续进行比较特殊性这一步骤。<br>总体规则：看选择器，选择器定位的范围越窄就越特殊。<br>具体规则：通过选择器计算一个4位十进制数，也就是权重，这个数越大就越特殊。  </p>
+<p><strong>1）千位</strong><br>如果是内联样式，千位为1，否则为0。 所以内联样式最特殊，优先级最高。<br>浏览器的在线调试就是使用的内联样式。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4-particularity.png" loading="lazy">  </p>
+<p><strong>2）百位</strong><br>等于选择器中所有ID选择器的数量。</p>
+<p><strong>3）十位</strong><br>等于所由选择器中类选择器、伪类选择器、属性选择器的数量。  </p>
+<p><strong>4）个位</strong><br>等于选择器中元素选择器、伪元素选择器的数量。<br>比如<code>a&#123; ... &#125;</code>的权重是0001，<code>body a&#123; ... &#125;</code>的权重是0002，所以后者胜出。</p>
+<p>举例：<br>html：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mydiv<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myul<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myli<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://douban.com<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mylink<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                Lorem ipsum dolor sit amet.
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>css：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">div ul a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">#mydiv #myul a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">#mydiv #myul .mylink</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> gold<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">#mydiv #myul a:link</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> chocolate<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>首先这几个都是作者样式表，所以他们的重要性是一样的，接下来比较特殊性，计算权重。<br>它们都不是内联样式，所以千位都为0。<br><code>a&#123; ... &#125;</code>的权重是<span style="color:red">0001</span>；<br><code>div ul a&#123; ... &#125;</code>的权重是<span style="color:red">0003</span>；<br><code>#mydiv #myul a&#123; ... &#125;</code>的权重是<span style="color:red">0201</span>；<br><code>#mydiv #myul .mylink&#123; ... &#125;</code>的权重是<span style="color:red">0210</span>；<br><code>#mydiv #myul a:link&#123; ... &#125;</code>的权重是<span style="color:red">0211</span>。<br>所以最后者胜出，网页文字被渲染为了chocolate色：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-particularity2.png" loading="lazy"><br>补充：这里的权重四位数不是逢十进一的，而是逢256进一。所以这里的“四位数”是应该加引号的，它本质上是四个数字，从高到低一个个数字比较。</p>
+<br>
+
+<h2 id="3-比较源次序"><a href="#3-比较源次序" class="headerlink" title="3.比较源次序"></a><strong>3.比较源次序</strong></h2><p>当然权重值是完全有可能相同的，所以这时要解决冲突就要继续向下比较，即比较源次序：代码书写靠后的胜出。<br>可以用栈的思维去助记：后进先出，最后读的代码就是最新的，就会被应用。<br>这步比完之后就肯定会揭晓胜负了，不存在平局。  </p>
+<br>
+
+<h2 id="层叠应用"><a href="#层叠应用" class="headerlink" title="层叠应用"></a><strong>层叠应用</strong></h2><p><strong>1）重置样式表</strong><br>不同浏览器的默认差异是有差异的，所以就导致你写的网页在不同浏览器上显示各异。这时可以书写一些作者样式，覆盖浏览器的默认样式。<br>实际项目中应用重置样式表的思想时，往往会创建<span style="color:red">reset.css</span>、<span style="color:red">mystyle.css</span>两个css文件，前者用来通用地重置，后者用来书写自己实际开发要用到的样式。然后在html文件中加入：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/reset.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/mystyle.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+<p>这样由于源次序规则，就会先应用自己写的mystyle.css样式。<br>重置样式的书写方法差不多是固定的，可以去网络上download下来，如<code>normallize.css</code>、<code>reset.css</code>、<code>meyer.css</code>等。<br>比如可以在<a href="https://meyerweb.com/">meyerweb.com</a>找到相应的css文件，使用绝对地址引用。</p>
+<p><strong>2）爱恨法则</strong><br>对于超链接，要按<code>link</code>、<code>visited</code>、<code>hover</code>、<code>active</code>的相对顺序书写，<span style="color: red">l</span>o<span style="color: red">v</span>e、<span style="color: red">ha</span>te，即“爱恨法则”。<br>为什么是这个顺序呢？因为这样才符合人的意愿。同一个时刻可能有多个状态都符合条件，比如鼠标按下激活（active）时也符合了鼠标悬停（hover）的状态，那么这个时候我们希望的肯定是鼠标按下的状态。所以基于人们的意愿就形成了爱恨法则这样的次序。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Web前端1：概论</title>
     <url>/2021/11/27/web1/</url>
     <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV1yx411d7Rc?from=search&amp;seid=6709307494925543999&amp;spm_id_from=333.337.0.0">Web前端开发_渡一教育_bilibili</a></p>
@@ -183,11 +402,65 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>HELLO WORLD</title>
-    <url>/2000/01/29/hello/</url>
-    <content><![CDATA[<p>HELLO WORLD</p>
-<p>I AM TANGJIAYAN </p>
+    <title>Web前端12：盒模型</title>
+    <url>/2021/12/05/web12/</url>
+    <content><![CDATA[<h2 id="盒子类型"><a href="#盒子类型" class="headerlink" title="盒子类型"></a><strong>盒子类型</strong></h2><p>每个元素在页面中都会生成一个矩形区域（盒子）。元素是html的概念，盒子是css的概念。<br>盒子类型：<br><strong>1）行盒</strong><br>属性<code>display</code>取值为<code>inline</code>的元素。<br>行盒不换行。如<code>&lt;span&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;img&gt;</code>等元素默认就是行盒。<br>display默认值就是inline。</p>
+<p><strong>2）块盒</strong><br>属性<code>display</code>取值为<code>block</code>的元素。<br>块盒最后有个换行，也就是独占一行。如<code>&lt;h&gt;</code>、<code>&lt;div&gt;</code>、<code>&lt;p&gt;</code>等容器元素默认就是块盒。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-box.png" loading="lazy"></p>
+<br>
+
+<h2 id="盒子的组成部分"><a href="#盒子的组成部分" class="headerlink" title="盒子的组成部分"></a><strong>盒子的组成部分</strong></h2><p>无论是行盒还是块盒，从内到外，都是由以下四个部分组成：   </p>
+<h3 id="1）内容（content）"><a href="#1）内容（content）" class="headerlink" title="1）内容（content）"></a><strong>1）内容（content）</strong></h3><p>涉及的属性有<code>width</code>、<code>height</code>等。设置盒子内容的宽高。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-width&height.png" loading="lazy"><br>内容部分叫做整个盒子的内容盒（content-box）。</p>
+<h3 id="2）填充（padding）"><a href="#2）填充（padding）" class="headerlink" title="2）填充（padding）"></a><strong>2）填充（padding）</strong></h3><p>盒子边框到盒子内容的距离，也称作内边距。<br>涉及的属性有<code>padding-left</code>、<code>padding-right</code>、<code>padding-top</code>、<code>padding-bottom</code>等。   </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+  <span class="token property">padding-top</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+  <span class="token property">padding-bottom</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
+  <span class="token property">padding-left</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
+  <span class="token property">padding-right</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-padding.png" loading="lazy"><br>这里也可以用简写属性<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding">padding</a>，写为<code>padding: padding-top、padding-right、padding-bottom、padding-left</code>，即上右下左，顺时针顺序。<br>如图中的属性值可以改写为<code>padding: 20px 5px 40px 80px</code>。<br>padding简写属性还有很多其他写法，比如<code>padding: 50px 20px 50px 20px</code>，上下相同，左右相同，可以简写为<code>padding: 50px 20px</code>。<br>更多的简写方式可以到MDN页面查看。<br>填充区 + 内容区 = 填充盒（padding-box）。</p>
+<h3 id="3）边框（border）"><a href="#3）边框（border）" class="headerlink" title="3）边框（border）"></a><strong>3）边框（border）</strong></h3><p>边框 = 边框样式（<code>border-style</code>） + 边框宽度（<code>border-width</code>） + 边框颜色（<code>border-color</code>）<br>如：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">border-width</span><span class="token punctuation">:</span> 4px<span class="token punctuation">;</span>
+    <span class="token property">border-style</span><span class="token punctuation">:</span> solid<span class="token punctuation">;</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4-border.png" loading="lazy"></p>
+<p>注意仅设置边框宽度而不设置边框样式是不行的，因为<code>border-style</code>的默认取值是<code>none</code>，不会显示。<br>如果没有设置<code>border-color</code>，那么边框颜色默认与字体颜色相同。<br>其实这里的<code>border-width</code>、<code>border-style</code>、<code>border-color</code>都是简写属性，也就是说，还可以写成如：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">border-width</span><span class="token punctuation">:</span> 10px 5px 20px 30px<span class="token punctuation">;</span>
+    <span class="token property">border-style</span><span class="token punctuation">:</span> solid dashed dotted groove <span class="token punctuation">;</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> blueviolet red yellow green<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-border2.png" loading="lazy"><br><code>border</code>本身也是一个简写属性，如可以写<code>border: 4px dashed red</code>，表示上右下左边框都是宽度4像素、虚线、红色。<br>边框区 + 填充区 + 内容区 = 边框盒（border-box）。</p>
+<h3 id="4）外边距（margin）"><a href="#4）外边距（margin）" class="headerlink" title="4）外边距（margin）"></a><strong>4）外边距（margin）</strong></h3><p>表示边框到其他盒子的距离。   </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.div1</span><span class="token punctuation">&#123;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span>10px 5px 30px 40px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6-margin.png" loading="lazy"></p>
+<br>
+
+<p>以上介绍的都是块盒，对于行盒，上面的一些参数有些不同的特性，以后再说。</p>
+<p><br><br><br><br><br></p>
+<hr>
 ]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
   </entry>
   <entry>
     <title>Web前端2：第一个网页、语义化</title>
@@ -255,6 +528,162 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 
 </div>
 
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端13：盒模型应用</title>
+    <url>/2021/12/06/web13/</url>
+    <content><![CDATA[<h2 id="改变宽高范围"><a href="#改变宽高范围" class="headerlink" title="改变宽高范围"></a><strong>改变宽高范围</strong></h2><p>默认情况下，<code>width</code>和<code>height</code>设置的是内容盒的宽高。<br>我们写的网页来自于设计师的psd文件设计稿。所以做静态网页的人也常被称为页面重构师，将psd文件制作为静态页面。   </p>
+<p>例：现在我们想模仿斗鱼网站的这个部分做个网页出来：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-1.png" loading="lazy"><br>所以我们就要测量这个盒子的宽高为多少像素，文字“云游戏”距左边界多少像素，并用审查元素查询它的文字颜色、背景颜色等。<br>对于测量后面会介绍专门的工具，这里先用mspaint或QQ截图大致测量一下，得到宽高为240 × 48像素，“云游戏”距左边框52像素。<br>另外，让文字垂直居中，需要将行高（line-height）设置与高度（height）相同。<br>于是，css文件中：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 240px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 48px<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #a7a7a7<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #2d2e36<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 48px<span class="token punctuation">;</span>
+    <span class="token property">padding-left</span> <span class="token punctuation">:</span>52px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>html文件中：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    云游戏
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>设置好了之后我们到网页中看一下它的宽高：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-2.png" loading="lazy"><br>诶？为什么它的div显示的是365 × 60呢？我们设置的不是300 * 60吗？<br>从盒模型中可以找到答案：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-3.png" loading="lazy"><br>这是因为我们设置的宽高是<span style="color:red">内容盒</span>的宽高，再加上填充区域就使得它的宽度多了65像素。<br>而我们量的时候量的是<span style="color:red">边框盒</span>的宽高（这里没有边框，所以边框盒 = 填充盒），也就是整个盒子的宽高，这符合人的直觉。<br>这里有两种解决方式：  </p>
+<ol>
+<li>精确计算。既然<code>padding-left</code>为<code>65px;</code>，那么就取<code>width</code>为300 - 65 =<code>235px;</code>。</li>
+<li>CSS3中有这么一个属性：<code>box-sizing</code>，它的取值可以为<code>content-box</code>、<code>border-box</code>，表示CSS宽高的影响范围。<br>这样一来，只要在上述CSS代码中最后再加上<code>box-sizing: border-box;</code>就可以了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-4.png" loading="lazy">   </li>
+</ol>
+<p>于是我们就可以看到，我们设计的样式和斗鱼的差不多：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-5.png" loading="lazy">   </p>
+<br>
+
+<h2 id="改变背景覆盖范围"><a href="#改变背景覆盖范围" class="headerlink" title="改变背景覆盖范围"></a><strong>改变背景覆盖范围</strong></h2><p>默认情况下，背景覆盖边框盒。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 15px dashed blueviolet<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-6.png" loading="lazy"><br>可以看到，背景颜色覆盖了边框区域。<br>背景的覆盖范围可以使用<code>background-clip</code>属性修改，可以取值为<code>content-box</code>、<code>padding-box</code>、<code>border-box</code>（默认值）等。<br>如在上述CSS代码中在加上<code>background-clip: content-box;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-7.png" loading="lazy">     </p>
+<br>
+
+<h2 id="溢出处理"><a href="#溢出处理" class="headerlink" title="溢出处理"></a><strong>溢出处理</strong></h2><p>有时盒子的内容可能会超出盒子区域，比如文字太多。<br>通常，不设置宽高就不会出现这样的问题，盒子的宽高会自动调整。而设置了宽高就容易出现溢出。  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 70px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 3px solid red<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-8.png" loading="lazy"><br>溢出后边框盒的处理方式可以通过属性<code>overflow</code>控制，它的取值有<code>auto</code>、<code>hidden</code>、<code>scroll</code>等，默认情况下取值是<code>visible</code>，即可见的。<br>如在上述CSS代码中在加上<code>overflow: scroll;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-9.png" loading="lazy"><br>这里的<code>scroll</code>是个简写属性，如果希望只出现纵向的滚动条（前提是x方向上没有溢出），可以写为<code>overflow-y: scroll;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-10.png" loading="lazy"><br><code>overflow</code>取值为<code>auto</code>表示自动控制滚动条，宽高足够、没有溢出时就不出现滚动条，溢出时就出现滚动条。   </p>
+<p>溢出隐藏有个应用场景，如淘宝网：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-11.png" loading="lazy"><br>可以看到它人为溢出了“淘宝网”这三个字，然后隐藏了起来。这么做是出于语义化的目的，有利于搜索引擎、浏览器理解。   </p>
+<br>
+
+<h2 id="断词规则"><a href="#断词规则" class="headerlink" title="断词规则"></a><strong>断词规则</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-12.png" loading="lazy"><br>这段英文来自伯特兰·罗素。<br>为什么这段英文的行尾参差不齐？是什么定义了它们的换行规则？<br>这是由属性<code>word-break</code>决定的，影响文字在什么位置截断换行。它有以下几个取值：   </p>
+<ul>
+<li><code>normal</code>：普通截断方式，对于CJK（Chinese Japanese Korean）字符，在文字截断；非CJK字符，在单词位置截断。<br>这个截断规定是合理的，如中文，每个字有独立的含义，截断了也不影响人们阅读。但是对于如英文，它一个单词才有独立的含义，截断了就失去了本来的意思。normal是默认值。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-13.png" loading="lazy">   </li>
+<li><code>break-all</code>：所有字符都截断。所以这样一来英文在单词内部就会被截断。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-14.png" loading="lazy">   </li>
+<li><code>keep-all</code>：所有文字都在单词之间截断。中文的汉字之间不加空格就会被认为是一个单词，所以会出现如下状况：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-15.png" loading="lazy"><br>给中文段落随便加几个空格：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-16.png" loading="lazy">   </li>
+</ul>
+<br>
+
+<h2 id="空白处理"><a href="#空白处理" class="headerlink" title="空白处理"></a><strong>空白处理</strong></h2><p>有时我们想在网页上显示一些信息，但是显示不下了，就会溢出，我们希望对溢出字符进行一些处理。比如下图截自猫眼电影：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-17.png" loading="lazy"><br>溢出的文字被替换为了“…”。<br>想实现这样的效果有固定的处理方法：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">li</span><span class="token punctuation">&#123;</span>
+    <span class="token property">border-bottom</span><span class="token punctuation">:</span> 1px dashed #ccc<span class="token punctuation">;</span>
+    <span class="token property">border-left</span><span class="token punctuation">:</span> 3px solid blueviolet<span class="token punctuation">;</span>
+    <span class="token property">padding-left</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 1em 0<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
+    
+    <span class="token property">width</span><span class="token punctuation">:</span> 240px<span class="token punctuation">;</span>
+    <span class="token property">white-space</span><span class="token punctuation">:</span> nowrap<span class="token punctuation">;</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+    <span class="token property">text-overflow</span><span class="token punctuation">:</span> ellipsis<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><code>white-space: nowrap;</code>表示不换行。<br><code>text-overflow: ellipsis;</code>表示文本溢出时用省略号（ellipsis）替代。<br>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-18.png" loading="lazy"><br>这种方式只能控制单行文本，多行文本需要用js。<br>像<code>&lt;pre&gt;</code>元素就是使用<code>white-space: pre;</code>属性来取消空白折叠的效果的。<br>所以如<code>&lt;div&gt;</code>元素也可以设置<code>white-space: pre;</code>属性来取消空白折叠。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端5：img元素以及和map元素联用、和figure元素联用；多媒体元素</title>
+    <url>/2021/11/29/web5/</url>
+    <content><![CDATA[<h2 id="1-img元素的使用"><a href="#1-img元素的使用" class="headerlink" title="1. img元素的使用"></a><strong>1. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img">img元素</a>的使用</strong></h2><p>img元素是一个空元素，它主要使用两个属性。<br>①<span style="color: red">src</span>。该属性是必须有的，表示你想嵌入的图片的文件路径，相对路径或绝对路径都可以。<br>②<span style="color: red">alt</span>。当图片文件被删除、路径不正确或者网不好等原因，导致图片加载不出来，就会显示一个“图裂”图标 + alt的内容。<br>正常情况：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/Yuki.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>图裂<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/Yuki.png" loading="lazy"><br>图裂情况：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/不存在的图片.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>图裂<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/tulie.png" loading="lazy">  </p>
+<br>
+
+<h2 id="2-和a元素联用"><a href="#2-和a元素联用" class="headerlink" title="2. 和a元素联用"></a><strong>2. 和a元素联用</strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.baidu.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/baidu.png<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+&lt;/a</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/img+a.png" loading="lazy"><br>可以看到当鼠标指向baidu.png这张图片时，变为了小手形状，表示存在超链接，点击就会跳转到百度了。  </p>
+<br>
+
+<h2 id="3-和map元素联用"><a href="#3-和map元素联用" class="headerlink" title="3. 和map元素联用"></a><strong>3. 和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/map">map元素</a>联用</strong></h2><p>map元素与<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/area">area元素</a>一起定义一个可点击的超链接区域。这个区域可以是很多形状。img元素和map元素、area元素的联用可以实现点击图片上的某些区域跳转到另外指定的超链接这个功能。<br>比如，这里有一张太阳系的图片：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/solarSystem.png" loading="lazy"><br>现在我们想实现如下功能：点击“木星”本身以及“木星”汉字都跳转到木星的百度百科，点击图片的其他位置跳转到银河系的百度百科。<br>这就要使用到map了。<br>map的shape属性表示区域形状，coords表示坐标。<br>shape取值circle表示圆形，取值rect表示矩形。<br>circle的coords属性值分别是“圆心x，圆心y，半径”。<br>rect的coords属性值分别是“矩形左上角x，矩形左上角y，矩形右下角x，矩形右下角y”。<br>坐标系规定如图，左上角是坐标原点，向右是x轴正方向，向下是y轴正方向，单位是像素：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mapCord.png" loading="lazy"><br>推荐使用mspaint进行坐标测量。使用QQ截图也可以，但在那之前你得检查一下你的电脑的屏幕显示是不是100%，一般的笔记本都推荐设置为了125%，导致测量得不对。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E9%93%B6%E6%B2%B3%E7%B3%BB/189795?fr=aladdin<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>银河系<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">usemap</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#solarMap<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/galaxy.png<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>map</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>solarMap<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>area</span> <span class="token attr-name">shape</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>circle<span class="token punctuation">"</span></span> <span class="token attr-name">coords</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>448,295,40<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>木星<span class="token punctuation">"</span></span>
+          <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E6%9C%A8%E6%98%9F/222105?fr=aladdin<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>area</span> <span class="token attr-name">shape</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rect<span class="token punctuation">"</span></span> <span class="token attr-name">coords</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>519,281,590,320<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>木星<span class="token punctuation">"</span></span>
+          <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E6%9C%A8%E6%98%9F/222105?fr=aladdin<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>map</span><span class="token punctuation">></span></span></code></pre>
+<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mapEffect.gif" loading="lazy">  </p>
+<br>
+
+<h2 id="4-和figure元素联用"><a href="#4-和figure元素联用" class="headerlink" title="4. 和figure元素联用"></a><strong>4. 和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figure">figure元素</a>联用</strong></h2><p>通常用figure元素把图片、图片标题、图片说明等元素打包在一起。用法很简单，但在语义化上的意义很重要。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figure</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E9%93%B6%E6%B2%B3%E7%B3%BB/189795?fr=aladdin<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>银河系<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">usemap</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#solarMap<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/galaxy.png<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figcaption</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>太阳系<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figcaption</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span><span class="token punctuation">></span></span>
+        太阳系（英文：Solar system）是一个以太阳为中心，受太阳引力约束在一起的天体系统，包括太阳、行星及其卫星、矮行星、小行星、彗星和行星际物质。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+        太阳系位于距银河系中心大约2.4~2.7万光年的位置（银河系的恒星数量约在1000亿到4000亿之间，太阳只是其中之一）。
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figure</span><span class="token punctuation">></span></span></code></pre>
+<p>figcaption是figure的子元素，表示图片标题。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/figure.png" loading="lazy">  </p>
+<br>
+
+<h2 id="5-多媒体元素"><a href="#5-多媒体元素" class="headerlink" title="5. 多媒体元素"></a><strong>5. 多媒体元素</strong></h2><p><strong>①</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video"><strong>video</strong></a><br>值得注意的是，video元素不是空元素。在 &lt;video&gt;&lt;/video&gt; 标签中间的内容，是针对浏览器不支持此元素时候的降级处理。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>video</span> <span class="token attr-name">controls</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./video/test.mp4<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span>500px<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+    Sorry, your browser doesn't support embedded videos.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/video.png" loading="lazy"><br>图示视频是我从《真探 第一季》中截的一段。<br>其中，controls属性的功能是显示控件。像controls、autoplay这样的属性，取值只有两种状态：<br>1）不写<br>2）取值为属性名<br>这种属性称为<span style="color:red">布尔属性</span>。布尔属性在HTML5中可以不写属性值。<br>另外常用的布尔属性有autoplay、muted、loop。<span style="color:red">autoplay</span>表示打开网页自动播放。有些浏览器不允许自动播放，也就是说你写了autoplay它也不自动播放。这么做的原因是避免打开网页就放出了视频声音，吓到用户（个人体验确实不自动播放好些）。为此，有时也会再加上<span style="color:red">muted</span>这个自动静音的布尔属性，然后允许自动播放。<span style="color:red">loop</span>即循环播放。很多游戏的主页就是不断重复播放的、静音的、代表游戏的视频。  </p>
+<p><strong>②</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio"><strong>audio</strong></a><br>用法和video差不多相同。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>audio</span> <span class="token attr-name">controls</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./audio/FELT - Beautiful Trick.mp3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    Your browser does not support the audio element.
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>audio</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/audio.png" loading="lazy">  </p>
+<br>
+
+<h2 id="6-兼容性"><a href="#6-兼容性" class="headerlink" title="6. 兼容性"></a><strong>6. 兼容性</strong></h2><p>不同的浏览器支持的音视频格式可能不一致，控件样式可能也不同。<br>为了使开发出的网站有获得更好的兼容性，在嵌入多媒体元素时会这样写：  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>video</span> <span class="token attr-name">controls</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./video/test.mp4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./video/test.webm<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>对不起，你的浏览器不支持video元素，请换个新一点的浏览器。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">></span></span></code></pre>
+<p>也就是准备多个不同格式的多媒体文件，让浏览器能用哪个就用哪个。<br>如果浏览器太旧，啥都不支持，就提示最后一句话。  </p>
+<p><br><br><br><br><br></p>
 <hr>
 ]]></content>
       <categories>
@@ -390,157 +819,6 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <br>
 <br>
 
-<hr>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web前端6：列表元素（有序列表ol、无序列表ul、定义列表dl）、容器元素、元素包含关系</title>
-    <url>/2021/11/29/web6/</url>
-    <content><![CDATA[<h2 id="1-有序列表ol"><a href="#1-有序列表ol" class="headerlink" title="1. 有序列表ol"></a><strong>1. 有序列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol">ol</a></strong></h2><p>ol即order list，有序列表。<br>li表示list item，即列表条目，是列表的子元素。<br>type属性表示序号的显示方式，取值可以是1、A、a、I、i。<br>但序号长什么样子本来是应该由CSS负责的，所以在MDN中有这样一段注释：</p>
-<blockquote>
-<p>type属性在 HTML4中弃用，但是在 HTML5 中被重新引入。除非列表中序号很重要（比如，在法律或者技术文件中条目通常被需要所引用），否则请使用 CSS list-style-type属性替代。  </p>
-</blockquote>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第一步：抓一只猫，让猫在强烈的政治攻击下承认自己是大象。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第二步：公布计划：生产一种能装进大象的冰箱，动员国民捐款。实际上并不生产。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第三步：收买证人，证明大象已经被装进冰箱里。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第四步：利用媒体优势反复强调“猫是大象的祖先”这一理论，以防后患。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ol1.png" loading="lazy"><br>ol还有一个布尔属性是reversed，作用是将序号倒过来编排。</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a<span class="token punctuation">"</span></span> <span class="token attr-name">reversed</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ul_reversed.png" loading="lazy">  </p>
-<br>
-
-<h2 id="2-无序列表ul"><a href="#2-无序列表ul" class="headerlink" title="2. 无序列表ul"></a><strong>2. 无序列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul">ul</a></strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
-    七宗罪：
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>色欲<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>暴食<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>贪婪<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>懒惰<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>暴怒<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>嫉妒<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>傲慢<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ul.png" loading="lazy"><br>相比于有序列表，无序列表使用频率更高，常用于菜单、新闻列表等。  </p>
-<br>
-
-<h2 id="3-定义列表dl"><a href="#3-定义列表dl" class="headerlink" title="3. 定义列表dl"></a><strong>3. 定义列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/dl">dl</a></strong></h2><p>dl即definition list，是一个包含术语定义以及描述的列表，通常用于展示词汇表或者元数据 （键-值对列表）。它通常包括两个子元素，分别是dt和dd。<br><span style="color:red">dt</span>，definition table，术语标题。<span style="color:red">dd</span>，definition description，术语描述。</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dl</span><span class="token punctuation">></span></span>
-    Web前端的一些术语
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>html<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
-        HTML（HyperText Markup Language，超文本标记语言） 是一种描述语言，用来定义网页结构。
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>css<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
-        层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 或 XML文档的呈现。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
-        CSS 描述了在屏幕、纸质、音频等其它媒体上的元素应该如何被渲染的问题。
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>javascript<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
-        JavaScript ( JS ) 是一种具有函数优先的轻量级，解释型或即时编译型的编程语言。
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dl</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/dl.png" loading="lazy"><br>在一些电影网站就有定义列表的应用。  </p>
-<br>
-
-<h2 id="4-容器元素"><a href="#4-容器元素" class="headerlink" title="4. 容器元素"></a><strong>4. 容器元素</strong></h2><p>容器元素表示一个块区域，内部用于放置其他元素。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/div">&lt;div&gt;</a>：一种通用的容器。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header">&lt;header&gt;</a>：用于表示页眉、文章的头部等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer">&lt;footer&gt;</a>：用于表示页脚、文章的尾部等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/article">&lt;article&gt;</a>：用于表示文章等。article一般包含header、div、footer等元素。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section">&lt;section&gt;</a>：用于表示一个文章段落等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/aside">&lt;aside&gt;</a>：用于表示附加信息，比如博客的侧边栏。<br>容器元素通常是和特定语义联系在一起，用来将网页划分区域。  </p>
-<br>
-
-<h2 id="5-元素包含关系"><a href="#5-元素包含关系" class="headerlink" title="5. 元素包含关系"></a>5. 元素包含关系</h2><p>在以前，规则是块级元素可以包含行级元素，行级元素不可以包含块级元素。</p>
-<p>而现在，由于语义化的强调，元素的包含关系由元素的内容类别（语义）决定。</p>
-<p>例如，h1元素能否包含p元素？从语义上看，h1表示标题，而p表示段落，显然标题是不能包含段落的，所以h1元素不能包含p元素。</p>
-<p>想知道什么元素能包含什么元素很简单，MDN一搜就就行了。比如在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul">&lt;ul&gt;</a>页面，有下图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/elementInclude1.png" loading="lazy"><br>“允许的内容”便是ul可以包含的元素了。<br>元素的包含关系在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories">内容分类</a>有详细定义。所有元素的严格包含关系是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/elementInclude2.png" loading="lazy">  </p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web前端5：img元素以及和map元素联用、和figure元素联用；多媒体元素</title>
-    <url>/2021/11/29/web5/</url>
-    <content><![CDATA[<h2 id="1-img元素的使用"><a href="#1-img元素的使用" class="headerlink" title="1. img元素的使用"></a><strong>1. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/img">img元素</a>的使用</strong></h2><p>img元素是一个空元素，它主要使用两个属性。<br>①<span style="color: red">src</span>。该属性是必须有的，表示你想嵌入的图片的文件路径，相对路径或绝对路径都可以。<br>②<span style="color: red">alt</span>。当图片文件被删除、路径不正确或者网不好等原因，导致图片加载不出来，就会显示一个“图裂”图标 + alt的内容。<br>正常情况：</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/Yuki.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>图裂<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/Yuki.png" loading="lazy"><br>图裂情况：</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/不存在的图片.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>图裂<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/tulie.png" loading="lazy">  </p>
-<br>
-
-<h2 id="2-和a元素联用"><a href="#2-和a元素联用" class="headerlink" title="2. 和a元素联用"></a><strong>2. 和a元素联用</strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.baidu.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/baidu.png<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-&lt;/a</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/img+a.png" loading="lazy"><br>可以看到当鼠标指向baidu.png这张图片时，变为了小手形状，表示存在超链接，点击就会跳转到百度了。  </p>
-<br>
-
-<h2 id="3-和map元素联用"><a href="#3-和map元素联用" class="headerlink" title="3. 和map元素联用"></a><strong>3. 和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/map">map元素</a>联用</strong></h2><p>map元素与<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/area">area元素</a>一起定义一个可点击的超链接区域。这个区域可以是很多形状。img元素和map元素、area元素的联用可以实现点击图片上的某些区域跳转到另外指定的超链接这个功能。<br>比如，这里有一张太阳系的图片：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/solarSystem.png" loading="lazy"><br>现在我们想实现如下功能：点击“木星”本身以及“木星”汉字都跳转到木星的百度百科，点击图片的其他位置跳转到银河系的百度百科。<br>这就要使用到map了。<br>map的shape属性表示区域形状，coords表示坐标。<br>shape取值circle表示圆形，取值rect表示矩形。<br>circle的coords属性值分别是“圆心x，圆心y，半径”。<br>rect的coords属性值分别是“矩形左上角x，矩形左上角y，矩形右下角x，矩形右下角y”。<br>坐标系规定如图，左上角是坐标原点，向右是x轴正方向，向下是y轴正方向，单位是像素：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mapCord.png" loading="lazy"><br>推荐使用mspaint进行坐标测量。使用QQ截图也可以，但在那之前你得检查一下你的电脑的屏幕显示是不是100%，一般的笔记本都推荐设置为了125%，导致测量得不对。  </p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E9%93%B6%E6%B2%B3%E7%B3%BB/189795?fr=aladdin<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>银河系<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">usemap</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#solarMap<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/galaxy.png<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>map</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>solarMap<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>area</span> <span class="token attr-name">shape</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>circle<span class="token punctuation">"</span></span> <span class="token attr-name">coords</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>448,295,40<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>木星<span class="token punctuation">"</span></span>
-          <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E6%9C%A8%E6%98%9F/222105?fr=aladdin<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>area</span> <span class="token attr-name">shape</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>rect<span class="token punctuation">"</span></span> <span class="token attr-name">coords</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>519,281,590,320<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>木星<span class="token punctuation">"</span></span>
-          <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E6%9C%A8%E6%98%9F/222105?fr=aladdin<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>map</span><span class="token punctuation">></span></span></code></pre>
-<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mapEffect.gif" loading="lazy">  </p>
-<br>
-
-<h2 id="4-和figure元素联用"><a href="#4-和figure元素联用" class="headerlink" title="4. 和figure元素联用"></a><strong>4. 和<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/figure">figure元素</a>联用</strong></h2><p>通常用figure元素把图片、图片标题、图片说明等元素打包在一起。用法很简单，但在语义化上的意义很重要。  </p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figure</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://baike.baidu.com/item/%E9%93%B6%E6%B2%B3%E7%B3%BB/189795?fr=aladdin<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>银河系<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">usemap</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#solarMap<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./img/galaxy.png<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-    
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figcaption</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">></span></span>太阳系<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figcaption</span><span class="token punctuation">></span></span>
-
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span><span class="token punctuation">></span></span>
-        太阳系（英文：Solar system）是一个以太阳为中心，受太阳引力约束在一起的天体系统，包括太阳、行星及其卫星、矮行星、小行星、彗星和行星际物质。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
-        太阳系位于距银河系中心大约2.4~2.7万光年的位置（银河系的恒星数量约在1000亿到4000亿之间，太阳只是其中之一）。
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figure</span><span class="token punctuation">></span></span></code></pre>
-<p>figcaption是figure的子元素，表示图片标题。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/figure.png" loading="lazy">  </p>
-<br>
-
-<h2 id="5-多媒体元素"><a href="#5-多媒体元素" class="headerlink" title="5. 多媒体元素"></a><strong>5. 多媒体元素</strong></h2><p><strong>①</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/video"><strong>video</strong></a><br>值得注意的是，video元素不是空元素。在 &lt;video&gt;&lt;/video&gt; 标签中间的内容，是针对浏览器不支持此元素时候的降级处理。  </p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>video</span> <span class="token attr-name">controls</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./video/test.mp4<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span>500px<span class="token punctuation">;</span></span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
-    Sorry, your browser doesn't support embedded videos.
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/video.png" loading="lazy"><br>图示视频是我从《真探 第一季》中截的一段。<br>其中，controls属性的功能是显示控件。像controls、autoplay这样的属性，取值只有两种状态：<br>1）不写<br>2）取值为属性名<br>这种属性称为<span style="color:red">布尔属性</span>。布尔属性在HTML5中可以不写属性值。<br>另外常用的布尔属性有autoplay、muted、loop。<span style="color:red">autoplay</span>表示打开网页自动播放。有些浏览器不允许自动播放，也就是说你写了autoplay它也不自动播放。这么做的原因是避免打开网页就放出了视频声音，吓到用户（个人体验确实不自动播放好些）。为此，有时也会再加上<span style="color:red">muted</span>这个自动静音的布尔属性，然后允许自动播放。<span style="color:red">loop</span>即循环播放。很多游戏的主页就是不断重复播放的、静音的、代表游戏的视频。  </p>
-<p><strong>②</strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/audio"><strong>audio</strong></a><br>用法和video差不多相同。</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>audio</span> <span class="token attr-name">controls</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./audio/FELT - Beautiful Trick.mp3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    Your browser does not support the audio element.
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>audio</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/audio.png" loading="lazy">  </p>
-<br>
-
-<h2 id="6-兼容性"><a href="#6-兼容性" class="headerlink" title="6. 兼容性"></a><strong>6. 兼容性</strong></h2><p>不同的浏览器支持的音视频格式可能不一致，控件样式可能也不同。<br>为了使开发出的网站有获得更好的兼容性，在嵌入多媒体元素时会这样写：  </p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>video</span> <span class="token attr-name">controls</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./video/test.mp4<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./video/test.webm<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>对不起，你的浏览器不支持video元素，请换个新一点的浏览器。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">></span></span></code></pre>
-<p>也就是准备多个不同格式的多媒体文件，让浏览器能用哪个就用哪个。<br>如果浏览器太旧，啥都不支持，就提示最后一句话。  </p>
-<p><br><br><br><br><br></p>
 <hr>
 ]]></content>
       <categories>
@@ -910,348 +1188,70 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>Web前端10：层叠</title>
-    <url>/2021/12/04/web10/</url>
-    <content><![CDATA[<h2 id="层叠"><a href="#层叠" class="headerlink" title="层叠"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Cascade">层叠</a></strong></h2><p>CSS全称就叫cascading style sheets，<span style="color:red">层叠</span>样式表，所以层叠这个概念是很重要的。<br>先来介绍一个概念，<span style="color:red">声明冲突</span>：同一个样式多次应用到了同一个元素。<br>我们自己写的CSS代码可能会和浏览器的CSS样式有冲突：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a</span><span class="token punctuation">&#123;</span>  
-    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-conflicting-declaration.png" loading="lazy">  </p>
-<p>声明冲突不一定是坏事，实际网站开发中甚至往往用到声明冲突，如：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">span</span><span class="token punctuation">&#123;</span>  
-    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> 
-<span class="token selector">.selected</span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
-    <span class="token property">background-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Lorem.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Quae.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Aut!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>selected<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Minus.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Vel.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Sint?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Quibusdam?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>Dolorem.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-conflicting-declaration2.png" loading="lazy"><br>这种样式是不是很熟悉？像下面这张截自百度贴吧的图就应用了这种样式：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-conflicting-declaration3.png" loading="lazy"><br>这种应用就是绝大部分元素的样式一样，只有其中某些元素处于特殊的状态（比如鼠标悬停）就更改样式。  </p>
-<p>解决声明冲突的过程就叫<span style="color: red">层叠</span>。<br>层叠不是由我们解决的，是由浏览器自动处理的，我们要学习的就是浏览器如何处理这个冲突过程的。<br>层叠也有很多其他叫法，比如权重计算。它一共经过三步：</p>
-<ol>
-<li>比较重要性</li>
-<li>比较特殊性</li>
-<li>比较原次序  </li>
-</ol>
-<p>经过这三个步骤之后，最后一定只有一个样式胜出，元素就应用那个胜出的样式。<br>下面逐个介绍。</p>
+    <title>Web前端6：列表元素（有序列表ol、无序列表ul、定义列表dl）、容器元素、元素包含关系</title>
+    <url>/2021/11/29/web6/</url>
+    <content><![CDATA[<h2 id="1-有序列表ol"><a href="#1-有序列表ol" class="headerlink" title="1. 有序列表ol"></a><strong>1. 有序列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ol">ol</a></strong></h2><p>ol即order list，有序列表。<br>li表示list item，即列表条目，是列表的子元素。<br>type属性表示序号的显示方式，取值可以是1、A、a、I、i。<br>但序号长什么样子本来是应该由CSS负责的，所以在MDN中有这样一段注释：</p>
+<blockquote>
+<p>type属性在 HTML4中弃用，但是在 HTML5 中被重新引入。除非列表中序号很重要（比如，在法律或者技术文件中条目通常被需要所引用），否则请使用 CSS list-style-type属性替代。  </p>
+</blockquote>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第一步：抓一只猫，让猫在强烈的政治攻击下承认自己是大象。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第二步：公布计划：生产一种能装进大象的冰箱，动员国民捐款。实际上并不生产。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第三步：收买证人，证明大象已经被装进冰箱里。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第四步：利用媒体优势反复强调“猫是大象的祖先”这一理论，以防后患。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ol1.png" loading="lazy"><br>ol还有一个布尔属性是reversed，作用是将序号倒过来编排。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a<span class="token punctuation">"</span></span> <span class="token attr-name">reversed</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ul_reversed.png" loading="lazy">  </p>
 <br>
 
-<h2 id="1-比较重要性"><a href="#1-比较重要性" class="headerlink" title="1.比较重要性"></a><strong>1.比较重要性</strong></h2><p>比较重要性时考虑的因素很多，没必要全都了解。<br>主要的三个重要性排序为：</p>
-<p><strong>1）作者样式表中的!important样式</strong><br>作者样式表就是开发者书写的样式，包括html文档中的&lt;style&gt;、css文件中的样式等。<br>我们写代码时可以在样式后面加上<span style="color:red">!important</span>，如</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">span</span><span class="token punctuation">&#123;</span>  
-    <span class="token property">color</span><span class="token punctuation">:</span> red <span class="token important">!important</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span> </code></pre>
-<p>这样就表示这个样式是重要性最高，最后一定会胜出，被应用。<br>所以这种方法太绝对了，如果哪天网站需求改变了，就很难更改，所以应用得极少。  </p>
-<p><strong>2）作者样式表中的普通样式</strong>  </p>
-<p><strong>3）浏览器（用户代理）默认样式表中的样式</strong>  </p>
+<h2 id="2-无序列表ul"><a href="#2-无序列表ul" class="headerlink" title="2. 无序列表ul"></a><strong>2. 无序列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul">ul</a></strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+    七宗罪：
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>色欲<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>暴食<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>贪婪<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>懒惰<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>暴怒<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>嫉妒<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>傲慢<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/ul.png" loading="lazy"><br>相比于有序列表，无序列表使用频率更高，常用于菜单、新闻列表等。  </p>
 <br>
 
-<h2 id="2-比较特殊性"><a href="#2-比较特殊性" class="headerlink" title="2.比较特殊性"></a><strong>2.比较特殊性</strong></h2><p>当比较重要性结束之后冲突还没有解决，就继续进行比较特殊性这一步骤。<br>总体规则：看选择器，选择器定位的范围越窄就越特殊。<br>具体规则：通过选择器计算一个4位十进制数，也就是权重，这个数越大就越特殊。  </p>
-<p><strong>1）千位</strong><br>如果是内联样式，千位为1，否则为0。 所以内联样式最特殊，优先级最高。<br>浏览器的在线调试就是使用的内联样式。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4-particularity.png" loading="lazy">  </p>
-<p><strong>2）百位</strong><br>等于选择器中所有ID选择器的数量。</p>
-<p><strong>3）十位</strong><br>等于所由选择器中类选择器、伪类选择器、属性选择器的数量。  </p>
-<p><strong>4）个位</strong><br>等于选择器中元素选择器、伪元素选择器的数量。<br>比如<code>a&#123; ... &#125;</code>的权重是0001，<code>body a&#123; ... &#125;</code>的权重是0002，所以后者胜出。</p>
-<p>举例：<br>html：</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mydiv<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myul<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myli<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://douban.com<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>mylink<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-                Lorem ipsum dolor sit amet.
-            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p>css：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a</span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector">div ul a</span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector">#mydiv #myul a</span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector">#mydiv #myul .mylink</span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> gold<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector">#mydiv #myul a:link</span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> chocolate<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p>首先这几个都是作者样式表，所以他们的重要性是一样的，接下来比较特殊性，计算权重。<br>它们都不是内联样式，所以千位都为0。<br><code>a&#123; ... &#125;</code>的权重是<span style="color:red">0001</span>；<br><code>div ul a&#123; ... &#125;</code>的权重是<span style="color:red">0003</span>；<br><code>#mydiv #myul a&#123; ... &#125;</code>的权重是<span style="color:red">0201</span>；<br><code>#mydiv #myul .mylink&#123; ... &#125;</code>的权重是<span style="color:red">0210</span>；<br><code>#mydiv #myul a:link&#123; ... &#125;</code>的权重是<span style="color:red">0211</span>。<br>所以最后者胜出，网页文字被渲染为了chocolate色：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-particularity2.png" loading="lazy"><br>补充：这里的权重四位数不是逢十进一的，而是逢256进一。所以这里的“四位数”是应该加引号的，它本质上是四个数字，从高到低一个个数字比较。</p>
+<h2 id="3-定义列表dl"><a href="#3-定义列表dl" class="headerlink" title="3. 定义列表dl"></a><strong>3. 定义列表<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/dl">dl</a></strong></h2><p>dl即definition list，是一个包含术语定义以及描述的列表，通常用于展示词汇表或者元数据 （键-值对列表）。它通常包括两个子元素，分别是dt和dd。<br><span style="color:red">dt</span>，definition table，术语标题。<span style="color:red">dd</span>，definition description，术语描述。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dl</span><span class="token punctuation">></span></span>
+    Web前端的一些术语
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>html<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
+        HTML（HyperText Markup Language，超文本标记语言） 是一种描述语言，用来定义网页结构。
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>css<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
+        层叠样式表 (Cascading Style Sheets，缩写为 CSS），是一种 样式表 语言，用来描述 HTML 或 XML文档的呈现。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">></span></span>
+        CSS 描述了在屏幕、纸质、音频等其它媒体上的元素应该如何被渲染的问题。
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dt</span><span class="token punctuation">></span></span>javascript<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dt</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dd</span><span class="token punctuation">></span></span>
+        JavaScript ( JS ) 是一种具有函数优先的轻量级，解释型或即时编译型的编程语言。
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dd</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dl</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/dl.png" loading="lazy"><br>在一些电影网站就有定义列表的应用。  </p>
 <br>
 
-<h2 id="3-比较源次序"><a href="#3-比较源次序" class="headerlink" title="3.比较源次序"></a><strong>3.比较源次序</strong></h2><p>当然权重值是完全有可能相同的，所以这时要解决冲突就要继续向下比较，即比较源次序：代码书写靠后的胜出。<br>可以用栈的思维去助记：后进先出，最后读的代码就是最新的，就会被应用。<br>这步比完之后就肯定会揭晓胜负了，不存在平局。  </p>
+<h2 id="4-容器元素"><a href="#4-容器元素" class="headerlink" title="4. 容器元素"></a><strong>4. 容器元素</strong></h2><p>容器元素表示一个块区域，内部用于放置其他元素。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/div">&lt;div&gt;</a>：一种通用的容器。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/header">&lt;header&gt;</a>：用于表示页眉、文章的头部等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer">&lt;footer&gt;</a>：用于表示页脚、文章的尾部等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/article">&lt;article&gt;</a>：用于表示文章等。article一般包含header、div、footer等元素。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/section">&lt;section&gt;</a>：用于表示一个文章段落等。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/aside">&lt;aside&gt;</a>：用于表示附加信息，比如博客的侧边栏。<br>容器元素通常是和特定语义联系在一起，用来将网页划分区域。  </p>
 <br>
 
-<h2 id="层叠应用"><a href="#层叠应用" class="headerlink" title="层叠应用"></a><strong>层叠应用</strong></h2><p><strong>1）重置样式表</strong><br>不同浏览器的默认差异是有差异的，所以就导致你写的网页在不同浏览器上显示各异。这时可以书写一些作者样式，覆盖浏览器的默认样式。<br>实际项目中应用重置样式表的思想时，往往会创建<span style="color:red">reset.css</span>、<span style="color:red">mystyle.css</span>两个css文件，前者用来通用地重置，后者用来书写自己实际开发要用到的样式。然后在html文件中加入：</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/reset.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/mystyle.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
-<p>这样由于源次序规则，就会先应用自己写的mystyle.css样式。<br>重置样式的书写方法差不多是固定的，可以去网络上download下来，如<code>normallize.css</code>、<code>reset.css</code>、<code>meyer.css</code>等。<br>比如可以在<a href="https://meyerweb.com/">meyerweb.com</a>找到相应的css文件，使用绝对地址引用。</p>
-<p><strong>2）爱恨法则</strong><br>对于超链接，要按<code>link</code>、<code>visited</code>、<code>hover</code>、<code>active</code>的相对顺序书写，<span style="color: red">l</span>o<span style="color: red">v</span>e、<span style="color: red">ha</span>te，即“爱恨法则”。<br>为什么是这个顺序呢？因为这样才符合人的意愿。同一个时刻可能有多个状态都符合条件，比如鼠标按下激活（active）时也符合了鼠标悬停（hover）的状态，那么这个时候我们希望的肯定是鼠标按下的状态。所以基于人们的意愿就形成了爱恨法则这样的次序。</p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web前端11：继承、属性值的计算过程</title>
-    <url>/2021/12/05/web11/</url>
-    <content><![CDATA[<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/inheritance">继承</a></strong></h2><p>子元素会继承父元素的<span style="color: red">某些</span>css属性。这也意味着有着继承的“连锁反应”，即后代元素会继承祖先元素。<br>这里的“某些”css属性，严格来说要一个个列出来，但那样不利于记忆，我们可以从整体上了解为：通常，跟文字相关的属性会被继承，如<code>color</code>、<code>font-size</code>、<code>font-family</code>、<code>font-weight</code>等。<br>所以一个网页中的字体一般是统一的，字体会被设置在&lt;body&gt;标签中。<br>一个属性是否是继承属性可以在MDN查询，如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/color">color</a>的页面中有写到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-inheritance.png" loading="lazy">   </p>
-<p>插曲小tip：<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Shorthand_properties">简写属性</a><br>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/font">font</a>就是一个简写属性，即一次性定义多个属性。其实这就是一个语法糖。</p>
-<br>
-
-<h2 id="属性值的计算过程"><a href="#属性值的计算过程" class="headerlink" title="属性值的计算过程"></a><strong>属性值的计算过程</strong></h2><p>其实讲的就是页面渲染的过程。<br>浏览器渲染元素是一个元素一个元素依次渲染的，顺序是遍历html文档的树形目录结构，如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-htmltree.png" loading="lazy"><br>渲染每个元素的前提条件：该元素的所有CSS属性必须有值。不是说我们写了哪些属性，就只要哪些属性有值就行了，必须是全部的属性都得有值。比如在浏览器的元素审查界面，可以看到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-computed.png" loading="lazy"><br>一个元素，从所有属性都没有值，到所有属性都有值，就是属性值的计算过程。</p>
-<h3 id="属性值计算的四个步骤"><a href="#属性值计算的四个步骤" class="headerlink" title="属性值计算的四个步骤"></a><strong>属性值计算的四个步骤</strong></h3><p><strong>1）确定声明值</strong><br>开发者写的一些样式就是声明值。参考样式表中没有冲突的声明，直接拿来作为属性值。 </p>
-<p><strong>2）层叠冲突</strong><br>对样式表有冲突的声明，使用层叠规则，确定属性值。<br>层叠就是发生在这一步。  </p>
-<p><strong>3）使用继承</strong><br>对于还是没有值的属性，继承父元素的值。<br>继承就是发生在这一步。 </p>
-<p><strong>4）使用默认值</strong><br>剩下的没有值的属性就使用默认值，这个默认值是多少可以在MDN查询。<br>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/width">width</a>的默认值是<code>auto</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4-initial-value.png" loading="lazy"></p>
-<p>根据属性值的计算过程，现在我们来提一个问题：  </p>
-<h3 id="Question"><a href="#Question" class="headerlink" title="Question"></a><strong>Question</strong></h3><p>代码如下：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> a元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span> span元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p>问：a元素是不是红色？<br>如果你想着：“因为a元素是div的子元素，所以根据继承的规则，a元素应该是红色”，然后回答“Yes”，那么说明你没搞懂属性值的计算过程。<br>眼见为实：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-question.png" loading="lazy"><br>来解释一下。要确定a元素属性的值要经过前已述及的四个步骤：确定声明值、层叠冲突、使用继承、使用默认值。  </p>
-<p>对于<code>&lt;span&gt;</code>元素：<br>第一步，声明值，span元素没有<code>&lt;span style=&quot;color: red&quot;&gt;</code>、<code>span&#123; color: red; &#125;</code>这样的声明值，第一步没有赋值。<br>第二步，层叠，层叠是发生在有声明冲突的时候的，但span元素连声明都没有，哪来的冲突，所以第二步也没有赋值。<br>第三步，继承，这一步就把<code>&lt;div&gt;</code>的红色继承了过来，赋值成功。</p>
-<p>对于<code>&lt;a&gt;</code>元素：<br>第一步确定声明值，这里虽然我们开发者没有写声明值，但浏览器默认样式表中有默认声明值：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6-question2.png" loading="lazy"><br>所以第一步就确定了颜色属性的值，赋值完成，不再进行后续步骤，所以“继承”这一步没有作用。</p>
-<p>那么现在我们希望使用重置样式表覆盖浏览器的默认样式，比如希望<code>&lt;a&gt;</code>元素没有下划线，颜色继承父元素。  </p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./css/reset.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> a元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span> span元素 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p>reset.css：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector">a</span><span class="token punctuation">&#123;</span>
-    <span class="token property">text-decoration</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> inherit<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p>这时因为有样式声明冲突，在层叠这一步，我们的作者样式表就会胜出，所以就用我们设置的CSS属性值了。<br>但是继承是层叠的下一步，如果我们在作者样式表reset.css中赋值color，在层叠这一步就会确定属性值了，那样就无法继承了，所以这里<code>color</code>的取值为<code>inherit</code>，表示强制继承、手动继承。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/7-question3.png" loading="lazy"></p>
-<p>除了<code>inherit</code>以外还有一个特殊的属性取值：<code>initial</code>，即默认值，也常用到。</p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web前端12：盒模型</title>
-    <url>/2021/12/05/web12/</url>
-    <content><![CDATA[<h2 id="盒子类型"><a href="#盒子类型" class="headerlink" title="盒子类型"></a><strong>盒子类型</strong></h2><p>每个元素在页面中都会生成一个矩形区域（盒子）。元素是html的概念，盒子是css的概念。<br>盒子类型：<br><strong>1）行盒</strong><br>属性<code>display</code>取值为<code>inline</code>的元素。<br>行盒不换行。如<code>&lt;span&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;img&gt;</code>等元素默认就是行盒。<br>display默认值就是inline。</p>
-<p><strong>2）块盒</strong><br>属性<code>display</code>取值为<code>block</code>的元素。<br>块盒最后有个换行，也就是独占一行。如<code>&lt;h&gt;</code>、<code>&lt;div&gt;</code>、<code>&lt;p&gt;</code>等容器元素默认就是块盒。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1-box.png" loading="lazy"></p>
-<br>
-
-<h2 id="盒子的组成部分"><a href="#盒子的组成部分" class="headerlink" title="盒子的组成部分"></a><strong>盒子的组成部分</strong></h2><p>无论是行盒还是块盒，从内到外，都是由以下四个部分组成：   </p>
-<h3 id="1）内容（content）"><a href="#1）内容（content）" class="headerlink" title="1）内容（content）"></a><strong>1）内容（content）</strong></h3><p>涉及的属性有<code>width</code>、<code>height</code>等。设置盒子内容的宽高。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2-width&height.png" loading="lazy"><br>内容部分叫做整个盒子的内容盒（content-box）。</p>
-<h3 id="2）填充（padding）"><a href="#2）填充（padding）" class="headerlink" title="2）填充（padding）"></a><strong>2）填充（padding）</strong></h3><p>盒子边框到盒子内容的距离，也称作内边距。<br>涉及的属性有<code>padding-left</code>、<code>padding-right</code>、<code>padding-top</code>、<code>padding-bottom</code>等。   </p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-  <span class="token property">padding-top</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
-  <span class="token property">padding-bottom</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
-  <span class="token property">padding-left</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
-  <span class="token property">padding-right</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3-padding.png" loading="lazy"><br>这里也可以用简写属性<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/padding">padding</a>，写为<code>padding: padding-top、padding-right、padding-bottom、padding-left</code>，即上右下左，顺时针顺序。<br>如图中的属性值可以改写为<code>padding: 20px 5px 40px 80px</code>。<br>padding简写属性还有很多其他写法，比如<code>padding: 50px 20px 50px 20px</code>，上下相同，左右相同，可以简写为<code>padding: 50px 20px</code>。<br>更多的简写方式可以到MDN页面查看。<br>填充区 + 内容区 = 填充盒（padding-box）。</p>
-<h3 id="3）边框（border）"><a href="#3）边框（border）" class="headerlink" title="3）边框（border）"></a><strong>3）边框（border）</strong></h3><p>边框 = 边框样式（<code>border-style</code>） + 边框宽度（<code>border-width</code>） + 边框颜色（<code>border-color</code>）<br>如：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
-    <span class="token property">border-width</span><span class="token punctuation">:</span> 4px<span class="token punctuation">;</span>
-    <span class="token property">border-style</span><span class="token punctuation">:</span> solid<span class="token punctuation">;</span>
-    <span class="token property">border-color</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4-border.png" loading="lazy"></p>
-<p>注意仅设置边框宽度而不设置边框样式是不行的，因为<code>border-style</code>的默认取值是<code>none</code>，不会显示。<br>如果没有设置<code>border-color</code>，那么边框颜色默认与字体颜色相同。<br>其实这里的<code>border-width</code>、<code>border-style</code>、<code>border-color</code>都是简写属性，也就是说，还可以写成如：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
-    <span class="token property">border-width</span><span class="token punctuation">:</span> 10px 5px 20px 30px<span class="token punctuation">;</span>
-    <span class="token property">border-style</span><span class="token punctuation">:</span> solid dashed dotted groove <span class="token punctuation">;</span>
-    <span class="token property">border-color</span><span class="token punctuation">:</span> blueviolet red yellow green<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5-border2.png" loading="lazy"><br><code>border</code>本身也是一个简写属性，如可以写<code>border: 4px dashed red</code>，表示上右下左边框都是宽度4像素、虚线、红色。<br>边框区 + 填充区 + 内容区 = 边框盒（border-box）。</p>
-<h3 id="4）外边距（margin）"><a href="#4）外边距（margin）" class="headerlink" title="4）外边距（margin）"></a><strong>4）外边距（margin）</strong></h3><p>表示边框到其他盒子的距离。   </p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
-    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid red<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token selector">.div1</span><span class="token punctuation">&#123;</span>
-    <span class="token property">margin</span><span class="token punctuation">:</span>10px 5px 30px 40px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6-margin.png" loading="lazy"></p>
-<br>
-
-<p>以上介绍的都是块盒，对于行盒，上面的一些参数有些不同的特性，以后再说。</p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL1：概论、MySQL软件基本使用</title>
-    <url>/2021/12/05/mysql1/</url>
-    <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV12b411K7Zu">MySQL_尚硅谷_bilibili</a>  </p>
-<br>
-
-<h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a><strong>概论</strong></h2><h3 id="为什么要使用数据库"><a href="#为什么要使用数据库" class="headerlink" title="为什么要使用数据库"></a><strong>为什么要使用数据库</strong></h3><p>为什么要用数据库来存取数据呢？数组、集合、文件不也能存取数据吗，功能不够用嘛？<br>数组、集合，最后是把数据存在了<span style="color:red">内存</span>中，而内存最大的缺点就是<span style="color:red">易失性</span>，主机重启数据就没了，数据无法长时间存放。<br><span style="color:red">文件</span>的数据存在外存，能实现长时间存放，但是不适合查询。<br>所以就需要专门开发出一套数据库系统，实现数据持久存放，统一管理。  </p>
-<h3 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a><strong>数据库相关概念</strong></h3><p><strong>DB</strong>：DataBase，数据库，存储数据的仓库，保存一系列有组织的数据。</p>
-<p><strong>DBMS</strong>：DataBase Management System，数据库管理系统，也可以理解为数据库软件。常见的数据库管理系统有MySQL、Oracle、DB2、SqlServer等。</p>
-<p><strong>SQL</strong>：Structured Query Language，结构化查询语言，专门用来与数据库通信的语言。SQL的优点：</p>
-<ol>
-<li>不是某个特定数据库供应商专有的语言，几乎所有的DBMS都支持SQL。当然各种DBMS可能有自己的“方言”。  </li>
-<li>简单却强大灵活。</li>
-</ol>
-<h3 id="数据库的特点"><a href="#数据库的特点" class="headerlink" title="数据库的特点"></a><strong>数据库的特点</strong></h3><ol>
-<li>将数据放到表中，再把表放到库中。</li>
-<li>一个数据库中可以有多张表，每张表都有一个唯一的名字用来标识自己。</li>
-<li>表具有一些特性，这些特性定义了数据在表中如何存储，类似java中“类”的设计。</li>
-<li>表由列组成，我们也称为字段，每一列（字段）类似java中的“属性”。</li>
-<li>表中的数据是按行存储的，每一行类似java中的“对象”。</li>
-</ol>
-<br>
-
-<h2 id="MySQL软件基本使用"><a href="#MySQL软件基本使用" class="headerlink" title="MySQL软件基本使用"></a><strong>MySQL软件基本使用</strong></h2><p>DBMS分为两类：</p>
-<ol>
-<li>基于共享文件系统的DBMS，如Access。</li>
-<li>基于客户机-服务器的DBMS，如MySQL、Oracle、SqlServe。  </li>
-</ol>
-<p>对于第二类数据库软件，我们说安装它，一般是指安装服务器端的软件。  </p>
-<h3 id="MySQL服务的启动和停止"><a href="#MySQL服务的启动和停止" class="headerlink" title="MySQL服务的启动和停止"></a><strong>MySQL服务的启动和停止</strong></h3><p><strong>方式一：图形化接口</strong><br>右击开始菜单 → 计算机管理 → 服务和应用程序 → 服务 → 找到MySQL，手动启动停止<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/1.png" loading="lazy">  </p>
-<p><strong>方式二：命令行接口</strong><br>注意应以管理员身份运行命令提示符。<br>停止MySQL：<code>net stop mysql</code><br>启动MySQL：<code>net start mysql</code><br>（这里我没改服务名称，如果更改了服务名称需要<code>net stop 服务名称</code>、<code>net start 服务名称</code>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/2.png" loading="lazy">  </p>
-<h3 id="MySQL服务器端的登录和退出"><a href="#MySQL服务器端的登录和退出" class="headerlink" title="MySQL服务器端的登录和退出"></a><strong>MySQL服务器端的登录和退出</strong></h3><p>在进行MySQL服务器端的登录和退出之前，要保证你的MySQL服务是启动的。<br>有两种方式控制MySQL服务器端，一是MySQL安装后自带的控制程序，二是Windows的命令提示符，如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/3.png" loading="lazy"><br>前者只能用于root用户的登录使用，所以推荐使用后者。<br>登录命令：<code>mysql -h localhost -P 3306 -u root -p</code><br><code>-h</code>表示要连的主机，<code>localhost</code>即表示本机，它们之间的空格可以省略；<br><code>-P</code>表示端口号，注意这个P是大写的，它后面的空格也可以省略；<br><code>-u</code>表示用户，<code>root</code>即根用户；<br><code>-p</code>表示密码，这个p是小写的。<br>但是如<code>localhost</code>和<code>-P</code>之间的空格不能省略，因为它们是两个命令。<br>登录命令可以简写为<code>mysql -u root -p</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/4.png" loading="lazy"><br>退出：<code>exit</code>、<code>quit</code>或者按下Ctrl+c都可以退出。</p>
-<h3 id="MySQL的常见命令概览"><a href="#MySQL的常见命令概览" class="headerlink" title="MySQL的常见命令概览"></a><strong>MySQL的常见命令概览</strong></h3><p>先大致浏览一下，以后会详细深入介绍。   </p>
-<p>显示当前的数据库列表：<code>show databases;</code><br>注意结尾加个分号。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/5.png" loading="lazy">   </p>
-<p>打开指定的数据库：<code>use 数据库名称;</code><br>显示数据库中的列表：<code>show tables;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/6.png" loading="lazy">     </p>
-<p>显示特定数据库列表：<code>show tables from 数据库名称;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/7.png" loading="lazy">   </p>
-<p>查询当前所使用的数据库：<code>select database();</code><br>这里的<code>database()</code>相当于一个函数。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/8.png" loading="lazy"></p>
-<p>创建表：<code>create table stuinfo(id int, name varchar(20));</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/9.png" loading="lazy">   </p>
-<p>查看表结构：<code>desc 表名称</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/10.png" loading="lazy">   </p>
-<p>在表中插入数据：<code>insert into stuinfo (id,name) values(1,&#39;John&#39;);</code><br>显示表中的数据：<code>select * from stuinfo;</code><br>更新表中的数据：<code>update stuinfo set name=&#39;Mary&#39; where id=1;</code><br>删除表中的数据：<code>delete from stuinfo where id=1;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/11.png" loading="lazy">   </p>
-<p>查看当前MySQL服务器端版本：<br>法一，MySQL命令：mysql&gt; <code>select version();</code><br>法二，DOS命令：C:\Windows\system32&gt;<code>mysql --version</code>（或<code>mysql --V</code>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/12.png" loading="lazy"></p>
-<h3 id="常见命令总结："><a href="#常见命令总结：" class="headerlink" title="常见命令总结："></a><strong>常见命令总结</strong>：</h3><ol>
-<li>查看当前所有的数据库<br> <code>show databases</code></li>
-<li>打开指定的库<br> <code>use 库名称;</code></li>
-<li>查看当前库的所有表<br> <code>show tables;</code></li>
-<li>查看其他库的所有表<br> <code>show tables from 库名称;</code></li>
-<li>创建表 <pre class="language-none"><code class="language-none">create table 表名(
-  列名 列类型;
-  列名 列类型;
-  ...
-)</code></pre></li>
-<li>查看表结构<br> <code>desc 表名称</code></li>
-<li>查看当前版本<br> <code>mysql&gt; select version();</code><br> <code>C:\Windows\system32&gt; mysql --version</code><br> <code>C:\Windows\system32&gt; mysql -V</code>   </li>
-</ol>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>数据库</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web前端13：盒模型应用</title>
-    <url>/2021/12/06/web13/</url>
-    <content><![CDATA[<h2 id="改变宽高范围"><a href="#改变宽高范围" class="headerlink" title="改变宽高范围"></a><strong>改变宽高范围</strong></h2><p>默认情况下，<code>width</code>和<code>height</code>设置的是内容盒的宽高。<br>我们写的网页来自于设计师的psd文件设计稿。所以做静态网页的人也常被称为页面重构师，将psd文件制作为静态页面。   </p>
-<p>例：现在我们想模仿斗鱼网站的这个部分做个网页出来：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-1.png" loading="lazy"><br>所以我们就要测量这个盒子的宽高为多少像素，文字“云游戏”距左边界多少像素，并用审查元素查询它的文字颜色、背景颜色等。<br>对于测量后面会介绍专门的工具，这里先用mspaint或QQ截图大致测量一下，得到宽高为240 × 48像素，“云游戏”距左边框52像素。<br>另外，让文字垂直居中，需要将行高（line-height）设置与高度（height）相同。<br>于是，css文件中：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 240px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 48px<span class="token punctuation">;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span> #a7a7a7<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> #2d2e36<span class="token punctuation">;</span>
-    <span class="token property">line-height</span><span class="token punctuation">:</span> 48px<span class="token punctuation">;</span>
-    <span class="token property">padding-left</span> <span class="token punctuation">:</span>52px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p>html文件中：</p>
-<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
-    云游戏
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p>设置好了之后我们到网页中看一下它的宽高：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-2.png" loading="lazy"><br>诶？为什么它的div显示的是365 × 60呢？我们设置的不是300 * 60吗？<br>从盒模型中可以找到答案：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-3.png" loading="lazy"><br>这是因为我们设置的宽高是<span style="color:red">内容盒</span>的宽高，再加上填充区域就使得它的宽度多了65像素。<br>而我们量的时候量的是<span style="color:red">边框盒</span>的宽高（这里没有边框，所以边框盒 = 填充盒），也就是整个盒子的宽高，这符合人的直觉。<br>这里有两种解决方式：  </p>
-<ol>
-<li>精确计算。既然<code>padding-left</code>为<code>65px;</code>，那么就取<code>width</code>为300 - 65 =<code>235px;</code>。</li>
-<li>CSS3中有这么一个属性：<code>box-sizing</code>，它的取值可以为<code>content-box</code>、<code>border-box</code>，表示CSS宽高的影响范围。<br>这样一来，只要在上述CSS代码中最后再加上<code>box-sizing: border-box;</code>就可以了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-4.png" loading="lazy">   </li>
-</ol>
-<p>于是我们就可以看到，我们设计的样式和斗鱼的差不多：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-5.png" loading="lazy">   </p>
-<br>
-
-<h2 id="改变背景覆盖范围"><a href="#改变背景覆盖范围" class="headerlink" title="改变背景覆盖范围"></a><strong>改变背景覆盖范围</strong></h2><p>默认情况下，背景覆盖边框盒。</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
-    <span class="token property">border</span><span class="token punctuation">:</span> 15px dashed blueviolet<span class="token punctuation">;</span>
-    <span class="token property">padding</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-6.png" loading="lazy"><br>可以看到，背景颜色覆盖了边框区域。<br>背景的覆盖范围可以使用<code>background-clip</code>属性修改，可以取值为<code>content-box</code>、<code>padding-box</code>、<code>border-box</code>（默认值）等。<br>如在上述CSS代码中在加上<code>background-clip: content-box;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-7.png" loading="lazy">     </p>
-<br>
-
-<h2 id="溢出处理"><a href="#溢出处理" class="headerlink" title="溢出处理"></a><strong>溢出处理</strong></h2><p>有时盒子的内容可能会超出盒子区域，比如文字太多。<br>通常，不设置宽高就不会出现这样的问题，盒子的宽高会自动调整。而设置了宽高就容易出现溢出。  </p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
-    <span class="token property">width</span><span class="token punctuation">:</span> 70px<span class="token punctuation">;</span>
-    <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
-    <span class="token property">background</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
-    <span class="token property">border</span><span class="token punctuation">:</span> 3px solid red<span class="token punctuation">;</span>
-    <span class="token property">padding</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-8.png" loading="lazy"><br>溢出后边框盒的处理方式可以通过属性<code>overflow</code>控制，它的取值有<code>auto</code>、<code>hidden</code>、<code>scroll</code>等，默认情况下取值是<code>visible</code>，即可见的。<br>如在上述CSS代码中在加上<code>overflow: scroll;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-9.png" loading="lazy"><br>这里的<code>scroll</code>是个简写属性，如果希望只出现纵向的滚动条（前提是x方向上没有溢出），可以写为<code>overflow-y: scroll;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-10.png" loading="lazy"><br><code>overflow</code>取值为<code>auto</code>表示自动控制滚动条，宽高足够、没有溢出时就不出现滚动条，溢出时就出现滚动条。   </p>
-<p>溢出隐藏有个应用场景，如淘宝网：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-11.png" loading="lazy"><br>可以看到它人为溢出了“淘宝网”这三个字，然后隐藏了起来。这么做是出于语义化的目的，有利于搜索引擎、浏览器理解。   </p>
-<br>
-
-<h2 id="断词规则"><a href="#断词规则" class="headerlink" title="断词规则"></a><strong>断词规则</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-12.png" loading="lazy"><br>这段英文来自伯特兰·罗素。<br>为什么这段英文的行尾参差不齐？是什么定义了它们的换行规则？<br>这是由属性<code>word-break</code>决定的，影响文字在什么位置截断换行。它有以下几个取值：   </p>
-<ul>
-<li><code>normal</code>：普通截断方式，对于CJK（Chinese Japanese Korean）字符，在文字截断；非CJK字符，在单词位置截断。<br>这个截断规定是合理的，如中文，每个字有独立的含义，截断了也不影响人们阅读。但是对于如英文，它一个单词才有独立的含义，截断了就失去了本来的意思。normal是默认值。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-13.png" loading="lazy">   </li>
-<li><code>break-all</code>：所有字符都截断。所以这样一来英文在单词内部就会被截断。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-14.png" loading="lazy">   </li>
-<li><code>keep-all</code>：所有文字都在单词之间截断。中文的汉字之间不加空格就会被认为是一个单词，所以会出现如下状况：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-15.png" loading="lazy"><br>给中文段落随便加几个空格：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-16.png" loading="lazy">   </li>
-</ul>
-<br>
-
-<h2 id="空白处理"><a href="#空白处理" class="headerlink" title="空白处理"></a><strong>空白处理</strong></h2><p>有时我们想在网页上显示一些信息，但是显示不下了，就会溢出，我们希望对溢出字符进行一些处理。比如下图截自猫眼电影：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-17.png" loading="lazy"><br>溢出的文字被替换为了“…”。<br>想实现这样的效果有固定的处理方法：</p>
-<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">li</span><span class="token punctuation">&#123;</span>
-    <span class="token property">border-bottom</span><span class="token punctuation">:</span> 1px dashed #ccc<span class="token punctuation">;</span>
-    <span class="token property">border-left</span><span class="token punctuation">:</span> 3px solid blueviolet<span class="token punctuation">;</span>
-    <span class="token property">padding-left</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
-    <span class="token property">margin</span><span class="token punctuation">:</span> 1em 0<span class="token punctuation">;</span>
-    <span class="token property">line-height</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
-    
-    <span class="token property">width</span><span class="token punctuation">:</span> 240px<span class="token punctuation">;</span>
-    <span class="token property">white-space</span><span class="token punctuation">:</span> nowrap<span class="token punctuation">;</span>
-    <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
-    <span class="token property">text-overflow</span><span class="token punctuation">:</span> ellipsis<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span></code></pre>
-<p><code>white-space: nowrap;</code>表示不换行。<br><code>text-overflow: ellipsis;</code>表示文本溢出时用省略号（ellipsis）替代。<br>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-18.png" loading="lazy"><br>这种方式只能控制单行文本，多行文本需要用js。<br>像<code>&lt;pre&gt;</code>元素就是使用<code>white-space: pre;</code>属性来取消空白折叠的效果的。<br>所以如<code>&lt;div&gt;</code>元素也可以设置<code>white-space: pre;</code>属性来取消空白折叠。</p>
+<h2 id="5-元素包含关系"><a href="#5-元素包含关系" class="headerlink" title="5. 元素包含关系"></a>5. 元素包含关系</h2><p>在以前，规则是块级元素可以包含行级元素，行级元素不可以包含块级元素。</p>
+<p>而现在，由于语义化的强调，元素的包含关系由元素的内容类别（语义）决定。</p>
+<p>例如，h1元素能否包含p元素？从语义上看，h1表示标题，而p表示段落，显然标题是不能包含段落的，所以h1元素不能包含p元素。</p>
+<p>想知道什么元素能包含什么元素很简单，MDN一搜就就行了。比如在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/ul">&lt;ul&gt;</a>页面，有下图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/elementInclude1.png" loading="lazy"><br>“允许的内容”便是ul可以包含的元素了。<br>元素的包含关系在MDN的<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Content_categories">内容分类</a>有详细定义。所有元素的严格包含关系是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/elementInclude2.png" loading="lazy">  </p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>

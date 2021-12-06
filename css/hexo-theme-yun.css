@@ -189,7 +189,7 @@ body::before {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background-image: url("https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/bg/stars-timing-0-blur-30px.jpg");
+  background-image: url("https://cdn.jsdelivr.net/gh/tangjan/imgBed/bg/bg-bright.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -1099,52 +1099,6 @@ body::before {
   top: 0;
   z-index: 11;
   pointer-events: none;
-}
-#trianglifyContainer {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: -1;
-  opacity: 0.5;
-  animation: triFadeIn 2s;
-}
-@-moz-keyframes triFadeIn {
-  from {
-    opacity: 0;
-    filter: grayscale(1);
-  }
-  to {
-    opacity: 0.5;
-  }
-}
-@-webkit-keyframes triFadeIn {
-  from {
-    opacity: 0;
-    filter: grayscale(1);
-  }
-  to {
-    opacity: 0.5;
-  }
-}
-@-o-keyframes triFadeIn {
-  from {
-    opacity: 0;
-    filter: grayscale(1);
-  }
-  to {
-    opacity: 0.5;
-  }
-}
-@keyframes triFadeIn {
-  from {
-    opacity: 0;
-    filter: grayscale(1);
-  }
-  to {
-    opacity: 0.5;
-  }
 }
 .spinner {
   width: 60px;
@@ -2065,7 +2019,7 @@ body::before {
     color: var(--hty-text-color);
   }
   :root:not([data-user-color-scheme]) body::before {
-    background-image: url("/images/bg_img_dark.jpg");
+    background-image: url("https://cdn.jsdelivr.net/gh/tangjan/imgBed/bg/bg-dark.jpg");
   }
   :root:not([data-user-color-scheme]) .char {
     background-color: rgba(0,0,0,0.5);
@@ -2135,7 +2089,7 @@ body::before {
   color: var(--hty-text-color);
 }
 [data-user-color-scheme='dark'] body::before {
-  background-image: url("/images/bg_img_dark.jpg");
+  background-image: url("https://cdn.jsdelivr.net/gh/tangjan/imgBed/bg/bg-dark.jpg");
 }
 [data-user-color-scheme='dark'] .char {
   background-color: rgba(0,0,0,0.5);
