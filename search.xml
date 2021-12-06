@@ -1263,9 +1263,12 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>博客背景图片来源</title>
+    <title>头像、博客背景来源</title>
     <url>/2021/12/06/picture-declaration/</url>
-    <content><![CDATA[<p><img src="https://s2.loli.net/2021/12/06/t4gbvkPsfUdo5jB.jpg" alt="bg-bright.png" loading="lazy">   </p>
+    <content><![CDATA[<p><img src="https://s2.loli.net/2021/12/06/rqRUPs9n14OXkHL.jpg" alt="avatar.png" loading="lazy"><br>——《素晴日》</p>
+<br>
+
+<p><img src="https://s2.loli.net/2021/12/06/t4gbvkPsfUdo5jB.jpg" alt="bg-bright.png" loading="lazy">   </p>
 <p>——《泡沫冬景》</p>
 <br>
 
