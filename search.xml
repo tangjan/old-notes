@@ -1262,4 +1262,20 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>博客背景图片来源</title>
+    <url>/2021/12/06/picture-declaration/</url>
+    <content><![CDATA[<p><img src="img/bg-bright.png" loading="lazy"></p>
+<p>——《泡沫冬景》</p>
+<br>
+
+<p><img src="img/bg-dark.jpg" loading="lazy"></p>
+<p>——《ハジメテノオト》By Rella，Pixiv id=<a href="https://www.pixiv.net/artworks/45691349">45691349</a></p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>未分类</category>
+      </categories>
+  </entry>
 </search>
