@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>MATLAB拼图游戏设计</title>
-    <url>/2021/11/26/matlabJigsaw/</url>
+    <url>/2021/01/15/matlabJigsaw/</url>
     <content><![CDATA[<p>这是我大三上学期《自动化软件工具》这门课的结课作业，也就是用MATLAB做一个项目出来。<br>参考于<a href="https://wuxian.blog.csdn.net/article/details/79219110">基于MATLAB的拼图游戏设计_思绪无限的博客-CSDN博客</a>。</p>
 <br>
 
@@ -1124,13 +1124,13 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV12b411K7Zu">MySQL_尚硅谷_bilibili</a>  </p>
 <br>
 
-<h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a><strong>概论</strong></h2><h3 id="为什么要使用数据库"><a href="#为什么要使用数据库" class="headerlink" title="为什么要使用数据库"></a><strong>为什么要使用数据库</strong></h3><p>为什么要用数据库来存取数据呢？数组、集合、文件不也能存取数据吗，功能不够用嘛？<br>数组、集合，最后是把数据存在了<span style="color:red">内存</span>中，而内存最大的缺点就是<span style="color:red">易失性</span>，主机重启数据就没了，数据无法长时间存放。<br><span style="color:red">文件</span>的数据存在外存，能实现长时间存放，但是不适合查询。<br>所以就需要专门开发出一套数据库系统，实现数据持久存放，统一管理</p>
+<h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a><strong>概论</strong></h2><h3 id="为什么要使用数据库"><a href="#为什么要使用数据库" class="headerlink" title="为什么要使用数据库"></a><strong>为什么要使用数据库</strong></h3><p>为什么要用数据库来存取数据呢？数组、集合、文件不也能存取数据吗，功能不够用嘛？<br>数组、集合，最后是把数据存在了<span style="color:red">内存</span>中，而内存最大的缺点就是<span style="color:red">易失性</span>，主机重启数据就没了，数据无法长时间存放。<br><span style="color:red">文件</span>的数据存在外存，能实现长时间存放，但是不适合查询。<br>所以就需要专门开发出一套数据库系统，实现数据持久存放，统一管理。  </p>
 <h3 id="数据库相关概念"><a href="#数据库相关概念" class="headerlink" title="数据库相关概念"></a><strong>数据库相关概念</strong></h3><p><strong>DB</strong>：DataBase，数据库，存储数据的仓库，保存一系列有组织的数据。</p>
 <p><strong>DBMS</strong>：DataBase Management System，数据库管理系统，也可以理解为数据库软件。常见的数据库管理系统有MySQL、Oracle、DB2、SqlServer等。</p>
 <p><strong>SQL</strong>：Structured Query Language，结构化查询语言，专门用来与数据库通信的语言。SQL的优点：</p>
 <ol>
 <li>不是某个特定数据库供应商专有的语言，几乎所有的DBMS都支持SQL。当然各种DBMS可能有自己的“方言”。  </li>
-<li>简单却强大灵活</li>
+<li>简单却强大灵活。</li>
 </ol>
 <h3 id="数据库的特点"><a href="#数据库的特点" class="headerlink" title="数据库的特点"></a><strong>数据库的特点</strong></h3><ol>
 <li>将数据放到表中，再把表放到库中。</li>
@@ -1180,6 +1180,86 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </categories>
       <tags>
         <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端13：盒模型应用</title>
+    <url>/2021/12/06/web13/</url>
+    <content><![CDATA[<h2 id="改变宽高范围"><a href="#改变宽高范围" class="headerlink" title="改变宽高范围"></a><strong>改变宽高范围</strong></h2><p>默认情况下，<code>width</code>和<code>height</code>设置的是内容盒的宽高。<br>我们写的网页来自于设计师的psd文件设计稿。所以做静态网页的人也常被称为页面重构师，将psd文件制作为静态页面。   </p>
+<p>例：现在我们想模仿斗鱼网站的这个部分做个网页出来：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-1.png" loading="lazy"><br>所以我们就要测量这个盒子的宽高为多少像素，文字“云游戏”距左边界多少像素，并用审查元素查询它的文字颜色、背景颜色等。<br>对于测量后面会介绍专门的工具，这里先用mspaint或QQ截图大致测量一下，得到宽高为240 × 48像素，“云游戏”距左边框52像素。<br>另外，让文字垂直居中，需要将行高（line-height）设置与高度（height）相同。<br>于是，css文件中：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 240px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 48px<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #a7a7a7<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #2d2e36<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 48px<span class="token punctuation">;</span>
+    <span class="token property">padding-left</span> <span class="token punctuation">:</span>52px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>html文件中：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    云游戏
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>设置好了之后我们到网页中看一下它的宽高：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-2.png" loading="lazy"><br>诶？为什么它的div显示的是365 × 60呢？我们设置的不是300 * 60吗？<br>从盒模型中可以找到答案：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-3.png" loading="lazy"><br>这是因为我们设置的宽高是<span style="color:red">内容盒</span>的宽高，再加上填充区域就使得它的宽度多了65像素。<br>而我们量的时候量的是<span style="color:red">边框盒</span>的宽高（这里没有边框，所以边框盒 = 填充盒），也就是整个盒子的宽高，这符合人的直觉。<br>这里有两种解决方式：  </p>
+<ol>
+<li>精确计算。既然<code>padding-left</code>为<code>65px;</code>，那么就取<code>width</code>为300 - 65 =<code>235px;</code>。</li>
+<li>CSS3中有这么一个属性：<code>box-sizing</code>，它的取值可以为<code>content-box</code>、<code>border-box</code>，表示CSS宽高的影响范围。<br>这样一来，只要在上述CSS代码中最后再加上<code>box-sizing: border-box;</code>就可以了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-4.png" loading="lazy">   </li>
+</ol>
+<p>于是我们就可以看到，我们设计的样式和斗鱼的差不多：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-5.png" loading="lazy">   </p>
+<br>
+
+<h2 id="改变背景覆盖范围"><a href="#改变背景覆盖范围" class="headerlink" title="改变背景覆盖范围"></a><strong>改变背景覆盖范围</strong></h2><p>默认情况下，背景覆盖边框盒。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 15px dashed blueviolet<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-6.png" loading="lazy"><br>可以看到，背景颜色覆盖了边框区域。<br>背景的覆盖范围可以使用<code>background-clip</code>属性修改，可以取值为<code>content-box</code>、<code>padding-box</code>、<code>border-box</code>（默认值）等。<br>如在上述CSS代码中在加上<code>background-clip: content-box;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-7.png" loading="lazy">     </p>
+<br>
+
+<h2 id="溢出处理"><a href="#溢出处理" class="headerlink" title="溢出处理"></a><strong>溢出处理</strong></h2><p>有时盒子的内容可能会超出盒子区域，比如文字太多。<br>通常，不设置宽高就不会出现这样的问题，盒子的宽高会自动调整。而设置了宽高就容易出现溢出。  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 70px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 3px solid red<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-8.png" loading="lazy"><br>溢出后边框盒的处理方式可以通过属性<code>overflow</code>控制，它的取值有<code>auto</code>、<code>hidden</code>、<code>scroll</code>等，默认情况下取值是<code>visible</code>，即可见的。<br>如在上述CSS代码中在加上<code>overflow: scroll;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-9.png" loading="lazy"><br>这里的<code>scroll</code>是个简写属性，如果希望只出现纵向的滚动条（前提是x方向上没有溢出），可以写为<code>overflow-y: scroll;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-10.png" loading="lazy"><br><code>overflow</code>取值为<code>auto</code>表示自动控制滚动条，宽高足够、没有溢出时就不出现滚动条，溢出时就出现滚动条。   </p>
+<p>溢出隐藏有个应用场景，如淘宝网：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-11.png" loading="lazy"><br>可以看到它人为溢出了“淘宝网”这三个字，然后隐藏了起来。这么做是出于语义化的目的，有利于搜索引擎、浏览器理解。   </p>
+<br>
+
+<h2 id="断词规则"><a href="#断词规则" class="headerlink" title="断词规则"></a><strong>断词规则</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-12.png" loading="lazy"><br>这段英文来自伯特兰·罗素。<br>为什么这段英文的行尾参差不齐？是什么定义了它们的换行规则？<br>这是由属性<code>word-break</code>决定的，影响文字在什么位置截断换行。它有以下几个取值：   </p>
+<ul>
+<li><code>normal</code>：普通截断方式，对于CJK（Chinese Japanese Korean）字符，在文字截断；非CJK字符，在单词位置截断。<br>这个截断规定是合理的，如中文，每个字有独立的含义，截断了也不影响人们阅读。但是对于如英文，它一个单词才有独立的含义，截断了就失去了本来的意思。normal是默认值。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-13.png" loading="lazy">   </li>
+<li><code>break-all</code>：所有字符都截断。所以这样一来英文在单词内部就会被截断。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-14.png" loading="lazy">   </li>
+<li><code>keep-all</code>：所有文字都在单词之间截断。中文的汉字之间不加空格就会被认为是一个单词，所以会出现如下状况：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-15.png" loading="lazy"><br>给中文段落随便加几个空格：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-16.png" loading="lazy">   </li>
+</ul>
+<br>
+
+<h2 id="空白处理"><a href="#空白处理" class="headerlink" title="空白处理"></a><strong>空白处理</strong></h2><p>有时我们想在网页上显示一些信息，但是显示不下了，就会溢出，我们希望对溢出字符进行一些处理。比如下图截自猫眼电影：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-17.png" loading="lazy"><br>溢出的文字被替换为了“…”。<br>想实现这样的效果有固定的处理方法：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">li</span><span class="token punctuation">&#123;</span>
+    <span class="token property">border-bottom</span><span class="token punctuation">:</span> 1px dashed #ccc<span class="token punctuation">;</span>
+    <span class="token property">border-left</span><span class="token punctuation">:</span> 3px solid blueviolet<span class="token punctuation">;</span>
+    <span class="token property">padding-left</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 1em 0<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
+    
+    <span class="token property">width</span><span class="token punctuation">:</span> 240px<span class="token punctuation">;</span>
+    <span class="token property">white-space</span><span class="token punctuation">:</span> nowrap<span class="token punctuation">;</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+    <span class="token property">text-overflow</span><span class="token punctuation">:</span> ellipsis<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><code>white-space: nowrap;</code>表示不换行。<br><code>text-overflow: ellipsis;</code>表示文本溢出时用省略号（ellipsis）替代。<br>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-18.png" loading="lazy"><br>这种方式只能控制单行文本，多行文本需要用js。<br>像<code>&lt;pre&gt;</code>元素就是使用<code>white-space: pre;</code>属性来取消空白折叠的效果的。<br>所以如<code>&lt;div&gt;</code>元素也可以设置<code>white-space: pre;</code>属性来取消空白折叠。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
       </tags>
   </entry>
 </search>
