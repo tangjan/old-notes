@@ -1445,4 +1445,106 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MySQL2：MySQL语法规范、图形化用户界面</title>
+    <url>/2021/12/07/mysql2/</url>
+    <content><![CDATA[<h2 id="SQL语法规范、图形化用户界面"><a href="#SQL语法规范、图形化用户界面" class="headerlink" title="SQL语法规范、图形化用户界面"></a><strong>SQL语法规范、图形化用户界面</strong></h2><p><strong>SQL语法规范</strong>：</p>
+<ol>
+<li>不区分大小写，但建议关键字大写，表名、列名小写。   </li>
+<li>每条命令以分号或<code>\g</code>结尾。   </li>
+<li>每条命令如果很长，可以缩进或换行，建议关键字单独一行。  </li>
+<li>注释，主要用于图形化用户界面中。<ul>
+<li>单行注释：<code>#注释文字</code>或<code>-- 注释文字</code>（注意有个空格）</li>
+<li>多行注释：<code>/*注释文字*/</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>图形化用户界面</strong>：安装SQLyog。</p>
+<br>
+
+<h2 id="SQL语言分类"><a href="#SQL语言分类" class="headerlink" title="SQL语言分类"></a><strong>SQL语言分类</strong></h2><p>SQL语言又可细分为DQL、DML、DDL、DCL、TCL等几类语言。<br><strong>DQL</strong>：<span style="color:red">D</span>ata <span style="color:red">Q</span>uery <span style="color:red">L</span>anguage，数据查询语言，用来从数据库中查询字段，如<code>SELECT</code>。<br><strong>DML</strong>：<span style="color:red">D</span>ata <span style="color:red">M</span>anipulation <span style="color:red">L</span>anguage，数据操纵语言，对数据库中的数据进行相关操作，如<code>DELETE</code>、<code>UPDATE</code>、<code>INSERT</code>。<br><strong>DDL</strong>：<span style="color:red">D</span>ata <span style="color:red">D</span>efinition <span style="color:red">L</span>anguage，数据定义语言，用于定义或改变表的结构、数据类型等，如<code>CREATE</code>、<code>ALTER</code>、<code>DROP</code>、<code>TRUNCATE</code>。<br><strong>DCL</strong>：<span style="color:red">D</span>ata <span style="color:red">C</span>ontrol <span style="color:red">L</span>anguage，数据控制语言，设置或更改数据库用户或角色权限，如<code>GRANT</code>、<code>REVOKE</code>。<br><strong>TCL</strong>：<span style="color:red">T</span>ransaction <span style="color:red">C</span>ontrol <span style="color:red">L</span>anguage，事务控制语言，如<code>COMMIT</code>、<code>ROLLBACK</code>、<code>SAVEPOINT</code>。    </p>
+<br>
+
+<h2 id="myemployees库的四张表介绍"><a href="#myemployees库的四张表介绍" class="headerlink" title="myemployees库的四张表介绍"></a><strong>myemployees库的四张表介绍</strong></h2><p>为了学习SQL语言，我们需要有个数据库用来执行操作。老师给提供了一个SQL脚本导入了四张表。分别是：</p>
+<ul>
+<li>departments</li>
+<li>employees</li>
+<li>jobs</li>
+<li>locations<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-1.png" loading="lazy"></li>
+</ul>
+<p>下面一个个介绍。</p>
+<h3 id="departments"><a href="#departments" class="headerlink" title="departments"></a><strong>departments</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-3_departments.png" loading="lazy"></p>
+<h3 id="employees"><a href="#employees" class="headerlink" title="employees"></a><strong>employees</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-2_employees.png" loading="lazy"></p>
+<h3 id="jobs"><a href="#jobs" class="headerlink" title="jobs"></a><strong>jobs</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-5_jobs.png" loading="lazy"></p>
+<h3 id="locations"><a href="#locations" class="headerlink" title="locations"></a><strong>locations</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-4_locations.png" loading="lazy"></p>
+<br>
+
+<h2 id="DQL语言基础查询介绍"><a href="#DQL语言基础查询介绍" class="headerlink" title="DQL语言基础查询介绍"></a><strong>DQL语言基础查询介绍</strong></h2><p>有一种说法，80%的SQL语句都用到了<code>SELECT</code>，所以基础查询语句是很重要的。</p>
+<p>语法：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 要查询的东西（们）
+<span class="token keyword">FROM</span> 表名</code></pre>
+<p>类似于java中的<code>System.out.println( ... );</code><br>特点：</p>
+<ol>
+<li>查询列表可以是：表中的字段（最常用）、常量值、表达式、函数</li>
+<li>查询结果是一个虚拟的表格</li>
+</ol>
+<h3 id="查询表中的单个字段"><a href="#查询表中的单个字段" class="headerlink" title="查询表中的单个字段"></a><strong>查询表中的单个字段</strong></h3><pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> last_name <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-6.png" loading="lazy">  </p>
+<h3 id="查询表中的多个字段"><a href="#查询表中的多个字段" class="headerlink" title="查询表中的多个字段"></a><strong>查询表中的多个字段</strong></h3><pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> last_name<span class="token punctuation">,</span>salary<span class="token punctuation">,</span>email <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-7.png" loading="lazy">   </p>
+<h3 id="查询表中的所有字段"><a href="#查询表中的所有字段" class="headerlink" title="查询表中的所有字段"></a><strong>查询表中的所有字段</strong></h3><p>可以输入<code>SELECT FROM employees</code>，然后光标选中在<code>SELECT</code>和<code>FROM</code>之间，双击左侧栏位中的每一项（之间别忘了加上逗号），然后选中已经输入的所有命令，按F12格式化，就得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-8.png" loading="lazy"><br>然后执行查询就可以了。   </p>
+<p>也可以使用<code>*</code>，表示“所有的”</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
+<p>但使用<code>*</code>的缺点是查询的结果和数据库中的表的顺序一样，不够灵活。   </p>
+<h3 id="细节补充"><a href="#细节补充" class="headerlink" title="细节补充"></a><strong>细节补充</strong></h3><p><strong>1）</strong> 使用命令行进行数据库查询之前需要先<code>USE 库名称</code>，而在SQLyog中就不用，它菜单栏中就可以自动确定当前使用的库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-9.png" loading="lazy"><br>但是使用SQLyog写命令时，还是建议在查询之前写上<code>USE 库名称</code>。   </p>
+<p><strong>2）</strong> <span style="color:red">`first_name`</span>中的<span style="color:red">``</span>表示着重号，可以省略。但如果恰巧遇见以关键字命名的字段，如name，查询命令就变成了<code>SELECT NAME FROM stuinfo</code>这样的形式，就容易出问题，可读性也差，这时就可以使用着重号标识，表示是一个字段。NAME就变成了`name`。<br>注意反引号<span style="color:red">``</span>和单引号<span style="color:red">‘’</span>的区别。</p>
+<p><strong>3）</strong> 图形界面上的执行查询默认是执行你已经写的所有的命令。如果你想只执行其中一部分命令，只需选中然后再点击执行（或按F9）即可。   </p>
+<h3 id="查询常量值"><a href="#查询常量值" class="headerlink" title="查询常量值"></a><strong>查询常量值</strong></h3><p>数值型常量值：<code>SELECT 100;</code><br>字符型常量值：<code>SELECT &#39;job&#39;;</code>，MySQL里不区分字符和字符串，单引号双引号都一样。<br>无需FROM。</p>
+<h3 id="查询表达式"><a href="#查询表达式" class="headerlink" title="查询表达式"></a><strong>查询表达式</strong></h3><p>如<code>SELECT 100*98;</code>、<code>SELECT 100%98;</code></p>
+<h3 id="查询函数"><a href="#查询函数" class="headerlink" title="查询函数"></a><strong>查询函数</strong></h3><p>如<code>SELECT VERSION();</code></p>
+<h3 id="起别名"><a href="#起别名" class="headerlink" title="起别名"></a><strong>起别名</strong></h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a><strong>方式一</strong>：</h4><p>如</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> last_name <span class="token keyword">AS</span> 姓氏<span class="token punctuation">,</span> first_name <span class="token keyword">AS</span> 名字 <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span> </code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-10.png" loading="lazy"><br>优点<br>1）提高可读性，方便理解。<br>2）如果要查询的字段有重名的情况，使用别名可以区分开来</p>
+<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a><strong>方式二</strong>：</h4><p>省略<code>AS</code>：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> last_name 姓氏<span class="token punctuation">,</span> first_name 名字 <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span> </code></pre>
+
+<p><strong>案例</strong>：查询salary，区别名为“out put”</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> salary <span class="token keyword">AS</span> <span class="token string">"out put"</span> <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span> </code></pre>
+<p><code>OUT</code>是SQL中的一个关键字，所以要用双引号引起来，单引号也行。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-11.png" loading="lazy">   </p>
+<h3 id="去重"><a href="#去重" class="headerlink" title="去重"></a><strong>去重</strong></h3><p><strong>案例</strong>：查询员工表中涉及到的所有部门编号</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> department_id <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-12.png" loading="lazy"><br>可以看到有重复的部分。这时就可以用去重，只需在查询字段前加个关键字<code>DISTINCT</code>：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> department_id <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-13.png" loading="lazy">    </p>
+<h3 id="号的作用"><a href="#号的作用" class="headerlink" title="+号的作用"></a><strong>+号的作用</strong></h3><p><strong>案例</strong>：查询员工名和姓，连接成一个字段，显示为 姓 名<br>你可能会想使用Java中的+号，拼出一个<code>last_name+first_name</code>，很遗憾这一功能在MySQL中并不适用。<br>MySQL中+号的功能只有一个，就是作运算符。<br><code>SELECT 100+90;</code>，两个操作数都为数值型，则做加法运算；<br><code>SELECT &#39;123&#39;+90</code>，两个操作数中其中一个为字符型数据，则试图将字符型数据转换为数值型，转换成功则继续加法运算；<br><code>SELECT &#39;john&#39;+90</code>，转换失败，则将字符型数据取0；<br><code>SELECT NULL+90</code>，两个操作数只要其中一个为<code>NULL</code>，则结果为<code>NULL</code>。  </p>
+<p>这样一来，想完成案例任务，就需要使用函数<code>CONCAT()</code>：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  CONCAT<span class="token punctuation">(</span>last_name<span class="token punctuation">,</span> first_name<span class="token punctuation">)</span> <span class="token keyword">AS</span> 姓名 
+<span class="token keyword">FROM</span>
+  employees <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-14.png" loading="lazy">  </p>
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a><strong>习题</strong></h2><p>显示出表employees的全部列，各个列之间用逗号连接，列头显示成<code>OUT_PUT</code>。</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  CONCAT<span class="token punctuation">(</span>
+    <span class="token punctuation">`</span>first_name<span class="token punctuation">`</span><span class="token punctuation">,</span>
+    <span class="token string">','</span><span class="token punctuation">,</span>
+    <span class="token punctuation">`</span>last_name<span class="token punctuation">`</span><span class="token punctuation">,</span>
+    <span class="token string">','</span><span class="token punctuation">,</span>
+    <span class="token punctuation">`</span>job_id<span class="token punctuation">`</span><span class="token punctuation">,</span>
+    <span class="token string">','</span><span class="token punctuation">,</span>
+    IFNULL<span class="token punctuation">(</span>commission_pct<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token punctuation">)</span> <span class="token keyword">AS</span> out_put 
+<span class="token keyword">FROM</span>
+  employees <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-15.png" loading="lazy">  </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
 </search>
