@@ -1294,7 +1294,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <h2 id="行盒的特点"><a href="#行盒的特点" class="headerlink" title="行盒的特点"></a><strong>行盒的特点</strong></h2><ol>
 <li>盒子沿着内容延伸，内容走到哪盒子跟到哪。<br>所以如果在后面再加一个<code>&lt;span&gt;</code>元素，它会接着上一个行元素排列：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-2.png" loading="lazy">   </li>
 <li>行盒无法设置宽高，行盒的宽高仅取决于内容的大小。<br>因此想调整行盒的宽高只能调整字体的大小、行高、字体类型等属性间接调整。   </li>
-<li>填充区<code>padding</code>水平方向上有效，垂直方向上仅影响背景，不会实际占据空间<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-3.gif" loading="lazy">  </li>
+<li>填充区<code>padding</code>水平方向上有效，垂直方向上仅影响背景，不会实际占据空间。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-3.gif" loading="lazy">  </li>
 <li>边框<code>boder</code>，和padding一样，水平有效，垂直方向上不占据空间。</li>
 <li>外边距<code>margin</code>，左右有效，上下无效。   </li>
 </ol>
@@ -1357,6 +1357,84 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <br>
 
 <h2 id="可替换元素、非可替换元素"><a href="#可替换元素、非可替换元素" class="headerlink" title="可替换元素、非可替换元素"></a><strong>可替换元素、非可替换元素</strong></h2><p>大部分元素，页面上显示的结果取决于<span style="color:red">元素内容</span>（写了什么文字），这种元素称为<span style="color:red">非可替换元素</span>。<br>而少部分元素，页面上显示的结果可被<span style="color:red">元素属性</span>替换，这种元素称为<span style="color:red">可替换元素</span>。<br>可替换元素如<code>&lt;img&gt;</code>、<code>&lt;video&gt;</code> 、<code>&lt;audio&gt;</code>。<br>可替换元素虽然是行盒，但它可以设置宽高等，所有尺寸都有效，类似于行块盒，当不设置高度只设置宽度时，高度会随着宽度按比例自动增加。<br>有个常用的属性<code>object-fit</code>表示图片的适应方式，可以取值为<code>fill</code>、<code>comtain</code>、<code>cover</code>等。<br><code>fill</code>是默认值，表示填充，会拉伸图片。<br><code>contain</code>表示保持图片宽高比，又不能溢出。<br><code>cover</code>表示保证把区域填充满，同时又保持宽高比，这时就会隐藏溢出。   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端15：常规流</title>
+    <url>/2021/12/07/web15/</url>
+    <content><![CDATA[<h2 id="视觉格式化模型"><a href="#视觉格式化模型" class="headerlink" title="视觉格式化模型"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Visual_formatting_model">视觉格式化模型</a></strong></h2><p>CSS的核心可以说有三个：层叠、盒模型、视觉格式化模型。<br>盒模型规定了单个盒子的规则，而<span style="color:red">视觉格式化模型</span>规定了页面中多个盒子的排列规则，它大体上将页面中盒子的排列分为三种方式：</p>
+<ol>
+<li>常规流</li>
+<li>浮动   </li>
+<li>绝对定位  </li>
+</ol>
+<br>
+
+<h2 id="常规流布局"><a href="#常规流布局" class="headerlink" title="常规流布局"></a><strong>常规流布局</strong></h2><p>常规流有时也被称为文档流、普通文档流、常规文档流等，所有元素默认情况下都属于常规流布局。<br>总体规则：块盒独占一行，行盒水平依次排列。<br><span style="color:red">包含块</span>（containing block）：每个盒子都有它的包含块，它决定了盒子的活动区域。<br>绝大部分情况下，盒子的包含块，为其父元素的<span style="color:red">内容盒</span>。<br>如：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>parent<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>child<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        child
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.parent</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 300px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 200px<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.child</span><span class="token punctuation">&#123;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-1.png" loading="lazy"><br>可以看到<code>子&lt;div&gt;</code>元素的宽度是有限的，是它父元素的内容盒的宽度大小<code>300px</code>。<br>如果这时修改<code>父&lt;div&gt;</code>的margin使其移动，<code>子&lt;div&gt;</code>也会跟着移动。   </p>
+<br>
+
+<h2 id="块盒的常规流"><a href="#块盒的常规流" class="headerlink" title="块盒的常规流"></a><strong>块盒的常规流</strong></h2><h3 id="总宽度"><a href="#总宽度" class="headerlink" title="总宽度"></a><strong>总宽度</strong></h3><p>每个块盒的总宽度（content + padding + border + margin），必须刚好等于包含块的宽度。<br>宽度<code>width</code>的默认值是auto，表示将剩余空间吸收掉。<br><code>margin</code>的取值也可以是auto，默认值是0。<br><code>width</code>吸收能力强于<code>margin</code>，所以当它们同时是auto时由<code>width</code>吸收。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-2.png" loading="lazy">   </p>
+<p>若content、padding、border、margin计算后，仍然有剩余空间，该剩余空间默认被<code>margin-right</code>全部吸收，因为文字默认都是从左向右排列的，这就是我们常遇到的情况。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-3.png" loading="lazy"><br>如果设置为<code>margin-right: auto</code>和<code>margin-left: auto</code>，则得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-4.png" loading="lazy"><br>这是常规流中常见的一种居中方式：欲使块盒在其包含块中居中，可以定宽、然后左右margin取值auto。<br>开发中常用<code>margin: 0 auto</code>，简写属性，也就是上下为0（也可以为其他大小），左右auto。<br>基于这个特性，我们可以做出一些有意思的效果，如设置<code>margin</code>为负数：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-5.png" loading="lazy"></p>
+<h3 id="每个块盒垂直方向上默认值"><a href="#每个块盒垂直方向上默认值" class="headerlink" title="每个块盒垂直方向上默认值"></a><strong>每个块盒垂直方向上默认值</strong></h3><p><code>height: auto</code>，表示高度适应内容多少来调整<br><code>margin: 0</code>，0就是0，没什么好说的  </p>
+<h3 id="百分比取值"><a href="#百分比取值" class="headerlink" title="百分比取值"></a><strong>百分比取值</strong></h3><p>这块不仅是常规流的知识，之后的浮动、绝对定位都要用到。  </p>
+<ol>
+<li><code>pading</code>、<code>width</code>、<code>margin</code>可以取值为百分比。这个百分比是相对于包含块的<span style="color:red">宽度</span>，比如就算你设置<code>margin-top: 50%</code>，这个百分比也是父元素宽度的50%。  </li>
+<li>高度<code>height</code>取值百分比，这个百分比是相对于包含块的高度包含块的<span style="color:red">高度</span>。<br>但如果父元素并没有设置高度，这时即取默认值auto，表示父元素高度取决于子元素。但子元素又设置了<code>height</code>取值为百分比，这时出现了“死锁”（借用一下操作系统的概念），百分比取值无效。</li>
+</ol>
+<h3 id="上下外边距的合并"><a href="#上下外边距的合并" class="headerlink" title="上下外边距的合并"></a><strong>上下外边距的合并</strong></h3><p>两个常规流块盒，上下外边距相邻则会合并。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 10px<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 3px solid<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-6.png" loading="lazy"><br>如果上下两个外边距不相等，则取最大值。   </p>
+<p>两个上边距相邻也会合并，如：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>parent<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>child<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.parent</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 300px<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 300px<span class="token punctuation">;</span>
+    <span class="token property">margin-top</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.child</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">margin-top</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-7.png" loading="lazy"><br>本来我们预期child div元素应该距parent div元素上面50px，但由于这两个外边距相邻了，就合并了。<br>这时如果想实现我们预期的效果，不让它们合并，只要打破合并的条件就可以了，也就是不让它们相邻，比如可以给parent div元素加上<code>border: 5px solid</code>，就得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-8.png" loading="lazy"><br>也可以转换思维，把child div元素的<code>margin-top</code>转换为parent div元素的<code>padding-top</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-9.png" loading="lazy">   </p>
+<p>这个上下外边距合并规则和印刷学里面的排版有关系。    </p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
