@@ -1,0 +1,244 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="糖加盐"><meta name="copyright" content="糖加盐"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>Web前端16：常规流练习 | 糖加盐的小站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/png" href="/favicon.png"><link rel="mask-icon" href="/favicon.png" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"tangjan.github.io","root":"/","title":"糖加盐的小站","version":"1.7.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="任务目标这里是png文件，但正规的设计稿应该是photoshop设计出的psd文件。      解新建文件夹首先新建文件夹作为我们的项目文件夹，不妨取名为“常规流练习”，文件夹内容如图：写代码的顺序应该是什么样的？先写html再写css这个顺序是肯定的。那么写多少html再写css呢？有的人喜欢把所有html代码写完再设置css样式，这么做是可以的，但是这样只适用于页面简单的状况。一旦页面复杂起来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端16：常规流练习">
+<meta property="og:url" content="https://tangjan.github.io/2021/12/08/web16/index.html">
+<meta property="og:site_name" content="糖加盐的小站">
+<meta property="og:description" content="任务目标这里是png文件，但正规的设计稿应该是photoshop设计出的psd文件。      解新建文件夹首先新建文件夹作为我们的项目文件夹，不妨取名为“常规流练习”，文件夹内容如图：写代码的顺序应该是什么样的？先写html再写css这个顺序是肯定的。那么写多少html再写css呢？有的人喜欢把所有html代码写完再设置css样式，这么做是可以的，但是这样只适用于页面简单的状况。一旦页面复杂起来">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-7.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-8.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-9.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-10.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-11.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-12.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-13.png">
+<meta property="article:published_time" content="2021-12-08T08:30:00.000Z">
+<meta property="article:modified_time" content="2021-12-08T08:46:06.875Z">
+<meta property="article:author" content="糖加盐">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-1.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的小站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">21</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">3</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">3</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%9B%AE%E6%A0%87"><span class="toc-text">任务目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3"><span class="toc-text">解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">新建文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-article-gt"><span class="toc-text">&lt;article&gt;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-article-gt-%E7%9B%92%E5%AD%90%E5%B0%BA%E5%AF%B8%E4%BF%AE%E6%95%B4"><span class="toc-text">&lt;article&gt;盒子尺寸修整</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E8%A1%8C%E9%AB%98"><span class="toc-text">文字行高</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#lt-header-gt"><span class="toc-text">&lt;header&gt;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89%E4%B8%8A%E4%B8%8B%E8%BE%B9%E8%B7%9D"><span class="toc-text">1）上下边距</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89%E8%BE%B9%E6%A1%86%E3%80%81%E5%B7%A6%E5%8F%B3%E6%BA%A2%E5%87%BA"><span class="toc-text">2）边框、左右溢出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89-lt-header-gt-%E4%B8%AD%E7%9A%84-lt-h1-gt-%E5%92%8C-lt-div-gt"><span class="toc-text">3）&lt;header&gt;中的&lt;h1&gt;和&lt;div&gt;</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E4%B8%BB%E4%BD%93"><span class="toc-text">文章主体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E4%B8%BB%E4%BD%93%E5%AE%BD%E5%BA%A6"><span class="toc-text">文章主体宽度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AE%B5%E8%90%BD%E4%B9%8B%E9%97%B4%E9%97%B4%E9%9A%94"><span class="toc-text">段落之间间隔</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lt-h2-gt-%E5%85%83%E7%B4%A0"><span class="toc-text">&lt;h2&gt;元素</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%86%E8%8A%82%E8%A1%A5%E5%85%85"><span class="toc-text">细节补充</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E5%8A%9F%E5%91%8A%E6%88%90"><span class="toc-text">大功告成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="toc-text">完整代码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#html"><span class="toc-text">html</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css"><span class="toc-text">css</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2021/12/08/web16/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的小站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Web前端16：常规流练习</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-12-08 16:30:00" itemprop="dateCreated datePublished" datetime="2021-12-08T16:30:00+08:00">2021-12-08</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">2k</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Web%E5%89%8D%E7%AB%AF/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Web前端</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/%E5%89%8D%E7%AB%AF/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">前端</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-1.png" loading="lazy"><br>这里是png文件，但正规的设计稿应该是photoshop设计出的psd文件。   </p>
+<br>
+
+<h2 id="解"><a href="#解" class="headerlink" title="解"></a><strong>解</strong></h2><h3 id="新建文件夹"><a href="#新建文件夹" class="headerlink" title="新建文件夹"></a><strong>新建文件夹</strong></h3><p>首先新建文件夹作为我们的项目文件夹，不妨取名为“常规流练习”，文件夹内容如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-3.png" loading="lazy"><br>写代码的顺序应该是什么样的？<br>先写html再写css这个顺序是肯定的。那么写多少html再写css呢？<br>有的人喜欢把所有html代码写完再设置css样式，这么做是可以的，但是这样只适用于页面简单的状况。一旦页面复杂起来，页面内盒子好几十个，都没写css样式，网页就会一片凌乱，很容易出问题。<br>所以这里可以借用算法里的“贪心”思想：一片区域html写完之后马上就css跟上，一片接一片区域地做。   </p>
+<h3 id="lt-article-gt"><a href="#lt-article-gt" class="headerlink" title="&lt;article&gt;"></a><strong>&lt;article&gt;</strong></h3><p>整个网页视作一篇文章，用一个<code>&lt;article&gt;</code>套起来。   </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+   lorem1000
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>article</span><span class="token punctuation">></span></span></code></pre>
+<p>cotainer表示容器，经常用来作为class名。所以下文中的<code>.container</code>和<code>&lt;article&gt;</code>是等价的。   </p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a><strong>背景</strong></h3><p><strong>1）</strong><br>整个网页中有个深色的背景，可以设置到<code>&lt;html&gt;</code>元素或<code>&lt;body&gt;</code>元素上，通常设置到<code>&lt;body&gt;</code>上。   </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #4d4a40<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><strong>2）</strong><br>&lt;article&gt;的背景是白色的</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+<h3 id="lt-article-gt-盒子尺寸修整"><a href="#lt-article-gt-盒子尺寸修整" class="headerlink" title="&lt;article&gt;盒子尺寸修整"></a><strong>&lt;article&gt;盒子尺寸修整</strong></h3><p><strong>1）</strong><br>可以看到<code>&lt;article&gt;</code>离页面上下边界有<code>20px</code>的距离，可以设置<code>&lt;body&gt;</code>的<code>padding</code>，也可以设置<code>&lt;article&gt;</code>的<code>margin</code>，哪个都行。这里设置前者。   </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 20px 0<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><strong>2）</strong><br>对于整个网页宽度规定为<code>1902px</code>这一点，你应该去找设计师商量一下。我们的网页是要在不同的屏幕上显示的，而每个人的电脑屏幕大小很可能不同，分辨率也不一样。如果横向上不兼容就会出现水平滚动条，影响美观。如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-4.png" loading="lazy"><br>假设我们和设计师沟通后，他让我们按比例缩放。我们可以取百分数给<code>&lt;article&gt;</code>的<code>width</code>赋值，1713/1902 ≈ 90%。<br>常规流块盒居中，定宽、取<code>margin</code>为<code>auto</code>即可。   </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 90%<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-5.png" loading="lazy"><br>可以看到水平滚动条消失，并且<code>&lt;article&gt;</code>居中了。</p>
+<h3 id="文字行高"><a href="#文字行高" class="headerlink" title="文字行高"></a><strong>文字行高</strong></h3><p>所有文字的行高都为2。由于行高是可以继承的，所以应该写在<code>&lt;body&gt;</code>中，</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="lt-header-gt"><a href="#lt-header-gt" class="headerlink" title="&lt;header&gt;"></a><strong>&lt;header&gt;</strong></h3><p><code>&lt;header&gt;</code>就是文章头部。包括<code>&lt;h1&gt;</code>和<code>&lt;div&gt;</code>。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>
+        常规流练习
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>original-link<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        原文地址：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> https://www.tangjiayan.com <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">></span></span></code></pre>
+<h4 id="1）上下边距"><a href="#1）上下边距" class="headerlink" title="1）上下边距"></a><strong>1）上下边距</strong></h4><p>从题目中可以看到它的上下距离是<code>30px</code>，这里你可能第一反应是设置<code>&lt;header&gt;</code>的<code>margin</code>，但是这是行不通的，会变成这样：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-6.png" loading="lazy"><br>原因是外边距合并。由于上面为了使<code>&lt;article&gt;</code>居中设置了<code>margin: 0 auto;</code>，虽然这个margin取值为0，但并不等同于没有外边距，取值为0时遇到别的外边距照样会合并。<br>所以我们可以转换思维，设置<code>&lt;header&gt;</code>的<code>padding</code>。<br>于是我们设置：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container header</span><span class="token punctuation">&#123;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 30px 0<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>为什么这里使用组合选择器呢，用一个元素选择器header不就完事了？<br>因为我们应该考虑得深远一点。<br>这个网页以后万一要加些东西，比如导航栏，它语义上也应是一个<code>&lt;header&gt;</code>元素，如果我们只使用元素选择器的话，这个header导航栏的样式也会被选中渲染。所以元素选择器的范围太广了，我们应该尽量细致地使用选择器。<br>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-7.png" loading="lazy">   </p>
+<h4 id="2）边框、左右溢出"><a href="#2）边框、左右溢出" class="headerlink" title="2）边框、左右溢出"></a><strong>2）边框、左右溢出</strong></h4><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container header</span><span class="token punctuation">&#123;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 5px solid #14414c<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0 -34px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><code>&lt;header&gt;</code>在一篇文章中一般只出现一次，所以这里胆子大一点，用元素选择器。</p>
+<h4 id="3）-lt-header-gt-中的-lt-h1-gt-和-lt-div-gt"><a href="#3）-lt-header-gt-中的-lt-h1-gt-和-lt-div-gt" class="headerlink" title="3）&lt;header&gt;中的&lt;h1&gt;和&lt;div&gt;"></a><strong>3）<code>&lt;header&gt;</code>中的<code>&lt;h1&gt;</code>和<code>&lt;div&gt;</code></strong></h4><p><strong>①&lt;h1&gt;</strong>  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container header h1</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 42px<span class="token punctuation">;</span>
+    <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><strong>②&lt;div&gt;</strong><br>由于<code>&lt;div&gt;</code>元素太常见了，使用元素选择器选中div的话范围太宽了，以后如果再用上div样式就直接被选中渲染了，样式可能会交错。所以这里给div加了个类名，使用类选择器。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container header div .original-link</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #dbdbdb<span class="token punctuation">;</span>
+    <span class="token property">margin-bottom</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>这里我们设置好之后会发现有一点误差，<code>margin-bottom</code>并不是<code>30px</code>而是约<code>35px</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-8.jpg" loading="lazy"><br>这是由于文字自身有行高。在网页设计时，有个词叫<span style="color:red">像素级还原</span>，就是做出的网页和设计稿一个像素都不差。但这只是理想情况，伊甸园，实际开发中非常非常非常困难。因为有字体、电脑系统环境等因素，不太可能实现像素级还原。就算实现了，时间成本也太高了，不划算。所以这里就忽略了。<br><strong>③&lt;div&gt;中的&lt;a&gt;</strong>  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container header .original-link a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">text-decoration</span><span class="token punctuation">:</span> underline<span class="token punctuation">;</span>    
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container header .original-link a:hover</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>    
+<span class="token punctuation">&#125;</span></code></pre>
+<p>你可能会问，下划线不就是浏览器的默认样式吗，为啥要还要用reset.css把浏览器的默认样式重置掉呢？<br>答：重置样式的通用的，浏览器的默认样式不是啊。<br>至此，<code>&lt;header&gt;</code>完成，网页中最复杂的地方也就完事了。<br>不要以为网页中谁占的面积大谁就复杂，那肯定是不对的。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-9.png" loading="lazy">  </p>
+<h3 id="文章主体"><a href="#文章主体" class="headerlink" title="文章主体"></a><strong>文章主体</strong></h3><p>可以把整个文章主体视作<code>&lt;div&gt;</code>，然后由一个个<code>&lt;section&gt;</code>构成。<br>用下面的命令快速生成测试：</p>
+<pre class="language-html" data-language="html"><code class="language-html">section*5>(h2>&#123;章节$&#125;)+(p*3>lorem)</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-10.png" loading="lazy">  </p>
+<h4 id="文章主体宽度"><a href="#文章主体宽度" class="headerlink" title="文章主体宽度"></a><strong>文章主体宽度</strong></h4><p>题目规定文章主体宽度是<code>1541px</code>，但直接写<code>.container section&#123; width: 1541px; &#125;</code>是不对的，因为你<code>&lt;article&gt;</code>设置的是百分比，而<code>&lt;section&gt;</code>是<code>&lt;article&gt;</code>的子元素，当然也只能用百分比。<br>1541/1713 ≈ 90%</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container section</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 90%<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h4 id="段落之间间隔"><a href="#段落之间间隔" class="headerlink" title="段落之间间隔"></a><strong>段落之间间隔</strong></h4><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container section p</span><span class="token punctuation">&#123;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 1em<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>这个时候上下外边距合并的作用就体现出来了。</p>
+<h4 id="lt-h2-gt-元素"><a href="#lt-h2-gt-元素" class="headerlink" title="&lt;h2&gt;元素"></a><strong>&lt;h2&gt;元素</strong></h4><p>这里<code>boder-top</code>和<code>border-bottem</code>的样式题目中没有给，我们就随便自己设计一下。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container section h2</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 32px<span class="token punctuation">;</span>
+    <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+    <span class="token property">border-top</span><span class="token punctuation">:</span> 1px dotted<span class="token punctuation">;</span>
+    <span class="token property">border-bottom</span><span class="token punctuation">:</span> 1px dotted<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="细节补充"><a href="#细节补充" class="headerlink" title="细节补充"></a><strong>细节补充</strong></h3><p>由于我们整体使用设置的尺寸是用百分比赋值的，所以改变浏览器大小时，网页内容大小也会自动跟着变。但这样的话，当浏览器缩得很小时网页会很丑。如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-11.gif" loading="lazy"><br>所以这里可以这么处理：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">min-width</span><span class="token punctuation">:</span> 1000px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>表示限制最小宽度<code>1000px</code>。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-12.gif" loading="lazy">  </p>
+<p>适应手机端就是这种方法，不过有的网页是只为适应PC端做的。<br>当然也有<code>max-width</code>属性。</p>
+<br>
+
+<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-13.png" loading="lazy">  </p>
+<br>
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><h3 id="html"><a href="#html" class="headerlink" title="html"></a><strong>html</strong></h3><pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=edge<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>css/reset.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>css/index.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>article</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>
+                常规流练习
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>original-link<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+                原文地址：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>https://www.tangjiayan.com<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">></span></span>
+        ection*5>(h2>&#123;章节$&#125;)+(p*3>lorem) <span class="token comment">&lt;!-- section内容太多了，就不放在这里了，请自己手动生成 --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>article</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a><strong>css</strong></h3><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #4d4a40<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 20px 0<span class="token punctuation">;</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
+    <span class="token property">min-width</span><span class="token punctuation">:</span> 1000px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 90%<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 30px 0<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container header</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #267890<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
+    <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 5px solid #14414c<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0 -34px<span class="token punctuation">;</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container header h1</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 42px<span class="token punctuation">;</span>
+    <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container header .original-link</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #dbdbdb<span class="token punctuation">;</span>
+    <span class="token property">margin-bottom</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container header .original-link a</span><span class="token punctuation">&#123;</span>
+    <span class="token property">text-decoration</span><span class="token punctuation">:</span> underline<span class="token punctuation">;</span>    
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container header .original-link a:hover</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>    
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container section</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 90%<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container section p</span><span class="token punctuation">&#123;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 1em<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.container section h2</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> 32px<span class="token punctuation">;</span>
+    <span class="token property">font-weight</span><span class="token punctuation">:</span> bold<span class="token punctuation">;</span>
+    <span class="token property">border-top</span><span class="token punctuation">:</span> 1px dotted<span class="token punctuation">;</span>
+    <span class="token property">border-bottom</span><span class="token punctuation">:</span> 1px dotted<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+</div></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/12/07/mysql2/" rel="next" title="MySQL2：MySQL语法规范、图形化用户界面"><span class="post-nav-text">MySQL2：MySQL语法规范、图形化用户界面</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 糖加盐</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.7.0</span></div><div class="live_time"><span>本博客已萌萌哒地运行</span><span id="display_live_time"></span><span class="moe-text">(●'◡'●)</span><script>function blog_live_time() {
+  setTimeout(blog_live_time, 1000);
+  const start = new Date('2021-11-31T00:00:00');
+  const now = new Date();
+  const timeDiff = (now.getTime() - start.getTime());
+  const msPerMinute = 60 * 1000;
+  const msPerHour = 60 * msPerMinute;
+  const msPerDay = 24 * msPerHour;
+  const passDay = Math.floor(timeDiff / msPerDay);
+  const passHour = Math.floor((timeDiff % msPerDay) / 60 / 60 / 1000);
+  const passMinute = Math.floor((timeDiff % msPerHour) / 60 / 1000);
+  const passSecond = Math.floor((timeDiff % msPerMinute) / 1000);
+  display_live_time.innerHTML = " " + passDay + " 天 " + passHour + " 小时 " + passMinute + " 分 " + passSecond + " 秒";
+}
+blog_live_time();
+</script></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
