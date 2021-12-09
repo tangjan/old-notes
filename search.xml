@@ -1675,7 +1675,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
                 原文地址：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>https://www.tangjiayan.com<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">></span></span>
-        ection*5>(h2>&#123;章节$&#125;)+(p*3>lorem) <span class="token comment">&lt;!-- section内容太多了，就不放在这里了，请自己手动生成 --></span>
+        section*5>(h2>&#123;章节$&#125;)+(p*3>lorem) <span class="token comment">&lt;!-- section内容太多了，就不放在这里了，请自己手动生成 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>article</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
@@ -1742,6 +1742,153 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 
 
 
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端17：浮动</title>
+    <url>/2021/12/09/web17/</url>
+    <content><![CDATA[<h2 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a><strong>回顾</strong></h2><p>视觉格式化模型：</p>
+<ol>
+<li>常规流</li>
+<li>浮动</li>
+<li>绝对定位</li>
+</ol>
+<p>常规流里分为行盒和块盒。<br>块盒横向撑满包含块，纵向上存在外边距合并；行盒连续排列。   </p>
+<p><span style="color:red">浮动</span>的应用场景有：</p>
+<ol>
+<li>文字环绕</li>
+<li>横向排列</li>
+</ol>
+<br>
+
+<h2 id="浮动的基本特点"><a href="#浮动的基本特点" class="headerlink" title="浮动的基本特点"></a><strong>浮动的基本特点</strong></h2><p>修改<code>float</code>属性值为：</p>
+<ul>
+<li>left：左浮动，元素在包含块内靠上靠左排列。  </li>
+<li>right：右浮动，元素在包含块内靠靠上靠右排列</li>
+<li>注意这里写的是“靠上靠左”、“靠上靠右”而不是“靠左上”、“靠右上”，因为它是先靠上再靠左（右），靠上的优先级高。   </li>
+</ul>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>left<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        div.left
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>right<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        div.right
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.container div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.container .left</span><span class="token punctuation">&#123;</span>
+    <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.container .right</span><span class="token punctuation">&#123;</span>
+    <span class="token property">float</span><span class="token punctuation">:</span> right<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-1.png" loading="lazy"></p>
+<p><code>float</code>默认值是<code>none</code>，即常规流。</p>
+<p><strong>1.</strong> 当一个元素浮动后，元素必定为块盒。也就是说设置<code>float</code>属性后，会一律改变盒子的属性<code>display</code>为<code>block</code>。<br><strong>2.</strong> 浮动元素的包含块和常规流一样，为父元素的内容盒。</p>
+<br>
+
+<h2 id="浮动盒子尺寸"><a href="#浮动盒子尺寸" class="headerlink" title="浮动盒子尺寸"></a><strong>浮动盒子尺寸</strong></h2><ol>
+<li>宽度、高度为<code>auto</code>时，表示适应内容宽高。（在常规流中宽高为<code>auto</code>是撑满内容盒）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-2.png" loading="lazy"><em>浮动中的宽高<code>auto</code></em><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-3.png" loading="lazy"><em>常规流中的宽高<code>auto</code></em></li>
+<li><code>margin</code>为<code>autok</code>表示0.（在常规流中<code>margin</code>为<code>auto</code>是吸收剩余空间）</li>
+<li>当然宽高、<code>margin</code>等设置为固定的值就是正常的值；边框、内边距、百分比设置与常规流一样。</li>
+</ol>
+<br>
+
+<h2 id="浮动盒子排列"><a href="#浮动盒子排列" class="headerlink" title="浮动盒子排列"></a><strong>浮动盒子排列</strong></h2><h3 id="1"><a href="#1" class="headerlink" title="1."></a><strong>1.</strong></h3><p>左浮动的盒子靠上靠左排列，右浮动的盒子靠上靠右排列。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    ... <span class="token comment">&lt;!-- 略写 --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>20<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-4.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-5.png" loading="lazy"><br>可以看到是先靠上再靠左，先靠上再靠右。  </p>
+<h3 id="2"><a href="#2" class="headerlink" title="2."></a><strong>2.</strong></h3><p>浮动盒子在包含块中排列时，会避开常规流盒子。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>normal<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>常规流盒子<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container .normal</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightgreen<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid <span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-6.png" loading="lazy">  </p>
+<h3 id="3"><a href="#3" class="headerlink" title="3."></a><strong>3.</strong></h3><p>常规流块盒在排列时，无视浮动盒子。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>normal<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>常规流盒子<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container .normal</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightgreen<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid <span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-7.png" loading="lazy"><br>也就是说常规流盒子与浮动盒子的排列顺序决定了盒子们的布局。如果浮动盒子的代码在前面，常规流的代码在后面，常规流盒子就会无视浮动盒子，导致被遮掩。   </p>
+<h3 id="4"><a href="#4" class="headerlink" title="4."></a><strong>4.</strong></h3><p>常规流行盒在排列时，会避开浮动盒子。</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/1.jpg<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 200px</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span> lorem200 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<p>正常情况是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-8.png" loading="lazy"><br>现在我们来设置出文字环绕的效果来：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">img</span><span class="token punctuation">&#123;</span>
+    <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-9.png" loading="lazy"><br>这里<code>&lt;p&gt;</code>元素不是行盒。如果文字没有在行盒中，浏览器会自动生成一个行盒来容纳文字，叫匿名行盒。所以<span style="color:red">文字</span>永远只可能在行盒里面。</p>
+<h3 id="5"><a href="#5" class="headerlink" title="5."></a><strong>5.</strong></h3><p>在浮动盒子中不会发生外边距合并。</p>
+<br>
+
+<h2 id="高度坍塌"><a href="#高度坍塌" class="headerlink" title="高度坍塌"></a><strong>高度坍塌</strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    ... <span class="token comment">&lt;!-- 略 --></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.item</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 6px<span class="token punctuation">;</span>
+    <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-10.png" loading="lazy"><br>可以看到浮动盒子跑到外面去了。为什么会这样？<code>.container</code>没设置宽高，不应该是适应内容调整宽高吗？<br>如果把浮动盒子的浮动属性去掉：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-11.png" loading="lazy"><br>这样就能自动调整了。<br>这种浮动盒子特有的现象就叫<span style="color:red">高度坍塌</span>。原因是常规流盒子的自动高度，在计算时不考虑浮动盒子。  </p>
+<p>解决高度坍塌的方法是<span style="color:red">清除浮动</span>，清除浮动不是说它不浮动了。这涉及到<code>clear</code>属性。<br><code>clear</code>：</p>
+<ul>
+<li>默认值<code>none</code></li>
+<li>取值<code>left</code>，清除左浮动，该元素必须出现在前面所有左浮动盒子的下方。</li>
+<li>取值<code>right</code>，清除右浮动，该元素必须出现在前面所有右浮动盒子的下方。</li>
+<li>取值<code>both</code>，清除左右浮动，该元素必须出现在前面所有浮动盒子的下方。</li>
+</ul>
+<p>相当于对这个元素说：“哥们，你抬头看一眼你那些在天上飞的兄弟们，照顾它们一下。”<br>在所有<code>&lt;div&gt;</code>最后加上：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>clearfix<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<p>“clearfix”表示处理高度塌陷。<br>css：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.clearfix</span><span class="token punctuation">&#123;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 60px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+    <span class="token property">clear</span><span class="token punctuation">:</span> both<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-12.png" loading="lazy"><br>这种处理方式就是我们添加的<code>.clearfix</code>元素把<code>.container</code>撑开了。缺点是需要手动添加一个没什么意义的元素。<br>所以我们通常采用另一种方法处理高度坍塌：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container clearfix<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.clearfix::after</span><span class="token punctuation">&#123;</span>
+    <span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+    <span class="token property">clear</span><span class="token punctuation">:</span> both<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-13.png" loading="lazy">  </p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
