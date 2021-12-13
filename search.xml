@@ -2605,7 +2605,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   </entry>
   <entry>
     <title>Web前端20：定位练习1-二级菜单</title>
-    <url>/2021/12/12/web20/</url>
+    <url>/2021/12/13/web20/</url>
     <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p>京东首页的这一部分：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-1.png" loading="lazy">  </p>
 <br>
 
@@ -2635,7 +2635,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 
 <br>
 
-<h2 id="lt-li-gt-的css修饰"><a href="#lt-li-gt-的css修饰" class="headerlink" title="&lt;li&gt;的css修饰"></a><strong><code>&lt;li&gt;</code>的css修饰</strong></h2><p>由于<code>&lt;li&gt;</code>下的二级菜单<code>&lt;div&gt;</code>要用到绝对定位，所以将<code>&lt;li&gt;</code>的定位方式设置为<code>relative</code>来提供包含块。<br><code>hover</code>时的<code>&lt;li&gt;</code>只有左右上边框，没有下边框，所以要专门设置<code>border-bottom: none</code>。<br>加上边框之后，<code>&lt;li&gt;</code>盒子的尺寸就会变化，进而会“挤开”它后面的盒子，这样就导致文字在视觉上有错位效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-2.gif" loading="lazy"><br>水平方向上错位的解决方法：设置<code>box-sizing: border-box</code>，即设置宽度为边框盒的宽度；<br>垂直方向上错位的解决方法：将<code>hover</code>时<code>&lt;li&gt;</code>的行高减去两个边框厚度，即设置为40px - 2*2px = 36px。  </p>
+<h3 id="lt-li-gt-的css修饰"><a href="#lt-li-gt-的css修饰" class="headerlink" title="&lt;li&gt;的css修饰"></a><strong><code>&lt;li&gt;</code>的css修饰</strong></h3><p>由于<code>&lt;li&gt;</code>下的二级菜单<code>&lt;div&gt;</code>要用到绝对定位，所以将<code>&lt;li&gt;</code>的定位方式设置为<code>relative</code>来提供包含块。<br><code>hover</code>时的<code>&lt;li&gt;</code>只有左右上边框，没有下边框，所以要专门设置<code>border-bottom: none</code>。<br>加上边框之后，<code>&lt;li&gt;</code>盒子的尺寸就会变化，进而会“挤开”它后面的盒子，这样就导致文字在视觉上有错位效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-2.gif" loading="lazy"><br>水平方向上错位的解决方法：设置<code>box-sizing: border-box</code>，即设置宽度为边框盒的宽度；<br>垂直方向上错位的解决方法：将<code>hover</code>时<code>&lt;li&gt;</code>的行高减去两个边框厚度，即设置为40px - 2*2px = 36px。  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.header</span><span class="token punctuation">&#123;</span>
     <span class="token property">height</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
     <span class="token property">line-height</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
@@ -2652,7 +2652,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <p>解决错位问题后：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-3.gif" loading="lazy">  </p>
 <br>
 
-<h2 id="二级菜单-lt-div-gt"><a href="#二级菜单-lt-div-gt" class="headerlink" title="二级菜单&lt;div&gt;"></a><strong>二级菜单<code>&lt;div&gt;</code></strong></h2><p>在其中一个<code>&lt;li&gt;</code>下插入一个<code>&lt;div&gt;</code>作为二级菜单内容，赋类名为<code>submenu</code>： </p>
+<h3 id="二级菜单-lt-div-gt"><a href="#二级菜单-lt-div-gt" class="headerlink" title="二级菜单&lt;div&gt;"></a><strong>二级菜单<code>&lt;div&gt;</code></strong></h3><p>在其中一个<code>&lt;li&gt;</code>下插入一个<code>&lt;div&gt;</code>作为二级菜单内容，赋类名为<code>submenu</code>： </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>客户服务<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>submenu<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -2792,6 +2792,18 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </categories>
       <tags>
         <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>My awesome title</title>
+    <url>/2021/12/01/web21/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>未分类</category>
+      </categories>
+      <tags>
+        <tag>标签1</tag>
+        <tag>标签2</tag>
       </tags>
   </entry>
 </search>
