@@ -2795,7 +2795,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>定位练习2：弹出层</title>
+    <title>Web前端21：定位练习2-弹出层</title>
     <url>/2021/12/13/web21/</url>
     <content><![CDATA[<p>弹出层可能是广告、登录框等。比如斗鱼网页点击退出账号时：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web21-1.png" loading="lazy"><br>这种东西就叫弹出层。<br>真正的弹出层构造需要用到js，这里只使用定位的知识用css来模拟弹出层已经弹出的静态页面。  </p>
 <br>
@@ -2988,7 +2988,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>定位练习3：轮播图</title>
+    <title>Web前端20：定位练习3-轮播图</title>
     <url>/2021/12/13/web22/</url>
     <content><![CDATA[<p>这节没什么新知识，就直接放结果和代码了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web22-1.png" loading="lazy"></p>
 <p>html：</p>
