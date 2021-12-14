@@ -3115,7 +3115,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   </entry>
   <entry>
     <title>Web前端23：更多的选择器</title>
-    <url>/2021/12/13/web23/</url>
+    <url>/2021/12/14/web23/</url>
     <content><![CDATA[<h2 id="更多的伪类选择器"><a href="#更多的伪类选择器" class="headerlink" title="更多的伪类选择器"></a><strong>更多的伪类选择器</strong></h2><h3 id="first-child"><a href="#first-child" class="headerlink" title="first-child"></a><strong>first-child</strong></h3><p>选中第一个子元素。<br>如下的html代码：  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
