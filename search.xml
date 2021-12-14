@@ -3192,4 +3192,84 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Web前端24：更多的样式</title>
+    <url>/2021/12/14/web24/</url>
+    <content><![CDATA[<h2 id="透明度"><a href="#透明度" class="headerlink" title="透明度"></a><strong>透明度</strong></h2><p>透明度的取值是0~1。   </p>
+<ol>
+<li><code>opacity</code>表示整个元素的透明度，包括背景、文字、边框等。<br>这种改变透明度的方式不是很常用，因为它的范围太广了。比如之前做的遮罩层练习，如果直接改变遮罩层的<code>opacity</code>，它内部的弹出块也会被改变透明度。     </li>
+<li>在颜色中设置alpha通道。这样透明度的影响就是颜色对应的部分，如<code>color</code>对应文字的透明度，<code>background-color</code>对应背景的透明度。    </li>
+</ol>
+<p>在浏览器中，按下Alt和上下方向键可以以0.1为单位改变取值。</p>
+<br>
+
+<h2 id="鼠标"><a href="#鼠标" class="headerlink" title="鼠标"></a><strong>鼠标</strong></h2><p>使用<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/cursor">cursor</a>属性设置，它的取值有很多，是一些操作系统常见的鼠标样式，常见的有如下几个：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-2.png" loading="lazy"><br>（来自DIVCSS5.com）<br>还可以设置为图片，但一般必须是.ico或.cur格式的图片。   </p>
+<pre class="language-none"><code class="language-none">div&#123;
+  cursor: url(&quot;&#x2F;img&#x2F;Arrow.cur&quot;), auto;
+&#125;</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-3.png" loading="lazy"><br>（取自<a href="https://zhutix.com/ico/kamisato-ayaka-cuu/">致美化网</a>）</p>
+<br>
+
+<h2 id="盒子隐藏"><a href="#盒子隐藏" class="headerlink" title="盒子隐藏"></a><strong>盒子隐藏</strong></h2><p>js中经常需要控制元素的隐藏和显示。   </p>
+<ol>
+<li><code>display: none</code>，这种方式就是直接把盒子去掉，所以会影响其他元素的排版。   </li>
+<li><code>visibility: hidden</code>，这种方式只是把盒子在原来的位置上隐藏，所以不会影响其他元素的排版。js有时通过这个方式实现一些闪烁的效果，比如QQ消息那种。     </li>
+</ol>
+<br>
+
+<h2 id="背景图"><a href="#背景图" class="headerlink" title="背景图"></a><strong>背景图</strong></h2><p>你可能会有疑问：已经有了<code>&lt;img&gt;</code>元素了，用<code>&lt;img&gt;</code>来显示背景图不就完事了，干嘛还要弄个背景图？<br><code>&lt;img&gt;</code>是HTML的范畴，背景图是CSS的范畴，它们最重要的不是功能上的区别，而是语义化上的区别。   </p>
+<ol>
+<li>当图片属于网页内容时，使用<code>&lt;img&gt;</code>元素。  </li>
+<li>当图片用于网页背景，用于美化页面时，使用背景图。</li>
+</ol>
+<p>背景图涉及的CSS属性：  </p>
+<h3 id="1）-background-image"><a href="#1）-background-image" class="headerlink" title="1） background-image"></a><strong>1）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-image">background-image</a></h3><p>用法：  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+  <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">"../img/1.jpg"</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="2）-background-repeat"><a href="#2）-background-repeat" class="headerlink" title="2） background-repeat"></a><strong>2）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-repeat">background-repeat</a></h3><p>如果图片尺寸比较小，会重复。如：<br>star.png：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-4.png" loading="lazy">    </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">"../img/star.png"</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-5.png" loading="lazy"><br>这时就可以用<code>background-repeat</code>来控制图片的重复方式，它其实是一个速写属性，可以分为<code>background-repeat-x</code>和<code>background-repeat-y</code>两个子属性。<br>取值为<code>repeat-x</code>，表示只在x方向上重复，取值为<code>repeat-y</code>，表示只在y方向上重复。<br>重复很有用的，比如这种图片：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-6.png" loading="lazy"><br>它们通常尺寸很小，然后使用重复效果铺满网页作为背景，这样可以有效节省存储空间。   </p>
+<h3 id="3）-background-size"><a href="#3）-background-size" class="headerlink" title="3） background-size"></a><strong>3）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size">background-size</a></h3><p>表示背景图的尺寸。常见的预设值有两个：<br><code>contain</code>：保证图片完整显示在元素区域内。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-7.png" loading="lazy"><br><code>cover</code>：让图片宽高比例不变地撑满区域。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-8.png" loading="lazy"><br>另外当然可以取数值或百分比。如<code>background-size: 100% 100%</code>表示x方向和y方向都撑满，所以如果元素宽高和背景图片不一致的话，图片宽高比例会变化：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-9.png" loading="lazy">  </p>
+<h3 id="4）-background-position"><a href="#4）-background-position" class="headerlink" title="4） background-position"></a><strong>4）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-position">background-position</a></h3><p>这个属性很有用。<br>设置背景图的位置，<code>background-position</code>是一个速写属性，包括<code>background-position-x</code>和<code>background-position-y</code>。它有几个预设值：<br><code>center</code>，居中，如<code>background-position: center</code>表示横向和纵向同时居中：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-10.png" loading="lazy"><br><code>top</code>，靠上；<code>bottom</code>靠下。<br>也可以写数值或百分比。  </p>
+<p><strong>雪碧图（精灵图）（sprite）</strong><br>网页上有时要用到很多小图标，在制作图时把这些图标合在一起做为一张图片，以减少文件数量，如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-11.jpg" loading="lazy"><br>这就叫精灵图。<br>使用精灵图的方法就是通过<code>background-position</code>，如</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">"../img/sprite.jpg"</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+    <span class="token property">background-repeat</span><span class="token punctuation">:</span> no-repeat<span class="token punctuation">;</span>
+    <span class="token property">background-position</span><span class="token punctuation">:</span> -17px -117px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-12.png" loading="lazy">   </p>
+<h3 id="5）-background-attachment"><a href="#5）-background-attachment" class="headerlink" title="5） background-attachment"></a><strong>5）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-attachment">background-attachment</a></h3><p>用来控制背景图是否固定。背景图默认情况下是不随着视口变动的，也就是说不跟着你的滚动条走。所以当你需要背景图固定在视口内时，可以用这个属性。  </p>
+<h3 id="6）背景图和背景颜色混用"><a href="#6）背景图和背景颜色混用" class="headerlink" title="6）背景图和背景颜色混用"></a><strong>6）背景图和背景颜色混用</strong></h3><p>背景图<code>background-image</code>和背景颜色<code>background-color</code>经常一起使用，背景图覆盖不到的地方就用背景颜色覆盖。</p>
+<h3 id="7）速写属性background"><a href="#7）速写属性background" class="headerlink" title="7）速写属性background"></a><strong>7）速写属性background</strong></h3><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>../img/star.png<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+    <span class="token property">background-repeat</span><span class="token punctuation">:</span> no-repeat<span class="token punctuation">;</span>
+    <span class="token property">background-size</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">background-position</span><span class="token punctuation">:</span> 50% 50%<span class="token punctuation">;</span>
+    <span class="token property">background-attachment</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
+    <span class="token property">background-color</span><span class="token punctuation">:</span> #000<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">``
+可以速写为：
+```css
+body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">"../img/star.png"</span><span class="token punctuation">)</span></span> no-repeat  50% 50%/100% fixed  #000<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>由于<code>background-size</code>和<code>background-position</code>的取值都可以是数值或百分比，所以为了避免混淆，在速写属性中规定先写位置、后写尺寸。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>
