@@ -3113,4 +3113,83 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Web前端23：更多的选择器</title>
+    <url>/2021/12/13/web23/</url>
+    <content><![CDATA[<h2 id="更多的伪类选择器"><a href="#更多的伪类选择器" class="headerlink" title="更多的伪类选择器"></a><strong>更多的伪类选择器</strong></h2><h3 id="first-child"><a href="#first-child" class="headerlink" title="first-child"></a><strong>first-child</strong></h3><p>选中第一个子元素。<br>如下的html代码：  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">http-equiv</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>X-UA-Compatible<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>IE=edge<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">></span></span>Document<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+              <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+          <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">></span></span></code></pre>
+
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.first-child</span><span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span></code></pre>
+<p><code>&lt;head&gt;</code>是&lt;html&gt;的第一个子元素；<br><code>&lt;meta&gt;</code>是&lt;head&gt;的第一个子元素；<br><code>&lt;div&gt;</code>是&lt;body&gt;的第一个子元素；<br><code>&lt;ul&gt;</code>是&lt;body&gt;的第一个子元素；<br><code>&lt;li&gt;</code>是&lt;ul&gt;的第一个子元素；<br>故以上元素都会被选中。这样选择的范围太广了，所以通常会在<code>first-child</code>前加上个元素选择器，如<code>li:first-child &#123; ... &#125;</code>，表示选择是<code>&lt;li&gt;</code>第一个子元素。   </p>
+<p>但对于<code>li:first-child &#123; ... &#125;</code>，如下的情况就不会有元素被选中：  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code></pre>
+<p>因为第一个&lt;li&gt;排在了第2位，不满足条件。  </p>
+<p>相应的，有另一个伪类选择器是<strong>first-of-type</strong>，选中子元素中第一个指定类型的元素。这样，<code>li:first-of-type &#123; ... &#125;</code>表示选中子元素中第一个<code>&lt;li&gt;</code>，上面html代码中的第一个<code>&lt;li&gt;</code>就会被选中。   </p>
+<p>故对比来看：<br><code>li:first-child &#123; ... &#125;</code>：选中&lt;li&gt;元素，且&lt;li&gt;元素必须是第一个子元素。<br><code>li:first-of-type &#123; ... &#125;</code>：选中子元素中第一个&lt;li&gt;元素。    </p>
+<br>
+
+<h3 id="last-child"><a href="#last-child" class="headerlink" title="last-child"></a><strong>last-child</strong></h3><p>和<code>first-child</code>相对应。<br>相应的也有<code>last-of-type</code>。  </p>
+<br>
+
+<h3 id="nth-child"><a href="#nth-child" class="headerlink" title="nth-child"></a><strong>nth-child</strong></h3><p>选中指定的第n个子元素。之前做浮动练习模拟猫眼电影时使用过这个伪类选择器。<br>如<code>a:nth-child(5)&#123; ... &#125;</code>：必须是&lt;a&gt;元素，必须是第5个子元素。所以会选中如下所示的&lt;li&gt;元素：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>被选中<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code></pre>
+<p>nth-child()中可以写变量，如<code>nth-child(3n)</code>选中第3、6、9、……个子元素，<code>nth-child(2n+1)</code>选中第1、3、5、……个子元素。<br><code>nth-child(even)</code>选中第偶数个子元素，<code>nth-child(odd))</code>选中第奇数数个子元素。</p>
+<br>
+
+<h3 id="nth-of-type"><a href="#nth-of-type" class="headerlink" title="nth-of-type"></a><strong>nth-of-type</strong></h3><p>用法规则和<code>first-of-type</code>类似。  </p>
+<br>
+
+<h2 id="更多的伪元素选择器"><a href="#更多的伪元素选择器" class="headerlink" title="更多的伪元素选择器"></a><strong>更多的伪元素选择器</strong></h2><h3 id="first-letter"><a href="#first-letter" class="headerlink" title="first-letter"></a><strong>first-letter</strong></h3><p>选中元素中的第一个字母/汉字。  </p>
+<h3 id="first-line"><a href="#first-line" class="headerlink" title="first-line"></a><strong>first-line</strong></h3><p>选中元素中的第一行文字。  </p>
+<h3 id="selection"><a href="#selection" class="headerlink" title="selection"></a><strong>selection</strong></h3><p>选中被用户框选的文字。</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">p::selection</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> yellow<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web23-1.png" loading="lazy"></p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>
