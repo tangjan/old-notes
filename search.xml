@@ -3272,4 +3272,189 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>MSQL3：条件查询</title>
+    <url>/2021/12/15/mysql3/</url>
+    <content><![CDATA[<p><strong>条件查询</strong></p>
+<br>
+
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a><strong>语法</strong></h2><pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  查询列表
+<span class="token keyword">FROM</span>
+  表名 
+<span class="token keyword">WHERE</span>
+  筛选条件 </code></pre>
+<p>如果要标明顺序的话，是先执行<code>FROM 表名</code>，确定表是否存在，然后执行<code>WHERE 筛选条件</code>，根据条件筛选，最后是<code>SELECT 查询列表</code>，进行查询显示。</p>
+<br>
+
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a><strong>分类</strong></h2><ol>
+<li>按条件表达式筛选<br>条件运算符：<code>&gt;</code>、<code>&lt;</code>、<code>!=</code>、<code>&lt;&gt;</code>、<code>&gt;=</code>、<code>&lt;=</code></li>
+<li>按逻辑表达式筛选<br>逻辑运算符：<code>&amp;&amp;</code>、<code>||</code>、<code>!</code>或<code>AND</code>、<code>OR</code>、<code>NOT</code>，即与或非，建议使用后者</li>
+<li>模糊查询<br><code>LIKE</code>、<code>BETWEEN AND</code>、<code>IN</code>、<code>IS (NOT) NULL</code></li>
+</ol>
+<br>
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a><strong>使用</strong></h2><h3 id="1-按条件表达式筛选"><a href="#1-按条件表达式筛选" class="headerlink" title="1. 按条件表达式筛选"></a><strong>1.</strong> 按条件表达式筛选</h3><p><strong>案例1</strong>：查询工资&gt;12000的员工信息</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> salary <span class="token operator">></span> <span class="token number">12000</span> <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-1.png" loading="lazy"><br><strong>案例2</strong>：查询部门编号不等于90的员工名和部门编号</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  last_name<span class="token punctuation">,</span>
+  department_id 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> department_id <span class="token operator">!=</span> <span class="token number">90</span> <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-2.png" loading="lazy">   </p>
+<h3 id="2-按逻辑表达式筛选"><a href="#2-按逻辑表达式筛选" class="headerlink" title="2. 按逻辑表达式筛选"></a><strong>2.</strong> 按逻辑表达式筛选</h3><p>逻辑运算符：用于连接条件表达式。<br><strong>案例1</strong>：查询工资在10000到20000之间的员工名、工资以及奖金</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  last_name<span class="token punctuation">,</span>
+  salary<span class="token punctuation">,</span>
+  commission_pct 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> salary <span class="token operator">>=</span> <span class="token number">10000</span> 
+  <span class="token operator">AND</span> salary <span class="token operator">&lt;=</span> <span class="token number">20000</span> <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-3.png" loading="lazy"><br><strong>案例2</strong>：查询部门编号不是在90到110之间的，或者工资高于15000的员工信息</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> department_id <span class="token operator">&lt;</span> <span class="token number">90</span> 
+  <span class="token operator">OR</span> department_id <span class="token operator">></span> <span class="token number">110</span> 
+  <span class="token operator">OR</span> salary <span class="token operator">></span> <span class="token number">15000</span> <span class="token punctuation">;</span></code></pre>
+<p>相当于：</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">WHERE</span> <span class="token operator">NOT</span> <span class="token punctuation">(</span>
+  department_id <span class="token operator">>=</span> <span class="token number">90</span> 
+  <span class="token operator">AND</span> department_id <span class="token operator">&lt;=</span> <span class="token number">110</span>
+<span class="token punctuation">)</span> 
+<span class="token operator">OR</span> salary <span class="token operator">></span> <span class="token number">15000</span> <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-4.png" loading="lazy">    </p>
+<h3 id="3-模糊查询"><a href="#3-模糊查询" class="headerlink" title="3. 模糊查询"></a><strong>3.</strong> 模糊查询</h3><p><code>LIKE</code>、<code>BETWEEN AND</code>、<code>IN</code>、<code>IS (NOT) NULL</code>  </p>
+<h4 id="1）-LIKE"><a href="#1）-LIKE" class="headerlink" title="1） LIKE"></a><strong>1）</strong> <code>LIKE</code></h4><p>特点：一般和通配符<code>%</code>（0个或多个字符）、<code>_</code>（一个字符）搭配使用。<br><strong>案例1</strong>：查询员工名中包含字符a的员工信息  </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> last_name <span class="token operator">LIKE</span> <span class="token string">'%a%'</span> <span class="token punctuation">;</span></code></pre>
+<p><code>%</code>表示字符通配符，用于替代0个或多个字符。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-5.png" loading="lazy"><br>可以看出并不区分大小写。  </p>
+<p><strong>案例2</strong>：查询员工名中第三个字符为<code>n</code>，第五个字符为<code>l</code>的员工名和工资  </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  last_name<span class="token punctuation">,</span> salary 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> last_name <span class="token operator">LIKE</span> <span class="token string">'__n_l%'</span> <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-6.png" loading="lazy">    </p>
+<p><strong>案例3</strong>：查询员工名中第二个字符为<code>_</code>的员工名<br>用转义字符<code>\</code></p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  last_name
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> last_name <span class="token operator">LIKE</span> <span class="token string">'_\_%'</span> <span class="token punctuation">;</span></code></pre>
+<p>或者用<code>ESCAPE</code>关键字人为规定转义字符</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">WHERE</span> last_name <span class="token operator">LIKE</span> <span class="token string">'_$_%'</span> <span class="token keyword">ESCAPE</span> <span class="token string">'$'</span><span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-7.png" loading="lazy">    </p>
+<h4 id="2）-BETWEEN-AND"><a href="#2）-BETWEEN-AND" class="headerlink" title="2） BETWEEN AND"></a><strong>2）</strong> <code>BETWEEN AND</code></h4><p>使用<code>BETWEEN AND</code>包含边界值，也就是相当于<code>&gt;=</code>、<code>&lt;=</code>。<br><strong>案例1</strong>：查询员工编号在100到120之间的员工信息<br>可以使用<code>&lt;=</code>、<code>&gt;=</code></p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> employee_id <span class="token operator">>=</span> <span class="token number">100</span> 
+  <span class="token operator">AND</span> employee_id <span class="token operator">&lt;=</span> <span class="token number">120</span> <span class="token punctuation">;</span></code></pre>
+<p>但是这里不能简写为<code>employee_id &gt;= 100 AND &lt;= 120 ;</code><br>可以写为<code>employee_id BETWEEN 100 AND 120 ;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-8.png" loading="lazy"><br>注意不可以写为<code>BETWEEN 120 AND 100</code>。   </p>
+<h4 id="3）-IN"><a href="#3）-IN" class="headerlink" title="3） IN"></a><strong>3）</strong> <code>IN</code></h4><p>判断某字段的值是否属于in列表中的一项。<code>IN</code>比<code>OR</code>更简洁。<br>要求<code>IN</code>列表的值类型一致或兼容。<br><code>IN</code>列表不可以使用<code>_</code>、<code>%</code>通配符。<br><strong>案例</strong>：查询员工的工种编号是<code>IT_PROG</code>、<code>AD_VP</code>、<code>AD_PRES</code>的员工名和工种编号  </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  last_name<span class="token punctuation">,</span>
+  job_id 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> job_id <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token string">'IT_PROG'</span><span class="token punctuation">,</span> <span class="token string">'AD_VP'</span><span class="token punctuation">,</span> <span class="token string">'AD_PRES'</span><span class="token punctuation">)</span> <span class="token punctuation">;</span></code></pre>
+<p>相当于</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">where</span> job_id <span class="token operator">=</span> <span class="token string">'IT_PROG'</span> 
+  <span class="token operator">or</span> job_id <span class="token operator">=</span> <span class="token string">'AD_VP'</span> 
+  <span class="token operator">or</span> job_id <span class="token operator">=</span> <span class="token string">'AD_PRES'</span> <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-9.png" loading="lazy">    </p>
+<h4 id="4）-IS-NOT-NUL"><a href="#4）-IS-NOT-NUL" class="headerlink" title="4） IS (NOT) NUL"></a><strong>4）</strong> <code>IS (NOT) NUL</code></h4><p><strong>案例1</strong>：查询没有奖金的员工名和奖金率   </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  last_name<span class="token punctuation">,</span>
+  commission_pct 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> commission_pct <span class="token operator">IS</span> <span class="token boolean">NULL</span> <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-10.png" loading="lazy"><br>不可以写为<code>WHERE commission_pct = NULL</code>，<code>=</code>、<code>&lt;&gt;</code>不能用于判断<code>NULL</code>，是无效的，查询结果将是0条。另外<code>IS</code>也不能用于判断数值，如<code>WHERE salary = 12000;</code>也是不正确的。<br>总而言之，<code>IS</code>只能和<code>NULL</code>一起用。<br>有奖金的就是<code>WHERE commission_pct IS NOT NULL</code>。   </p>
+<h3 id="4-安全等于-lt-gt"><a href="#4-安全等于-lt-gt" class="headerlink" title="4. 安全等于&lt;=&gt;"></a><strong>4.</strong> 安全等于<code>&lt;=&gt;</code></h3><p>可以用来判断<code>NULL</code>，如</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">WHERE</span> commission_pct <span class="token operator">&lt;=></span> <span class="token boolean">NULL</span> <span class="token punctuation">;</span></code></pre>
+<p>也可以判断数值，如</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">WHERE</span> salary <span class="token operator">&lt;=></span> <span class="token number">12000</span> <span class="token punctuation">;</span></code></pre>
+<p>但是安全等于用得较少，因为视觉上很容易和不等于<code>&lt;&gt;</code>混淆。   </p>
+<br>
+
+<h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a><strong>习题</strong></h2><p><strong>1.</strong> 查询工号为176的员工的姓名、部门号和年薪   </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  last_name<span class="token punctuation">,</span>
+  department_id<span class="token punctuation">,</span>
+  salary <span class="token operator">*</span> <span class="token number">12</span> <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span> IFNULL<span class="token punctuation">(</span>commission_pct<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> 年薪 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> employee_id <span class="token operator">=</span> <span class="token number">176</span> <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-11.png" loading="lazy">    </p>
+<p><strong>2.</strong> 查询没有奖金，且工资小于18000的<code>salary</code>、<code>last_name</code>  </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  salary<span class="token punctuation">,</span>
+  last_name 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> commission_pct <span class="token operator">IS</span> <span class="token boolean">NULL</span> 
+  <span class="token operator">AND</span> salary <span class="token operator">&lt;</span> <span class="token number">18000</span> <span class="token punctuation">;</span></code></pre>
+
+<p><strong>3.</strong> 查询<code>employees</code>表中，<code>job_id</code>不为<code>IT</code>或者工资为120000的员工信息  </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> job_id <span class="token operator">&lt;></span> <span class="token string">'IT'</span> 
+  <span class="token operator">OR</span> salary <span class="token operator">=</span> <span class="token number">12000</span> <span class="token punctuation">;</span></code></pre>
+
+<p><strong>4.</strong> 查询部门<code>departments</code>表中涉及到了哪些位置编号  </p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> 
+  location_id 
+<span class="token keyword">FROM</span>
+  departments <span class="token punctuation">;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-12.png" loading="lazy">    </p>
+<p><strong>5.</strong> 经典面试题<br>试问</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+  employees <span class="token punctuation">;</span></code></pre>
+<p>和</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> commission_pct <span class="token operator">LIKE</span> <span class="token string">'%%'</span> 
+  <span class="token operator">AND</span> last_name <span class="token operator">LIKE</span> <span class="token string">'%%'</span> <span class="token punctuation">;</span></code></pre>
+<p>结果是否一样？说明原因。<br>答：不一样。<br>前者显示的结果中，<code>commission_pct</code>字段有<code>NULL</code>值，而后者没有，相当于筛掉了<code>NULL</code>。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-13.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-14.png" loading="lazy">    </p>
+<p>如果改成</p>
+<pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
+  <span class="token operator">*</span> 
+<span class="token keyword">FROM</span>
+  employees 
+<span class="token keyword">WHERE</span> commission_pct <span class="token operator">LIKE</span> <span class="token string">'%%'</span> 
+   <span class="token operator">OR</span> last_name <span class="token operator">LIKE</span> <span class="token string">'%%'</span> <span class="token punctuation">;</span>
+   <span class="token operator">OR</span> employee_id <span class="token operator">LIKE</span> <span class="token string">'%%'</span><span class="token punctuation">;</span>
+   <span class="token operator">OR</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> （所有字段都加上）</code></pre>
+<p>就和<code>SELECT * FROM employees</code>一样了，因为总归有一个字段不存在<code>NULL</code>值。（主键就不可以为<code>NULL</code>）    </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
 </search>
