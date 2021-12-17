@@ -541,7 +541,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <title>Web前端13：盒模型应用</title>
     <url>/2021/12/06/web13/</url>
     <content><![CDATA[<h2 id="改变宽高范围"><a href="#改变宽高范围" class="headerlink" title="改变宽高范围"></a><strong>改变宽高范围</strong></h2><p>默认情况下，<code>width</code>和<code>height</code>设置的是内容盒的宽高。<br>我们写的网页来自于设计师的psd文件设计稿。所以做静态网页的人也常被称为页面重构师，将psd文件制作为静态页面。   </p>
-<p>例：现在我们想模仿斗鱼网站的这个部分做个网页出来：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-1.png" loading="lazy"><br>所以我们就要测量这个盒子的宽高为多少像素，文字“云游戏”距左边界多少像素，并用审查元素查询它的文字颜色、背景颜色等。<br>对于测量后面会介绍专门的工具，这里先用mspaint或QQ截图大致测量一下，得到宽高为240 × 48像素，“云游戏”距左边框52像素。<br>另外，让文字垂直居中，需要将行高（line-height）设置与高度（height）相同。<br>于是，css文件中：</p>
+<p>例：现在我们想模仿斗鱼网站的这个部分做个网页出来：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-1.png" loading="lazy"><br>所以我们就要测量这个盒子的宽高为多少像素，文字“云游戏”距左边界多少像素，并用审查元素查询它的文字颜色、背景颜色等。<br>对于测量后面会介绍专门的工具，这里先用mspaint或QQ截图大致测量一下，得到宽高为240 × 48像素，“云游戏”距左边框52像素。<br>另外，让文字垂直居中，需要将行高（line-height）设置与高度（height）相同。<br>于是，css文件中：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 240px<span class="token punctuation">;</span>
     <span class="token property">height</span><span class="token punctuation">:</span> 48px<span class="token punctuation">;</span>
@@ -554,12 +554,12 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
     云游戏
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p>设置好了之后我们到网页中看一下它的宽高：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-2.png" loading="lazy"><br>诶？为什么它的div显示的是365 × 60呢？我们设置的不是300 * 60吗？<br>从盒模型中可以找到答案：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-3.png" loading="lazy"><br>这是因为我们设置的宽高是<span style="color:red">内容盒</span>的宽高，再加上填充区域就使得它的宽度多了65像素。<br>而我们量的时候量的是<span style="color:red">边框盒</span>的宽高（这里没有边框，所以边框盒 = 填充盒），也就是整个盒子的宽高，这符合人的直觉。<br>这里有两种解决方式：  </p>
+<p>设置好了之后我们到网页中看一下它的宽高：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-2.png" loading="lazy"><br>诶？为什么它的div显示的是365 × 60呢？我们设置的不是300 * 60吗？<br>从盒模型中可以找到答案：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-3.png" loading="lazy"><br>这是因为我们设置的宽高是<span style="color:red">内容盒</span>的宽高，再加上填充区域就使得它的宽度多了65像素。<br>而我们量的时候量的是<span style="color:red">边框盒</span>的宽高（这里没有边框，所以边框盒 = 填充盒），也就是整个盒子的宽高，这符合人的直觉。<br>这里有两种解决方式：  </p>
 <ol>
 <li>精确计算。既然<code>padding-left</code>为<code>65px;</code>，那么就取<code>width</code>为300 - 65 =<code>235px;</code>。</li>
-<li>CSS3中有这么一个属性：<code>box-sizing</code>，它的取值可以为<code>content-box</code>、<code>border-box</code>，表示CSS宽高的影响范围。<br>这样一来，只要在上述CSS代码中最后再加上<code>box-sizing: border-box;</code>就可以了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-4.png" loading="lazy">   </li>
+<li>CSS3中有这么一个属性：<code>box-sizing</code>，它的取值可以为<code>content-box</code>、<code>border-box</code>，表示CSS宽高的影响范围。<br>这样一来，只要在上述CSS代码中最后再加上<code>box-sizing: border-box;</code>就可以了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-4.png" loading="lazy">   </li>
 </ol>
-<p>于是我们就可以看到，我们设计的样式和斗鱼的差不多：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-5.png" loading="lazy">   </p>
+<p>于是我们就可以看到，我们设计的样式和斗鱼的差不多：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-5.png" loading="lazy">   </p>
 <br>
 
 <h2 id="改变背景覆盖范围"><a href="#改变背景覆盖范围" class="headerlink" title="改变背景覆盖范围"></a><strong>改变背景覆盖范围</strong></h2><p>默认情况下，背景覆盖边框盒。</p>
@@ -570,7 +570,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border</span><span class="token punctuation">:</span> 15px dashed blueviolet<span class="token punctuation">;</span>
     <span class="token property">padding</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-6.png" loading="lazy"><br>可以看到，背景颜色覆盖了边框区域。<br>背景的覆盖范围可以使用<code>background-clip</code>属性修改，可以取值为<code>content-box</code>、<code>padding-box</code>、<code>border-box</code>（默认值）等。<br>如在上述CSS代码中在加上<code>background-clip: content-box;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-7.png" loading="lazy">     </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-6.png" loading="lazy"><br>可以看到，背景颜色覆盖了边框区域。<br>背景的覆盖范围可以使用<code>background-clip</code>属性修改，可以取值为<code>content-box</code>、<code>padding-box</code>、<code>border-box</code>（默认值）等。<br>如在上述CSS代码中在加上<code>background-clip: content-box;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-7.png" loading="lazy">     </p>
 <br>
 
 <h2 id="溢出处理"><a href="#溢出处理" class="headerlink" title="溢出处理"></a><strong>溢出处理</strong></h2><p>有时盒子的内容可能会超出盒子区域，比如文字太多。<br>通常，不设置宽高就不会出现这样的问题，盒子的宽高会自动调整。而设置了宽高就容易出现溢出。  </p>
@@ -581,19 +581,19 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border</span><span class="token punctuation">:</span> 3px solid red<span class="token punctuation">;</span>
     <span class="token property">padding</span><span class="token punctuation">:</span> 20px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-8.png" loading="lazy"><br>溢出后边框盒的处理方式可以通过属性<code>overflow</code>控制，它的取值有<code>auto</code>、<code>hidden</code>、<code>scroll</code>等，默认情况下取值是<code>visible</code>，即可见的。<br>如在上述CSS代码中在加上<code>overflow: scroll;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-9.png" loading="lazy"><br>这里的<code>scroll</code>是个简写属性，如果希望只出现纵向的滚动条（前提是x方向上没有溢出），可以写为<code>overflow-y: scroll;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-10.png" loading="lazy"><br><code>overflow</code>取值为<code>auto</code>表示自动控制滚动条，宽高足够、没有溢出时就不出现滚动条，溢出时就出现滚动条。   </p>
-<p>溢出隐藏有个应用场景，如淘宝网：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-11.png" loading="lazy"><br>可以看到它人为溢出了“淘宝网”这三个字，然后隐藏了起来。这么做是出于语义化的目的，有利于搜索引擎、浏览器理解。   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-8.png" loading="lazy"><br>溢出后边框盒的处理方式可以通过属性<code>overflow</code>控制，它的取值有<code>auto</code>、<code>hidden</code>、<code>scroll</code>等，默认情况下取值是<code>visible</code>，即可见的。<br>如在上述CSS代码中在加上<code>overflow: scroll;</code>，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-9.png" loading="lazy"><br>这里的<code>scroll</code>是个简写属性，如果希望只出现纵向的滚动条（前提是x方向上没有溢出），可以写为<code>overflow-y: scroll;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-10.png" loading="lazy"><br><code>overflow</code>取值为<code>auto</code>表示自动控制滚动条，宽高足够、没有溢出时就不出现滚动条，溢出时就出现滚动条。   </p>
+<p>溢出隐藏有个应用场景，如淘宝网：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-11.png" loading="lazy"><br>可以看到它人为溢出了“淘宝网”这三个字，然后隐藏了起来。这么做是出于语义化的目的，有利于搜索引擎、浏览器理解。   </p>
 <br>
 
-<h2 id="断词规则"><a href="#断词规则" class="headerlink" title="断词规则"></a><strong>断词规则</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-12.png" loading="lazy"><br>这段英文来自伯特兰·罗素。<br>为什么这段英文的行尾参差不齐？是什么定义了它们的换行规则？<br>这是由属性<code>word-break</code>决定的，影响文字在什么位置截断换行。它有以下几个取值：   </p>
+<h2 id="断词规则"><a href="#断词规则" class="headerlink" title="断词规则"></a><strong>断词规则</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-12.png" loading="lazy"><br>这段英文来自伯特兰·罗素。<br>为什么这段英文的行尾参差不齐？是什么定义了它们的换行规则？<br>这是由属性<code>word-break</code>决定的，影响文字在什么位置截断换行。它有以下几个取值：   </p>
 <ul>
-<li><code>normal</code>：普通截断方式，对于CJK（Chinese Japanese Korean）字符，在文字截断；非CJK字符，在单词位置截断。<br>这个截断规定是合理的，如中文，每个字有独立的含义，截断了也不影响人们阅读。但是对于如英文，它一个单词才有独立的含义，截断了就失去了本来的意思。normal是默认值。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-13.png" loading="lazy">   </li>
-<li><code>break-all</code>：所有字符都截断。所以这样一来英文在单词内部就会被截断。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-14.png" loading="lazy">   </li>
-<li><code>keep-all</code>：所有文字都在单词之间截断。中文的汉字之间不加空格就会被认为是一个单词，所以会出现如下状况：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-15.png" loading="lazy"><br>给中文段落随便加几个空格：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-16.png" loading="lazy">   </li>
+<li><code>normal</code>：普通截断方式，对于CJK（Chinese Japanese Korean）字符，在文字截断；非CJK字符，在单词位置截断。<br>这个截断规定是合理的，如中文，每个字有独立的含义，截断了也不影响人们阅读。但是对于如英文，它一个单词才有独立的含义，截断了就失去了本来的意思。normal是默认值。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-13.png" loading="lazy">   </li>
+<li><code>break-all</code>：所有字符都截断。所以这样一来英文在单词内部就会被截断。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-14.png" loading="lazy">   </li>
+<li><code>keep-all</code>：所有文字都在单词之间截断。中文的汉字之间不加空格就会被认为是一个单词，所以会出现如下状况：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-15.png" loading="lazy"><br>给中文段落随便加几个空格：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-16.png" loading="lazy">   </li>
 </ul>
 <br>
 
-<h2 id="空白处理"><a href="#空白处理" class="headerlink" title="空白处理"></a><strong>空白处理</strong></h2><p>有时我们想在网页上显示一些信息，但是显示不下了，就会溢出，我们希望对溢出字符进行一些处理。比如下图截自猫眼电影：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-17.png" loading="lazy"><br>溢出的文字被替换为了“…”。<br>想实现这样的效果有固定的处理方法：</p>
+<h2 id="空白处理"><a href="#空白处理" class="headerlink" title="空白处理"></a><strong>空白处理</strong></h2><p>有时我们想在网页上显示一些信息，但是显示不下了，就会溢出，我们希望对溢出字符进行一些处理。比如下图截自猫眼电影：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-17.png" loading="lazy"><br>溢出的文字被替换为了“…”。<br>想实现这样的效果有固定的处理方法：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">li</span><span class="token punctuation">&#123;</span>
     <span class="token property">border-bottom</span><span class="token punctuation">:</span> 1px dashed #ccc<span class="token punctuation">;</span>
     <span class="token property">border-left</span><span class="token punctuation">:</span> 3px solid blueviolet<span class="token punctuation">;</span>
@@ -606,7 +606,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
     <span class="token property">text-overflow</span><span class="token punctuation">:</span> ellipsis<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><code>white-space: nowrap;</code>表示不换行。<br><code>text-overflow: ellipsis;</code>表示文本溢出时用省略号（ellipsis）替代。<br>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web13-18.png" loading="lazy"><br>这种方式只能控制单行文本，多行文本需要用js。<br>像<code>&lt;pre&gt;</code>元素就是使用<code>white-space: pre;</code>属性来取消空白折叠的效果的。<br>所以如<code>&lt;div&gt;</code>元素也可以设置<code>white-space: pre;</code>属性来取消空白折叠。</p>
+<p><code>white-space: nowrap;</code>表示不换行。<br><code>text-overflow: ellipsis;</code>表示文本溢出时用省略号（ellipsis）替代。<br>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web13/web13-18.png" loading="lazy"><br>这种方式只能控制单行文本，多行文本需要用js。<br>像<code>&lt;pre&gt;</code>元素就是使用<code>white-space: pre;</code>属性来取消空白折叠的效果的。<br>所以如<code>&lt;div&gt;</code>元素也可以设置<code>white-space: pre;</code>属性来取消空白折叠。</p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
@@ -782,7 +782,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">></span></span>四级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h5</span><span class="token punctuation">></span></span>五级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h5</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h6</span><span class="token punctuation">></span></span>六级标题<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h6</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web3/web3-1.png" loading="lazy"><br>这里强调一点，根据web<span style="color:red">语义化</span>的概念，一级标题<span style="color:red">未必</span>比二级标题大。<br><span style="color:red">插曲小tip</span>：<br>①在VScode里，Ctrl + Enter可以直接切换光标至下一行行首，不论当前光标在哪（不同于只按Enter）；Shift + Ctrl + Enter直接切换至上一行行首<br>②<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web3/web3-2.png" loading="lazy"><br>这时按Tab键可以扩展为：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web3/web3-3.png" loading="lazy"><br>（需要安装Emmet插件，不过一般安装VScode时就这个插件也自动安装好了）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web3/web3-1.png" loading="lazy"><br>这里强调一点，根据web<span style="color:red">语义化</span>的概念，一级标题<span style="color:red">未必</span>比二级标题大。<br><span style="color:red">插曲小tip</span>：<br>①在VScode里，Ctrl + Enter可以直接切换光标至下一行行首，不论当前光标在哪（不同于只按Enter）；Shift + Ctrl + Enter直接切换至上一行行首<br>②<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web3/web3-2.png" loading="lazy"><br>这时按Tab键可以扩展为：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web3/web3-3.png" loading="lazy"><br>（需要安装Emmet插件，不过一般安装VScode时就这个插件也自动安装好了）</p>
 <h2 id="3-lt-p-gt"><a href="#3-lt-p-gt" class="headerlink" title="3. &lt;p&gt;"></a><strong>3. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/p">&lt;p&gt;</a></strong></h2><p>p即paragraph，表示段落。<br><span style="color:red">插曲小tip</span>：<br>乱数假文：Lorem ipsum。常用来测试排版，“Lorem + 数字”可生成指定个数单词。</p>
 <h2 id="4-lt-span-gt"><a href="#4-lt-span-gt" class="headerlink" title="4. &lt;span&gt;"></a><strong>4. <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/span">&lt;span&gt;</a></strong></h2><p>span是一个没有语义的元素。<br>为什么会存在没有语义的元素呢？因为有的时候就是需要将网页中的某些内容设置为一个个没有语义的span，然后再进行处理，如：</p>
 <pre class="language-none"><code class="language-none">光学三原色包含：红、绿、蓝</code></pre>
@@ -1003,7 +1003,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <span class="token property">line-height</span><span class="token punctuation">:</span> 1.5<span class="token punctuation">;</span>
     <span class="token punctuation">&#125;</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web8/web8-7png" loading="lazy"><br>为什么这里不以em为单位进行设置呢？之后讲到<span style="color:red">继承</span>会有解释。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web8/web8-7.png" loading="lazy"><br>为什么这里不以em为单位进行设置呢？之后讲到<span style="color:red">继承</span>会有解释。</p>
 <br>
 
 <h2 id="5-width、height、letter-spancing、text-align"><a href="#5-width、height、letter-spancing、text-align" class="headerlink" title="5. width、height、letter-spancing、text-align"></a><strong>5. <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/width">width</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/height">height</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/letter-spacing">letter-spancing</a>、<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/text-align">text-align</a></strong></h2><p><strong>1) width、height</strong><br>宽度、高度。<br>没啥可说的。</p>
@@ -1200,7 +1200,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第三步：收买证人，证明大象已经被装进冰箱里。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>第四步：利用媒体优势反复强调“猫是大象的祖先”这一理论，以防后患。<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/postsweb/web6/web6-1.png" loading="lazy"><br>ol还有一个布尔属性是reversed，作用是将序号倒过来编排。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web6/web6-1.png" loading="lazy"><br>ol还有一个布尔属性是reversed，作用是将序号倒过来编排。</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>a<span class="token punctuation">"</span></span> <span class="token attr-name">reversed</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
@@ -1263,7 +1263,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>头像、博客背景来源</title>
+    <title>本站头像、背景来源</title>
     <url>/2021/12/06/picture-declaration/</url>
     <content><![CDATA[<p><img src="https://s2.loli.net/2021/12/06/rqRUPs9n14OXkHL.jpg" alt="avatar.png" loading="lazy"><br>——《素晴日》</p>
 <br>
@@ -1287,14 +1287,14 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <content><![CDATA[<h2 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a><strong>简单介绍</strong></h2><p>行盒的盒模型和块盒的有不小的差异。<br>常见的行盒：包含具体内容的元素，如<code>&lt;span&gt;</code>、<code>&lt;strong&gt;</code>、<code>&lt;i&gt;</code>、<code>&lt;em&gt;</code>、<code>&lt;img&gt;</code>、<code>&lt;video&gt;</code>、<code>&lt;audio&gt;</code>。<br>行盒的盒模型也是content、paddin、border、margin四个部分。<br>先来简单看一下行盒和块盒到底怎么个不一样法。   </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>lorem30<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>lorem30<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-1.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web14/web14-1.png" loading="lazy">   </p>
 <p>p元素是块元素（<code>display: block</code>），span元素是行元素（<code>display: inline</code>）。从这张图中可以很明显看出它们的区别：块元素方方正正的一片区域，而行元素像一条蛇一样弯来扭去的。   </p>
 <br>
 
 <h2 id="行盒的特点"><a href="#行盒的特点" class="headerlink" title="行盒的特点"></a><strong>行盒的特点</strong></h2><ol>
-<li>盒子沿着内容延伸，内容走到哪盒子跟到哪。<br>所以如果在后面再加一个<code>&lt;span&gt;</code>元素，它会接着上一个行元素排列：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-2.png" loading="lazy">   </li>
+<li>盒子沿着内容延伸，内容走到哪盒子跟到哪。<br>所以如果在后面再加一个<code>&lt;span&gt;</code>元素，它会接着上一个行元素排列：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web14/web14-2.png" loading="lazy">   </li>
 <li>行盒无法设置宽高，行盒的宽高仅取决于内容的大小。<br>因此想调整行盒的宽高只能调整字体的大小、行高、字体类型等属性间接调整。   </li>
-<li>填充区<code>padding</code>水平方向上有效，垂直方向上仅影响背景，不会实际占据空间。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-3.gif" loading="lazy">  </li>
+<li>填充区<code>padding</code>水平方向上有效，垂直方向上仅影响背景，不会实际占据空间。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web14/web14-3.gif" loading="lazy">  </li>
 <li>边框<code>boder</code>，和padding一样，水平有效，垂直方向上不占据空间。</li>
 <li>外边距<code>margin</code>，左右有效，上下无效。   </li>
 </ol>
@@ -1313,8 +1313,8 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">line-height</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
     <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-4.png" loading="lazy"><br>可以看到，行块盒既实现了块盒的宽高设置，又实现了行盒衔接排列。  </p>
-<p>行块盒的一个常用应用是分页，如百度的分页：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-5.png" loading="lazy"><br>我们来模仿做一下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web14/web14-4.png" loading="lazy"><br>可以看到，行块盒既实现了块盒的宽高设置，又实现了行盒衔接排列。  </p>
+<p>行块盒的一个常用应用是分页，如百度的分页：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web14/web14-5.png" loading="lazy"><br>我们来模仿做一下：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">a</span><span class="token punctuation">&#123;</span>
     <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
     <span class="token property">border</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
@@ -1351,7 +1351,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 9 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 10 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web14-6.png" loading="lazy"><br>差不多。<br>行块盒之间的空格来自于空白折叠，发生在行盒（行块盒）内部或行盒（行块盒）之间。空白折叠是无法消除的，想消掉这个空格只能不换行不加空格，如：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web14/web14-6.png" loading="lazy"><br>差不多。<br>行块盒之间的空格来自于空白折叠，发生在行盒（行块盒）内部或行盒（行块盒）之间。空白折叠是无法消除的，想消掉这个空格只能不换行不加空格，如：</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 1 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 2 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span> 3 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span></code></pre>
 
 <br>
@@ -1396,11 +1396,11 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
     <span class="token property">background</span><span class="token punctuation">:</span> blueviolet<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-1.png" loading="lazy"><br>可以看到<code>子&lt;div&gt;</code>元素的宽度是有限的，是它父元素的内容盒的宽度大小<code>300px</code>。<br>如果这时修改<code>父&lt;div&gt;</code>的margin使其移动，<code>子&lt;div&gt;</code>也会跟着移动。   </p>
+<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-1.png" loading="lazy"><br>可以看到<code>子&lt;div&gt;</code>元素的宽度是有限的，是它父元素的内容盒的宽度大小<code>300px</code>。<br>如果这时修改<code>父&lt;div&gt;</code>的margin使其移动，<code>子&lt;div&gt;</code>也会跟着移动。   </p>
 <br>
 
-<h2 id="块盒的常规流"><a href="#块盒的常规流" class="headerlink" title="块盒的常规流"></a><strong>块盒的常规流</strong></h2><h3 id="总宽度"><a href="#总宽度" class="headerlink" title="总宽度"></a><strong>总宽度</strong></h3><p>每个块盒的总宽度（content + padding + border + margin），必须刚好等于包含块的宽度。<br>宽度<code>width</code>的默认值是auto，表示将剩余空间吸收掉。<br><code>margin</code>的取值也可以是auto，默认值是0。<br><code>width</code>吸收能力强于<code>margin</code>，所以当它们同时是auto时由<code>width</code>吸收。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-2.png" loading="lazy">   </p>
-<p>若content、padding、border、margin计算后，仍然有剩余空间，该剩余空间默认被<code>margin-right</code>全部吸收，因为文字默认都是从左向右排列的，这就是我们常遇到的情况。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-3.png" loading="lazy"><br>如果设置为<code>margin-right: auto</code>和<code>margin-left: auto</code>，则得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-4.png" loading="lazy"><br>这是常规流中常见的一种居中方式：欲使块盒在其包含块中居中，可以定宽、然后左右margin取值auto。<br>开发中常用<code>margin: 0 auto</code>，简写属性，也就是上下为0（也可以为其他大小），左右auto。<br>基于这个特性，我们可以做出一些有意思的效果，如设置<code>margin</code>为负数：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-5.png" loading="lazy"></p>
+<h2 id="块盒的常规流"><a href="#块盒的常规流" class="headerlink" title="块盒的常规流"></a><strong>块盒的常规流</strong></h2><h3 id="总宽度"><a href="#总宽度" class="headerlink" title="总宽度"></a><strong>总宽度</strong></h3><p>每个块盒的总宽度（content + padding + border + margin），必须刚好等于包含块的宽度。<br>宽度<code>width</code>的默认值是auto，表示将剩余空间吸收掉。<br><code>margin</code>的取值也可以是auto，默认值是0。<br><code>width</code>吸收能力强于<code>margin</code>，所以当它们同时是auto时由<code>width</code>吸收。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-2.png" loading="lazy">   </p>
+<p>若content、padding、border、margin计算后，仍然有剩余空间，该剩余空间默认被<code>margin-right</code>全部吸收，因为文字默认都是从左向右排列的，这就是我们常遇到的情况。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-3.png" loading="lazy"><br>如果设置为<code>margin-right: auto</code>和<code>margin-left: auto</code>，则得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-4.png" loading="lazy"><br>这是常规流中常见的一种居中方式：欲使块盒在其包含块中居中，可以定宽、然后左右margin取值auto。<br>开发中常用<code>margin: 0 auto</code>，简写属性，也就是上下为0（也可以为其他大小），左右auto。<br>基于这个特性，我们可以做出一些有意思的效果，如设置<code>margin</code>为负数：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-5.png" loading="lazy"></p>
 <h3 id="每个块盒垂直方向上默认值"><a href="#每个块盒垂直方向上默认值" class="headerlink" title="每个块盒垂直方向上默认值"></a><strong>每个块盒垂直方向上默认值</strong></h3><p><code>height: auto</code>，表示高度适应内容多少来调整<br><code>margin: 0</code>，0就是0，没什么好说的  </p>
 <h3 id="百分比取值"><a href="#百分比取值" class="headerlink" title="百分比取值"></a><strong>百分比取值</strong></h3><p>这块不仅是常规流的知识，之后的浮动、绝对定位都要用到。  </p>
 <ol>
@@ -1414,7 +1414,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border</span><span class="token punctuation">:</span> 3px solid<span class="token punctuation">;</span>
     <span class="token property">margin</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-6.png" loading="lazy"><br>如果上下两个外边距不相等，则取最大值。   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-6.png" loading="lazy"><br>如果上下两个外边距不相等，则取最大值。   </p>
 <p>两个上边距相邻也会合并，如：</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>parent<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>child<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -1433,7 +1433,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
     <span class="token property">margin-top</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-7.png" loading="lazy"><br>本来我们预期child div元素应该距parent div元素上面50px，但由于这两个外边距相邻了，就合并了。<br>这时如果想实现我们预期的效果，不让它们合并，只要打破合并的条件就可以了，也就是不让它们相邻，比如可以给parent div元素加上<code>border: 5px solid</code>，就得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-8.png" loading="lazy"><br>也可以转换思维，把child div元素的<code>margin-top</code>转换为parent div元素的<code>padding-top</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web15-9.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-7.png" loading="lazy"><br>本来我们预期child div元素应该距parent div元素上面50px，但由于这两个外边距相邻了，就合并了。<br>这时如果想实现我们预期的效果，不让它们合并，只要打破合并的条件就可以了，也就是不让它们相邻，比如可以给parent div元素加上<code>border: 5px solid</code>，就得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-8.png" loading="lazy"><br>也可以转换思维，把child div元素的<code>margin-top</code>转换为parent div元素的<code>padding-top</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web15/web15-9.png" loading="lazy">   </p>
 <p>这个上下外边距合并规则和印刷学里面的排版有关系。    </p>
 <p><br><br><br><br><br></p>
 <hr>
@@ -1470,13 +1470,13 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <li>departments</li>
 <li>employees</li>
 <li>jobs</li>
-<li>locations<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-1.png" loading="lazy"></li>
+<li>locations<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-1.png" loading="lazy"></li>
 </ul>
 <p>下面一个个介绍。</p>
-<h3 id="departments"><a href="#departments" class="headerlink" title="departments"></a><strong>departments</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-3_departments.png" loading="lazy"></p>
-<h3 id="employees"><a href="#employees" class="headerlink" title="employees"></a><strong>employees</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-2_employees.png" loading="lazy"></p>
-<h3 id="jobs"><a href="#jobs" class="headerlink" title="jobs"></a><strong>jobs</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-5_jobs.png" loading="lazy"></p>
-<h3 id="locations"><a href="#locations" class="headerlink" title="locations"></a><strong>locations</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-4_locations.png" loading="lazy"></p>
+<h3 id="departments"><a href="#departments" class="headerlink" title="departments"></a><strong>departments</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-3_departments.png" loading="lazy"></p>
+<h3 id="employees"><a href="#employees" class="headerlink" title="employees"></a><strong>employees</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-2_employees.png" loading="lazy"></p>
+<h3 id="jobs"><a href="#jobs" class="headerlink" title="jobs"></a><strong>jobs</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-5_jobs.png" loading="lazy"></p>
+<h3 id="locations"><a href="#locations" class="headerlink" title="locations"></a><strong>locations</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-4_locations.png" loading="lazy"></p>
 <br>
 
 <h2 id="DQL语言基础查询介绍"><a href="#DQL语言基础查询介绍" class="headerlink" title="DQL语言基础查询介绍"></a><strong>DQL语言基础查询介绍</strong></h2><p>有一种说法，80%的SQL语句都用到了<code>SELECT</code>，所以基础查询语句是很重要的。</p>
@@ -1489,14 +1489,14 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <li>查询结果是一个虚拟的表格</li>
 </ol>
 <h3 id="查询表中的单个字段"><a href="#查询表中的单个字段" class="headerlink" title="查询表中的单个字段"></a><strong>查询表中的单个字段</strong></h3><pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> last_name <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-6.png" loading="lazy">  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-6.png" loading="lazy">  </p>
 <h3 id="查询表中的多个字段"><a href="#查询表中的多个字段" class="headerlink" title="查询表中的多个字段"></a><strong>查询表中的多个字段</strong></h3><pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> last_name<span class="token punctuation">,</span>salary<span class="token punctuation">,</span>email <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-7.png" loading="lazy">   </p>
-<h3 id="查询表中的所有字段"><a href="#查询表中的所有字段" class="headerlink" title="查询表中的所有字段"></a><strong>查询表中的所有字段</strong></h3><p>可以输入<code>SELECT FROM employees</code>，然后光标选中在<code>SELECT</code>和<code>FROM</code>之间，双击左侧栏位中的每一项（之间别忘了加上逗号），然后选中已经输入的所有命令，按F12格式化，就得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-8.png" loading="lazy"><br>然后执行查询就可以了。   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-7.png" loading="lazy">   </p>
+<h3 id="查询表中的所有字段"><a href="#查询表中的所有字段" class="headerlink" title="查询表中的所有字段"></a><strong>查询表中的所有字段</strong></h3><p>可以输入<code>SELECT FROM employees</code>，然后光标选中在<code>SELECT</code>和<code>FROM</code>之间，双击左侧栏位中的每一项（之间别忘了加上逗号），然后选中已经输入的所有命令，按F12格式化，就得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-8.png" loading="lazy"><br>然后执行查询就可以了。   </p>
 <p>也可以使用<code>*</code>，表示“所有的”</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
 <p>但使用<code>*</code>的缺点是查询的结果和数据库中的表的顺序一样，不够灵活。   </p>
-<h3 id="细节补充"><a href="#细节补充" class="headerlink" title="细节补充"></a><strong>细节补充</strong></h3><p><strong>1）</strong> 使用命令行进行数据库查询之前需要先<code>USE 库名称</code>，而在SQLyog中就不用，它菜单栏中就可以自动确定当前使用的库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-9.png" loading="lazy"><br>但是使用SQLyog写命令时，还是建议在查询之前写上<code>USE 库名称</code>。   </p>
+<h3 id="细节补充"><a href="#细节补充" class="headerlink" title="细节补充"></a><strong>细节补充</strong></h3><p><strong>1）</strong> 使用命令行进行数据库查询之前需要先<code>USE 库名称</code>，而在SQLyog中就不用，它菜单栏中就可以自动确定当前使用的库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-9.png" loading="lazy"><br>但是使用SQLyog写命令时，还是建议在查询之前写上<code>USE 库名称</code>。   </p>
 <p><strong>2）</strong> <span style="color:red">`first_name`</span>中的<span style="color:red">``</span>表示着重号，可以省略。但如果恰巧遇见以关键字命名的字段，如name，查询命令就变成了<code>SELECT NAME FROM stuinfo</code>这样的形式，就容易出问题，可读性也差，这时就可以使用着重号标识，表示是一个字段。NAME就变成了`name`。<br>注意反引号<span style="color:red">``</span>和单引号<span style="color:red">‘’</span>的区别。</p>
 <p><strong>3）</strong> 图形界面上的执行查询默认是执行你已经写的所有的命令。如果你想只执行其中一部分命令，只需选中然后再点击执行（或按F9）即可。   </p>
 <h3 id="查询常量值"><a href="#查询常量值" class="headerlink" title="查询常量值"></a><strong>查询常量值</strong></h3><p>数值型常量值：<code>SELECT 100;</code><br>字符型常量值：<code>SELECT &#39;job&#39;;</code>，MySQL里不区分字符和字符串，单引号双引号都一样。<br>无需FROM。</p>
@@ -1504,25 +1504,25 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <h3 id="查询函数"><a href="#查询函数" class="headerlink" title="查询函数"></a><strong>查询函数</strong></h3><p>如<code>SELECT VERSION();</code></p>
 <h3 id="起别名"><a href="#起别名" class="headerlink" title="起别名"></a><strong>起别名</strong></h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a><strong>方式一</strong>：</h4><p>如</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> last_name <span class="token keyword">AS</span> 姓氏<span class="token punctuation">,</span> first_name <span class="token keyword">AS</span> 名字 <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span> </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-10.png" loading="lazy"><br>优点<br>1）提高可读性，方便理解。<br>2）如果要查询的字段有重名的情况，使用别名可以区分开来</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-10.png" loading="lazy"><br>优点<br>1）提高可读性，方便理解。<br>2）如果要查询的字段有重名的情况，使用别名可以区分开来</p>
 <h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a><strong>方式二</strong>：</h4><p>省略<code>AS</code>：</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> last_name 姓氏<span class="token punctuation">,</span> first_name 名字 <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span> </code></pre>
 
 <p><strong>案例</strong>：查询salary，区别名为“out put”</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> salary <span class="token keyword">AS</span> <span class="token string">"out put"</span> <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span> </code></pre>
-<p><code>OUT</code>是SQL中的一个关键字，所以要用双引号引起来，单引号也行。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-11.png" loading="lazy">   </p>
+<p><code>OUT</code>是SQL中的一个关键字，所以要用双引号引起来，单引号也行。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-11.png" loading="lazy">   </p>
 <h3 id="去重"><a href="#去重" class="headerlink" title="去重"></a><strong>去重</strong></h3><p><strong>案例</strong>：查询员工表中涉及到的所有部门编号</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> department_id <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-12.png" loading="lazy"><br>可以看到有重复的部分。这时就可以用去重，只需在查询字段前加个关键字<code>DISTINCT</code>：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-12.png" loading="lazy"><br>可以看到有重复的部分。这时就可以用去重，只需在查询字段前加个关键字<code>DISTINCT</code>：</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token keyword">DISTINCT</span> department_id <span class="token keyword">FROM</span> employees<span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-13.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-13.png" loading="lazy">    </p>
 <h3 id="号的作用"><a href="#号的作用" class="headerlink" title="+号的作用"></a><strong>+号的作用</strong></h3><p><strong>案例</strong>：查询员工名和姓，连接成一个字段，显示为 姓 名<br>你可能会想使用Java中的+号，拼出一个<code>last_name+first_name</code>，很遗憾这一功能在MySQL中并不适用。<br>MySQL中+号的功能只有一个，就是作运算符。<br><code>SELECT 100+90;</code>，两个操作数都为数值型，则做加法运算；<br><code>SELECT &#39;123&#39;+90</code>，两个操作数中其中一个为字符型数据，则试图将字符型数据转换为数值型，转换成功则继续加法运算；<br><code>SELECT &#39;john&#39;+90</code>，转换失败，则将字符型数据取0；<br><code>SELECT NULL+90</code>，两个操作数只要其中一个为<code>NULL</code>，则结果为<code>NULL</code>。  </p>
 <p>这样一来，想完成案例任务，就需要使用函数<code>CONCAT()</code>：</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   CONCAT<span class="token punctuation">(</span>last_name<span class="token punctuation">,</span> first_name<span class="token punctuation">)</span> <span class="token keyword">AS</span> 姓名 
 <span class="token keyword">FROM</span>
   employees <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-14.png" loading="lazy">  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-14.png" loading="lazy">  </p>
 <h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a><strong>习题</strong></h2><p>显示出表employees的全部列，各个列之间用逗号连接，列头显示成<code>OUT_PUT</code>。</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   CONCAT<span class="token punctuation">(</span>
@@ -1536,7 +1536,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   <span class="token punctuation">)</span> <span class="token keyword">AS</span> out_put 
 <span class="token keyword">FROM</span>
   employees <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql2-15.png" loading="lazy">  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql2/mysql2-15.png" loading="lazy">  </p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
@@ -1550,10 +1550,10 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   <entry>
     <title>Web前端16：常规流练习</title>
     <url>/2021/12/08/web16/</url>
-    <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-1.png" loading="lazy"><br>这里是png文件，但正规的设计稿应该是photoshop设计出的psd文件。   </p>
+    <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-1.png" loading="lazy"><br>这里是png文件，但正规的设计稿应该是photoshop设计出的psd文件。   </p>
 <br>
 
-<h2 id="解"><a href="#解" class="headerlink" title="解"></a><strong>解</strong></h2><h3 id="新建文件夹"><a href="#新建文件夹" class="headerlink" title="新建文件夹"></a><strong>新建文件夹</strong></h3><p>首先新建文件夹作为我们的项目文件夹，不妨取名为“常规流练习”，文件夹内容如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-3.png" loading="lazy"><br>写代码的顺序应该是什么样的？<br>先写html再写css这个顺序是肯定的。那么写多少html再写css呢？<br>有的人喜欢把所有html代码写完再设置css样式，这么做是可以的，但是这样只适用于页面简单的状况。一旦页面复杂起来，页面内盒子好几十个，都没写css样式，网页就会一片凌乱，很容易出问题。<br>所以这里可以借用算法里的“贪心”思想：一片区域html写完之后马上就css跟上，一片接一片区域地做。   </p>
+<h2 id="解"><a href="#解" class="headerlink" title="解"></a><strong>解</strong></h2><h3 id="新建文件夹"><a href="#新建文件夹" class="headerlink" title="新建文件夹"></a><strong>新建文件夹</strong></h3><p>首先新建文件夹作为我们的项目文件夹，不妨取名为“常规流练习”，文件夹内容如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-3.png" loading="lazy"><br>写代码的顺序应该是什么样的？<br>先写html再写css这个顺序是肯定的。那么写多少html再写css呢？<br>有的人喜欢把所有html代码写完再设置css样式，这么做是可以的，但是这样只适用于页面简单的状况。一旦页面复杂起来，页面内盒子好几十个，都没写css样式，网页就会一片凌乱，很容易出问题。<br>所以这里可以借用算法里的“贪心”思想：一片区域html写完之后马上就css跟上，一片接一片区域地做。   </p>
 <br>
 
 <h3 id="lt-article-gt"><a href="#lt-article-gt" class="headerlink" title="&lt;article&gt;"></a><strong>&lt;article&gt;</strong></h3><p>整个网页视作一篇文章，用一个<code>&lt;article&gt;</code>套起来。   </p>
@@ -1578,12 +1578,12 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
     <span class="token property">padding</span><span class="token punctuation">:</span> 20px 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><strong>2）</strong><br>对于整个网页宽度规定为<code>1902px</code>这一点，你应该去找设计师商量一下。我们的网页是要在不同的屏幕上显示的，而每个人的电脑屏幕大小很可能不同，分辨率也不一样。如果横向上不兼容就会出现水平滚动条，影响美观。如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-4.png" loading="lazy"><br>假设我们和设计师沟通后，他让我们按比例缩放。我们可以取百分数给<code>&lt;article&gt;</code>的<code>width</code>赋值，1713/1902 ≈ 90%。<br>常规流块盒居中，定宽、取<code>margin</code>为<code>auto</code>即可。   </p>
+<p><strong>2）</strong><br>对于整个网页宽度规定为<code>1902px</code>这一点，你应该去找设计师商量一下。我们的网页是要在不同的屏幕上显示的，而每个人的电脑屏幕大小很可能不同，分辨率也不一样。如果横向上不兼容就会出现水平滚动条，影响美观。如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-4.png" loading="lazy"><br>假设我们和设计师沟通后，他让我们按比例缩放。我们可以取百分数给<code>&lt;article&gt;</code>的<code>width</code>赋值，1713/1902 ≈ 90%。<br>常规流块盒居中，定宽、取<code>margin</code>为<code>auto</code>即可。   </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container</span><span class="token punctuation">&#123;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 90%<span class="token punctuation">;</span>
     <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-5.png" loading="lazy"><br>可以看到水平滚动条消失，并且<code>&lt;article&gt;</code>居中了。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-5.png" loading="lazy"><br>可以看到水平滚动条消失，并且<code>&lt;article&gt;</code>居中了。</p>
 <br>
 
 <h3 id="文字行高"><a href="#文字行高" class="headerlink" title="文字行高"></a><strong>文字行高</strong></h3><p>所有文字的行高都为2。由于行高是可以继承的，所以应该写在<code>&lt;body&gt;</code>中，</p>
@@ -1602,11 +1602,11 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         原文地址：<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.tangjiayan.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> https://www.tangjiayan.com <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>header</span><span class="token punctuation">></span></span></code></pre>
-<h4 id="1）上下边距"><a href="#1）上下边距" class="headerlink" title="1）上下边距"></a><strong>1）上下边距</strong></h4><p>从题目中可以看到它的上下距离是<code>30px</code>，这里你可能第一反应是设置<code>&lt;header&gt;</code>的<code>margin</code>，但是这是行不通的，会变成这样：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-6.png" loading="lazy"><br>原因是外边距合并。由于上面为了使<code>&lt;article&gt;</code>居中设置了<code>margin: 0 auto;</code>，虽然这个margin取值为0，但并不等同于没有外边距，取值为0时遇到别的外边距照样会合并。<br>所以我们可以转换思维，设置<code>&lt;header&gt;</code>的<code>padding</code>。<br>于是我们设置：</p>
+<h4 id="1）上下边距"><a href="#1）上下边距" class="headerlink" title="1）上下边距"></a><strong>1）上下边距</strong></h4><p>从题目中可以看到它的上下距离是<code>30px</code>，这里你可能第一反应是设置<code>&lt;header&gt;</code>的<code>margin</code>，但是这是行不通的，会变成这样：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-6.png" loading="lazy"><br>原因是外边距合并。由于上面为了使<code>&lt;article&gt;</code>居中设置了<code>margin: 0 auto;</code>，虽然这个margin取值为0，但并不等同于没有外边距，取值为0时遇到别的外边距照样会合并。<br>所以我们可以转换思维，设置<code>&lt;header&gt;</code>的<code>padding</code>。<br>于是我们设置：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container header</span><span class="token punctuation">&#123;</span>
     <span class="token property">padding</span><span class="token punctuation">:</span> 30px 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>为什么这里使用组合选择器呢，用一个元素选择器header不就完事了？<br>因为我们应该考虑得深远一点。<br>这个网页以后万一要加些东西，比如导航栏，它语义上也应是一个<code>&lt;header&gt;</code>元素，如果我们只使用元素选择器的话，这个header导航栏的样式也会被选中渲染。所以元素选择器的范围太广了，我们应该尽量细致地使用选择器。<br>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-7.png" loading="lazy">   </p>
+<p>为什么这里使用组合选择器呢，用一个元素选择器header不就完事了？<br>因为我们应该考虑得深远一点。<br>这个网页以后万一要加些东西，比如导航栏，它语义上也应是一个<code>&lt;header&gt;</code>元素，如果我们只使用元素选择器的话，这个header导航栏的样式也会被选中渲染。所以元素选择器的范围太广了，我们应该尽量细致地使用选择器。<br>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-7.png" loading="lazy">   </p>
 <h4 id="2）边框、左右溢出"><a href="#2）边框、左右溢出" class="headerlink" title="2）边框、左右溢出"></a><strong>2）边框、左右溢出</strong></h4><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container header</span><span class="token punctuation">&#123;</span>
     <span class="token property">border</span><span class="token punctuation">:</span> 5px solid #14414c<span class="token punctuation">;</span>
     <span class="token property">margin</span><span class="token punctuation">:</span> 0 -34px<span class="token punctuation">;</span>
@@ -1622,7 +1622,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">color</span><span class="token punctuation">:</span> #dbdbdb<span class="token punctuation">;</span>
     <span class="token property">margin-bottom</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>这里我们设置好之后会发现有一点误差，<code>margin-bottom</code>并不是<code>30px</code>而是约<code>35px</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-8.jpg" loading="lazy"><br>这是由于文字自身有行高。在网页设计时，有个词叫<span style="color:red">像素级还原</span>，就是做出的网页和设计稿一个像素都不差。但这只是理想情况，伊甸园，实际开发中非常非常非常困难。因为有字体、电脑系统环境等因素，不太可能实现像素级还原。就算实现了，时间成本也太高了，不划算。所以这里就忽略了。<br><strong>③&lt;div&gt;中的&lt;a&gt;</strong>  </p>
+<p>这里我们设置好之后会发现有一点误差，<code>margin-bottom</code>并不是<code>30px</code>而是约<code>35px</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-8.jpg" loading="lazy"><br>这是由于文字自身有行高。在网页设计时，有个词叫<span style="color:red">像素级还原</span>，就是做出的网页和设计稿一个像素都不差。但这只是理想情况，伊甸园，实际开发中非常非常非常困难。因为有字体、电脑系统环境等因素，不太可能实现像素级还原。就算实现了，时间成本也太高了，不划算。所以这里就忽略了。<br><strong>③&lt;div&gt;中的&lt;a&gt;</strong>  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container header .original-link a</span><span class="token punctuation">&#123;</span>
     <span class="token property">text-decoration</span><span class="token punctuation">:</span> underline<span class="token punctuation">;</span>    
 <span class="token punctuation">&#125;</span>
@@ -1630,12 +1630,12 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <span class="token selector">.container header .original-link a:hover</span><span class="token punctuation">&#123;</span>
     <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>    
 <span class="token punctuation">&#125;</span></code></pre>
-<p>你可能会问，下划线不就是浏览器的默认样式吗，为啥要还要用reset.css把浏览器的默认样式重置掉呢？<br>答：重置样式的通用的，浏览器的默认样式不是啊。<br>至此，<code>&lt;header&gt;</code>完成，网页中最复杂的地方也就完事了。<br>不要以为网页中谁占的面积大谁就复杂，那肯定是不对的。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-9.png" loading="lazy">  </p>
+<p>你可能会问，下划线不就是浏览器的默认样式吗，为啥要还要用reset.css把浏览器的默认样式重置掉呢？<br>答：重置样式的通用的，浏览器的默认样式不是啊。<br>至此，<code>&lt;header&gt;</code>完成，网页中最复杂的地方也就完事了。<br>不要以为网页中谁占的面积大谁就复杂，那肯定是不对的。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-9.png" loading="lazy">  </p>
 <br>
 
 <h3 id="文章主体"><a href="#文章主体" class="headerlink" title="文章主体"></a><strong>文章主体</strong></h3><p>可以把整个文章主体视作<code>&lt;div&gt;</code>，然后由一个个<code>&lt;section&gt;</code>构成。<br>用下面的命令快速生成测试：</p>
 <pre class="language-html" data-language="html"><code class="language-html">section*5>(h2>&#123;章节$&#125;)+(p*3>lorem)</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-10.png" loading="lazy">  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-10.png" loading="lazy">  </p>
 <h4 id="文章主体宽度"><a href="#文章主体宽度" class="headerlink" title="文章主体宽度"></a><strong>文章主体宽度</strong></h4><p>题目规定文章主体宽度是<code>1541px</code>，但直接写<code>.container section&#123; width: 1541px; &#125;</code>是不对的，因为你<code>&lt;article&gt;</code>设置的是百分比，而<code>&lt;section&gt;</code>是<code>&lt;article&gt;</code>的子元素，当然也只能用百分比。<br>1541/1713 ≈ 90%</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container section</span><span class="token punctuation">&#123;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 90%<span class="token punctuation">;</span>
@@ -1656,15 +1656,15 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 
 <br>
 
-<h3 id="细节补充"><a href="#细节补充" class="headerlink" title="细节补充"></a><strong>细节补充</strong></h3><p>由于我们整体使用设置的尺寸是用百分比赋值的，所以改变浏览器大小时，网页内容大小也会自动跟着变。但这样的话，当浏览器缩得很小时网页会很丑。如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-11.gif" loading="lazy"><br>所以这里可以这么处理：</p>
+<h3 id="细节补充"><a href="#细节补充" class="headerlink" title="细节补充"></a><strong>细节补充</strong></h3><p>由于我们整体使用设置的尺寸是用百分比赋值的，所以改变浏览器大小时，网页内容大小也会自动跟着变。但这样的话，当浏览器缩得很小时网页会很丑。如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-11.gif" loading="lazy"><br>所以这里可以这么处理：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
     <span class="token property">min-width</span><span class="token punctuation">:</span> 1000px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>表示限制最小宽度<code>1000px</code>。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-12.gif" loading="lazy">  </p>
+<p>表示限制最小宽度<code>1000px</code>。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-12.gif" loading="lazy">  </p>
 <p>适应手机端就是这种方法，不过有的网页是只为适应PC端做的。<br>当然也有<code>max-width</code>属性。</p>
 <br>
 
-<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web16-13.png" loading="lazy">  </p>
+<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web16/web16-13.png" loading="lazy">  </p>
 <br>
 
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><h3 id="html"><a href="#html" class="headerlink" title="html"></a><strong>html</strong></h3><pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
@@ -1813,13 +1813,13 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <span class="token selector">.container .right</span><span class="token punctuation">&#123;</span>
     <span class="token property">float</span><span class="token punctuation">:</span> right<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-1.png" loading="lazy"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-1.png" loading="lazy"></p>
 <p><code>float</code>默认值是<code>none</code>，即常规流。</p>
 <p><strong>1.</strong> 当一个元素浮动后，元素必定为块盒。也就是说设置<code>float</code>属性后，会一律改变盒子的属性<code>display</code>为<code>block</code>。<br><strong>2.</strong> 浮动元素的包含块和常规流一样，为父元素的内容盒。</p>
 <br>
 
 <h2 id="浮动盒子尺寸"><a href="#浮动盒子尺寸" class="headerlink" title="浮动盒子尺寸"></a><strong>浮动盒子尺寸</strong></h2><ol>
-<li>宽度、高度为<code>auto</code>时，表示适应内容宽高。（在常规流中宽高为<code>auto</code>是撑满内容盒）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-2.png" loading="lazy"><em>浮动中的宽高<code>auto</code></em><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-3.png" loading="lazy"><em>常规流中的宽高<code>auto</code></em></li>
+<li>宽度、高度为<code>auto</code>时，表示适应内容宽高。（在常规流中宽高为<code>auto</code>是撑满内容盒）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-2.png" loading="lazy"><em>浮动中的宽高<code>auto</code></em><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-3.png" loading="lazy"><em>常规流中的宽高<code>auto</code></em></li>
 <li><code>margin</code>为<code>autok</code>表示0.（在常规流中<code>margin</code>为<code>auto</code>是吸收剩余空间）</li>
 <li>当然宽高、<code>margin</code>等设置为固定的值就是正常的值；边框、内边距、百分比设置与常规流一样。</li>
 </ol>
@@ -1832,7 +1832,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     ... <span class="token comment">&lt;!-- 略写 --></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>20<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-4.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-5.png" loading="lazy"><br>可以看到是先靠上再靠左，先靠上再靠右。  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-4.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-5.png" loading="lazy"><br>可以看到是先靠上再靠左，先靠上再靠右。  </p>
 <h3 id="2"><a href="#2" class="headerlink" title="2."></a><strong>2.</strong></h3><p>浮动盒子在包含块中排列时，会避开常规流盒子。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>normal<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>常规流盒子<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container .normal</span><span class="token punctuation">&#123;</span>
@@ -1840,7 +1840,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border</span><span class="token punctuation">:</span> 2px solid <span class="token punctuation">;</span>
     <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-6.png" loading="lazy">  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-6.png" loading="lazy">  </p>
 <h3 id="3"><a href="#3" class="headerlink" title="3."></a><strong>3.</strong></h3><p>常规流块盒在排列时，无视浮动盒子。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>normal<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>常规流盒子<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span></code></pre>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container .normal</span><span class="token punctuation">&#123;</span>
@@ -1848,15 +1848,15 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border</span><span class="token punctuation">:</span> 2px solid <span class="token punctuation">;</span>
     <span class="token property">margin</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-7.png" loading="lazy"><br>也就是说常规流盒子与浮动盒子的排列顺序决定了盒子们的布局。如果浮动盒子的代码在前面，常规流的代码在后面，常规流盒子就会无视浮动盒子，导致被遮掩。   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-7.png" loading="lazy"><br>也就是说常规流盒子与浮动盒子的排列顺序决定了盒子们的布局。如果浮动盒子的代码在前面，常规流的代码在后面，常规流盒子就会无视浮动盒子，导致被遮掩。   </p>
 <h3 id="4"><a href="#4" class="headerlink" title="4."></a><strong>4.</strong></h3><p>常规流行盒在排列时，会避开浮动盒子。</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/1.jpg<span class="token punctuation">"</span></span> <span class="token special-attr"><span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token value css language-css"><span class="token property">width</span><span class="token punctuation">:</span> 200px</span><span class="token punctuation">"</span></span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span> lorem200 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
-<p>正常情况是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-8.png" loading="lazy"><br>现在我们来设置出文字环绕的效果来：</p>
+<p>正常情况是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-8.png" loading="lazy"><br>现在我们来设置出文字环绕的效果来：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">img</span><span class="token punctuation">&#123;</span>
     <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-9.png" loading="lazy"><br>这里<code>&lt;p&gt;</code>元素不是行盒。如果文字没有在行盒中，浏览器会自动生成一个行盒来容纳文字，叫匿名行盒。所以<span style="color:red">文字</span>永远只可能在行盒里面。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-9.png" loading="lazy"><br>这里<code>&lt;p&gt;</code>元素不是行盒。如果文字没有在行盒中，浏览器会自动生成一个行盒来容纳文字，叫匿名行盒。所以<span style="color:red">文字</span>永远只可能在行盒里面。</p>
 <h3 id="5"><a href="#5" class="headerlink" title="5."></a><strong>5.</strong></h3><p>在浮动盒子中不会发生外边距合并。</p>
 <br>
 
@@ -1877,7 +1877,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">margin</span><span class="token punctuation">:</span> 6px<span class="token punctuation">;</span>
     <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-10.png" loading="lazy"><br>可以看到浮动盒子跑到外面去了。为什么会这样？<code>.container</code>没设置宽高，不应该是适应内容调整宽高吗？<br>如果把浮动盒子的浮动属性去掉：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-11.png" loading="lazy"><br>这样就能自动调整了。<br>这种浮动盒子特有的现象就叫<span style="color:red">高度坍塌</span>。原因是常规流盒子的自动高度，在计算时不考虑浮动盒子。  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-10.png" loading="lazy"><br>可以看到浮动盒子跑到外面去了。为什么会这样？<code>.container</code>没设置宽高，不应该是适应内容调整宽高吗？<br>如果把浮动盒子的浮动属性去掉：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-11.png" loading="lazy"><br>这样就能自动调整了。<br>这种浮动盒子特有的现象就叫<span style="color:red">高度坍塌</span>。原因是常规流盒子的自动高度，在计算时不考虑浮动盒子。  </p>
 <p>解决高度坍塌的方法是<span style="color:red">清除浮动</span>，清除浮动不是说它不浮动了。这涉及到<code>clear</code>属性。<br><code>clear</code>：</p>
 <ul>
 <li>默认值<code>none</code></li>
@@ -1893,7 +1893,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">background</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
     <span class="token property">clear</span><span class="token punctuation">:</span> both<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-12.png" loading="lazy"><br>这种处理方式就是我们添加的<code>.clearfix</code>元素把<code>.container</code>撑开了。缺点是需要手动添加一个没什么意义的元素。<br>所以我们通常采用另一种方法处理高度坍塌：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-12.png" loading="lazy"><br>这种处理方式就是我们添加的<code>.clearfix</code>元素把<code>.container</code>撑开了。缺点是需要手动添加一个没什么意义的元素。<br>所以我们通常采用另一种方法处理高度坍塌：</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container clearfix<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.clearfix::after</span><span class="token punctuation">&#123;</span>
@@ -1901,7 +1901,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
     <span class="token property">clear</span><span class="token punctuation">:</span> both<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web17-13.png" loading="lazy">  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web17/web17-13.png" loading="lazy">  </p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
@@ -1915,7 +1915,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   <entry>
     <title>Web前端18：浮动练习</title>
     <url>/2021/12/09/web18/</url>
-    <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-1.png" loading="lazy"></p>
+    <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-1.png" loading="lazy"></p>
 <br>
 
 <h2 id="解"><a href="#解" class="headerlink" title="解"></a><strong>解</strong></h2><h3 id="新建文件夹"><a href="#新建文件夹" class="headerlink" title="新建文件夹"></a><strong>新建文件夹</strong></h3><p>新建文件夹是一种仪式感。<br>由于不是首页，而是“电影”页，就取名为<code>movie.html</code>。   </p>
@@ -1931,10 +1931,10 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main</span><span class="token punctuation">&#123;</span>
     <span class="token property">line-height</span><span class="token punctuation">:</span> 1.5<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>主区域可以视作是由如图两部分组成的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-4.png" loading="lazy"><br>为什么是这样划分区域的呢？区域2不是能划分成更多区域吗？<br>答：区域2再划分成更多区域也行，不过我们可以看出区域2的内容<span style="color:red">宽度</span>是一样的，所以方便处理样式，就把区域2划分为了一个区域，作为一个整体。<br>一个网页怎么做都行，只要符合设计稿的要求就可以。</p>
+<p>主区域可以视作是由如图两部分组成的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-4.png" loading="lazy"><br>为什么是这样划分区域的呢？区域2不是能划分成更多区域吗？<br>答：区域2再划分成更多区域也行，不过我们可以看出区域2的内容<span style="color:red">宽度</span>是一样的，所以方便处理样式，就把区域2划分为了一个区域，作为一个整体。<br>一个网页怎么做都行，只要符合设计稿的要求就可以。</p>
 <br>
 
-<h3 id="主区域1：导航栏"><a href="#主区域1：导航栏" class="headerlink" title="主区域1：导航栏"></a><strong>主区域1：导航栏</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-5.png" loading="lazy"><br>你可能会想使用<code>&lt;ul&gt;</code>来做导航栏，也行。但HTML5里专门有个元素叫<code>&lt;nav&gt;</code>用来表示导航栏。 （nav：navigation n.导航<br>）<br>用行盒、行块盒、浮动都行，都能做出来。为了复习，这里用行盒做。  </p>
+<h3 id="主区域1：导航栏"><a href="#主区域1：导航栏" class="headerlink" title="主区域1：导航栏"></a><strong>主区域1：导航栏</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-5.png" loading="lazy"><br>你可能会想使用<code>&lt;ul&gt;</code>来做导航栏，也行。但HTML5里专门有个元素叫<code>&lt;nav&gt;</code>用来表示导航栏。 （nav：navigation n.导航<br>）<br>用行盒、行块盒、浮动都行，都能做出来。为了复习，这里用行盒做。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nav</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>nav<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>正在热映<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>即将上映<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
@@ -1958,17 +1958,17 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">color</span><span class="token punctuation">:</span> #ef4238<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 <p>注意这里<code>.main .nav a.selected</code>不能写为<code>.main .nav .selected</code>，否则<code>.main .nav a:hover</code>的特殊性就会更高，导致鼠标移上去时变成白色。<br>另外，如果是手动测量的<code>margin</code>，由于外边距合并规则，取值别忘了除以2。  </p>
-<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-6.png" loading="lazy"><br>这里的菜单样式切换在js中才会学，所以这里只做个静态的效果出来。<br>这个小尖尖目前也没有什么好的办法，学完定位才会做，这里也先不管了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-7.png" loading="lazy">    </p>
+<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-6.png" loading="lazy"><br>这里的菜单样式切换在js中才会学，所以这里只做个静态的效果出来。<br>这个小尖尖目前也没有什么好的办法，学完定位才会做，这里也先不管了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-7.png" loading="lazy">    </p>
 <br>
 
 
-<h3 id="主区域2：电影信息"><a href="#主区域2：电影信息" class="headerlink" title="主区域2：电影信息"></a><strong>主区域2：电影信息</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-8.png" loading="lazy"><br>首先我们调整一下浏览器大小看这个区域的宽度有没有变化：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-9.gif" loading="lazy"><br>没有变化，所以是定宽的。  </p>
+<h3 id="主区域2：电影信息"><a href="#主区域2：电影信息" class="headerlink" title="主区域2：电影信息"></a><strong>主区域2：电影信息</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-8.png" loading="lazy"><br>首先我们调整一下浏览器大小看这个区域的宽度有没有变化：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-9.gif" loading="lazy"><br>没有变化，所以是定宽的。  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container</span><span class="token punctuation">&#123;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 1120px<span class="token punctuation">;</span>
     <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 
-<h4 id="电影类型筛选部分"><a href="#电影类型筛选部分" class="headerlink" title="电影类型筛选部分"></a><strong>电影类型筛选部分</strong></h4><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-10.png" loading="lazy">  </p>
+<h4 id="电影类型筛选部分"><a href="#电影类型筛选部分" class="headerlink" title="电影类型筛选部分"></a><strong>电影类型筛选部分</strong></h4><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-10.png" loading="lazy">  </p>
 <h5 id="1）整体划分"><a href="#1）整体划分" class="headerlink" title="1）整体划分"></a><strong>1）整体划分</strong></h5><p>分别是类型、区域、年代，可以看到这三个区域的样式基本是一样的，所以制作一份然后copy一下就行。<br>整个电影类型筛选区定义类名为<code>choose-area</code>，三个区域分别是<code>choose-item</code>，每个区域又可分为左右两块，分别定义为<code>left</code>和<code>right</code>，所以大致结构为：</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>choose-area<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>choose-item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -2009,7 +2009,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 <p>也就是用类名<code>.no-line</code>专门写个不带下划线的样式，用给“年代”。注意<code>.choose-item</code>和<code>.no-line</code>不要加空格。 </p>
-<p>另外还有个小细节：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-11.png" loading="lazy"><br>这个dotted线并不是顶到头的，是因为它<code>choose-item</code>并不是和<code>choose-area</code>一样宽的，所以在<code>choose-area</code>补充个<code>padding</code>就行了。   </p>
+<p>另外还有个小细节：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-11.png" loading="lazy"><br>这个dotted线并不是顶到头的，是因为它<code>choose-item</code>并不是和<code>choose-area</code>一样宽的，所以在<code>choose-area</code>补充个<code>padding</code>就行了。   </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container .choose-area</span><span class="token punctuation">&#123;</span>
     <span class="token property">padding</span><span class="token punctuation">:</span> 0 30px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
@@ -2029,7 +2029,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>Assumenda?<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span>
 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p><code>&lt;li&gt;</code>默认是上下排列的，要让它们变成左右排列的一个个盒子，可以使用浮动来实现。<br>另外，右区域字少的时候可以使用<code>width: auto</code>，但字多的时候就会出现这种情况：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-12.png" loading="lazy"><br>这时由于浮动盒子宽度太宽就自动换行了，所以还是免不了要设个宽度，可以用减法算出来。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-13.png" loading="lazy">  </p>
+<p><code>&lt;li&gt;</code>默认是上下排列的，要让它们变成左右排列的一个个盒子，可以使用浮动来实现。<br>另外，右区域字少的时候可以使用<code>width: auto</code>，但字多的时候就会出现这种情况：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-12.png" loading="lazy"><br>这时由于浮动盒子宽度太宽就自动换行了，所以还是免不了要设个宽度，可以用减法算出来。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-13.png" loading="lazy">  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container .choose-area .choose-item .right</span><span class="token punctuation">&#123;</span>
     <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 1010px<span class="token punctuation">;</span>
@@ -2042,15 +2042,15 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <span class="token selector">.main .container .choose-area .choose-item .right li:hover</span><span class="token punctuation">&#123;</span>
     <span class="token property">color</span><span class="token punctuation">:</span> #ef4238<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>另外，<code>selected</code>用来表示当前已经选中的电影类型，这有个圆角特效，需用CSS3的<code>border-radius</code>属性。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-14.png" loading="lazy">  </p>
+<p>另外，<code>selected</code>用来表示当前已经选中的电影类型，这有个圆角特效，需用CSS3的<code>border-radius</code>属性。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-14.png" loading="lazy">  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container .choose-area .choose-item .right li.selected</span><span class="token punctuation">&#123;</span>
     <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
     <span class="token property">color</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
     <span class="token property">border-radius</span><span class="token punctuation">:</span> 15px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 <p>以上所有浮动注意需用<code>.clearfix::after</code>解决浮动元素的高度坍塌问题。  </p>
-<h5 id="4）效果"><a href="#4）效果" class="headerlink" title="4）效果"></a><strong>4）效果</strong></h5><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-15.png" loading="lazy">  </p>
-<h4 id="电影"><a href="#电影" class="headerlink" title="电影"></a><strong>电影</strong></h4><h5 id="电影组成"><a href="#电影组成" class="headerlink" title="电影组成"></a><strong>电影组成</strong></h5><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-16.png" loading="lazy"><br>可以看到，每个电影是有三部分组成的：海报、电影名、评分。（猫眼EVA评分咋这么低）<br>所以可以这样设计html结构：</p>
+<h5 id="4）效果"><a href="#4）效果" class="headerlink" title="4）效果"></a><strong>4）效果</strong></h5><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-15.png" loading="lazy">  </p>
+<h4 id="电影"><a href="#电影" class="headerlink" title="电影"></a><strong>电影</strong></h4><h5 id="电影组成"><a href="#电影组成" class="headerlink" title="电影组成"></a><strong>电影组成</strong></h5><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-16.png" loading="lazy"><br>可以看到，每个电影是有三部分组成的：海报、电影名、评分。（猫眼EVA评分咋这么低）<br>所以可以这样设计html结构：</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>movies<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>movie-item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
 
@@ -2071,24 +2071,24 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <p>然后用</p>
 <pre class="language-none"><code class="language-none">div.movie-item*12&gt;(div.poster&gt;a&gt;img[src&#x3D;&quot;图片路径&quot;])+(div.name&gt;a&gt;&#123;电影名&#125;)+(div.score&gt;&#123;评分&#125;)</code></pre>
 <p>快速生成12个电影。   </p>
-<h5 id="电影盒子间隙处理"><a href="#电影盒子间隙处理" class="headerlink" title="电影盒子间隙处理"></a><strong>电影盒子间隙处理</strong></h5><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-17.png" loading="lazy"><br>从图片中可以看出电影盒子之间有一定的间隙，这里可以使用<code>margin</code>同时设置左右边距，但为了引出一个知识点，采用单独设置<code>margin-right</code>的方式：  </p>
+<h5 id="电影盒子间隙处理"><a href="#电影盒子间隙处理" class="headerlink" title="电影盒子间隙处理"></a><strong>电影盒子间隙处理</strong></h5><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-17.png" loading="lazy"><br>从图片中可以看出电影盒子之间有一定的间隙，这里可以使用<code>margin</code>同时设置左右边距，但为了引出一个知识点，采用单独设置<code>margin-right</code>的方式：  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container .movies .movie-item</span><span class="token punctuation">&#123;</span>
     <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 160px<span class="token punctuation">;</span>
     <span class="token property">margin-right</span><span class="token punctuation">:</span> 10px 32px 10px 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>这时出现一个问题（七海千秋，出自《弹丸论破2》）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-18.png" loading="lazy"><br>最后一张图片排不下了，换了行。<br>我们希望的情况是前5张图片<code>margin-right</code>正常，第6张的<code>margin-right</code>设为0。这种情况我们可以使用伪元素选择器<code>nth-child( )</code>来处理：</p>
+<p>这时出现一个问题（七海千秋，出自《弹丸论破2》）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-18.png" loading="lazy"><br>最后一张图片排不下了，换了行。<br>我们希望的情况是前5张图片<code>margin-right</code>正常，第6张的<code>margin-right</code>设为0。这种情况我们可以使用伪元素选择器<code>nth-child( )</code>来处理：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container .movies .movie-item:nth-child(6n)</span><span class="token punctuation">&#123;</span>
     <span class="token property">margin-right</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>  </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-19.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-19.png" loading="lazy">    </p>
 <h5 id="图片、电影名和评分"><a href="#图片、电影名和评分" class="headerlink" title="图片、电影名和评分"></a><strong>图片、电影名和评分</strong></h5><p><strong>图片</strong>要设置个宽高，不然尺寸与盒子不吻合，排版就乱了。  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container .movies .movie-item .poster a img</span><span class="token punctuation">&#123;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 160px<span class="token punctuation">;</span>
     <span class="token property">height</span><span class="token punctuation">:</span> 220px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 
-<p><strong>文字</strong>有个省略号的效果，这一点在<span style="color:red">空白处理</span>有介绍。（见<a href="https://www.tangjiayan.com/2021/12/06/web13/">Web前端13：盒模型应用</a>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-20.png" loading="lazy"><br>对于字数少不会溢出的情况，就居中。</p>
+<p><strong>文字</strong>有个省略号的效果，这一点在<span style="color:red">空白处理</span>有介绍。（见<a href="https://www.tangjiayan.com/2021/12/06/web13/">Web前端13：盒模型应用</a>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-20.png" loading="lazy"><br>对于字数少不会溢出的情况，就居中。</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container .movies .movie-item .name</span><span class="token punctuation">&#123;</span>
     <span class="token property">white-space</span><span class="token punctuation">:</span> nowrap<span class="token punctuation">;</span>
     <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
@@ -2096,8 +2096,8 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">padding</span><span class="token punctuation">:</span> 0 2px<span class="token punctuation">;</span>
     <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-21.png" loading="lazy">  </p>
-<p><strong>评分</strong>需要注意第一个数字是大字号。这里使用<code>::fitst-letter</code>选择器。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-22.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-21.png" loading="lazy">  </p>
+<p><strong>评分</strong>需要注意第一个数字是大字号。这里使用<code>::fitst-letter</code>选择器。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-22.png" loading="lazy">   </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.main .container .movies .movie-item .score</span><span class="token punctuation">&#123;</span>
     <span class="token property">color</span><span class="token punctuation">:</span> #ffb400<span class="token punctuation">;</span>
     <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
@@ -2110,7 +2110,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 
 <br>
 
-<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a><strong>分页</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-23.png" loading="lazy"><br>分页在<a href="https://www.tangjiayan.com/2021/12/07/web14/">这篇博客</a>的行块盒中有做过。<br>大多数网页需要用到分页，所以可以分页的css代码可以单独做个css文件出来，用来共用。  </p>
+<h3 id="分页"><a href="#分页" class="headerlink" title="分页"></a><strong>分页</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-23.png" loading="lazy"><br>分页在<a href="https://www.tangjiayan.com/2021/12/07/web14/">这篇博客</a>的行块盒中有做过。<br>大多数网页需要用到分页，所以可以分页的css代码可以单独做个css文件出来，用来共用。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>pager<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>上一页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
@@ -2138,15 +2138,15 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 
-<h2 id="隐患"><a href="#隐患" class="headerlink" title="隐患"></a><strong>隐患</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-24.png" loading="lazy"><br><code>div.movies</code>的高度是0，坍塌了。但为什么没有出问题呢？<br>答：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-25.png" loading="lazy"><br>因为分页元素高度自动调整，把<code>div.movies</code>坍塌的高度补上了。而现在没有混乱是因为恰好电影盒子占满了页面，如果删掉几个电影盒子，混乱就立刻显现了：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-26.png" loading="lazy"><br>所以高度坍塌是个很大的隐患。如果使用到了浮动元素，建议给它的父元素也加个<code>clearfix</code>类。  </p>
+<h2 id="隐患"><a href="#隐患" class="headerlink" title="隐患"></a><strong>隐患</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-24.png" loading="lazy"><br><code>div.movies</code>的高度是0，坍塌了。但为什么没有出问题呢？<br>答：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-25.png" loading="lazy"><br>因为分页元素高度自动调整，把<code>div.movies</code>坍塌的高度补上了。而现在没有混乱是因为恰好电影盒子占满了页面，如果删掉几个电影盒子，混乱就立刻显现了：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-26.png" loading="lazy"><br>所以高度坍塌是个很大的隐患。如果使用到了浮动元素，建议给它的父元素也加个<code>clearfix</code>类。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>movies clearfix<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> ... <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
-<p>处理高度坍塌后：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-27.png" loading="lazy">   </p>
+<p>处理高度坍塌后：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-27.png" loading="lazy">   </p>
 <p>检查一下，<code>&lt;ul&gt;</code>也坍塌了，顺便加上。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>clearfix<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> ... <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">></span></span></code></pre>
 
 <br>
 
-<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web18-28.png" loading="lazy">   </p>
+<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web18/web18-28.png" loading="lazy">   </p>
 <br>
 
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><h3 id="movie-html"><a href="#movie-html" class="headerlink" title="movie.html"></a><strong>movie.html</strong></h3><pre class="language-html" data-language="html"><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">></span></span>
@@ -2428,7 +2428,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">top</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
     <span class="token property">left</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-1.png" loading="lazy"><br>使用相对定位时应尽量避免同时使用有冲突的值，如<code>top</code>和<code>bottom</code>一起设置，<code>left</code>和<code>right</code>一起设置。   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-1.png" loading="lazy"><br>使用相对定位时应尽量避免同时使用有冲突的值，如<code>top</code>和<code>bottom</code>一起设置，<code>left</code>和<code>right</code>一起设置。   </p>
 <p><strong>和<code>margin</code>的区别</strong>   </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.div2</span><span class="token punctuation">&#123;</span>
     <span class="token property">position</span><span class="token punctuation">:</span> relative<span class="token punctuation">;</span>
@@ -2437,7 +2437,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <span class="token selector">.div3</span><span class="token punctuation">&#123;</span>
     <span class="token property">margin-left</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span> </code></pre>
-<p>静态定位元素（不定位元素）会因为要撑满包含快，内容宽度会自动减小；而相对定位元素不需撑满包含块，宽度不会减小。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-2.png" loading="lazy">   </p>
+<p>静态定位元素（不定位元素）会因为要撑满包含快，内容宽度会自动减小；而相对定位元素不需撑满包含块，宽度不会减小。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-2.png" loading="lazy">   </p>
 <br>
 
 <h2 id="绝对定位absolute"><a href="#绝对定位absolute" class="headerlink" title="绝对定位absolute"></a><strong>绝对定位<code>absolute</code></strong></h2><ol>
@@ -2473,11 +2473,11 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">right</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
     <span class="token property">bottom</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-3.png" loading="lazy"><br>可以看到绝对定位元素<code>.div3</code>的<code>right</code>和<code>bottom</code>是相对于它的第一个定位祖先元素<code>.div1</code>的包含块而言的。<br>若去掉<code>.div1</code>的<code>position: relative;</code>，则它的包含块变为整个网页：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-4.png" loading="lazy">   </p>
-<p><strong>绝对定位的应用</strong><br>如猫眼电影的电影海报，左上角的“2DIMAX”、火花图标就可以用绝对定位。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-5.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-6.png" loading="lazy"><br>相对定位的作用通常就是为绝对定位的元素提供包含块。   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-3.png" loading="lazy"><br>可以看到绝对定位元素<code>.div3</code>的<code>right</code>和<code>bottom</code>是相对于它的第一个定位祖先元素<code>.div1</code>的包含块而言的。<br>若去掉<code>.div1</code>的<code>position: relative;</code>，则它的包含块变为整个网页：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-4.png" loading="lazy">   </p>
+<p><strong>绝对定位的应用</strong><br>如猫眼电影的电影海报，左上角的“2DIMAX”、火花图标就可以用绝对定位。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-5.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-6.png" loading="lazy"><br>相对定位的作用通常就是为绝对定位的元素提供包含块。   </p>
 <br>
 
-<h2 id="固定定位fixed"><a href="#固定定位fixed" class="headerlink" title="固定定位fixed"></a><strong>固定定位<code>fixed</code></strong></h2><p>使用方式和绝对定位完全一样，只有一点不同：包含块。<br>固定定位的包含块固定为<span style="color:red">视口</span>（浏览器的可视窗口）。<br>比如当你在浏览器中打开元素审查界面的时候，视口只有这么大：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-7.png" loading="lazy"><br>滚动条会随着视口的大小变化而变化。<br>固定定位用法示例：  </p>
+<h2 id="固定定位fixed"><a href="#固定定位fixed" class="headerlink" title="固定定位fixed"></a><strong>固定定位<code>fixed</code></strong></h2><p>使用方式和绝对定位完全一样，只有一点不同：包含块。<br>固定定位的包含块固定为<span style="color:red">视口</span>（浏览器的可视窗口）。<br>比如当你在浏览器中打开元素审查界面的时候，视口只有这么大：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-7.png" loading="lazy"><br>滚动条会随着视口的大小变化而变化。<br>固定定位用法示例：  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
     <span class="token property">width</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span>
     <span class="token property">height</span><span class="token punctuation">:</span>100px<span class="token punctuation">;</span>
@@ -2486,7 +2486,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
     <span class="token property">top</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-8.gif" loading="lazy"><br>一些烦人的小广告就是这么来的。   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-8.gif" loading="lazy"><br>一些烦人的小广告就是这么来的。   </p>
 <p>固定定位的元素写在哪都无所谓，无论嵌套为子元素嵌套得多么深，它的包含块都是浏览器的视口。  </p>
 <br>
 
@@ -2504,7 +2504,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">bottom</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
     <span class="token property">margin</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-9.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-9.png" loading="lazy">   </p>
 <br>
 
 <h2 id="多个定位元素重叠时"><a href="#多个定位元素重叠时" class="headerlink" title="多个定位元素重叠时"></a><strong>多个定位元素重叠时</strong></h2><p>这涉及到一个叫做<span style="color:red">堆叠上下文</span>的概念。<br>设置<code>z-index</code>，把电脑屏幕看作x-y平面，z轴就是垂直于屏幕的轴，正方向指向用户。通常情况下，该值越大，越靠屏幕前方。   </p>
@@ -2551,7 +2551,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border-color</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
     <span class="token property">background</span><span class="token punctuation">:</span> green<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>未设置<code>z-index</code>时:<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-10.png" loading="lazy"><br>现在设置<code>z-index</code>如下：</p>
+<p>未设置<code>z-index</code>时:<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-10.png" loading="lazy"><br>现在设置<code>z-index</code>如下：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.circle1</span><span class="token punctuation">&#123;</span>
   <span class="token property">z-index</span><span class="token punctuation">:</span> 5<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
@@ -2567,7 +2567,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <span class="token selector">.circle5</span><span class="token punctuation">&#123;</span>
   <span class="token property">z-index</span><span class="token punctuation">:</span> 2<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-11.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-11.png" loading="lazy">   </p>
 <p>可以看到，从左至右，蓝黄黑绿红，分别被叠在了下层。<br>只有定位元素设置<code>z-index</code>有效。<br><code>z-index</code>可以是负数，如果是负数，则遇到常规流、浮动元素时，会被其覆盖。<br>如：</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.circle1</span><span class="token punctuation">&#123;</span>
   <span class="token property">z-index</span><span class="token punctuation">:</span> -1<span class="token punctuation">;</span>
@@ -2584,7 +2584,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <span class="token selector">.circle5</span><span class="token punctuation">&#123;</span>
   <span class="token property">z-index</span><span class="token punctuation">:</span> -1<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web19-12.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web19/web19-12.png" loading="lazy">   </p>
 <p>可以用这种方式设置背景图。  </p>
 <br>
 
@@ -2606,7 +2606,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   <entry>
     <title>Web前端20：定位练习1-二级菜单</title>
     <url>/2021/12/13/web20/</url>
-    <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p>京东首页的这一部分：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-1.png" loading="lazy">  </p>
+    <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p>京东首页的这一部分：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web20/web20-1.png" loading="lazy">  </p>
 <br>
 
 <h2 id="解"><a href="#解" class="headerlink" title="解"></a><strong>解</strong></h2><p>像行高、背景颜色这样次要的属性设置就不作说明了。  </p>
@@ -2635,7 +2635,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 
 <br>
 
-<h3 id="lt-li-gt-的css修饰"><a href="#lt-li-gt-的css修饰" class="headerlink" title="&lt;li&gt;的css修饰"></a><strong><code>&lt;li&gt;</code>的css修饰</strong></h3><p>由于<code>&lt;li&gt;</code>下的二级菜单<code>&lt;div&gt;</code>要用到绝对定位，所以将<code>&lt;li&gt;</code>的定位方式设置为<code>relative</code>来提供包含块。<br><code>hover</code>时的<code>&lt;li&gt;</code>只有左右上边框，没有下边框，所以要专门设置<code>border-bottom: none</code>。<br>加上边框之后，<code>&lt;li&gt;</code>盒子的尺寸就会变化，进而会“挤开”它后面的盒子，这样就导致文字在视觉上有错位效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-2.gif" loading="lazy"><br>水平方向上错位的解决方法：设置<code>box-sizing: border-box</code>，即设置宽度为边框盒的宽度；<br>垂直方向上错位的解决方法：将<code>hover</code>时<code>&lt;li&gt;</code>的行高减去两个边框厚度，即设置为40px - 2*2px = 36px。  </p>
+<h3 id="lt-li-gt-的css修饰"><a href="#lt-li-gt-的css修饰" class="headerlink" title="&lt;li&gt;的css修饰"></a><strong><code>&lt;li&gt;</code>的css修饰</strong></h3><p>由于<code>&lt;li&gt;</code>下的二级菜单<code>&lt;div&gt;</code>要用到绝对定位，所以将<code>&lt;li&gt;</code>的定位方式设置为<code>relative</code>来提供包含块。<br><code>hover</code>时的<code>&lt;li&gt;</code>只有左右上边框，没有下边框，所以要专门设置<code>border-bottom: none</code>。<br>加上边框之后，<code>&lt;li&gt;</code>盒子的尺寸就会变化，进而会“挤开”它后面的盒子，这样就导致文字在视觉上有错位效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web20/web20-2.gif" loading="lazy"><br>水平方向上错位的解决方法：设置<code>box-sizing: border-box</code>，即设置宽度为边框盒的宽度；<br>垂直方向上错位的解决方法：将<code>hover</code>时<code>&lt;li&gt;</code>的行高减去两个边框厚度，即设置为40px - 2*2px = 36px。  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.header</span><span class="token punctuation">&#123;</span>
     <span class="token property">height</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
     <span class="token property">line-height</span><span class="token punctuation">:</span> 40px<span class="token punctuation">;</span>
@@ -2649,7 +2649,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">border-bottom</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
     <span class="token property">line-height</span><span class="token punctuation">:</span> 36px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>解决错位问题后：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-3.gif" loading="lazy">  </p>
+<p>解决错位问题后：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web20/web20-3.gif" loading="lazy">  </p>
 <br>
 
 <h3 id="二级菜单-lt-div-gt"><a href="#二级菜单-lt-div-gt" class="headerlink" title="二级菜单&lt;div&gt;"></a><strong>二级菜单<code>&lt;div&gt;</code></strong></h3><p>在其中一个<code>&lt;li&gt;</code>下插入一个<code>&lt;div&gt;</code>作为二级菜单内容，赋类名为<code>submenu</code>： </p>
@@ -2682,7 +2682,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">position</span><span class="token punctuation">:</span> absolute<span class="token punctuation">;</span>
     <span class="token property">right</span><span class="token punctuation">:</span> -2px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>目前的效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-4.png" loading="lazy"><br>可以看到客户服务下面有一条碍眼的边框线，这个边框线是由<code>submenu</code>产生的，所以无法直接消除。<br>可以采用间接的方式消除：使用伪元素选择器<code>::after</code>手动在<code>submenu</code>后加上一条白色线条覆盖之。  </p>
+<p>目前的效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web20/web20-4.png" loading="lazy"><br>可以看到客户服务下面有一条碍眼的边框线，这个边框线是由<code>submenu</code>产生的，所以无法直接消除。<br>可以采用间接的方式消除：使用伪元素选择器<code>::after</code>手动在<code>submenu</code>后加上一条白色线条覆盖之。  </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.header .topnav>li:hover::after</span><span class="token punctuation">&#123;</span>
     <span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">;</span>
     <span class="token property">background</span><span class="token punctuation">:</span> #fff<span class="token punctuation">;</span>
@@ -2692,10 +2692,10 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">bottom</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
     <span class="token property">left</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-5.png" loading="lazy">  </p>
+<p>得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web20/web20-5.png" loading="lazy">  </p>
 <br>
 
-<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p>（不知道为啥录屏后边框颜色变成黑的了）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web20-6.gif" loading="lazy"></p>
+<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p>（不知道为啥录屏后边框颜色变成黑的了）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web20/web20-6.gif" loading="lazy"></p>
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><p>html</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>header<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -2797,7 +2797,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   <entry>
     <title>Web前端21：定位练习2-弹出层</title>
     <url>/2021/12/13/web21/</url>
-    <content><![CDATA[<p>弹出层可能是广告、登录框等。比如斗鱼网页点击退出账号时：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web21-1.png" loading="lazy"><br>这种东西就叫弹出层。<br>真正的弹出层构造需要用到js，这里只使用定位的知识用css来模拟弹出层已经弹出的静态页面。  </p>
+    <content><![CDATA[<p>弹出层可能是广告、登录框等。比如斗鱼网页点击退出账号时：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web21/web21-1.png" loading="lazy"><br>这种东西就叫弹出层。<br>真正的弹出层构造需要用到js，这里只使用定位的知识用css来模拟弹出层已经弹出的静态页面。  </p>
 <br>
 
 <h2 id="解"><a href="#解" class="headerlink" title="解"></a><strong>解</strong></h2><h3 id="网页背景"><a href="#网页背景" class="headerlink" title="网页背景"></a><strong>网页背景</strong></h3><p>在斗鱼网页截个图作为网页的背景，并设置好尺寸。  </p>
@@ -2810,7 +2810,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 
 <br>
 
-<h3 id="遮罩层"><a href="#遮罩层" class="headerlink" title="遮罩层"></a><strong>遮罩层</strong></h3><p>我们可以看到在斗鱼网页的弹出层后面有层阴影：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web21-2.png" loading="lazy"><br>这层阴影就叫做<span style="color:red">遮罩层</span>。遮罩层涉及到颜色的透明度：每个颜色都具有透明通道，取值是0~1，0是完全透明，1是不透明，表示方式是<code>rgba(红，绿，蓝，alpha)</code>、<code>#红绿蓝透</code>。   </p>
+<h3 id="遮罩层"><a href="#遮罩层" class="headerlink" title="遮罩层"></a><strong>遮罩层</strong></h3><p>我们可以看到在斗鱼网页的弹出层后面有层阴影：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web21/web21-2.png" loading="lazy"><br>这层阴影就叫做<span style="color:red">遮罩层</span>。遮罩层涉及到颜色的透明度：每个颜色都具有透明通道，取值是0~1，0是完全透明，1是不透明，表示方式是<code>rgba(红，绿，蓝，alpha)</code>、<code>#红绿蓝透</code>。   </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.modal</span><span class="token punctuation">&#123;</span>
     <span class="token property">position</span><span class="token punctuation">:</span> fixed<span class="token punctuation">;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
@@ -2872,7 +2872,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 
 <br>
 
-<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web21-3.png" loading="lazy">  </p>
+<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web21/web21-3.png" loading="lazy">  </p>
 <br>
 
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><p>html：</p>
@@ -2990,7 +2990,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   <entry>
     <title>Web前端22：定位练习3-轮播图</title>
     <url>/2021/12/13/web22/</url>
-    <content><![CDATA[<p>这节没什么新知识，就直接放结果和代码了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web22-1.png" loading="lazy"></p>
+    <content><![CDATA[<p>这节没什么新知识，就直接放结果和代码了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web22/web22-1.png" loading="lazy"></p>
 <p>html：</p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>banner<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>imgs<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -3181,7 +3181,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">color</span><span class="token punctuation">:</span> yellow<span class="token punctuation">;</span>
     <span class="token property">background</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web23-1.png" loading="lazy"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web23/web23-1.png" loading="lazy"></p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
@@ -3203,11 +3203,11 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
 <p>在浏览器中，按下Alt和上下方向键可以以0.1为单位改变取值。</p>
 <br>
 
-<h2 id="鼠标"><a href="#鼠标" class="headerlink" title="鼠标"></a><strong>鼠标</strong></h2><p>使用<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/cursor">cursor</a>属性设置，它的取值有很多，是一些操作系统常见的鼠标样式，常见的有如下几个：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-2.png" loading="lazy"><br>（来自DIVCSS5.com）<br>还可以设置为图片，但一般必须是.ico或.cur格式的图片。   </p>
+<h2 id="鼠标"><a href="#鼠标" class="headerlink" title="鼠标"></a><strong>鼠标</strong></h2><p>使用<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/cursor">cursor</a>属性设置，它的取值有很多，是一些操作系统常见的鼠标样式，常见的有如下几个：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-1.png" loading="lazy"><br>（来自DIVCSS5.com）<br>还可以设置为图片，但一般必须是.ico或.cur格式的图片。   </p>
 <pre class="language-none"><code class="language-none">div&#123;
   cursor: url(&quot;&#x2F;img&#x2F;Arrow.cur&quot;), auto;
 &#125;</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-3.png" loading="lazy"><br>（取自<a href="https://zhutix.com/ico/kamisato-ayaka-cuu/">致美化网</a>）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-2.png" loading="lazy"><br>（取自<a href="https://zhutix.com/ico/kamisato-ayaka-cuu/">致美化网</a>）</p>
 <br>
 
 <h2 id="盒子隐藏"><a href="#盒子隐藏" class="headerlink" title="盒子隐藏"></a><strong>盒子隐藏</strong></h2><p>js中经常需要控制元素的隐藏和显示。   </p>
@@ -3228,14 +3228,14 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
   <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">"../img/1.jpg"</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 
-<h3 id="2）-background-repeat"><a href="#2）-background-repeat" class="headerlink" title="2） background-repeat"></a><strong>2）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-repeat">background-repeat</a></h3><p>如果图片尺寸比较小，会重复。如：<br>star.png：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-4.png" loading="lazy">    </p>
+<h3 id="2）-background-repeat"><a href="#2）-background-repeat" class="headerlink" title="2） background-repeat"></a><strong>2）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-repeat">background-repeat</a></h3><p>如果图片尺寸比较小，会重复。如：<br>star.png：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-3.png" loading="lazy">    </p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
     <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">"../img/star.png"</span><span class="token punctuation">)</span></span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-5.png" loading="lazy"><br>这时就可以用<code>background-repeat</code>来控制图片的重复方式，它其实是一个速写属性，可以分为<code>background-repeat-x</code>和<code>background-repeat-y</code>两个子属性。<br>取值为<code>repeat-x</code>，表示只在x方向上重复，取值为<code>repeat-y</code>，表示只在y方向上重复。<br>重复很有用的，比如这种图片：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-6.png" loading="lazy"><br>它们通常尺寸很小，然后使用重复效果铺满网页作为背景，这样可以有效节省存储空间。   </p>
-<h3 id="3）-background-size"><a href="#3）-background-size" class="headerlink" title="3） background-size"></a><strong>3）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size">background-size</a></h3><p>表示背景图的尺寸。常见的预设值有两个：<br><code>contain</code>：保证图片完整显示在元素区域内。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-7.png" loading="lazy"><br><code>cover</code>：让图片宽高比例不变地撑满区域。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-8.png" loading="lazy"><br>另外当然可以取数值或百分比。如<code>background-size: 100% 100%</code>表示x方向和y方向都撑满，所以如果元素宽高和背景图片不一致的话，图片宽高比例会变化：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-9.png" loading="lazy">  </p>
-<h3 id="4）-background-position"><a href="#4）-background-position" class="headerlink" title="4） background-position"></a><strong>4）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-position">background-position</a></h3><p>这个属性很有用。<br>设置背景图的位置，<code>background-position</code>是一个速写属性，包括<code>background-position-x</code>和<code>background-position-y</code>。它有几个预设值：<br><code>center</code>，居中，如<code>background-position: center</code>表示横向和纵向同时居中：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-10.png" loading="lazy"><br><code>top</code>，靠上；<code>bottom</code>靠下。<br>也可以写数值或百分比。  </p>
-<p><strong>雪碧图（精灵图）（sprite）</strong><br>网页上有时要用到很多小图标，在制作图时把这些图标合在一起做为一张图片，以减少文件数量，如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-11.jpg" loading="lazy"><br>这就叫精灵图。<br>使用精灵图的方法就是通过<code>background-position</code>，如</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-4.png" loading="lazy"><br>这时就可以用<code>background-repeat</code>来控制图片的重复方式，它其实是一个速写属性，可以分为<code>background-repeat-x</code>和<code>background-repeat-y</code>两个子属性。<br>取值为<code>repeat-x</code>，表示只在x方向上重复，取值为<code>repeat-y</code>，表示只在y方向上重复。<br>重复很有用的，比如这种图片：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-5.png" loading="lazy"><br>它们通常尺寸很小，然后使用重复效果铺满网页作为背景，这样可以有效节省存储空间。   </p>
+<h3 id="3）-background-size"><a href="#3）-background-size" class="headerlink" title="3） background-size"></a><strong>3）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-size">background-size</a></h3><p>表示背景图的尺寸。常见的预设值有两个：<br><code>contain</code>：保证图片完整显示在元素区域内。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-6.png" loading="lazy"><br><code>cover</code>：让图片宽高比例不变地撑满区域。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-7.png" loading="lazy"><br>另外当然可以取数值或百分比。如<code>background-size: 100% 100%</code>表示x方向和y方向都撑满，所以如果元素宽高和背景图片不一致的话，图片宽高比例会变化：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-8.png" loading="lazy">  </p>
+<h3 id="4）-background-position"><a href="#4）-background-position" class="headerlink" title="4） background-position"></a><strong>4）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-position">background-position</a></h3><p>这个属性很有用。<br>设置背景图的位置，<code>background-position</code>是一个速写属性，包括<code>background-position-x</code>和<code>background-position-y</code>。它有几个预设值：<br><code>center</code>，居中，如<code>background-position: center</code>表示横向和纵向同时居中：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-9.png" loading="lazy"><br><code>top</code>，靠上；<code>bottom</code>靠下。<br>也可以写数值或百分比。  </p>
+<p><strong>雪碧图（精灵图）（sprite）</strong><br>网页上有时要用到很多小图标，在制作图时把这些图标合在一起做为一张图片，以减少文件数量，如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-10.jpg" loading="lazy"><br>这就叫精灵图。<br>使用精灵图的方法就是通过<code>background-position</code>，如</p>
 <pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
     <span class="token property">width</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
     <span class="token property">height</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
@@ -3244,7 +3244,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
     <span class="token property">background-position</span><span class="token punctuation">:</span> -17px -117px<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span>
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web24-12.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web24/web24-11.png" loading="lazy">   </p>
 <h3 id="5）-background-attachment"><a href="#5）-background-attachment" class="headerlink" title="5） background-attachment"></a><strong>5）</strong> <a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/background-attachment">background-attachment</a></h3><p>用来控制背景图是否固定。背景图默认情况下是不随着视口变动的，也就是说不跟着你的滚动条走。所以当你需要背景图固定在视口内时，可以用这个属性。  </p>
 <h3 id="6）背景图和背景颜色混用"><a href="#6）背景图和背景颜色混用" class="headerlink" title="6）背景图和背景颜色混用"></a><strong>6）背景图和背景颜色混用</strong></h3><p>背景图<code>background-image</code>和背景颜色<code>background-color</code>经常一起使用，背景图覆盖不到的地方就用背景颜色覆盖。</p>
 <h3 id="7）速写属性background"><a href="#7）速写属性background" class="headerlink" title="7）速写属性background"></a><strong>7）速写属性background</strong></h3><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
@@ -3300,14 +3300,14 @@ body</span><span class="token punctuation">&#123;</span>
 <span class="token keyword">FROM</span>
   employees 
 <span class="token keyword">WHERE</span> salary <span class="token operator">></span> <span class="token number">12000</span> <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-1.png" loading="lazy"><br><strong>案例2</strong>：查询部门编号不等于90的员工名和部门编号</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-1.png" loading="lazy"><br><strong>案例2</strong>：查询部门编号不等于90的员工名和部门编号</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   last_name<span class="token punctuation">,</span>
   department_id 
 <span class="token keyword">FROM</span>
   employees 
 <span class="token keyword">WHERE</span> department_id <span class="token operator">!=</span> <span class="token number">90</span> <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-2.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-2.png" loading="lazy">   </p>
 <h3 id="2-按逻辑表达式筛选"><a href="#2-按逻辑表达式筛选" class="headerlink" title="2. 按逻辑表达式筛选"></a><strong>2.</strong> 按逻辑表达式筛选</h3><p>逻辑运算符：用于连接条件表达式。<br><strong>案例1</strong>：查询工资在10000到20000之间的员工名、工资以及奖金</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   last_name<span class="token punctuation">,</span>
@@ -3317,7 +3317,7 @@ body</span><span class="token punctuation">&#123;</span>
   employees 
 <span class="token keyword">WHERE</span> salary <span class="token operator">>=</span> <span class="token number">10000</span> 
   <span class="token operator">AND</span> salary <span class="token operator">&lt;=</span> <span class="token number">20000</span> <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-3.png" loading="lazy"><br><strong>案例2</strong>：查询部门编号不是在90到110之间的，或者工资高于15000的员工信息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-3.png" loading="lazy"><br><strong>案例2</strong>：查询部门编号不是在90到110之间的，或者工资高于15000的员工信息</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   <span class="token operator">*</span> 
 <span class="token keyword">FROM</span>
@@ -3331,7 +3331,7 @@ body</span><span class="token punctuation">&#123;</span>
   <span class="token operator">AND</span> department_id <span class="token operator">&lt;=</span> <span class="token number">110</span>
 <span class="token punctuation">)</span> 
 <span class="token operator">OR</span> salary <span class="token operator">></span> <span class="token number">15000</span> <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-4.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-4.png" loading="lazy">    </p>
 <h3 id="3-模糊查询"><a href="#3-模糊查询" class="headerlink" title="3. 模糊查询"></a><strong>3.</strong> 模糊查询</h3><p><code>LIKE</code>、<code>BETWEEN AND</code>、<code>IN</code>、<code>IS (NOT) NULL</code>  </p>
 <h4 id="1）-LIKE"><a href="#1）-LIKE" class="headerlink" title="1） LIKE"></a><strong>1）</strong> <code>LIKE</code></h4><p>特点：一般和通配符<code>%</code>（0个或多个字符）、<code>_</code>（一个字符）搭配使用。<br><strong>案例1</strong>：查询员工名中包含字符a的员工信息  </p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
@@ -3339,14 +3339,14 @@ body</span><span class="token punctuation">&#123;</span>
 <span class="token keyword">FROM</span>
   employees 
 <span class="token keyword">WHERE</span> last_name <span class="token operator">LIKE</span> <span class="token string">'%a%'</span> <span class="token punctuation">;</span></code></pre>
-<p><code>%</code>表示字符通配符，用于替代0个或多个字符。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-5.png" loading="lazy"><br>可以看出并不区分大小写。  </p>
+<p><code>%</code>表示字符通配符，用于替代0个或多个字符。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-5.png" loading="lazy"><br>可以看出并不区分大小写。  </p>
 <p><strong>案例2</strong>：查询员工名中第三个字符为<code>n</code>，第五个字符为<code>l</code>的员工名和工资  </p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   last_name<span class="token punctuation">,</span> salary 
 <span class="token keyword">FROM</span>
   employees 
 <span class="token keyword">WHERE</span> last_name <span class="token operator">LIKE</span> <span class="token string">'__n_l%'</span> <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-6.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-6.png" loading="lazy">    </p>
 <p><strong>案例3</strong>：查询员工名中第二个字符为<code>_</code>的员工名<br>用转义字符<code>\</code></p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   last_name
@@ -3355,7 +3355,7 @@ body</span><span class="token punctuation">&#123;</span>
 <span class="token keyword">WHERE</span> last_name <span class="token operator">LIKE</span> <span class="token string">'_\_%'</span> <span class="token punctuation">;</span></code></pre>
 <p>或者用<code>ESCAPE</code>关键字人为规定转义字符</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">WHERE</span> last_name <span class="token operator">LIKE</span> <span class="token string">'_$_%'</span> <span class="token keyword">ESCAPE</span> <span class="token string">'$'</span><span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-7.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-7.png" loading="lazy">    </p>
 <h4 id="2）-BETWEEN-AND"><a href="#2）-BETWEEN-AND" class="headerlink" title="2） BETWEEN AND"></a><strong>2）</strong> <code>BETWEEN AND</code></h4><p>使用<code>BETWEEN AND</code>包含边界值，也就是相当于<code>&gt;=</code>、<code>&lt;=</code>。<br><strong>案例1</strong>：查询员工编号在100到120之间的员工信息<br>可以使用<code>&lt;=</code>、<code>&gt;=</code></p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   <span class="token operator">*</span> 
@@ -3363,7 +3363,7 @@ body</span><span class="token punctuation">&#123;</span>
   employees 
 <span class="token keyword">WHERE</span> employee_id <span class="token operator">>=</span> <span class="token number">100</span> 
   <span class="token operator">AND</span> employee_id <span class="token operator">&lt;=</span> <span class="token number">120</span> <span class="token punctuation">;</span></code></pre>
-<p>但是这里不能简写为<code>employee_id &gt;= 100 AND &lt;= 120 ;</code><br>可以写为<code>employee_id BETWEEN 100 AND 120 ;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-8.png" loading="lazy"><br>注意不可以写为<code>BETWEEN 120 AND 100</code>。   </p>
+<p>但是这里不能简写为<code>employee_id &gt;= 100 AND &lt;= 120 ;</code><br>可以写为<code>employee_id BETWEEN 100 AND 120 ;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-8.png" loading="lazy"><br>注意不可以写为<code>BETWEEN 120 AND 100</code>。   </p>
 <h4 id="3）-IN"><a href="#3）-IN" class="headerlink" title="3） IN"></a><strong>3）</strong> <code>IN</code></h4><p>判断某字段的值是否属于in列表中的一项。<code>IN</code>比<code>OR</code>更简洁。<br>要求<code>IN</code>列表的值类型一致或兼容。<br><code>IN</code>列表不可以使用<code>_</code>、<code>%</code>通配符。<br><strong>案例</strong>：查询员工的工种编号是<code>IT_PROG</code>、<code>AD_VP</code>、<code>AD_PRES</code>的员工名和工种编号  </p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   last_name<span class="token punctuation">,</span>
@@ -3375,7 +3375,7 @@ body</span><span class="token punctuation">&#123;</span>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">where</span> job_id <span class="token operator">=</span> <span class="token string">'IT_PROG'</span> 
   <span class="token operator">or</span> job_id <span class="token operator">=</span> <span class="token string">'AD_VP'</span> 
   <span class="token operator">or</span> job_id <span class="token operator">=</span> <span class="token string">'AD_PRES'</span> <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-9.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-9.png" loading="lazy">    </p>
 <h4 id="4）-IS-NOT-NUL"><a href="#4）-IS-NOT-NUL" class="headerlink" title="4） IS (NOT) NUL"></a><strong>4）</strong> <code>IS (NOT) NUL</code></h4><p><strong>案例1</strong>：查询没有奖金的员工名和奖金率   </p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   last_name<span class="token punctuation">,</span>
@@ -3383,7 +3383,7 @@ body</span><span class="token punctuation">&#123;</span>
 <span class="token keyword">FROM</span>
   employees 
 <span class="token keyword">WHERE</span> commission_pct <span class="token operator">IS</span> <span class="token boolean">NULL</span> <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-10.png" loading="lazy"><br>不可以写为<code>WHERE commission_pct = NULL</code>，<code>=</code>、<code>&lt;&gt;</code>不能用于判断<code>NULL</code>，是无效的，查询结果将是0条。另外<code>IS</code>也不能用于判断数值，如<code>WHERE salary = 12000;</code>也是不正确的。<br>总而言之，<code>IS</code>只能和<code>NULL</code>一起用。<br>有奖金的就是<code>WHERE commission_pct IS NOT NULL</code>。   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-10.png" loading="lazy"><br>不可以写为<code>WHERE commission_pct = NULL</code>，<code>=</code>、<code>&lt;&gt;</code>不能用于判断<code>NULL</code>，是无效的，查询结果将是0条。另外<code>IS</code>也不能用于判断数值，如<code>WHERE salary = 12000;</code>也是不正确的。<br>总而言之，<code>IS</code>只能和<code>NULL</code>一起用。<br>有奖金的就是<code>WHERE commission_pct IS NOT NULL</code>。   </p>
 <h3 id="4-安全等于-lt-gt"><a href="#4-安全等于-lt-gt" class="headerlink" title="4. 安全等于&lt;=&gt;"></a><strong>4.</strong> 安全等于<code>&lt;=&gt;</code></h3><p>可以用来判断<code>NULL</code>，如</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">WHERE</span> commission_pct <span class="token operator">&lt;=></span> <span class="token boolean">NULL</span> <span class="token punctuation">;</span></code></pre>
 <p>也可以判断数值，如</p>
@@ -3399,7 +3399,7 @@ body</span><span class="token punctuation">&#123;</span>
 <span class="token keyword">FROM</span>
   employees 
 <span class="token keyword">WHERE</span> employee_id <span class="token operator">=</span> <span class="token number">176</span> <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-11.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-11.png" loading="lazy">    </p>
 <p><strong>2.</strong> 查询没有奖金，且工资小于18000的<code>salary</code>、<code>last_name</code>  </p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   salary<span class="token punctuation">,</span>
@@ -3422,7 +3422,7 @@ body</span><span class="token punctuation">&#123;</span>
   location_id 
 <span class="token keyword">FROM</span>
   departments <span class="token punctuation">;</span></code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-12.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-12.png" loading="lazy">    </p>
 <p><strong>5.</strong> 经典面试题<br>试问</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   <span class="token operator">*</span> 
@@ -3435,8 +3435,8 @@ body</span><span class="token punctuation">&#123;</span>
   employees 
 <span class="token keyword">WHERE</span> commission_pct <span class="token operator">LIKE</span> <span class="token string">'%%'</span> 
   <span class="token operator">AND</span> last_name <span class="token operator">LIKE</span> <span class="token string">'%%'</span> <span class="token punctuation">;</span></code></pre>
-<p>结果是否一样？说明原因。<br>答：不一样。<br>前者显示的结果中，<code>commission_pct</code>字段有<code>NULL</code>值，而后者没有，相当于筛掉了<code>NULL</code>。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-13.png" loading="lazy">    </p>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/mysql3-14.png" loading="lazy">    </p>
+<p>结果是否一样？说明原因。<br>答：不一样。<br>前者显示的结果中，<code>commission_pct</code>字段有<code>NULL</code>值，而后者没有，相当于筛掉了<code>NULL</code>。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-13.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/mysql/mysql3/mysql3-14.png" loading="lazy">    </p>
 <p>如果改成</p>
 <pre class="language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> 
   <span class="token operator">*</span> 
@@ -3460,7 +3460,7 @@ body</span><span class="token punctuation">&#123;</span>
   <entry>
     <title>Web前端25：背景图练习</title>
     <url>/2021/12/15/web25/</url>
-    <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web25-1.png" loading="lazy"><br>我是去<a href="https://www.wowchina.com/zh-cn/news/17693700/%E4%BA%89%E9%9C%B8%E8%89%BE%E6%B3%BD%E6%8B%89%E6%96%AF%E7%8E%B0%E5%B7%B2%E5%85%A8%E7%90%83%E5%90%8C%E6%AD%A5%E4%B8%8A%E7%BA%BF%E6%B5%8B%E8%AF%95%EF%BC%81">魔兽世界官网</a>扒的素材，没用和这张图一样的，所以最终结果有些出入。   </p>
+    <content><![CDATA[<h2 id="任务目标"><a href="#任务目标" class="headerlink" title="任务目标"></a><strong>任务目标</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web25/web25-1.png" loading="lazy"><br>我是去<a href="https://www.wowchina.com/zh-cn/news/17693700/%E4%BA%89%E9%9C%B8%E8%89%BE%E6%B3%BD%E6%8B%89%E6%96%AF%E7%8E%B0%E5%B7%B2%E5%85%A8%E7%90%83%E5%90%8C%E6%AD%A5%E4%B8%8A%E7%BA%BF%E6%B5%8B%E8%AF%95%EF%BC%81">魔兽世界官网</a>扒的素材，没用和这张图一样的，所以最终结果有些出入。   </p>
 <br>
 
 <h2 id="网页背景图片"><a href="#网页背景图片" class="headerlink" title="网页背景图片"></a><strong>网页背景图片</strong></h2><pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
@@ -3469,7 +3469,7 @@ body</span><span class="token punctuation">&#123;</span>
 
 <br>
 
-<h2 id="导航栏-lt-header-gt"><a href="#导航栏-lt-header-gt" class="headerlink" title="导航栏&lt;header&gt;"></a><strong>导航栏<code>&lt;header&gt;</code></strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web25-2.png" loading="lazy">   </p>
+<h2 id="导航栏-lt-header-gt"><a href="#导航栏-lt-header-gt" class="headerlink" title="导航栏&lt;header&gt;"></a><strong>导航栏<code>&lt;header&gt;</code></strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web25/web25-2.png" loading="lazy">   </p>
 <h3 id="整体规划"><a href="#整体规划" class="headerlink" title="整体规划"></a><strong>整体规划</strong></h3><p>整个导航栏用<code>&lt;header&gt;</code>表示，分为文字“进入官网”、“账号注册”、“充值管理”、“游戏下载”、“客户中心”、“官方论坛”和logo两部分。<br>文字可以用<code>&lt;ul&gt;</code>、<code>&lt;li&gt;</code>，也可以使用<code>&lt;nav&gt;</code>、<code>&lt;a&gt;</code>。这里用后者。<br>logo使用<code>&lt;a&gt;</code>元素，因为通常logo是链接到超链接的。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>header</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>header<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>nav</span><span class="token punctuation">></span></span> 
@@ -3510,10 +3510,10 @@ body</span><span class="token punctuation">&#123;</span>
     <span class="token property">margin</span><span class="token punctuation">:</span> auto<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
 
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a><strong>效果</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web25-3.png" loading="lazy">   </p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a><strong>效果</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web25/web25-3.png" loading="lazy">   </p>
 <br>
 
-<h2 id="两个按钮"><a href="#两个按钮" class="headerlink" title="两个按钮"></a><strong>两个按钮</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web25-4.png" loading="lazy"><br>其实就是两个超链接加上背景图就行了。<br>这里魔兽世界官网现在已经没有个样式的按钮了，所以我在百度图片随便找了个作背景。（有点丑……不过意思一下就行了）   </p>
+<h2 id="两个按钮"><a href="#两个按钮" class="headerlink" title="两个按钮"></a><strong>两个按钮</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web25/web25-4.png" loading="lazy"><br>其实就是两个超链接加上背景图就行了。<br>这里魔兽世界官网现在已经没有个样式的按钮了，所以我在百度图片随便找了个作背景。（有点丑……不过意思一下就行了）   </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>buttons<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>detail<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
         了解详情
@@ -3538,10 +3538,10 @@ body</span><span class="token punctuation">&#123;</span>
     <span class="token property">line-height</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
     <span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>../img/button.png<span class="token punctuation">)</span></span> no-repeat 0 7px/contain<span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web25-5.png" loading="lazy">   </p>
+<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web25/web25-5.png" loading="lazy">   </p>
 <br>
 
-<h2 id="广告部分"><a href="#广告部分" class="headerlink" title="广告部分"></a><strong>广告部分</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web25-6.png" loading="lazy">   </p>
+<h2 id="广告部分"><a href="#广告部分" class="headerlink" title="广告部分"></a><strong>广告部分</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web25/web25-6.png" loading="lazy">   </p>
 <h3 id="html"><a href="#html" class="headerlink" title="html"></a><strong>html</strong></h3><p>可以认为是4个<code>&lt;div&gt;</code>。每个<code>&lt;div&gt;</code>由一个标题和一张图片组成。  </p>
 <pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>ad<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
@@ -3604,7 +3604,7 @@ body</span><span class="token punctuation">&#123;</span>
 
 <br>
 
-<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/Web%E5%89%8D%E7%AB%AF/web25-7.png" loading="lazy">   </p>
+<h2 id="大功告成"><a href="#大功告成" class="headerlink" title="大功告成"></a><strong>大功告成</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web25/web25-7.png" loading="lazy">   </p>
 <br>
 
 <h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><h3 id="html："><a href="#html：" class="headerlink" title="html："></a>html：</h3><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
@@ -3784,19 +3784,6 @@ body</span><span class="token punctuation">&#123;</span>
 
 
 <p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Web前端</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Web前端26：xxx</title>
-    <url>/2021/12/16/web26/</url>
-    <content><![CDATA[<p><br><br><br><br><br></p>
 <hr>
 ]]></content>
       <categories>
