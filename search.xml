@@ -3794,7 +3794,7 @@ body</span><span class="token punctuation">&#123;</span>
       </tags>
   </entry>
   <entry>
-    <title>Linux1：课程内容介绍，Linux学习方向、应用领域、进阶路线、学习方法，Linux简介，VMware和CentOS的安装</title>
+    <title>Linux1：课程内容介绍，Linux简介，VMware和CentOS的安装</title>
     <url>/2021/12/16/linux1/</url>
     <content><![CDATA[<p>在腾讯云买了台轻量应用服务器，安装的CentOS 7.6操作系统。这样一来手里就有了实践的对象，所以趁这个机会学一遍Linux。<br>跟着<a href="https://www.bilibili.com/video/BV1dW411M7xL">Linux_尚硅谷_bilibili</a>学的。    </p>
 <br>
@@ -3900,6 +3900,136 @@ body</span><span class="token punctuation">&#123;</span>
       </categories>
       <tags>
         <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git1：课程大纲，版本控制，Git简介，代码托管中心，本地库初始化，设置签名</title>
+    <url>/2021/12/17/git1/</url>
+    <content><![CDATA[<p>我目前图床是搭建在github上，用了一段时间的PicGo，但是发现PicGo上传图片很方便，想修改已上传的文件的名称、整理图片就不行了。<br>所以用git来管理图床更方便些，就这个原因来学一遍git。</p>
+<p>一些比较权威的git文档：</p>
+<ul>
+<li><a href="https://git-scm.com/book/zh">Git官方</a></li>
+<li><a href="https://docs.github.com/cn">Github</a></li>
+<li><a href="http://git.oschina.net/progit/">Gitee</a></li>
+</ul>
+<p>大致搞懂这几个文档就够用了，不过对于我这个小白，直接看文档入门有点耗神，所以我选择跟着<a href="https://www.bilibili.com/video/BV1pW411A7a5">Git&amp;Github_尚硅谷_bilibili</a>过一遍。 </p>
+<br>
+
+<h2 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a><strong>课程大纲</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-0.bmp" loading="lazy">  </p>
+<br>
+
+<h2 id="版本控制的功能"><a href="#版本控制的功能" class="headerlink" title="版本控制的功能"></a><strong>版本控制的功能</strong></h2><ul>
+<li>协同修改<ul>
+<li>多人并行不悖地修改服务器端的同一个文件。</li>
+</ul>
+</li>
+<li>数据备份<ul>
+<li>不仅保存目录和文件的当前状态，还能够保存每一个提交过的历史状态。</li>
+</ul>
+</li>
+<li>版本管理<ul>
+<li>在保存每一个版本的文件信息的同时做到不保存重复数据，以节约存储空间、提高运行效率。这方面SVN采用的是增量式管理的方式，而Git采取了文件系统快照的方式。   </li>
+</ul>
+</li>
+<li>权限控制<ul>
+<li>对团队中参与开发的人员进行权限控制。  </li>
+<li>对团队外开发者贡献的代码进行审核——Git独有。</li>
+</ul>
+</li>
+<li>历史记录<ul>
+<li>查看修改人、修改时间、修改内容、日志信息。</li>
+<li>将本地文件恢复到某一个历史状态。</li>
+</ul>
+</li>
+<li>分支管理<ul>
+<li>允许开发团队在工作过程中多条生产线同时推进任务，进一步提高效率。 </li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="版本控制简介"><a href="#版本控制简介" class="headerlink" title="版本控制简介"></a><strong>版本控制简介</strong></h2><p>版本控制是一种思想，git等是实现版本控制的工具。  </p>
+<p>集中式版本控制（工具有cvs、svn、vss等）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-1.png" loading="lazy">  </p>
+<p>这种方式的缺点是单点故障，服务器一旦挂了，就都没了。   </p>
+<p>分布式版本控制（工具有<span style="color:red">Git</span>等）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-2.png" loading="lazy">  </p>
+<br>
+
+<h2 id="Git简史"><a href="#Git简史" class="headerlink" title="Git简史"></a><strong>Git简史</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-3.png" loading="lazy">  </p>
+<br>
+
+<h2 id="Git的logo、优势"><a href="#Git的logo、优势" class="headerlink" title="Git的logo、优势"></a><strong>Git的logo、优势</strong></h2><p><strong>logo</strong><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-4.png" loading="lazy">  </p>
+<p>这个图片就表达了“分支”这个意思。  </p>
+<p><strong>优势</strong>：  </p>
+<ul>
+<li>大部分操作在本地完成，不需要联网。</li>
+<li>完整性保证。对每一次提交进行hash操作，通过比较hash值是否相同就知道了项目是否完整。</li>
+<li>尽可能添加数据而不是删除或修改数据。删除往往就找不回来了，所以每提交一次，版本都会增加1个，随时有后悔药可吃。</li>
+<li>分支操作非常快捷流畅。</li>
+<li>与Linux命令全面兼容，毕竟git和linux都是林纳斯（Linus）开发的。</li>
+</ul>
+<br>
+
+<h2 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a><strong>Git的安装</strong></h2><p><a href="https://git-scm.com/">Git官网</a><br>下载慢的话可以去一些镜像网站<br>比如阿里云：<a href="https://developer.aliyun.com/mirror/">https://developer.aliyun.com/mirror/</a>   </p>
+<br>
+
+<h2 id="Git的结构"><a href="#Git的结构" class="headerlink" title="Git的结构"></a><strong>Git的结构</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-6.png" loading="lazy">  </p>
+<br>
+
+<h2 id="Git的代码托管中心"><a href="#Git的代码托管中心" class="headerlink" title="Git的代码托管中心"></a><strong>Git的代码托管中心</strong></h2><p>代码托管中心的任务：维护远程库。  </p>
+<ul>
+<li>局域网环境下：GitLab服务器</li>
+<li>外网环境下：Github、Gitee</li>
+</ul>
+<br>
+
+<h2 id="本地库和远程库"><a href="#本地库和远程库" class="headerlink" title="本地库和远程库"></a><strong>本地库和远程库</strong></h2><ol>
+<li>团队内部协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-2.png" loading="lazy">  </li>
+</ol>
+<ol start="2">
+<li>跨团队协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-7.png" loading="lazy">  </li>
+</ol>
+<br>
+
+<h2 id="本地库初始化"><a href="#本地库初始化" class="headerlink" title="本地库初始化"></a><strong>本地库初始化</strong></h2><p>命令：<code>git init</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-8.png" loading="lazy">  </p>
+<p>这样就会生成一个“.git”文件夹，其内容为：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-9.png" loading="lazy">  </p>
+<p>这里存放的是本地库相关的子目录和文件，不要删除，也不要轻易修改。</p>
+<br>
+
+<h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a><strong>签名</strong></h2><p><strong>形式</strong><br>用户名：tom<br>Email地址：<a href="mailto:&#x67;&#111;&#111;&#100;&#77;&#111;&#114;&#x6e;&#x69;&#x6e;&#103;&#64;&#x61;&#x74;&#x67;&#117;&#105;&#x67;&#117;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#111;&#111;&#100;&#77;&#111;&#114;&#x6e;&#x69;&#x6e;&#103;&#64;&#x61;&#x74;&#x67;&#117;&#105;&#x67;&#117;&#x2e;&#x63;&#111;&#x6d;</a><br>用户名（tom）和Email地址的用户名（goodMorning）不一定一致，甚至Email地址可以省略。  </p>
+<p><strong>作用</strong><br>区分不同开发人员的身份。  </p>
+<p><strong>辨析</strong><br>这里设置的签名和登录远程库（代码托管中心）的账号、密码没有任何关系。</p>
+<p><strong>设置签名的命令</strong>  </p>
+<ul>
+<li><p>项目级别（仓库级别）：仅在当前本地库范围内有效。<br>命令： </p>
+<ul>
+<li><code>git config user.name 用户名</code>  </li>
+<li><code>git config user.email Email地址</code><br>信息保存位置：<code>./.git/config</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-10.png" loading="lazy">  </li>
+</ul>
+</li>
+<li><p>系统用户级别：登录当前操作系统的用户范围。<br>命令：   </p>
+<ul>
+<li><code>git config --global user.name 用户名</code></li>
+<li><code>git config --global user.email Email地址</code><br>信息保存位置：<code>~/.gitconfig</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-11.png" loading="lazy">  </li>
+</ul>
+</li>
+</ul>
+<p>通常实际开发时设置一个系统用户级别的签名就够了，不用再设置个项目级别的。</p>
+<ul>
+<li>级别优先级<ul>
+<li>就近原则：项目级别优先于系统用户级别，二者都有时采用项目级别的签名。</li>
+<li>如果只有系统用户级别的签名，就以系统用户级别的签名为准。</li>
+<li>二者都没有的情况不存在，会报错。</li>
+</ul>
+</li>
+</ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
 </search>
