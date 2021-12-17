@@ -3903,7 +3903,7 @@ body</span><span class="token punctuation">&#123;</span>
       </tags>
   </entry>
   <entry>
-    <title>Git1：课程大纲，版本控制，Git简介，代码托管中心，本地库初始化，设置签名</title>
+    <title>Git1：课程大纲、版本控制、Git简介、本地库初始化、签名</title>
     <url>/2021/12/17/git1/</url>
     <content><![CDATA[<p>我目前图床是搭建在github上，用了一段时间的PicGo，但是发现PicGo上传图片很方便，想修改已上传的文件的名称、整理图片就不行了。<br>所以用git来管理图床更方便些，就这个原因来学一遍git。</p>
 <p>一些比较权威的git文档：</p>
@@ -3972,7 +3972,7 @@ body</span><span class="token punctuation">&#123;</span>
 <h2 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a><strong>Git的安装</strong></h2><p><a href="https://git-scm.com/">Git官网</a><br>下载慢的话可以去一些镜像网站<br>比如阿里云：<a href="https://developer.aliyun.com/mirror/">https://developer.aliyun.com/mirror/</a>   </p>
 <br>
 
-<h2 id="Git的结构"><a href="#Git的结构" class="headerlink" title="Git的结构"></a><strong>Git的结构</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-6.png" loading="lazy">  </p>
+<h2 id="Git的结构"><a href="#Git的结构" class="headerlink" title="Git的结构"></a><strong>Git的结构</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-5.png" loading="lazy">  </p>
 <br>
 
 <h2 id="Git的代码托管中心"><a href="#Git的代码托管中心" class="headerlink" title="Git的代码托管中心"></a><strong>Git的代码托管中心</strong></h2><p>代码托管中心的任务：维护远程库。  </p>
@@ -3983,7 +3983,7 @@ body</span><span class="token punctuation">&#123;</span>
 <br>
 
 <h2 id="本地库和远程库"><a href="#本地库和远程库" class="headerlink" title="本地库和远程库"></a><strong>本地库和远程库</strong></h2><ol>
-<li>团队内部协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-2.png" loading="lazy">  </li>
+<li>团队内部协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-6.png" loading="lazy">  </li>
 </ol>
 <ol start="2">
 <li>跨团队协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-7.png" loading="lazy">  </li>
@@ -3995,7 +3995,7 @@ body</span><span class="token punctuation">&#123;</span>
 <p>这里存放的是本地库相关的子目录和文件，不要删除，也不要轻易修改。</p>
 <br>
 
-<h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a><strong>签名</strong></h2><p><strong>形式</strong><br>用户名：tom<br>Email地址：<a href="mailto:&#x67;&#111;&#111;&#100;&#77;&#111;&#114;&#x6e;&#x69;&#x6e;&#103;&#64;&#x61;&#x74;&#x67;&#117;&#105;&#x67;&#117;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#111;&#111;&#100;&#77;&#111;&#114;&#x6e;&#x69;&#x6e;&#103;&#64;&#x61;&#x74;&#x67;&#117;&#105;&#x67;&#117;&#x2e;&#x63;&#111;&#x6d;</a><br>用户名（tom）和Email地址的用户名（goodMorning）不一定一致，甚至Email地址可以省略。  </p>
+<h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a><strong>签名</strong></h2><p><strong>形式</strong><br>用户名：tom<br>Email地址：<a href="mailto:&#x67;&#x6f;&#111;&#x64;&#77;&#x6f;&#114;&#110;&#x69;&#110;&#103;&#64;&#x61;&#x74;&#103;&#x75;&#105;&#103;&#117;&#46;&#x63;&#111;&#x6d;">&#x67;&#x6f;&#111;&#x64;&#77;&#x6f;&#114;&#110;&#x69;&#110;&#103;&#64;&#x61;&#x74;&#103;&#x75;&#105;&#103;&#117;&#46;&#x63;&#111;&#x6d;</a><br>用户名（tom）和Email地址的用户名（goodMorning）不一定一致，甚至Email地址可以省略。  </p>
 <p><strong>作用</strong><br>区分不同开发人员的身份。  </p>
 <p><strong>辨析</strong><br>这里设置的签名和登录远程库（代码托管中心）的账号、密码没有任何关系。</p>
 <p><strong>设置签名的命令</strong>  </p>
@@ -4022,6 +4022,68 @@ body</span><span class="token punctuation">&#123;</span>
 </ul>
 </li>
 </ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git2：查看、添加、提交</title>
+    <url>/2021/12/18/git2/</url>
+    <content><![CDATA[<h2 id="状态查看：git-status"><a href="#状态查看：git-status" class="headerlink" title="状态查看：git status"></a><strong>状态查看</strong>：<code>git status</code></h2><p>查看工作区、暂存区状态<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-1.png" loading="lazy">  </p>
+<p>用vim编辑器随便新建个文件：<br>在vim编辑器里按i插入文本，按Esc退出，输入<code>:wq</code>回车即保存并退出<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-2.png" loading="lazy">  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-3.png" loading="lazy">   </p>
+<p>结果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-4.png" loading="lazy"><br>可以看到新建了个<code>1.txt</code>文件<br>然后在用<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-5.png" loading="lazy"><br>可以看到有一个“Untracked files”，并且提示你用<code>git add</code>添加到暂存区</p>
+<br>
+
+<h2 id="添加：git-add-lt-file-gt"><a href="#添加：git-add-lt-file-gt" class="headerlink" title="添加：git add &lt;file&gt;"></a><strong>添加</strong>：<code>git add &lt;file&gt;</code></h2><p>接上文，继续<code>git add 1.txt</code>可得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-6.png" loading="lazy"><br>这有一个warning，意思是add到暂存区的文件中，行末换行符会由LF转换为CRLF，而工作区的仍是LF。行末换行符是文件底层自动加的。<br>这里没什么影响。<br>再来看一下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-7.png" loading="lazy"><br>字变成绿色了，不像红色那么引人注意了，说明文件已保存到了暂存区，有了一定的安全性。<br>这里有句提示   </p>
+<pre class="language-none"><code class="language-none">use git rm --cached &lt;file&gt;... to unstage</code></pre>
+<p>意思是告诉你可以执行这个命令把它移出暂存区，移回工作区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-8.png" loading="lazy">   </p>
+<br>
+
+<h2 id="提交：git-commit-lt-file-gt"><a href="#提交：git-commit-lt-file-gt" class="headerlink" title="提交：git commit &lt;file&gt;"></a><strong>提交</strong>：<code>git commit &lt;file&gt;</code></h2><h3 id="新建文件后的提交"><a href="#新建文件后的提交" class="headerlink" title="新建文件后的提交"></a><strong>新建文件后的提交</strong></h3><p>接上文，<code>git add</code>之后<code>git commit 1.txt</code>会进入到这个界面：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-9.png" loading="lazy"><br>这是vim编辑器，在这里输入本次提交的注释。<br>输入<code>:set nu</code>回车，显示行号：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-10.png" loading="lazy"><br>按i键输入文本，然后Ecs键退出，最后输入<code>:wq</code>回车提交：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-11.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-12.png" loading="lazy"><br>我们来看这3行：</p>
+<pre class="language-none"><code class="language-none">[master (root-commit) de4a738] first commit new file 1.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 1.txt</code></pre>
+<p><code>master (root-commit)</code>：表示在master分支的根提交<br><code>de4a738</code>：现在不太方便解释，姑且可以认为是这次提交的版本号<br><code>first commit new file 1.txt</code>：就是我们刚刚在vim编辑器里写的注释<br><code>1 file changed, 1 insertion(+)</code>：1个文件被修改，这个文件里增加了1行文字<br><code>create mode 100644 1.txt</code>：100代表regular file，644代表文件权限  </p>
+<p><code>git commit</code>之后再来看一下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-13.png" loading="lazy"><br>这样一来暂存区和工作区都是干净的。   </p>
+<h3 id="修改文件后的提交"><a href="#修改文件后的提交" class="headerlink" title="修改文件后的提交"></a><strong>修改文件后的提交</strong></h3><p>接下来我们再用<code>vim 1.txt</code>进入1.txt文件编辑界面，增加几行文字：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-14.png" loading="lazy"><br>然后<code>:wq</code>保存，再查看以下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-15.png" loading="lazy"><br>还是红字，但是提示的是<code>modified</code>，表示文件被修改过。<br>并且括号中提示：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</code></pre>
+<p>对比之前新建文件时的提示消息：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</code></pre>
+<p>一个是“include”，一个是“update”，很明显能体会到两者的区别。   </p>
+<p>接下来看这个：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)</code></pre>
+<p>意思是可以用<code>git restore &lt;file&gt;...</code>命令放弃修改，之后再细说。</p>
+<p>最后看这个：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</code></pre>
+<p>“and/or”的意思就是可以先add然后commit，也可以不add直接commit<br>和之前新建文件时比较：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git add&quot; to track)</code></pre>
+
+<p>我们<code>git add 1.txt</code>之后再查看<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-16.png" loading="lazy"><br>这里提示变为了</p>
+<pre class="language-none"><code class="language-none">(use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)</code></pre>
+<p>意思是这次得用<code>git restore --staged &lt;file&gt;...</code>把1.txt移出暂存区，移回工作区，而不是新建文件时的<code>git rm --cached &lt;file&gt;...</code>。  </p>
+<p>然后是提交，可以和之前一样使用<code>git commit 1.txt</code>，但是那样会打开vim编辑器，让你输入本次提交的注释，那样比较麻烦。我们可以用<code>git commit -m &quot;注释内容&quot; 1.txt</code>直接提交：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-17.png" loading="lazy"><br>对比新建文件的提交：</p>
+<pre class="language-none"><code class="language-none">[master (root-commit) de4a738] first commit new file 1.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 1.txt</code></pre>
+<p>可以看到这次少了<code>[master (root-commit) de4a738] first commit new file 1.txt</code>一行，因为根提交只能有一个<br><code>3 insertions(+)</code>，表示修改了文件中增加了3行</p>
+<br>
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h2><ul>
+<li><p>查看：<code>git status</code><br>查看工作区、暂存区的状态   </p>
+</li>
+<li><p>添加：<code>git add &lt;file&gt;</code><br>将工作区的“新建/修改”添加到暂存区<br>新建的文件commit之前必须add；而修改的文件（已经add过）可以直接commit，但这样就无法撤销了</p>
+</li>
+<li><p>提交：<code>git commit -m &quot;commit message&quot; &lt;file&gt;</code><br>将暂存区的内容提交到本地库</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-18.png" loading="lazy">   </p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
