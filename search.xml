@@ -3806,4 +3806,113 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux1：课程内容介绍，Linux学习方向、应用领域、进阶路线、学习方法，Linux简介，VMware和CentOS的安装</title>
+    <url>/2021/12/16/linux1/</url>
+    <content><![CDATA[<p>在腾讯云买了台轻量应用服务器，安装的CentOS 7.6操作系统。这样一来手里就有了实践的对象，所以趁这个机会学一遍Linux。<br>跟着<a href="https://www.bilibili.com/video/BV1dW411M7xL">Linux_尚硅谷_bilibili</a>学的。    </p>
+<br>
+
+<p>Linux<br>[ˈlɪnəks]</p>
+<br>
+
+<h2 id="课程内容介绍"><a href="#课程内容介绍" class="headerlink" title="课程内容介绍"></a><strong>课程内容介绍</strong></h2><p><strong>基础篇</strong>：</p>
+<ul>
+<li>Linux入门</li>
+<li>vm和Linux的安装</li>
+<li>Linux目录结构</li>
+</ul>
+<p><strong>实操篇</strong>：</p>
+<ul>
+<li>远程登录（Xshell、XFtp）</li>
+<li>vi和Vim编辑器</li>
+<li>开机、重启和用户登陆注销</li>
+<li>用户管理</li>
+<li>实用指令</li>
+<li>定时任务调度</li>
+<li>磁盘分区、挂载</li>
+<li>网络配置</li>
+<li>进程管理</li>
+<li>RPM和YUM</li>
+</ul>
+<p><strong>JavaEE定制篇</strong></p>
+<p><strong>大数据定制篇</strong></p>
+<p><strong>Python定制篇</strong></p>
+<br>
+
+<h2 id="Linux学习方向"><a href="#Linux学习方向" class="headerlink" title="Linux学习方向"></a><strong>Linux学习方向</strong></h2><p>三大方向：</p>
+<ul>
+<li><p>Linux运维工程师<br>比如一些BAT这样的大公司，它有很多服务器，上万甚至几十万台，保证这些服务器的稳定运行就是Linux运维工程师的工作。比如服务器的优化、数据监控、日志备份分析等。</p>
+</li>
+<li><p>Linux嵌入式工程师<br>在Linux下做驱动开发、嵌入式开发等。需求量相对不是很大。</p>
+</li>
+<li><p>Linux下开发项目<br>这个是需求最多的。Java程序一般是部署在Linux上面的，如果你只会Java而不会Linux，你就无法把Java部署到Linux上。所以要学Linux上开发环境相关的知识。<br>Linux上也可以部署Python、大数据、PHP、C/C++相关的内容。  </p>
+</li>
+</ul>
+<br>
+
+<h2 id="Linux的应用领域"><a href="#Linux的应用领域" class="headerlink" title="Linux的应用领域"></a><strong>Linux的应用领域</strong></h2><p><strong>1）</strong> 个人桌面领域<br>像Windows这样的。<br>不过这个领域的应用比较薄弱，被Windows所压制。</p>
+<p><strong>2）</strong> 服务器领域<br>Linux最强的领域。我的腾讯云轻量应用服务器就是属于Linux的CentOS系统。  </p>
+<p><strong>3）</strong> 嵌入式领域<br>可以根据需要进行软件裁剪，内核最小仅需几百KB。<br>以后在物联网中应用会更广泛。  </p>
+<br>
+
+<h2 id="Linux高手进阶之路"><a href="#Linux高手进阶之路" class="headerlink" title="Linux高手进阶之路"></a><strong>Linux高手进阶之路</strong></h2><p><strong>第1阶段</strong><br>Linux环境下的基本操作命令，包括文件操作命令（rm、mkdir、chmod、chown）、编译工具使用（vi vim）、Linux用户管理（useradd、userdel、usermod）等。<br>比如一个项目经理，他不应该把root用户给别人，这就需要用到用户管理。  </p>
+<p><strong>第2阶段</strong><br>Linux的各种配置（环境变量配置、网络配置、服务配置）</p>
+<p><strong>第3阶段</strong><br>Linux下搭建对应语言的开发环境（大数据、JavaEE、Python等）</p>
+<p><strong>第4阶段</strong><br>能编写shell脚本，对Linux服务器进行维护。  </p>
+<p><strong>第5阶段</strong><br>能进行安全设置，防止攻击，保障服务器正常运行，能对系统调优。  </p>
+<p><strong>第6阶段</strong><br>深入理解Linux系统，对内核有研究，熟练掌握大型网站应用架构组成、并熟悉各个环节的部署和维护方法。    </p>
+<br>
+
+<h2 id="Linux学习方法"><a href="#Linux学习方法" class="headerlink" title="Linux学习方法"></a><strong>Linux学习方法</strong></h2><ol>
+<li>高效愉快</li>
+<li>先建立整体框架，再研究细节</li>
+<li>不需要掌握所有的Linux指令，要学会查询手册和百度<br>Linux指令非常多，两千个应该是有的  </li>
+<li>先know how，再know why</li>
+<li>计算机是一门“做中学”的学科，不是会了再做，而是做了才会</li>
+<li>适当地囫囵吞枣</li>
+<li>Linux不是变成，重点是实际操作，各种常用指令要玩得溜</li>
+</ol>
+<br>
+
+<h2 id="Linux介绍"><a href="#Linux介绍" class="headerlink" title="Linux介绍"></a><strong>Linux介绍</strong></h2><p>1） Linux的读音<br>读法很多，里纽克斯、利尼克斯、利纳克斯<br>怎么读都行，不影响理解就行了。</p>
+<p>2）Linux是一款操作系统，免费、开源、安全、高效、稳定、高并发。<br>现在很多企业级项目都部署到Linux或Unix服务器上运行。<br>一般.NET开发的产品才会部署到Windows操作系统上。  </p>
+<p>3）创始人：林纳斯（Linus）   </p>
+<p>4）Linux的吉祥物：企鹅-tux。<br>很多技术都有吉祥物，像github-章鱼猫，mysql-海豚，PHP-大象，docker-鲸鱼……</p>
+<p>5）Linux主要发行版本<br>Linux内核并没有提供软件，很多厂商就根据自己的需求基于Linux开发了软件。<br>主要的版本有：CentOS、Redhat、Ubuntu、Suse、红旗Linux等。  </p>
+<p>6）目前主要的操作系统<br>windows、linux、android、ios、macOS等。</p>
+<br>
+
+<h2 id="Linux和Unix的关系"><a href="#Linux和Unix的关系" class="headerlink" title="Linux和Unix的关系"></a><strong>Linux和Unix的关系</strong></h2><p>Linux是从Unix演化而来的。<br>Unix的其他分支：IBM → AIX、Sun → Solaris、HP → HP-UX，不过这些类Unix操作系统都不是开源的，并且运行在高端服务器上。<br>GNU计划：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-1.jpg" loading="lazy">   </p>
+<br>
+
+<h2 id="Linux和Windows比较"><a href="#Linux和Windows比较" class="headerlink" title="Linux和Windows比较"></a><strong>Linux和Windows比较</strong></h2><ul>
+<li>Windows基本都是图形界面下操作的，而Linux的应用场景更多是远程登录，通过命令行控制，所以学习的时候更多的是学命令行，图形化用得很少很少。  </li>
+<li>Windows是封闭的，系统可定制性差。Linux开源，可定制化很强。     </li>
+<li>个人PC机用Windows最多，Linux更多用在企业服务器上。  </li>
+</ul>
+<br>
+
+<h2 id="VMWare中一些知识"><a href="#VMWare中一些知识" class="headerlink" title="VMWare中一些知识"></a><strong>VMWare中一些知识</strong></h2><p><strong>1.</strong> BIOS：基本输出输出系统。  </p>
+<p><strong>2.</strong> 任务管理器 - 性能 - 资源监视器 - CPU 可以看到CPU的数量。   </p>
+<p><strong>3.</strong> VMware中几种网络连接方式解释：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-2.png" loading="lazy"><br><strong>1）</strong> 桥接模式<br>就是直接给虚拟机安装的Linux系统分配一个专用地址，Linux就可以直接和其它计算机使用者通信。这样的弊端在于当使用者很多时，地址可能会冲突。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-3.png" loading="lazy">    </p>
+<p><strong>2）</strong> NAT模式<br>此时使用者有两个ip地址，一个用于和网络环境内的其它使用者通信，一个用来和Linux通信，这样Linux就不占用网络环境中的IP地址，不会出现冲突。但这样Linux就不能直接和其它使用者通信了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-4.png" loading="lazy">    </p>
+<p><strong>3）</strong> 仅主机模式<br>这时Linux相当于一个独立的主机，不能访问外网。 </p>
+<br>
+
+<h2 id="CentOS的安装"><a href="#CentOS的安装" class="headerlink" title="CentOS的安装"></a><strong>CentOS的安装</strong></h2><p>CentOS镜像下载地址：在<a href="https://www.centos.org/download/">CentOS官网</a>就可以下。<br>我是安装的最新版本的CentOS（8.5.2111），和尚硅谷老师用的版本不一样，所以我一开始安装的最小系统，等以后缺什么了再安装。<br>首先缺的就是GUI界面，百度了一下，安装指令是：</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">yum groupinstall &quot;Server with GUI&quot;</code></pre>
+<p>然后输入以下命令查询当前开机启动模式：</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">systemctl get-default</code></pre>
+<p>查询结果中：<br><code>graphical.target</code>代表开机时启动图形化界面<br><code>multi-user.target</code>代表开机时启动dos界面<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-5.png" loading="lazy"><br>建议初学者弄个GUI界面，方便些。<br>成功之后CentOS的界面是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-6.png" loading="lazy">    </p>
+<p>欢迎步入Linux的世界。</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
 </search>
