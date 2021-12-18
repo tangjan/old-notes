@@ -4094,4 +4094,125 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>Git</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Web前端26：iframe元素、flash</title>
+    <url>/2021/12/18/web26/</url>
+    <content><![CDATA[<p>从这里开始就是HTML进阶部分了。</p>
+<h2 id="iframe元素"><a href="#iframe元素" class="headerlink" title="iframe元素"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe">iframe元素</a></strong></h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a><strong>基本使用</strong></h3><p>通常用于在网页中嵌入另一个页面。  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.bilibili.com<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span></code></pre>
+<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web26/web26-1.png" loading="lazy">  </p>
+<p>在浏览器元素审查界面：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web26/web26-2.png" loading="lazy"><br>其实<code>&lt;iframe&gt;</code>元素内嵌了另一套哔哩哔哩的html代码。  </p>
+<p>iframe元素是一个<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Replaced_element">可替换元素</a>。<br>可替换元素的特点：</p>
+<ol>
+<li>通常是行盒。</li>
+<li>通常显示的内容取决于元素的属性。  </li>
+<li>CSS不能完全控制其中的样式。比如CSS可以控制图片的大小、边框等，但是不能控制图片的颜色等。   </li>
+<li>具有行块盒的特点，盒模型中的各个尺寸是可设置的。<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">iframe</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web26/web26-3.png" loading="lazy">  </li>
+</ol>
+<h3 id="切换"><a href="#切换" class="headerlink" title="切换"></a><strong>切换</strong></h3><p>功能：点击<code>&lt;a&gt;</code>元素切换<code>&lt;iframe&gt;</code>的内容<br>其实很简单：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.bilibili.com<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myframe<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>哔哩哔哩<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.bing.com<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myframe<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>必应<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.taobao.com<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myframe<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>淘宝<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myframe<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web26/web26-4.gif" loading="lazy"><br>很好玩的样子。   </p>
+<h3 id="内嵌播放器"><a href="#内嵌播放器" class="headerlink" title="内嵌播放器"></a><strong>内嵌播放器</strong></h3><p><code>&lt;iframe&gt;</code>通常用于在网页中内嵌别的网页的视频。<br><code>&lt;video&gt;</code>需要源视频文件，一般取不到。<br>如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web26/web26-5.png" loading="lazy">   </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>//player.bilibili.com/player.html?aid=884543233&amp;bvid=BV1nK4y1a7cZ&amp;cid=235110583&amp;page=1<span class="token punctuation">"</span></span> <span class="token attr-name">scrolling</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>no<span class="token punctuation">"</span></span> <span class="token attr-name">border</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token attr-name">frameborder</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>no<span class="token punctuation">"</span></span> <span class="token attr-name">framespacing</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span> <span class="token attr-name">allowfullscreen</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">></span></span></code></pre>
+<p>这样一来网页中就内嵌了一个视频播放器：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web26/web26-6.png" loading="lazy"><br>其实这个视频是我自己录的，<a href="https://www.bilibili.com/video/BV1nK4y1a7cZ">原链接</a></p>
+<br>
+
+<h2 id="flash"><a href="#flash" class="headerlink" title="flash"></a><strong>flash</strong></h2><p>flash现在已经停用了，不过顺便学一下吧。<br>有两个元素可以嵌入flash文件： </p>
+<ol>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/object">&lt;object&gt;</a></p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>object</span> <span class="token attr-name">data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./flash.swf<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>application/x-shockwave-flash<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>object</span><span class="token punctuation">></span></span></code></pre>
+<p>其中<code>type</code>的值要填MIME格式的，详情见<a href="https://baike.baidu.com/item/MIME/2900607">MIME - 百度百科</a>。<br><code>&lt;object&gt;</code>内可以插入<code>&lt;param&gt;</code>，表示参数，在js中会细讲。  </p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/embed">&lt;embed&gt;</a></p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>embed</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./flash.swf<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>application/x-shockwave-flash<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre></li>
+</ol>
+<p>有的浏览器只能识别object元素，有的浏览器只能识别embed元素，所以在写的时候往往会这么写：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>object</span> <span class="token attr-name">data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./flash.swf<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>application/x-shockwave-flash<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>embed</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./flash.swf<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>application/x-shockwave-flash<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>object</span><span class="token punctuation">></span></span></code></pre>
+
+
+
+
+
+
+
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux2：终端、VMTools、Linux文件系统目录结构、远程登录、sshd、Xshell、Xftp</title>
+    <url>/2021/12/18/linux2/</url>
+    <content><![CDATA[<h2 id="终端的使用"><a href="#终端的使用" class="headerlink" title="终端的使用"></a><strong>终端的使用</strong></h2><p>“终端”在“应用程序”里。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-1.png" loading="lazy"><br>也可以在桌面右键：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-2.png" loading="lazy">   </p>
+<p>这里可以改配色方案：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-3.png" loading="lazy">  </p>
+<br>
+
+<h2 id="VMware-Tools"><a href="#VMware-Tools" class="headerlink" title="VMware Tools"></a><strong>VMware Tools</strong></h2><ol>
+<li>可以直接粘贴命令在Windows和CentOS之间</li>
+<li>可以设置Windows和CentOS的共享文件夹<br>在这安装（我之前安装过了）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-4.png" loading="lazy"><br>共享文件夹在这设置：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-5.png" loading="lazy"><br>然后在CentOS的计算机/mnt/hgfs/路径下就可以看到共享的文件夹了：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-6.png" loading="lazy">  </li>
+</ol>
+<p>创建文件指令：<code>touch 文件名</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-7.png" loading="lazy"><br>清屏指令：<code>clear</code><br>重启：<code>reboot</code><br>关机：<code>shutdown now</code>  </p>
+<br>
+
+<h2 id="Linux文件系统目录结构"><a href="#Linux文件系统目录结构" class="headerlink" title="Linux文件系统目录结构"></a><strong>Linux文件系统目录结构</strong></h2><p>Windows下有C盘、D盘、E盘等，而Linux只有一个根目录“/”。在这个根目录下有很多子目录，构成了一个树形结构。<br>所以有一个<code>rm -rf /*</code>的梗，表示删掉根目录下的所有文件，那样整个Liunx系统就被删掉了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-8.png" loading="lazy"><br>一句经典的话：在Linux的世界里，一切皆文件。<br>以下摘自<a href="https://www.runoob.com/linux/linux-system-contents.html">菜鸟教程</a><br><code>/dev</code>：device，设备，比如显示器、鼠标、键盘，都在这个文件夹里。<br><code>/boot</code>：存放系统开机启动加载程序的核心文件。<br><code>/bin</code>：binary，常用指令，比如cp表示copy，用来复制；date是用来修改时间的；cat用来查看文件；chgrp用来改变组等等。<br><code>etc</code>：两种说法，一是etcetera，二是Editable Text Configuration。存放一些系统程序的配置文件。<br><code>home</code>：存放普通用户。<br><code>lib</code>、<code>lib64</code>、：library，标准程序设计库，又叫动态链接共享库，作用类似windows里的.dll文件。<br><code>media</code>：存放一些媒介，如U盘、光驱。<br><code>mnt</code>：mount，可以让用户临时挂载别的文件系统。<br><code>opt</code>：optional，给主机额外安装软件所摆放的目录。<br><code>proc</code>：processes，操作系统运行时，进程信息、硬件信息存放在这里。<br><code>root</code>：超级权限用户（系统管理员）。<br><code>sbin</code>：superuser binary，存放系统管理员的管理程序，大多是涉及系统管理的。<br><code>srv</code>：service，存放一些服务启动之后需要提取的数据。<br><code>sys</code>：该文件系统是内核设备树的一个直观反映。当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。<br><code>tmp</code>：temporary，存放一些临时文件。<br><code>usr</code>：unix shared resources，用户的很多应用程序和文件都放在这个目录下，类似于 windows 下的 program files 目录。<br><code>var</code>：variable，这个目录中存放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下。包括各种日志文件。    </p>
+<br>
+
+<h2 id="为什么要远程登录"><a href="#为什么要远程登录" class="headerlink" title="为什么要远程登录"></a><strong>为什么要远程登录</strong></h2><p>为什么需要远程登陆Linux？你不是在本机装上了Linux了么，直接操作不就完事了？<br>真实的公司开发时，正式上线的项目是运行在公网的，所以Linux系统是安装在（比如联通移动阿里云）机房服务器上的，由开发小组共享，所以你只能远程控制，常用的软件是<span style="color:red">Xshell</span>。<br>再看另一种情况，下载你的电脑中有MySQL的安装包，你想远程传输到机房的Linux上然后安装；或者你想从机房的Linux上下载一些文件过来，这时就需要如<span style="color:red">Xftp</span>这样的软件。   </p>
+<p>Xshell是目前最好的远程登录到Linux的软件，操作流畅并且完美解决了中文乱码的问题。   </p>
+<p>Xshell和Xftp的<a href="https://www.xshell.com/zh/xshell/">下载地址</a>。</p>
+<br>
+
+<h2 id="sshd服务"><a href="#sshd服务" class="headerlink" title="sshd服务"></a><strong>sshd服务</strong></h2><p>用Xshell需要Linux系统开启sshd服务，开启22号端口监听，等待Windows连接。<br>理论上一个操作系统可以开65535个端口，但端口开得越多就越不安全。  </p>
+<p>CentOS8中：</p>
+<ul>
+<li>查看sshd服务的状态：<code>systemctl status sshd</code></li>
+<li>开启sshd服务：<code>systemctl start sshd</code></li>
+<li>停止sshd服务：<code>systemctl stop sshd</code></li>
+<li>重启sshd服务：<code>systemctl restart sshd</code></li>
+<li>sshd服务开机启动：<code>systemctl enable sshd</code></li>
+<li>sshd服务禁止开机启动：<code>systemctl disable sshd</code></li>
+<li>锁定sshd服务：<code>systemctl mask sshd</code></li>
+<li>解锁sshd服务：<code>systemctl unmask sshd</code></li>
+<li>重新加载sshd服务的配置文件：<code>systemctl reload sshd</code></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-9.png" loading="lazy"><br>绿字<code>active</code>表示已经开启。</p>
+<br>
+
+<h2 id="Xshell的配置"><a href="#Xshell的配置" class="headerlink" title="Xshell的配置"></a><strong>Xshell的配置</strong></h2><p>在CentOS中，<code>ifconfig</code>查询ip地址：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-10.png" loading="lazy"><br>这个IP地址是自动分配的，其实也可以人为指定，后面会讲。  </p>
+<p>在Xshell中，新建，填入上面的ip地址：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-11.png" loading="lazy">  </p>
+<p>确定，然后在左边就能看到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-12.png" loading="lazy"><br>双击，会弹出：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-13.png" loading="lazy"><br>点击“接受并保存”。<br>然后会弹出用户名和密码，这个用户名和密码指的是CentOS系统中的。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-14.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-15.png" loading="lazy"><br>当右边出现root，就表示已经连上了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-16.png" loading="lazy">  </p>
+<p>至此，Xshell连接CentOS成功，相当于我们可以远程操作了。  </p>
+<br>
+
+<h2 id="Xftp的配置"><a href="#Xftp的配置" class="headerlink" title="Xftp的配置"></a><strong>Xftp的配置</strong></h2><p>名称可以随便填，主机地址还是查询到的CentOS的地址，协议要用SFTP。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-17.png" loading="lazy"><br>然后确定，连接即可：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-18.png" loading="lazy"><br>显示了乱码，不要紧，在“属性”里设置：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-19.png" loading="lazy"><br>然后就不乱码了：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-20.png" loading="lazy">   </p>
+<p>试着传个文件给CentOS：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-21.png" loading="lazy"><br>在CentOS中root文件夹成功收到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-22.png" loading="lazy">   </p>
+<p>当然你的VMware安装了VMTools，可以直接从Windows复制文件到CentOS；但是在实际开发中CentOS可不是装在VMware中的……</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
 </search>
