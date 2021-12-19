@@ -4550,4 +4550,73 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Git4：删除找回、比较文件、分支</title>
+    <url>/2021/12/19/git4/</url>
+    <content><![CDATA[<h2 id="永久删除文件后找回"><a href="#永久删除文件后找回" class="headerlink" title="永久删除文件后找回"></a><strong>永久删除文件后找回</strong></h2><p>新建一个2.txt，并且提交到暂存区、本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-1.png" loading="lazy"><br>然后使用<code>rm 2.txt</code>删除2.txt<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-2.png" loading="lazy"><br>把删除2.txt的操作提交到暂存区、本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-3.png" loading="lazy"><br>现在2.txt已经被永久删除了。<br>但是版本提交的历史记录是一直存在的，每一个版本都有，也就是说<code>rm 2.txt</code>之前的版本也存在，所以2.txt是能找回来的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-4.png" loading="lazy"><br>可以看到2.txt被找回来了，后悔药服用成功。   </p>
+<p>但是.git这个文件夹你不能删掉，删掉就真没了。   </p>
+<br>
+
+<h2 id="添加到暂存区的删除文件找回"><a href="#添加到暂存区的删除文件找回" class="headerlink" title="添加到暂存区的删除文件找回"></a><strong>添加到暂存区的删除文件找回</strong></h2><p>新建一个3.txt，提交到暂存区和本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-5.png" loading="lazy"><br>然后删掉3.txt，提交到暂存区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-6.png" loading="lazy"><br>这时可以使用<code>git reset --hard HEAD</code>来找回3.txt文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-7.png" loading="lazy"><br>原理是同步工作区为本地库的指针<code>HEAD</code>指向的版本，刷新暂存区，而本地库的<code>HEAD</code>指向的是<code>new 3.txt</code>这个版本，所以文件找回来了。   </p>
+<br>
+
+<h2 id="删除找回总结"><a href="#删除找回总结" class="headerlink" title="删除找回总结"></a><strong>删除找回总结</strong></h2><p>前提：删除前，文件存在的版本提交到了本地库。<br>操作：<code>git reset --hard &lt;指针位置&gt;</code></p>
+<ul>
+<li>删除操作已经提交到本地库：指针位置指向历史记录   </li>
+<li>删除操作尚未提交到本地库：指针位置使用<code>HEAD</code>   </li>
+</ul>
+<br>
+
+<h2 id="比较文件"><a href="#比较文件" class="headerlink" title="比较文件"></a><strong>比较文件</strong></h2><p>修改一下1.txt的文件内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-8.png" loading="lazy"><br>然后使用<code>git diff 1.txt</code>把工作区文件和暂存区比较，查看文件的变动：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-9.png" loading="lazy"><br><code>-</code>红字表示删掉的内容，<code>+</code>绿字表示新增的内容，以行为单位。  </p>
+<p>如果执行<code>git add 1.txt</code>加到暂存区，就不会用什么显示，因为工作区和暂存区一致，没有变动：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-10.png" loading="lazy">   </p>
+<p>我们还可以把工作区文件和某一历史版本文件进行比较，如</p>
+<pre class="language-none"><code class="language-none">git diff b25b444 1.txt</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-11.png" loading="lazy">   </p>
+<p>不带文件名，如<code>git diff head</code>，可以同时比较多个文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-12.png" loading="lazy">   </p>
+<p><strong>总结</strong>：</p>
+<ul>
+<li><p><code>git diff &lt;文件名&gt;</code><br>将工作区中的文件和暂存区进行比较</p>
+</li>
+<li><p><code>git diff &lt;本地库中历史版本&gt; &lt;文件名&gt;</code><br>将工作区中的文件和本地库历史记录比较</p>
+</li>
+<li><p>不带文件名比较多个文件</p>
+</li>
+</ul>
+<br>
+
+<h2 id="分支概述"><a href="#分支概述" class="headerlink" title="分支概述"></a><strong>分支概述</strong></h2><p>分支：在版本控制过程中，使用多条线同时推进多个任务。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-13.png" loading="lazy"><br><code>master</code>表示主干<br><code>feature_blue</code>表示开发一套蓝色的主题的分支<br><code>feature_game</code>表示开发一个小游戏的分支<br>这些分支彼此独立，如果不合并的话就互不影响。所以如果其中某一分支开发失败，删除分支即可，对整个项目没有影响，方便试错。对项目推进的效率也很有帮助，多个分支可以齐头并进，不必等项目主体开发完再开始。<br>分支开发完成后没有问题就可以合并到master主干，进行产品升级。<br>主干也可能出现bug，这时可以使用专门用来修复bug的<code>hot_fix</code>分支来修复，意思是热修复，因为服务器是不停运行的，在运行过程中修复就是热修复。相应地，停掉服务器再修复就是冷修复。     </p>
+<p>从上面的过程我们可以总结出分支的好处：</p>
+<ul>
+<li>同时并行推进多个功能开发，提高开发效率。  </li>
+<li>各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响。失败的分支删除重新开始即可。  </li>
+</ul>
+<p><span style="color:red">插曲小tip</span>：Ctrl + L 可以实现清屏的效果。（实际上不是清屏，只是翻页了而已）</p>
+<br>
+
+<h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a><strong>分支操作</strong></h2><ul>
+<li>查看分支：<code>git brach -v</code>   </li>
+<li>创建分支：<code>git branch &lt;分支名&gt;</code>   </li>
+<li>切换分支：<code>git checkout &lt;分支名&gt;</code>   </li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-14.png" loading="lazy">   </p>
+<p>我们新建了一个<code>hot_fix</code>分支，并切换到了这个分支。<br>在这个分支上进行操作并提交到本地库当然也会进行版本更新：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-15.png" loading="lazy"><br>这时<code>hot_fix</code>分支的版本就比<code>master</code>的版本更领先，假设这时说明<code>hot_fix</code>的功能已经实现了，需要合并到<code>master</code>主干，就需要进行分支合并。<br>进行分支合并时必须在接受合并的分支（master）上，然后再执行合并指令，也就是：</p>
+<ol>
+<li>第一步：<code>git checkout &lt;接受合并分支名&gt;</code>   </li>
+<li>第二步：<code>git merge &lt;有新内容分支名&gt;</code>  </li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-16.png" loading="lazy">   </p>
+<br>
+
+<h2 id="分支合并时冲突的解决"><a href="#分支合并时冲突的解决" class="headerlink" title="分支合并时冲突的解决"></a><strong>分支合并时冲突的解决</strong></h2><p>当在两个分支分别修改时，恰好修改的是同一文件的同一位置，分支合并时就会出现冲突。<br>现在我们在<code>master</code>分支和<code>hot_fix</code>分支都修改<code>1.txt</code>文件中的同一行：<br>master中：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-17.png" loading="lazy"><br>hot_fix中：<br>（有句命令手残敲错了一次）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-18.png" loading="lazy">   </p>
+<p>这时再合并（往hot_fix上合并master也是可以的）就会出现：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-19.png" loading="lazy"><br>意思是自动合并失败，需要我们手动合并，<code>MERGING</code>就表示正在合并。<br>这时用<code>vim 1.txt</code>打开1.txt查看，会出现这样的内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-20.png" loading="lazy"><br>增加了一些特殊的标记。<br>以<code>=======</code>为分界，HEAD指向的，即<code>333333 edit bt bot_fix</code>（应该是by，敲错了）表示当前分支内容，<code>333333 edit bt master</code>表示master分支内容。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-21.png" loading="lazy"><br>处理方式很容易理解，在此vim编辑器中删掉不需要的内容、留下需要的，就行了。<br>现在我什么都不修改，假设已经决定好了，直接退出，然后<code>git add 1.txt</code>、<code>git commit</code>（注意<code>git commit</code>后不要带文件名）。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-22.png" loading="lazy"><br>冲突解决，合并完成。然后使用<code>cat 1.txt</code>看一下：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-23.png" loading="lazy"><br>可以看到其内容就是刚才<code>MERGING</code>过程中编辑的内容</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
 </search>
