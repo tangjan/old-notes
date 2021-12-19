@@ -4215,4 +4215,73 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>Linux</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Git3：历史记录、版本穿梭、reset命令的三个参数对比</title>
+    <url>/2021/12/19/git3/</url>
+    <content><![CDATA[<h2 id="查看历史记录"><a href="#查看历史记录" class="headerlink" title="查看历史记录"></a><strong>查看历史记录</strong></h2><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a><strong><code>git log</code></strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-1.png" loading="lazy"><br>其中，</p>
+<ul>
+<li><code>80555fa9114e1aa95eef4677fda4424829fd80a4</code>和<code>de4a738faba2b6c27ef69cf9295df79a95a852e8</code>是哈希值，表示索引。    </li>
+<li><code>(HEAD -&gt; master)</code>表示指针，指向当前的版本。   </li>
+<li><code>Author</code>是作者签名，<code>Date</code>是提交时间。</li>
+<li><code>second commit, modify 1.txt</code>和<code>first commit new file 1.txt</code>是我们自己写的提交注释。  </li>
+</ul>
+<h3 id="多屏显示"><a href="#多屏显示" class="headerlink" title="多屏显示"></a><strong>多屏显示</strong></h3><p>为了讲解接下来的内容，不断给1.txt文档增加内容，多添加一些提交（我添加了8次的样子），然后使用<code>git log</code>可以看到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-2.png" loading="lazy"><br>可以看到一屏已经放不下了，并且左下角多了个<code>:</code>，说明后面还有内容。<br>在这里和Linux一样，可以按键盘的上下箭头来浏览，也可以空格向下翻页、B键向上翻页，Q键退出。   </p>
+<h3 id="简要显示"><a href="#简要显示" class="headerlink" title="简要显示"></a><strong>简要显示</strong></h3><p>直接用<code>git log</code>显示的内容比较多，浏览起来比较麻烦，所以当日志多的时候可以给此命令附加一些参数：</p>
+<pre class="language-none"><code class="language-none">git log --pretty&#x3D;oneline</code></pre>
+<p>这样一来每条日志只显示简要的一行：<br>（增加一行“3”写错了，应该是增加一行4，对不住了强迫症朋友）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-3.png" loading="lazy">   </p>
+<p>还可以：</p>
+<pre class="language-none"><code class="language-none">git log --oneline</code></pre>
+<p>这样一来哈希值只显示一部分：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-4.png" loading="lazy">   </p>
+<br>
+
+<h2 id="版本穿梭"><a href="#版本穿梭" class="headerlink" title="版本穿梭"></a><strong>版本穿梭</strong></h2><pre class="language-none"><code class="language-none">git reflog</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-5.png" loading="lazy"><br>相比于之前的<code>git log</code>，多了一些<code>HEAD@&#123;$&#125;</code>的信息，表示回到<code>$</code>版本需要移动<code>$</code>步。<br>这里的<code>HEAD</code>之前介绍过，表示指针，默认指向时间上离我们最近的版本，可以操控指针移动来实现版本回退。<br>有3种方式：  </p>
+<h3 id="基于索引值操作（推荐）"><a href="#基于索引值操作（推荐）" class="headerlink" title="基于索引值操作（推荐）"></a><strong>基于索引值操作（推荐）</strong></h3><p>命令：<code>git reset --hard &lt;局部索引值&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-6.png" loading="lazy"><br>然后使用<code>cat 1.txt</code>查看1.txt的内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-7.png" loading="lazy"><br>可以看到版本回退成功。<br>然后再使用<code>git reflog</code>来看：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-8.png" loading="lazy"><br>可以看到指针指到了<code>HEAD@&#123;6&#125;</code>这条记录。<br>这种基于索引值的命令可以随意穿梭，前进后退都行。总之只要你知道你想去的那个版本，就可以穿梭到那。    </p>
+<p><span style="color:red">插曲小tip</span>：<br>在git bash窗口中，选中即复制，什么键都不用按。也就是说选中后直接粘贴就行。<br>而在Windows的cmd窗口中，选中之后按一下鼠标右键是复制。</p>
+<h3 id="使用-符号，只能后退"><a href="#使用-符号，只能后退" class="headerlink" title="使用^符号，只能后退"></a><strong>使用<code>^</code>符号，只能后退</strong></h3><p>命令：<code>git reset --hard HEAD^</code><br>我们再回到最新的版本，然后用<code>git log --oneline</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-9.png" loading="lazy"><br>然后使用<code>git reset --hard HEAD^</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-10.png" loading="lazy"><br>可以看到它回退到了上一个版本。   </p>
+<p><code>HEAD</code>后有几个<code>^</code>，就回退几个版本：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-11.png" loading="lazy"><br>但这样有很大的限制，如果是要回退好几十个版本，那写好几十个<code>^</code>岂不是要累坏……<br>所以就可以用<code>~</code>符号。</p>
+<h3 id="使用-符号，只能后退-1"><a href="#使用-符号，只能后退-1" class="headerlink" title="使用~符号，只能后退"></a><strong>使用<code>~</code>符号，只能后退</strong></h3><p>命令：<code>git reset --hard HEAD~&lt;回退步数&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-12.png" loading="lazy">   </p>
+<p>使用<code>^</code>或<code>~</code>，都需要数一下回退步数，如果是要回退几十次，很容易数错<br>所以还是推荐使用<code>git reset --hard &lt;局部索引值&gt;</code></p>
+<br>
+
+<h2 id="reset命令的三个参数对比"><a href="#reset命令的三个参数对比" class="headerlink" title="reset命令的三个参数对比"></a><strong>reset命令的三个参数对比</strong></h2><h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a><strong>解释</strong></h3><p>可以使用<code>git help &lt;命令名&gt;</code>查看帮助，比如输入<code>git help reset</code>就会在浏览器中弹出<code>git-reset.html</code>帮助文件，<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-13.png" loading="lazy"><br>在这里可以看到reset命令的3个参数解释：</p>
+<blockquote>
+<p>–soft<br>Does not touch the index file or the working tree at all (but resets the head to &lt;commit&gt;, just like all modes do). This leaves all your changed files “Changes to be committed”, as git status would put it.</p>
+</blockquote>
+<p><code>index file</code>指的是暂存区，<code>working tree</code>指的是工作区。也就是说<code>--soft</code>不涉及到暂存区和工作区，仅仅在本地库中移动HEAD指针。</p>
+<blockquote>
+<p>–mixed<br>Resets the index but not the working tree (i.e., the changed files are preserved but not marked for commit) and reports what has not been updated. This is the default action.<br>If -N is specified, removed paths are marked as intent-to-add (see git-add(1)).</p>
+</blockquote>
+<p>重置暂存区，但不涉及工作区。也就是在本地库移动HEAD指针的同时重置暂存区。   </p>
+<blockquote>
+<p>–hard<br>Resets the index and working tree. Any changes to tracked files in the working tree since &lt;commit&gt; are discarded. Any untracked files or directories in the way of writing any tracked files are simply deleted.</p>
+</blockquote>
+<p>在本地库移动HEAD指针的同时重置暂存区和工作区。可以感觉到“hard”的含义了，确实很hard。   </p>
+<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a><strong>演示</strong></h3><p>下面分别运行这3个参数体会一下。<br>先用<code>git reflog</code>查看一下当前HEAD指针的位置：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-14.png" loading="lazy"><br>可以看到HEAD是指在“增加一行7”的版本。  </p>
+<p><code>--soft</code>：<br>使用<code>git reset --soft 2a84e07</code>把HEAD指针移动到“增加一行B”的版本，然后使用<code>cat 1.txt</code>查看一下1.txt文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-15.png" loading="lazy"><br>可以看到1.txt并没有修改，也就是本地的工作区没被修改。<br>再用<code>git status</code>看一下暂存区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-16.png" loading="lazy"><br>字儿变成绿的了，提示<code>modified 1.txt</code>，这是因为本地库的版本变了，而暂存区的版本没变，导致暂存区和本地库不一致，所以它就提示“modified”。<br>也就是说不是因为我们修改而1.txt直接导致<code>modified</code>，而是因为本地库版本改变间接导致<code>modified</code>。   </p>
+<p><code>--mixed</code>：<br>和<code>--soft</code>上面一样的一套操作：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-17.png" loading="lazy"><br>移动到“增加一行8”的版本，然后用<code>cat 1.txt</code>发现本地工作区没被改变。<br>而使用<code>git status</code>查看暂存区，发现字儿变成红的了，也就是暂存区被改变了。   </p>
+<p><code>--hard</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-18.png" loading="lazy"><br>可以看见本地工作区文件被修改，并且暂存区没什么提示。<br>也就是说工作区、暂存区、本地库三者同步了。   </p>
+<p>实际上<code>--soft</code>和<code>--mixed</code>很少用到。   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>My awesome title</title>
+    <url>/2021/12/01/git4/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>未分类</category>
+      </categories>
+      <tags>
+        <tag>标签1</tag>
+        <tag>标签2</tag>
+      </tags>
+  </entry>
 </search>
