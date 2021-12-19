@@ -4273,4 +4273,50 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>Git</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Linux3：vi和vim编辑器、快捷键</title>
+    <url>/2021/12/19/linux3/</url>
+    <content><![CDATA[<h2 id="vi和vim编辑器"><a href="#vi和vim编辑器" class="headerlink" title="vi和vim编辑器"></a><strong>vi和vim编辑器</strong></h2><p>就像Windows里一定要会使用notepad，Linux中一定要学会vim编辑器。  </p>
+<p>所有的Linux系统都会内建vi文本编辑器。vim具有程序编辑的能力，可以看作是vi的增强版，可以主动地以字体颜色辨别语法的正确性，方便程序设计。代码补全、编译及错误跳转等方便编程的功能丰富，在程序员中被广泛使用。  </p>
+<p>vi和vim常用的三种模式：</p>
+<ul>
+<li><p>一般模式<br>以vi或vim正常打开一个文档就直接进入一般模式。   </p>
+</li>
+<li><p>编辑模式<br>在此模式下，程序员可以输入内容。<br>一般在正常模式中按下i就可以进入该模式。  </p>
+</li>
+<li><p>命令行模式<br>在此模式下可以输入一些命令，完成读取、存盘、替换、离开vim、显示行号等动作。   </p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-1.png" loading="lazy">   </p>
+<p><code>a</code>和<code>i</code>是有区别的，<code>a</code>会定位到当前光标的下一行。<br><code>:wq</code>表示保存并退出（w表示write，q表示quit），<code>:q</code>表示退出但不保存，<code>:q!</code>表示强制退出<br>如果你已经修改了文件，用<code>:q</code>是无法退出的，会提示<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-2.png" loading="lazy"><br>也就是说修改了文件后想不保存退出只能用<code>:q!</code>。<br><code>:q</code>是用来查看但不修改后退出的。   </p>
+<br>
+
+<h2 id="简单案例"><a href="#简单案例" class="headerlink" title="简单案例"></a><strong>简单案例</strong></h2><p>使用vim开发一个Hello.java程序，用Xshell来控制。<br>首先执行<code>vim hello.java</code>，进入vim编辑器正常模式，按i进入插入模式，输入以下内容：</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> hello<span class="token punctuation">&#123;</span>
+        <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>string<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello, World"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-3.png" loading="lazy"><br>然后按Esc，输入<code>:wq</code>，回车<br>使用<code>ll</code>指令可以看到已经新建了个“hello.java”文件<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-4.png" loading="lazy">   </p>
+<br>
+
+<h2 id="vi和vim的快捷键"><a href="#vi和vim的快捷键" class="headerlink" title="vi和vim的快捷键"></a><strong>vi和vim的快捷键</strong></h2><p>快捷键用熟后vim会很强大。<br>接下来举7个例子：</p>
+<h3 id="例1"><a href="#例1" class="headerlink" title="例1"></a><strong>例1</strong></h3><p>拷贝当前行（<code>yy</code>），粘贴（<code>p</code>）；拷贝当前行下面的5行（<code>5yy</code>），粘贴（<code>p</code>）。<br>新建个<code>test.java</code>文件，内容为：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-5.png" loading="lazy"><br>在一般模式下，输入y、y，然后按p，即可粘贴<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-6.png" loading="lazy"><br>把光标移回第一行，输入5、y、y，窗口下面就会出现：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-7.png" loading="lazy"><br>按p即可粘贴：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-8.png" loading="lazy">   </p>
+<h3 id="例2"><a href="#例2" class="headerlink" title="例2"></a><strong>例2</strong></h3><p>删除当前行（<code>dd</code>）；删除当前行向下5行（<code>5dd</code>）。<br>为了方便看出效果，我把文档内容修改了一下：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-9.png" loading="lazy"><br>光标移到a2一行，然后输入d、d，得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-10.png" loading="lazy"><br>可以看到a2一行被删掉了。<br>继续输入5、d、d，得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-11.png" loading="lazy"><br>5行被删掉了。</p>
+<h3 id="例3"><a href="#例3" class="headerlink" title="例3"></a><strong>例3</strong></h3><p>在文件中查找某个关键词（<code>/关键词</code>，<code>n</code>：查找下一个）。<br>修改一下test.java：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-12.png" loading="lazy"><br>在一般模式下输入<code>/hello</code>，回车，可以看到<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-13.png" loading="lazy"><br>这时按<code>n</code>就可以跳到下一个hello</p>
+<h3 id="例4"><a href="#例4" class="headerlink" title="例4"></a><strong>例4</strong></h3><p>设置文件的行号（<code>:set nu</code>），取消文件的行号（<code>:set nonu</code>）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-14.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-15.png" loading="lazy">     </p>
+<h3 id="例5"><a href="#例5" class="headerlink" title="例5"></a><strong>例5</strong></h3><p>编辑<code>/etc/profile</code>文件，使用快捷键到底文档的最末行（<code>G</code>，注意大写）和最首行（<code>gg</code>）<br>使用<code>vim /etc/profile</code>进入<code>profile</code>文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-16.png" loading="lazy"><br>这个文件有很多内容，可以用快捷键快速跳转到最后一行。在一般模式下输入<code>G</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-17.png" loading="lazy"><br>右下角提示已经跳转到了底端。<br>再输入<code>gg</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-18.png" loading="lazy"><br>右下角提示跳回了顶端。   </p>
+<h3 id="例6"><a href="#例6" class="headerlink" title="例6"></a><strong>例6</strong></h3><p>在一个文件中输入”你好”，然后撤销（<code>u</code>）。<br><code>vim test.java</code>打开test.java文件，然后输入“你好”：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-19.png" loading="lazy"><br>Esc回到一般模式，输入<code>u</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-20.png" loading="lazy"><br>可以看到最下面提示“1行被去掉”，撤销成功。  </p>
+<h3 id="例7"><a href="#例7" class="headerlink" title="例7"></a><strong>例7</strong></h3><p>编辑<code>/etc/profile</code>文件，将光标移动到第70行（shift + g）。<br>第一步：显示行号，<code>:set nu</code><br>第二步：输入<code>70</code><br>第三步：shift + g<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-21.png" loading="lazy"><br>可以看到光标定位到了第70行。   </p>
+<p>还有很多其他的vi/vim快捷键，可以参考<a href="https://www.runoob.com/w3cnote/all-vim-cheatsheat.html">菜鸟教程</a>。<br>这里放一张图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux3/linux3-22.gif" loading="lazy">     </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
 </search>
