@@ -4242,6 +4242,7 @@ body</span><span class="token punctuation">&#123;</span>
 <p><code>HEAD</code>后有几个<code>^</code>，就回退几个版本：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-11.png" loading="lazy"><br>但这样有很大的限制，如果是要回退好几十个版本，那写好几十个<code>^</code>岂不是要累坏……<br>所以就可以用<code>~</code>符号。</p>
 <h3 id="使用-符号，只能后退-1"><a href="#使用-符号，只能后退-1" class="headerlink" title="使用~符号，只能后退"></a><strong>使用<code>~</code>符号，只能后退</strong></h3><p>命令：<code>git reset --hard HEAD~&lt;回退步数&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-12.png" loading="lazy">   </p>
 <p>使用<code>^</code>或<code>~</code>，都需要数一下回退步数，如果是要回退几十次，很容易数错<br>所以还是推荐使用<code>git reset --hard &lt;局部索引值&gt;</code></p>
+<p>另外，使用<code>git reset --hard HEAD</code>，不加<code>^</code>和<code>~</code>，就表示统一工作区、暂存区到本地库HEAD指针指向的位置。相关内容见下面。   </p>
 <br>
 
 <h2 id="reset命令的三个参数对比"><a href="#reset命令的三个参数对比" class="headerlink" title="reset命令的三个参数对比"></a><strong>reset命令的三个参数对比</strong></h2><h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a><strong>解释</strong></h3><p>可以使用<code>git help &lt;命令名&gt;</code>查看帮助，比如输入<code>git help reset</code>就会在浏览器中弹出<code>git-reset.html</code>帮助文件，<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-13.png" loading="lazy"><br>在这里可以看到reset命令的3个参数解释：</p>
@@ -4270,18 +4271,6 @@ body</span><span class="token punctuation">&#123;</span>
       </categories>
       <tags>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>My awesome title</title>
-    <url>/2021/12/01/git4/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>未分类</category>
-      </categories>
-      <tags>
-        <tag>标签1</tag>
-        <tag>标签2</tag>
       </tags>
   </entry>
 </search>
