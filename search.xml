@@ -4782,4 +4782,139 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>Linux</tag>
       </tags>
   </entry>
+  <entry>
+    <title>My awesome title</title>
+    <url>/2021/12/01/web29/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>未分类</category>
+      </categories>
+      <tags>
+        <tag>标签1</tag>
+        <tag>标签2</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Web前端28：美化表单元素</title>
+    <url>/2021/12/20/web28/</url>
+    <content><![CDATA[<p>上节课是表单元素的HTML知识，这节课是表单元素的CSS知识。   </p>
+<br>
+
+<h2 id="新的伪类"><a href="#新的伪类" class="headerlink" title="新的伪类"></a><strong>新的伪类</strong></h2><h3 id="focus"><a href="#focus" class="headerlink" title=":focus"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:focus">:focus</a></strong></h3><p>元素聚焦时的样式。<br><span style="color:red">聚焦</span>是什么意思？<br>以超链接、文本输入框和按钮为例。首先，点击输入框时，它显示的这个状态就叫聚焦：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-1.png" loading="lazy"><br>对于其他元素，可以通过按Tab键来切换到聚焦状态：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-2.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-3.png" loading="lazy"><br>按Tab键时的切换顺序默认是从上到下，不过这个顺序可以通过<code>tabindex</code>属性来调整，如：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">tabindex</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>2<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">></span></span>lorem<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">tabindex</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>1<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">tabindex</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>3<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>提交<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<p>表示切换的顺序是<code>&lt;input&gt;</code>、<code>&lt;a&gt;</code>、<code>&lt;button&gt;</code>。  </p>
+<p>聚焦时的样式就是通过伪类<code>focus</code>来控制的。<br>如：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">input:focus</span><span class="token punctuation">&#123;</span>
+    <span class="token property">outline</span><span class="token punctuation">:</span> 3px solid #008c8c<span class="token punctuation">;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-4.gif" loading="lazy">   </p>
+<br>
+
+<h3 id="checked"><a href="#checked" class="headerlink" title=":checked"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/:checked">:checked</a></strong></h3><p>单选框或多选框被选中时的样式。<br>由于<code>&lt;input&gt;</code>是可替换元素，所以能用CSS控制的样式不多。所以事实上即使你设置</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">input:checked</span><span class="token punctuation">&#123;</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+```   
+也是没什么效果的。  
+不过，你可以这样设置：
+```html
+&lt;p>
+    &lt;input id=<span class="token string">"radio-male"</span> name=<span class="token string">"gender"</span> type=<span class="token string">"radio"</span>>
+    &lt;label for=<span class="token string">"radio-male"</span>>男&lt;/label>
+    
+    &lt;input id=<span class="token string">"radio-female"</span> name=<span class="token string">"gender"</span> type=<span class="token string">"radio"</span>>
+    &lt;label for=<span class="token string">"radio-female"</span>>女&lt;/label> 
+&lt;/p></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">input:checked+label</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span>red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>即用<code>+</code>设置单选框被选中时的它的子元素。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-5.png" loading="lazy">   </p>
+<br>
+
+<h2 id="设置表单元素样式-常见用法"><a href="#设置表单元素样式-常见用法" class="headerlink" title="设置表单元素样式 常见用法"></a><strong>设置表单元素样式 常见用法</strong></h2><h3 id="重置表单元素样式"><a href="#重置表单元素样式" class="headerlink" title="重置表单元素样式"></a><strong>重置表单元素样式</strong></h3><p>有的文本输入框是和浏览器的默认样式不一样的，比如淘宝的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-6.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-7.png" loading="lazy"><br>所以为了更方便地进行CSS渲染，就需要现进行样式重置。如<br><code>reset.css</code>：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">input, textarea, button, select</span><span class="token punctuation">&#123;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">outline-offset</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">input:focus, textarea:focus, button:focus, select:focus</span><span class="token punctuation">&#123;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+    <span class="token property">outline-offset</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>然后就可以在自己的css文件里按照设计稿进行CSS渲染了。   </p>
+<h3 id="设置-lt-textarea-gt-调整尺寸的方式"><a href="#设置-lt-textarea-gt-调整尺寸的方式" class="headerlink" title="设置&lt;textarea&gt;调整尺寸的方式"></a><strong>设置&lt;textarea&gt;调整尺寸的方式</strong></h3><p>一般情况下<code>&lt;textarea&gt;</code>可以通过右下角调整尺寸：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-8.png" loading="lazy"><br>可以通过CSS设置它调整尺寸的方式：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-9.png" loading="lazy"><br><code>none</code>表示不允许调整尺寸。<br><code>both</code>表示x方向和y方向上都可以调整尺寸。<br><code>horizontal</code>表示仅允许x方向上调整尺寸。<br><code>vertical</code>表示仅允许y方向调整尺寸。    </p>
+<h3 id="设置文本框边缘到文字的距离"><a href="#设置文本框边缘到文字的距离" class="headerlink" title="设置文本框边缘到文字的距离"></a><strong>设置文本框边缘到文字的距离</strong></h3><p><strong>方式1</strong>：padding</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">input</span><span class="token punctuation">&#123;</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-10.png" loading="lazy">   </p>
+<p><strong>方式2</strong>：text-indent<br>这种方式只能设置左边的距离。  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">input</span><span class="token punctuation">&#123;</span>
+    <span class="token property">text-indent</span><span class="token punctuation">:</span> 1em<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-11.png" loading="lazy">   </p>
+<h3 id="控制单选和多选的样式"><a href="#控制单选和多选的样式" class="headerlink" title="控制单选和多选的样式"></a><strong>控制单选和多选的样式</strong></h3><p>如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-12.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-13.png" loading="lazy"><em>（来自<a href="https://element.eleme.cn/#/zh-CN/component/checkbox">Element</a>）</em>   </p>
+<p>再看我们的多选框：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-14.png" loading="lazy"><br>丑得一比……</p>
+<p>其实那些漂亮的多选单选框是另做的，不是<code>&lt;input type=&quot;checkbox&quot;&gt;</code>元素。<br>如（就不解释了，自己琢磨）：<br>html：  </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    性别：
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio-item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gender<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>男<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>label</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio-item<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>gender<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>radio<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>女<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>label</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<p>css：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.radio-item .radio</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 12px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 12px<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 1px solid #999<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 35%<span class="token punctuation">;</span>
+    <span class="token property">cursor</span><span class="token punctuation">:</span> pointer<span class="token punctuation">;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> inline-block<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.radio-item input:checked+.radio</span><span class="token punctuation">&#123;</span>
+    <span class="token property">border-color</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.radio-item input:checked~span</span><span class="token punctuation">&#123;</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> #008c8c<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.radio-item input:checked+.radio::after</span><span class="token punctuation">&#123;</span>
+    <span class="token property">content</span><span class="token punctuation">:</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 7px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 7px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #008c8c<span class="token punctuation">;</span>
+    <span class="token property">margin-left</span><span class="token punctuation">:</span> 2.5px<span class="token punctuation">;</span>
+    <span class="token property">margin-top</span><span class="token punctuation">:</span> 2.5px<span class="token punctuation">;</span>
+    <span class="token property">border-radius</span><span class="token punctuation">:</span> 50%<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.radio-item input[type="radio"]</span><span class="token punctuation">&#123;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>效果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web28/web28-15.png" loading="lazy">   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>
