@@ -4710,7 +4710,7 @@ body</span><span class="token punctuation">&#123;</span>
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-30.png" loading="lazy">   </p>
 <br>
 
-<h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a><strong>Gitlab</strong></h2><p>Gitlab一般搭建在Linux上的，用来创建私有仓库。<br>目前来看，对于我个人来说，Gitee就够用了，所以Gitlab等以后有需要再学。<br><a href="https://about.gitlab.com/">Gitlab官网</a></p>
+<h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a><strong>Gitlab</strong></h2><p>Gitlab一般搭建在Linux上的，用来创建私有仓库。也可以用来创建局域网内的团队仓库，这样哪怕一个团队访问不了外网，也能做起项目来。<br>目前来看，对于我个人来说，Gitee就够用了，所以Gitlab等以后有需要再学。<br><a href="https://about.gitlab.com/">Gitlab官网</a></p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
@@ -4719,6 +4719,67 @@ body</span><span class="token punctuation">&#123;</span>
       </categories>
       <tags>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux4：关机重启注销、用户管理、用户和组的相关文件</title>
+    <url>/2021/12/19/linux4/</url>
+    <content><![CDATA[<h2 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a><strong>关机、重启</strong></h2><p><code>shutdown -h now</code>：立即关机<br><code>shutdown -h 1</code>：1分钟后关机   </p>
+<p><code>shutdown -r now</code>：立即重启<br><code>shutdown -r 1</code>：1分钟后重启</p>
+<p><code>halt</code>：停机，等价于关机   </p>
+<p><code>reboot</code>：重启</p>
+<p><code>sync</code>：把内存的数据同步到磁盘，重启或关机之前应该执行一下这个命令，防止数据丢失  </p>
+<br>
+
+<h2 id="用户登录和注销"><a href="#用户登录和注销" class="headerlink" title="用户登录和注销"></a><strong>用户登录和注销</strong></h2><p><code>logout</code>是注销登录当前用户，在图形运行级别无效，在运行级别3下有效。（运行级别之后再介绍）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-1.png" loading="lazy">   </p>
+<p>登陆时应尽量少使用root账号登录，因为它是系统管理员，最高权限，防止操作失误。<br>可以用普通用户登录，登陆后再用<code>su -</code>命令来切换成系统管理员的身份。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-2.png" loading="lazy"></p>
+<br>
+
+<h2 id="用户管理基本介绍"><a href="#用户管理基本介绍" class="headerlink" title="用户管理基本介绍"></a><strong>用户管理基本介绍</strong></h2><p>Linux系统是一个多用户多任务的操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，任何以这个账号的身份进入系统。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-3.png" loading="lazy"><br>每一个用户至少属于1个组，可以同时属于多个组。<br>每一个用户都有一个家目录，在<code>/home</code>路径中，在Xshell中登录时，会首先进入相应用户的家目录。   </p>
+<br>
+
+<h2 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a><strong>添加用户</strong></h2><p>指令：<code>useradd [选项] &lt;用户名&gt;</code><br>中括号表示可选，也就是可有可无。<br>例：<code>useradd Mary</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-4.png" loading="lazy">   </p>
+<p><code>cd</code>表示change directory，切换目录。<br>如果在<code>[选项]</code>中没有指定<code>Mary</code>的组，系统就会自动创建一个和Mary同名的组。</p>
+<p>可以通过<code>useradd -d &lt;家目录&gt;</code>指定家目录，不一定和用户名相同：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-5.png" loading="lazy">   </p>
+<br>
+
+<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a><strong>设置密码</strong></h2><p>指令：<code>passwd &lt;用户名&gt;</code>，只有root才能设置。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-6.png" loading="lazy"><br>密码是隐藏输入的，看不到。   </p>
+<br>
+
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a><strong>删除用户</strong></h2><p>比如有个员工离职了，那么这个用户就应该删掉。只有root才能删除用户。<br>有两种删除方式：</p>
+<ul>
+<li><p>删除用户，但保留其家目录。<br>指令：<code>userdel &lt;用户名&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-7.png" loading="lazy"><br>可以看到虽然删掉了用户Luis，但其家目录<code>test</code>还在（之前用<code>useradd -d</code>指定家目录创建的）。</p>
+</li>
+<li><p>删除用户及其家目录。<br>指令：<code>userdel -r &lt;用户名&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-8.png" loading="lazy"><br>可以看到Mary及其家目录一并删掉了。  </p>
+</li>
+</ul>
+<p>实际上一般不会删掉家目录，除非家目录里什么有价值的内容都没有。   </p>
+<br>
+
+<h2 id="查询用户信息"><a href="#查询用户信息" class="headerlink" title="查询用户信息"></a><strong>查询用户信息</strong></h2><p>指令：<code>id &lt;用户名&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-9.png" loading="lazy"><br><code>uid</code>表示用户的id号，<code>gid</code>表示所在组的id号。  </p>
+<p>另外，<code>whoami</code>可以看到现在是哪个用户：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-10.png" loading="lazy">   </p>
+<br>
+
+<h2 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a><strong>切换用户</strong></h2><p>指令：<code>su - &lt;用户名&gt;</code>或<code>su &lt;用户名&gt;</code><br>在操作Linux时，如果当前用户权限不够，可以通过su指令切换到高权限用户。<br>从高权限用户切换到低权限用户不需输入密码，从低权限用户切换到高权限用户需要输入密码。<br>切换用户后，<code>exit</code>是注销。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-11.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-12.png" loading="lazy">   </p>
+<br>
+
+<h2 id="用户组操作"><a href="#用户组操作" class="headerlink" title="用户组操作"></a><strong>用户组操作</strong></h2><p>对有共性的一组用户进行统一的管理。  </p>
+<p><strong>创建组</strong>：<code>groupadd &lt;组名&gt;</code><br><strong>删除组</strong>：<code>groupdel &lt;组名&gt;</code>   </p>
+<p><strong>新建用户时直接加入某个组</strong>：<code>user add -g &lt;组名&gt; &lt;用户名&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-13.png" loading="lazy">   </p>
+<p><strong>修改用户的组</strong>：<code>usermod -g &lt;组名&gt; &lt;用户名&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-14.png" loading="lazy">   </p>
+<br>
+
+<h2 id="用户和组的相关文件"><a href="#用户和组的相关文件" class="headerlink" title="用户和组的相关文件"></a><strong>用户和组的相关文件</strong></h2><p><code>/etc/passwd</code>文件<br>用户的配置文件，记录用户的各种信息。<br>每行的含义：<span style="color:darkcyan">用户名</span>:<span style="color:purple">口令</span>:<span style="color:red">用户标识号</span>:<span style="color:red">组标识号</span>:<span style="color:blue">注释性描述</span>:<span style="color:green">家目录</span>:<span style="color:gold">登录Shell</span><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-15.png" loading="lazy">   </p>
+<p><code>/etc/shadow</code>文件<br>口令配置文件，密码和登录信息（是加密的，看不出来什么东西）。<br>每行的含义：<span style="color:darkcyan">登录名</span>:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-16.png" loading="lazy">   </p>
+<p><code>/etc/group</code>文件<br>组配置文件，记录用户组的各种信息。<br>每行的含义：<span style="color:darkcyan">组名</span>:<span style="color:purple">口令</span>:<span style="color:red">组标识号</span>:<span style="color:darkcyan">组内用户列表</span><br>但是一般组内用户列表看不到。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux4/linux4-17.png" loading="lazy">   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
       </tags>
   </entry>
 </search>
