@@ -4783,18 +4783,6 @@ body</span><span class="token punctuation">&#123;</span>
       </tags>
   </entry>
   <entry>
-    <title>My awesome title</title>
-    <url>/2021/12/01/web29/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>未分类</category>
-      </categories>
-      <tags>
-        <tag>标签1</tag>
-        <tag>标签2</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Web前端28：美化表单元素</title>
     <url>/2021/12/20/web28/</url>
     <content><![CDATA[<p>上节课是表单元素的HTML知识，这节课是表单元素的CSS知识。   </p>
