@@ -4619,4 +4619,78 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Git5：哈希、Git的机制原理、Github的使用</title>
+    <url>/2021/12/20/git5/</url>
+    <content><![CDATA[<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a><strong>哈希</strong></h2><p>所有文件本质上都是0和1，所以所有文件都可以加密。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-1.png" loading="lazy">   </p>
+<p>哈希是一个系列的加密算法，各个不同的哈希算法虽然加密强度不同，但是有以下几个共同点：</p>
+<ul>
+<li>不管输入数据的数据量有多大，输入同一个哈希算法，得到的加密结果长度固定  </li>
+<li>哈希算法确定，输入数据确定，输出数据能够保证不变  </li>
+<li>哈希算法确定，输入数据有变化，输出数据一定有变化，而且通常变化很大   </li>
+<li>哈希算法不可逆   </li>
+</ul>
+<p>常见的哈希算法有MD5、SHA、CRC等。<br>哈希算法可以被用来验证文件。原理如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-2.png" loading="lazy"><br>Git就是靠这种机制来从根本上保证数据完整性的。   </p>
+<br>
+
+<h2 id="Git保存版本的机制"><a href="#Git保存版本的机制" class="headerlink" title="Git保存版本的机制"></a><strong>Git保存版本的机制</strong></h2><h3 id="集中式版本控制工具的文件管理机制"><a href="#集中式版本控制工具的文件管理机制" class="headerlink" title="集中式版本控制工具的文件管理机制"></a><strong>集中式版本控制工具的文件管理机制</strong></h3><p>以文件变更列表的方式存储信息。这类系统将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-3.png" loading="lazy">   </p>
+<h3 id="Git的文件管理机制"><a href="#Git的文件管理机制" class="headerlink" title="Git的文件管理机制"></a><strong>Git的文件管理机制</strong></h3><p>Git把数据看作是小型文件系统的一组快照。每次提交更新时Git都会对当前的全部文件制作一个快照并保存这个快照的索引。<br>为了高效，如果文件没有修改， Git不再重新存储该文件，而是只保留一个链接指向之前存储的文件。所以Git的工作方式可以称之为快照流。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-4.png" loading="lazy">   </p>
+<h3 id="Git文件管理机制细节"><a href="#Git文件管理机制细节" class="headerlink" title="Git文件管理机制细节"></a><strong>Git文件管理机制细节</strong></h3><p>Git的“提交对象”<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-5.png" loading="lazy"><br>提交对象及其父对象形成的链条<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-6.png" loading="lazy">   </p>
+<br>
+
+<h2 id="Git分支管理机制"><a href="#Git分支管理机制" class="headerlink" title="Git分支管理机制"></a><strong>Git分支管理机制</strong></h2><h3 id="分支的创建"><a href="#分支的创建" class="headerlink" title="分支的创建"></a>分支的创建</h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-7.png" loading="lazy"><br><code>98ca9</code>是根提交</p>
+<h3 id="分支的切换"><a href="#分支的切换" class="headerlink" title="分支的切换"></a>分支的切换</h3><p>主干<code>master</code>和分支<code>testing</code>都可视作指向某一版本<span style="color:red">指针</span>，<code>HEAD</code>视作指向分支的指针，用来切换分支。<br>所以切换分支本质就是移动指针，切换起来简单高效。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-8.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-9.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-10.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-11.png" loading="lazy">   </p>
+<br>
+
+<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a><strong><a href="https://github.com/">Github</a></strong></h2><p>大名鼎鼎的 <del>同性</del> 程序员交友网站。<br>账号注册、在github创建远程库就不介绍了。   </p>
+<h3 id="本地库和远程库交互方式复习"><a href="#本地库和远程库交互方式复习" class="headerlink" title="本地库和远程库交互方式复习"></a><strong>本地库和远程库交互方式复习</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-12.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-13.png" loading="lazy"><br>用Github Desktop很容易实现本地库与远程库的交互，但我们要学习其本质的东西，所以下面介绍用git指令实现交互。   </p>
+<h3 id="创建本地库和远程库"><a href="#创建本地库和远程库" class="headerlink" title="创建本地库和远程库"></a><strong>创建本地库和远程库</strong></h3><p>先新建个本地库，初始化，并添加个文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-14.png" loading="lazy"><br>然后<code>git add</code>、<code>git commit</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-15.png" loading="lazy">   </p>
+<p>然后创建远程库，和本地库名字不一定非得一样，但最好还是同名，方便识别。<br>现在就做个练习，没必要用私有库。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-16.png" loading="lazy">   </p>
+<h3 id="远程库的地址和起别名"><a href="#远程库的地址和起别名" class="headerlink" title="远程库的地址和起别名"></a><strong>远程库的地址和起别名</strong></h3><p>这个是远程库的地址（SSH的也行）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-17.png" loading="lazy"><br>这个地址很长，每次都粘贴进去很不方便，所以要创建别名。<br>命令：   </p>
+<ul>
+<li><code>git remote -v</code>：查看当前所有远程库别名   </li>
+<li><code>git remote add &lt;别名&gt; &lt;远程地址&gt;</code>：给远程库起别名    </li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-18.png" loading="lazy">   </p>
+<h3 id="push"><a href="#push" class="headerlink" title="push"></a><strong>push</strong></h3><p>命令：<code>git push &lt;别名&gt; &lt;分支名&gt;</code><br>回车之后会弹出Github的登录框，登陆就行了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-19.png" loading="lazy"><br>现在的GitHub主分支改名为了<code>main</code>，下次注意一下。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-20.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-21.png" loading="lazy"><br>可以看到远程库更新成功。   </p>
+<h3 id="clone"><a href="#clone" class="headerlink" title="clone"></a><strong>clone</strong></h3><p>命令：<code>git clone &lt;远程库地址&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-22.png" loading="lazy">   </p>
+<h3 id="团队成员邀请"><a href="#团队成员邀请" class="headerlink" title="团队成员邀请"></a><strong>团队成员邀请</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-23.png" loading="lazy">   </p>
+<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a><strong>pull</strong></h3><p><code>pull</code> = <code>fetch</code> + <code>merge</code><br><code>fetch</code>只是把远程库分支的内容下载到本地，并没有合并到当前分支。  </p>
+<ul>
+<li><code>git fetch [远程库地址别名] [远程分支名]</code></li>
+<li><code>git merge [远程库地址别名/远程分支名]</code></li>
+<li><code>git pull [远程库地址别名]</code></li>
+</ul>
+<p>如果pull过来的库比较简单，直接pull就行，而如果比较复杂，为了保险慎重可以把pull分开为fetch和merge两步手动操作。   </p>
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a><strong>解决冲突</strong></h3><p>要点</p>
+<ul>
+<li>如果不是基于GitHub远程库的最新版所做的修改，不能推送，必须先拉取。</li>
+<li>拉取下来后如果进入冲突状态，则按照“分支冲突解决”操作解决即可。</li>
+</ul>
+<h3 id="跨团队协作"><a href="#跨团队协作" class="headerlink" title="跨团队协作"></a><strong>跨团队协作</strong></h3><p>这个比较麻烦，至少要两个账号，就不演示了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-13.png" loading="lazy">   </p>
+<br>
+
+<h3 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a><strong>SSH免密登录</strong></h3><p>用HTTPS与远程库进行交互经常需要GitHub的用户名密码，比较麻烦。<br>而SSH就不需要GitHub用户名密码，不过只能一个用户使用，事实上开发的时候大多时间都是自己一个人在本地开发的，所以用SSH也够了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-24.png" loading="lazy"><br>我的电脑之前已经连接过SSH，这个连接SSH的过程就就不截图了。   </p>
+<ul>
+<li>进入当前电脑用户的家目录 <code>cd ~</code>   </li>
+<li>运行命令生成.ssh密钥目录 <code>ssh-keygen -t rsa -C &lt;你的Github邮箱地址&gt;</code><br>注意C是大写的。 </li>
+<li>进入 .ssh 目录 <code>cd .ssh</code></li>
+<li>查看 id_rsa.pub 文件内容 <code>cat id_rsa.pub</code> </li>
+<li>复制 id_rsa.pub 文件内容</li>
+<li>登录 GitHub，点击用户头像 → Settings → SSH and GPG keys → New SSH Key</li>
+<li>输入复制的密钥信息  </li>
+<li>测试 <code>ssh -T git@github.com</code></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-25.png" loading="lazy">   </p>
+<p>这样就是成功了。   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
 </search>
