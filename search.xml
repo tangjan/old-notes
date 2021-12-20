@@ -4723,7 +4723,7 @@ body</span><span class="token punctuation">&#123;</span>
   </entry>
   <entry>
     <title>Linux4：关机重启注销、用户管理、用户和组的相关文件</title>
-    <url>/2021/12/19/linux4/</url>
+    <url>/2021/12/20/linux4/</url>
     <content><![CDATA[<h2 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a><strong>关机、重启</strong></h2><p><code>shutdown -h now</code>：立即关机<br><code>shutdown -h 1</code>：1分钟后关机   </p>
 <p><code>shutdown -r now</code>：立即重启<br><code>shutdown -r 1</code>：1分钟后重启</p>
 <p><code>halt</code>：停机，等价于关机   </p>
