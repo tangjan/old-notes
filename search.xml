@@ -4620,7 +4620,7 @@ body</span><span class="token punctuation">&#123;</span>
       </tags>
   </entry>
   <entry>
-    <title>Git5：哈希、Git的机制原理、Github的使用</title>
+    <title>Git5：哈希、Git的机制原理、Github、工作流、GitFlow、Gitlab</title>
     <url>/2021/12/20/git5/</url>
     <content><![CDATA[<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a><strong>哈希</strong></h2><p>所有文件本质上都是0和1，所以所有文件都可以加密。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-1.png" loading="lazy">   </p>
 <p>哈希是一个系列的加密算法，各个不同的哈希算法虽然加密强度不同，但是有以下几个共同点：</p>
@@ -4683,6 +4683,34 @@ body</span><span class="token punctuation">&#123;</span>
 </ul>
 <p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-25.png" loading="lazy">   </p>
 <p>这样就是成功了。   </p>
+<br>
+
+<h2 id="Git-工作流"><a href="#Git-工作流" class="headerlink" title="Git 工作流"></a><strong>Git 工作流</strong></h2><p>工作流就是在项目开发过程中使用Git的方式。<br>分类</p>
+<ul>
+<li>集中式工作流</li>
+<li>GitFlow 工作流（用的最多）</li>
+<li>Forking 工作流  </li>
+</ul>
+<p><strong>集中式工作流</strong><br>简单说就是不分支，每个人有各自的本地库。就像 SVN 一样，集中式工作流以中央仓库作为项目所有修改的单点实体。所有修改都提交到 Master 这个分支上。 这种方式与 SVN 的主要区别就是开发人员有本地库。Git 很多特性并没有用到。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-26.png" loading="lazy">   </p>
+<p><strong>GitFlow 工作流</strong><br>充分利用了分支的特点，通过为功能开发、发布准备和维护设立了独立的分支，让发布迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-27.png" loading="lazy">   </p>
+<p><strong>Forking工作流</strong><br>在 GitFlow 基础上，充分利用了 Git 的 Fork 和 pull request 的 功能以达到代码审核的目的。更适合安全可靠地管理大团队的开发者，而且能接受不信任贡献者的提交。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-28.png" loading="lazy"><br><br></p>
+<h2 id="GitFlow工作流详解"><a href="#GitFlow工作流详解" class="headerlink" title="GitFlow工作流详解"></a><strong>GitFlow工作流详解</strong></h2><h3 id="分支种类"><a href="#分支种类" class="headerlink" title="分支种类"></a><strong>分支种类</strong></h3><ul>
+<li><p>主干分支 master<br>主要负责管理正在运行的生产环境代码。永远保持与正在运行的生产环境 完全一致。</p>
+</li>
+<li><p>开发分支 develop<br>主要负责管理正在开发过程中的代码。一般情况下应该是最新的代码。</p>
+</li>
+<li><p>bug修理分支 hotfix<br>主要负责管理生产环境下出现的紧急修复的代码。 从主干分支分出，修理完毕并测试上线后，并回主干分支。并回后，视情况可以删除该分支。</p>
+</li>
+<li><p>准生产分支（预发布分支） release<br>较大的版本上线前，会从开发分支中分出准生产分支，进行最后阶段的集成测试。该版本上线后，会合并到主干分支。生产环境运行一段阶段较稳定后 可以视情况删除。</p>
+</li>
+<li><p>功能分支 feature<br>为了不影响较短周期的开发工作，一般把中长期开发模块，会从开发分支中独立出来。开发完成后会合并到开发分支。</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-29.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-30.png" loading="lazy">   </p>
+<br>
+
+<h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a><strong>Gitlab</strong></h2><p>Gitlab一般搭建在Linux上的，用来创建私有仓库。<br>目前来看，对于我个人来说，Gitee就够用了，所以Gitlab等以后有需要再学。<br><a href="https://about.gitlab.com/">Gitlab官网</a></p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
