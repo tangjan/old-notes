@@ -4905,4 +4905,85 @@ body</span><span class="token punctuation">&#123;</span>
         <tag>前端</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Java1：随便聊聊</title>
+    <url>/2021/12/21/java1/</url>
+    <content><![CDATA[<p><a href="https://www.bilibili.com/video/BV1Kb411W75N">Java_尚硅谷_bilibili</a></p>
+<br>
+
+<h2 id="CPU处理器含义"><a href="#CPU处理器含义" class="headerlink" title="CPU处理器含义"></a><strong>CPU处理器含义</strong></h2><p>比如我的电脑：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java1/java1-1.png" loading="lazy">   </p>
+<ul>
+<li><p><code>Intel(R) Core(TM)</code>：品牌。英特尔® 酷睿™ 。（®是注册标记，™是商标）   </p>
+</li>
+<li><p><code>i5</code>：品牌修饰符。目前，英特尔® 酷睿™ 处理器系列的品牌修饰符包括 i3、i5、i7 和 i9。品牌修饰符数字越大表示其提供的性能级别更高。   </p>
+</li>
+<li><p><code>8</code>：代次指示符。在由四位数字组成的处理器编号中，第一个数字通常表示代次。例如，包含数字 9800 的处理器是第 9 代智能处理器，而标记为 8800 的处理器则属于第 8 代技术。</p>
+</li>
+<li><p><code>250</code>：SKU 数值。SKU 通常是按照该代次和产品线中的处理器开发顺序分配的。在处理器品牌和代次的其他部分完全相同的前提下，较高的 SKU 一般表示具有更多功能。</p>
+</li>
+<li><p><code>U</code>：产品线后缀。U 表示专为高能效笔记本电脑或 2 合 1 电脑设计的处理器。</p>
+</li>
+</ul>
+<p>总之就是数字越大，CPU就越强。   </p>
+<p>更多信息见<a href="https://www.intel.cn/content/www/cn/zh/processors/processor-numbers.html">英特尔® 处理器名称和编号</a></p>
+<br>
+
+<h2 id="IT行业三大定律"><a href="#IT行业三大定律" class="headerlink" title="IT行业三大定律"></a><strong>IT行业三大定律</strong></h2><ul>
+<li><p><strong><a href="https://baike.baidu.com/item/%E6%91%A9%E5%B0%94%E5%AE%9A%E5%BE%8B/350634">摩尔定律</a></strong><br>英特尔创始人之一戈登·摩尔的经验之谈，其核心内容为：集成电路上可以容纳的晶体管数目在大约每经过18个月便会增加一倍。</p>
+</li>
+<li><p><strong><a href="https://baike.baidu.com/item/%E5%8F%8D%E6%91%A9%E5%B0%94%E5%AE%9A%E5%BE%8B">反摩尔定律</a></strong><br>是Google的前CEO埃里克·施密特提出的：如果你反过来看摩尔定律，一个IT公司如果今天和18个月前卖掉同样多的、同样的产品，它的营业额就要降一半。  </p>
+</li>
+<li><p><strong><a href="https://baike.baidu.com/item/%E5%AE%89%E8%BF%AA%E6%AF%94%E5%B0%94%E5%AE%9A%E7%90%86/8696213">安迪 · 比尔定律</a></strong><br>是对IT产业中软件和硬件升级换代关系的一个概括。原话是 “Andy gives, Bill takes away.” 安迪指英特尔前CEO安迪·格鲁夫，比尔指微软前任CEO比尔·盖茨，这句话的意思是，硬件提高的性能，很快被软件消耗掉了。</p>
+</li>
+</ul>
+<br>
+
+<h2 id="存储容量单位"><a href="#存储容量单位" class="headerlink" title="存储容量单位"></a><strong>存储容量单位</strong></h2><p>KB：Kilo Byte，千字节<br>MB：Mega Byte，兆字节<br>GB：Giga Byre，吉字节<br>TB：Tera Byte，万亿字节<br>PB：Peta Byte，千万亿字节   </p>
+<br>
+
+<h2 id="职业发展与提升"><a href="#职业发展与提升" class="headerlink" title="职业发展与提升"></a><strong>职业发展与提升</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java1/java1-2.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java1/java1-3.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java1/java1-4.jpg" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java1/java1-5.jpg" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java1/java1-6.jpg" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java1/java1-7.png" loading="lazy">   </p>
+<br>
+
+<h2 id="学习经验探讨"><a href="#学习经验探讨" class="headerlink" title="学习经验探讨"></a><strong>学习经验探讨</strong></h2><ul>
+<li>敲代码</li>
+<li>模仿好的编程习惯</li>
+<li>知识 → （时间、实践） → 技能</li>
+<li>不是没听懂，而是记不住 → 复习</li>
+</ul>
+<br>
+
+<h2 id="Java语言概述"><a href="#Java语言概述" class="headerlink" title="Java语言概述"></a><strong>Java语言概述</strong></h2><p>Java基础是学习JavaEE、大数据、Android开发的基石。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java1/java1-8.png" loading="lazy">   </p>
+<br>
+
+<h2 id="软件开发介绍"><a href="#软件开发介绍" class="headerlink" title="软件开发介绍"></a><strong>软件开发介绍</strong></h2><p><strong>人机交互方式</strong>  </p>
+<ul>
+<li>图形化界面（<span style="color:red">G</span>raphical <span style="color:red">U</span>ser <span style="color:red">I</span>nterface，GUI）</li>
+<li>命令行方式（<span style="color:red">C</span>ommand <span style="color:red">L</span>ine <span style="color:red">I</span>nterface，CLI）</li>
+</ul>
+<p><strong>常用的DOS命令</strong>  </p>
+<ul>
+<li><code>d:</code>：跳转到D盘</li>
+<li><code>dir</code>：directory，列出当前目录下的文件以及文件夹</li>
+<li><code>md</code>：make directory，创建目录</li>
+<li><code>rd</code>：remove directory，删除目录</li>
+<li><code>cd</code>：change directory，进入指定目录</li>
+<li><code>cd..</code>：退回到上一级目录</li>
+<li><code>cd\</code>：退回到根目录</li>
+<li><code>del</code>：delete，删除文件<ul>
+<li><code>del *.txt</code> 表示删掉当前目录中.txt类型的文件</li>
+<li><code>del 文件夹名</code> 表示当文件夹非空时，删除文件夹内的内容</li>
+</ul>
+</li>
+<li><code>exit</code>：退出 dos 命令行</li>
+</ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>
