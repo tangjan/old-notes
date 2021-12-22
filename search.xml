@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Git1：课程大纲、版本控制、Git简介、本地库初始化、签名</title>
+    <title>Git-1：课程大纲、版本控制、Git简介、本地库初始化、签名</title>
     <url>/2021/12/17/git1/</url>
     <content><![CDATA[<p>我目前图床是搭建在github上，用了一段时间的PicGo，但是发现PicGo上传图片很方便，想修改已上传的文件的名称、整理图片就不行了。<br>所以用git来管理图床更方便些，就这个原因来学一遍git。</p>
 <p>一些比较权威的git文档：</p>
@@ -93,7 +93,7 @@
 <p>这里存放的是本地库相关的子目录和文件，不要删除，也不要轻易修改。</p>
 <br>
 
-<h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a><strong>签名</strong></h2><p><strong>形式</strong><br>用户名：tom<br>Email地址：<a href="mailto:&#x67;&#111;&#x6f;&#x64;&#77;&#x6f;&#x72;&#110;&#105;&#110;&#103;&#x40;&#x61;&#x74;&#x67;&#x75;&#105;&#103;&#117;&#x2e;&#99;&#111;&#x6d;">&#x67;&#111;&#x6f;&#x64;&#77;&#x6f;&#x72;&#110;&#105;&#110;&#103;&#x40;&#x61;&#x74;&#x67;&#x75;&#105;&#103;&#117;&#x2e;&#99;&#111;&#x6d;</a><br>用户名（tom）和Email地址的用户名（goodMorning）不一定一致，甚至Email地址可以省略。  </p>
+<h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a><strong>签名</strong></h2><p><strong>形式</strong><br>用户名：tom<br>Email地址：<a href="mailto:&#x67;&#x6f;&#111;&#x64;&#x4d;&#111;&#x72;&#x6e;&#105;&#110;&#x67;&#x40;&#x61;&#116;&#103;&#117;&#x69;&#103;&#x75;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#x6f;&#111;&#x64;&#x4d;&#111;&#x72;&#x6e;&#105;&#110;&#x67;&#x40;&#x61;&#116;&#103;&#117;&#x69;&#103;&#x75;&#x2e;&#99;&#x6f;&#x6d;</a><br>用户名（tom）和Email地址的用户名（goodMorning）不一定一致，甚至Email地址可以省略。  </p>
 <p><strong>作用</strong><br>区分不同开发人员的身份。  </p>
 <p><strong>辨析</strong><br>这里设置的签名和登录远程库（代码托管中心）的账号、密码没有任何关系。</p>
 <p><strong>设置签名的命令</strong>  </p>
@@ -131,7 +131,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Git2：查看、添加、提交</title>
+    <title>Git-2：查看、添加、提交</title>
     <url>/2021/12/18/git2/</url>
     <content><![CDATA[<h2 id="状态查看：git-status"><a href="#状态查看：git-status" class="headerlink" title="状态查看：git status"></a><strong>状态查看</strong>：<code>git status</code></h2><p>查看工作区、暂存区状态<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-1.png" loading="lazy">  </p>
 <p>用vim编辑器随便新建个文件：<br>在vim编辑器里按i插入文本，按Esc退出，输入<code>:wq</code>回车即保存并退出<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-2.png" loading="lazy">  </p>
@@ -193,7 +193,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Git3：历史记录、版本穿梭、reset命令的三个参数对比</title>
+    <title>Git-3：历史记录、版本穿梭、reset命令的三个参数对比</title>
     <url>/2021/12/19/git3/</url>
     <content><![CDATA[<h2 id="查看历史记录"><a href="#查看历史记录" class="headerlink" title="查看历史记录"></a><strong>查看历史记录</strong></h2><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a><strong><code>git log</code></strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-1.png" loading="lazy"><br>其中，</p>
 <ul>
@@ -251,7 +251,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Git4：删除找回、比较文件、分支</title>
+    <title>Git-4：删除找回、比较文件、分支</title>
     <url>/2021/12/19/git4/</url>
     <content><![CDATA[<h2 id="永久删除文件后找回"><a href="#永久删除文件后找回" class="headerlink" title="永久删除文件后找回"></a><strong>永久删除文件后找回</strong></h2><p>新建一个2.txt，并且提交到暂存区、本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-1.png" loading="lazy"><br>然后使用<code>rm 2.txt</code>删除2.txt<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-2.png" loading="lazy"><br>把删除2.txt的操作提交到暂存区、本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-3.png" loading="lazy"><br>现在2.txt已经被永久删除了。<br>但是版本提交的历史记录是一直存在的，每一个版本都有，也就是说<code>rm 2.txt</code>之前的版本也存在，所以2.txt是能找回来的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-4.png" loading="lazy"><br>可以看到2.txt被找回来了，后悔药服用成功。   </p>
 <p>但是.git这个文件夹你不能删掉，删掉就真没了。   </p>
@@ -320,7 +320,7 @@
       </tags>
   </entry>
   <entry>
-    <title>Linux1：课程内容介绍，Linux简介，VMware和CentOS的安装</title>
+    <title>Linux-1：课程内容介绍，Linux简介，VMware和CentOS的安装</title>
     <url>/2021/12/16/linux1/</url>
     <content><![CDATA[<p>在腾讯云买了台轻量应用服务器，安装的CentOS 7.6操作系统。这样一来手里就有了实践的对象，所以趁这个机会学一遍Linux。<br>跟着<a href="https://www.bilibili.com/video/BV1dW411M7xL">Linux_尚硅谷_bilibili</a>学的。    </p>
 <br>
@@ -436,133 +436,7 @@
 ]]></content>
   </entry>
   <entry>
-    <title>MATLAB拼图游戏设计</title>
-    <url>/2021/01/15/matlabJigsaw/</url>
-    <content><![CDATA[<p>这是我大三上学期《自动化软件工具》这门课的结课作业，也就是用MATLAB做一个项目出来。<br>参考于<a href="https://wuxian.blog.csdn.net/article/details/79219110">基于MATLAB的拼图游戏设计_思绪无限的博客-CSDN博客</a>。</p>
-<br>
-
-<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a><strong>一. 概述</strong></h2><p>拼图是广为人知的一种游戏。这里的拼图游戏指的是华容道式的拼图，规则是有一幅3*3的打乱的拼图，包括8块拼图块，1格空白位置用来移动，点击空白处旁的拼图，则拼图将移动到空白处，游戏胜利条件是还原拼图。<br>MATLAB的图像处理和函数功能支持较为完善，本设计使用MATLAB通过m文件编程构造出了拼图游戏。有趣的是，MATLAB是matrix、laboratory两个词的组合，意为矩阵矩阵实验室，而本设计——拼图游戏的本质也是对矩阵进行操作，可以说是MATLAB的“灵魂”游戏。</p>
-<br>
-
-<h2 id="二-程序设计"><a href="#二-程序设计" class="headerlink" title="二. 程序设计"></a><strong>二. 程序设计</strong></h2><h3 id="2-1-分割拼图"><a href="#2-1-分割拼图" class="headerlink" title="2.1 分割拼图"></a><strong>2.1 分割拼图</strong></h3><p>首先要准备一张正方形图片用来拼，这里就拿我就读的中国矿业大学的校徽作为对象。校徽图片的宽度和高度都是300像素。因此，该jpeg图片在MATLAB工作区中的储存形式是一个300*300*3的矩阵。其中，“300*300”表示像素点的个数，“3”用来储存像素点的颜色，比如，这里我制作了一张只有一个白色像素点的图片（用mspaint制作的），在MATLAB中使用imread函数来读取这张图片，显示出数组信息如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw1.png" loading="lazy"><br>(255，255，255)即表示白色。<br>接下来，为便于解释，现把整个图片分为9个部分，编号如图所示：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw2.png" loading="lazy"><br>其中最后一个位置用作空白块，所以为了显示出其特殊性，编号为0而非编号为9。这样一来，运行<code>x1 = image(1:100, 1:100, :);</code>赋值语句之后，x1即是表示拼图块1的矩阵。<br>同理，有：</p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab">x2 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">%拼图块2矩阵数据</span>
-x3 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">%拼图块3矩阵数据</span>
-x4 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">%拼图块4矩阵数据</span>
-x5 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%拼图块5矩阵数据</span>
-x6 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%拼图块6矩阵数据</span>
-x7 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">%拼图块7矩阵数据</span>
-x8 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%拼图块8矩阵数据</span>
-x0 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%拼图块0矩阵数据</span></code></pre>
-<p>可使用axis on函数显示出横纵坐标帮助理解：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw3.png" loading="lazy"><br>接下来定义一个从原图中分割拼图块并标记编号的函数，不妨命名为<code>split(image, index)</code>，其中<code>image</code>为原图的数据矩阵，<code>index</code>为要选择的拼图块的编号。split函数的输出为矩阵x，是序号为index的拼图块的数据矩阵。<br>比如，运行语句<code>x2 = split(image, 5);</code>后，x2即表示校徽图片的最中央的拼图块的数据矩阵。<br>split函数内容如下：  </p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> x <span class="token operator">=</span> <span class="token function">split</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> index<span class="token punctuation">)</span>
-  <span class="token keyword">if</span> index <span class="token operator">></span> <span class="token number">0</span>  <span class="token comment">%拼图块1~8</span>
-    <span class="token comment">% 计算出行数row以及列数column</span>
-    row <span class="token operator">=</span> <span class="token function">fix</span><span class="token punctuation">(</span><span class="token punctuation">(</span>index<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">%fix表示向零方向取整</span>
-    column <span class="token operator">=</span> <span class="token function">mod</span><span class="token punctuation">(</span>index<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
-    x <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span>row<span class="token operator">*</span><span class="token number">100</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token operator">*</span><span class="token punctuation">(</span>row<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">+</span>column<span class="token operator">*</span><span class="token number">100</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token operator">*</span><span class="token punctuation">(</span>column<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">else</span>  <span class="token comment">%拼图块0 </span>
-    x <span class="token operator">=</span> <span class="token function">uint8</span><span class="token punctuation">(</span><span class="token number">255</span> <span class="token operator">*</span> <span class="token function">ones</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token keyword">end</span></code></pre>
-<h3 id="2-2-按编号矩阵显示拼图"><a href="#2-2-按编号矩阵显示拼图" class="headerlink" title="2.2 按编号矩阵显示拼图"></a><strong>2.2 按编号矩阵显示拼图</strong></h3><p>上一节已经实现通过序号获得小拼图块的数据矩阵。一幅拼图可以由一个3*3的矩阵A来表示，接下来编写一个根据编号矩阵A显示对应拼图图片的函数，命名为<code>drawmap(A)</code>，代码如下</p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> <span class="token function">drawmap</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span>
-    origin <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'jigsawImage.jpeg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    image <span class="token operator">=</span> origin<span class="token punctuation">;</span> 
-    <span class="token keyword">for</span> row <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">3</span>   <span class="token comment">%根据编号矩阵A构建要显示的拼图数据矩阵image</span>
-      <span class="token keyword">for</span> col <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">3</span>
-        <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span><span class="token punctuation">(</span>row<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token operator">*</span>row<span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">+</span><span class="token punctuation">(</span>col<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token operator">*</span>col<span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">split</span><span class="token punctuation">(</span>origin<span class="token punctuation">,</span> <span class="token function">A</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span>col<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-      <span class="token keyword">end</span>
-    <span class="token keyword">end</span>
-    <span class="token function">imshow</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>  <span class="token comment">%显示拼图</span></code></pre>
-<p>比如，假设矩阵A为<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw4.png" loading="lazy">则运行<code>drawmap(A)</code>可得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw5.png" loading="lazy">  </p>
-<h3 id="2-3-移动拼图"><a href="#2-3-移动拼图" class="headerlink" title="2.3 移动拼图"></a><strong>2.3 移动拼图</strong></h3><p>移动拼图的过程是：点击空白处旁的拼图，则拼图将移动到空白处。而拼图块和空白块的相对位置只有四种，即上下左右四种位置，按照这个想法，定义函数为<code>function tag = movejig(tag, row, col)</code>。其中，<code>tag</code>表示当前拼图的编号矩阵，<code>row</code>和<code>col</code>分别表示鼠标点击位置的行数和列数。输出为移动后得到的编号矩阵。</p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> tag <span class="token operator">=</span> <span class="token function">movejig</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> row<span class="token punctuation">,</span> col<span class="token punctuation">)</span>
-<span class="token comment">%4个if分4种情况对不同位置处的点坐标与矩阵行列式统一</span>
-  num <span class="token operator">=</span> <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token punctuation">;</span> 
-  <span class="token comment">%鼠标位置与号码牌一致</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>row<span class="token operator">></span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
-  <span class="token comment">%点击位置在第2或3行，空白块在点击位置的上一行   </span>
-    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> num<span class="token punctuation">;</span> 
-    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token keyword">end</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>row<span class="token operator">&lt;</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
-  <span class="token comment">%点击位置在第1或2行，空白块在点击位置的下一行</span>
-    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
-    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token keyword">end</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token operator">></span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
-  <span class="token comment">%点击位置在第2或3列，空白块在点击位置的左边一列</span>
-    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
-    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token keyword">end</span>
-  <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token operator">&lt;</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
-  <span class="token comment">%点击位置在第2或3列，空白块在点击位置的右边一列</span>
-    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
-    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-  <span class="token keyword">end</span></code></pre>
-<h3 id="2-4-打乱拼图"><a href="#2-4-打乱拼图" class="headerlink" title="2.4 打乱拼图"></a><strong>2.4 打乱拼图</strong></h3><p>这里需要注意，不可以使用<code>rand</code>函数生成一个由数字0~8随机排列构成的3*3的矩阵作为拼图矩阵，因为那样生成的矩阵大概率无法还原为原图，这在数学上是有证明的。<br>这里采取另一种想法来打乱拼图，即随机移动初始拼图使其打乱。取循环400次（也可以更多，但400次已经足够了），每次使用<code>rand</code>函数随机生成模拟点击的行列数，然后调用上述定义的<code>movejig</code>函数进行移动。定义函数为<code>function y = Disrupt()</code>，代码如下</p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> y <span class="token operator">=</span> <span class="token function">Disrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
-<span class="token comment">%随机打乱原拼图排列顺序</span>
-  y <span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">;</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">;</span> <span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">%原始的拼图矩阵</span>
-  <span class="token keyword">for</span> <span class="token number">i</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">400</span>
-    row <span class="token operator">=</span> <span class="token function">randi</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    col <span class="token operator">=</span> <span class="token function">randi</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    y <span class="token operator">=</span> <span class="token function">movejig</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span> row<span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token punctuation">;</span>  
-  <span class="token keyword">end</span></code></pre>
-<h3 id="2-5-拼图主函数和回调函数"><a href="#2-5-拼图主函数和回调函数" class="headerlink" title="2.5 拼图主函数和回调函数"></a><strong>2.5 拼图主函数和回调函数</strong></h3><p>主函数是一个整合中心，用来整合调用各已定义好的子函数。<br>另外，很明显主函数需要重复获得鼠标点击时的位置坐标来进行拼图游戏，也要有游戏胜利的终止条件。这里采用figure的<code>WindowButtonDownFcn</code>属性，MATLAB官方文件中对其介绍如下：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw6.png" loading="lazy"><br>据此可以结合<code>set</code>函数、gcf图形句柄和函数句柄定义一个获取鼠标点击坐标的回调函数。当在图上按下鼠标左键的时候，就自动执行回调函数来获取坐标值，同时在回调函数中判断游戏是否胜利。<br>主函数：</p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> <span class="token function">jigsaw</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token comment">%主函数</span>
-  Tag_A <span class="token operator">=</span> <span class="token function">Disrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%获得打乱好的拼图编号矩阵</span>
-  <span class="token function">drawmap</span><span class="token punctuation">(</span>Tag_A<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">%按照编号矩阵显示拼图</span>
-  global Tag<span class="token punctuation">;</span>        <span class="token comment">%Tag是游戏过程中的拼图编号矩阵，定义为全局变量以方便参 数传递</span>
-  Tag <span class="token operator">=</span> Tag_A<span class="token punctuation">;</span>
-  <span class="token function">set</span><span class="token punctuation">(</span>gcf<span class="token punctuation">,</span> <span class="token string">'WindowButtonDownFcn'</span><span class="token punctuation">,</span> <span class="token operator">@</span>ButtonDownFcn<span class="token punctuation">)</span><span class="token punctuation">;</span>
-  <span class="token comment">%点击鼠标时调用ButtonDownFcn函数</span></code></pre>
-<p>回调函数：</p>
-<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> <span class="token function">ButtonDownFcn</span><span class="token punctuation">(</span>src<span class="token punctuation">,</span>event<span class="token punctuation">)</span>
-<span class="token comment">%回调函数，鼠标点击事件发生时调用</span>
-  pt <span class="token operator">=</span> <span class="token function">get</span><span class="token punctuation">(</span>gca<span class="token punctuation">,</span> <span class="token string">'CurrentPoint'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%获取当前鼠标点击位置坐标</span>
-  xpos <span class="token operator">=</span> <span class="token function">pt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment">%鼠标点击处的横坐标实际值</span>
-  ypos <span class="token operator">=</span> <span class="token function">pt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment">%鼠标点击处的纵坐标实际值</span>
-  col <span class="token operator">=</span> <span class="token function">ceil</span><span class="token punctuation">(</span>xpos<span class="token operator">/</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">%将横坐标值转换为列数,ceil表示向无穷大方向取整</span>
-  row <span class="token operator">=</span> <span class="token function">ceil</span><span class="token punctuation">(</span>ypos<span class="token operator">/</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">%将纵坐标值转换为行数</span>
-  global Tag<span class="token punctuation">;</span>                    <span class="token comment">%全局变量声明</span>
-  <span class="token keyword">if</span><span class="token punctuation">(</span>col <span class="token operator">&lt;=</span> <span class="token number">3</span> <span class="token operator">&amp;&amp;</span> col <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>row <span class="token operator">&lt;=</span> <span class="token number">3</span> <span class="token operator">&amp;&amp;</span> row <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">%鼠标点击位置在有效范围内    </span>
-    Tag <span class="token operator">=</span> <span class="token function">movejig</span><span class="token punctuation">(</span>Tag<span class="token punctuation">,</span> row<span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token punctuation">;</span>      　　　　　 <span class="token comment">%按点击位置移动拼图</span>
-    <span class="token function">drawmap</span><span class="token punctuation">(</span>Tag<span class="token punctuation">)</span>                     <span class="token comment">%显示拼图</span>
-    order <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span><span class="token punctuation">;</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>   <span class="token comment">%原图的编号矩阵</span>
-    zt <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>Tag <span class="token operator">-</span> order<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">%比较两个矩阵,要加绝对值</span>
-    <span class="token keyword">if</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token function">zt</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>               <span class="token comment">%与原图已吻合</span>
-　      image <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'jigsawImage.jpeg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-　      <span class="token function">imshow</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>                <span class="token comment">%游戏完成，显示全图</span>
-　      <span class="token function">msgbox</span><span class="token punctuation">(</span><span class="token string">'恭喜完成！'</span><span class="token punctuation">)</span>   
-　      <span class="token keyword">pause</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        
-　      close all 
-    <span class="token keyword">end</span>
-  <span class="token keyword">else</span>
-      <span class="token keyword">return</span>
-  <span class="token keyword">end</span></code></pre>
-<p>至此，拼图游戏设计完成。  </p>
-<br>
-
-<h2 id="三、结果分析"><a href="#三、结果分析" class="headerlink" title="三、结果分析"></a><strong>三、结果分析</strong></h2><p>点击运行程序，会显示打乱好的拼图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw7.png" loading="lazy"><br>点击空白块旁边的拼图，会移动拼图块：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw8.png" loading="lazy"><br>完成拼图后会提示“恭喜完成”：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw9.png" loading="lazy"><br>稍作修改，也可以将该程序改为4*4、5*5、……的拼图游戏。主要需要修改循环次数、行列数、行列计算公式、原始数据矩阵等，disrupt函数中的随机点击的次数也应适当增加。我做了个10*10的拼图游戏，效果如图<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw10.png" loading="lazy"><br>另外，结合tic toc指令，还可以实现游戏计时功能：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw11.png" loading="lazy">  </p>
-<br>
-
-<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a><strong>四、总结</strong></h2><p>通过本次课程设计，我对课堂上学过的函数的定义、if语句、for循环语句等内容掌握得更加熟练。也学会了一些MATLAB中的图像处理方法，以及将图片与矩阵结合进行操作的思想。<br>另外，我本身就对编程有着很大的兴趣，所以做这份课程设计对我来说是一件愉快的事情。</p>
-<br>
-
-<p>github：<a href="https://github.com/tangjan/MATLAB_jigsaw">tangjan/MATLAB_jigsaw</a></p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>未分类</category>
-      </categories>
-      <tags>
-        <tag>MATLAB</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linux3：vi和vim编辑器、快捷键</title>
+    <title>Linux-3：vi和vim编辑器、快捷键</title>
     <url>/2021/12/19/linux3/</url>
     <content><![CDATA[<h2 id="vi和vim编辑器"><a href="#vi和vim编辑器" class="headerlink" title="vi和vim编辑器"></a><strong>vi和vim编辑器</strong></h2><p>就像Windows里一定要会使用notepad，Linux中一定要学会vim编辑器。  </p>
 <p>所有的Linux系统都会内建vi文本编辑器。vim具有程序编辑的能力，可以看作是vi的增强版，可以主动地以字体颜色辨别语法的正确性，方便程序设计。代码补全、编译及错误跳转等方便编程的功能丰富，在程序员中被广泛使用。  </p>
@@ -608,7 +482,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>Linux2：终端、VMTools、Linux文件系统目录结构、远程登录、sshd、Xshell、Xftp</title>
+    <title>Linux-2：终端、VMTools、Linux文件系统目录结构、远程登录、sshd、Xshell、Xftp</title>
     <url>/2021/12/18/linux2/</url>
     <content><![CDATA[<h2 id="终端的使用"><a href="#终端的使用" class="headerlink" title="终端的使用"></a><strong>终端的使用</strong></h2><p>“终端”在“应用程序”里。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-1.png" loading="lazy"><br>也可以在桌面右键：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-2.png" loading="lazy">   </p>
 <p>这里可以改配色方案：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux2/linux2-3.png" loading="lazy">  </p>
@@ -665,7 +539,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>MySQL1：概论、MySQL软件基本使用</title>
+    <title>MySQL-1：概论、MySQL软件基本使用</title>
     <url>/2021/12/05/mysql1/</url>
     <content><![CDATA[<p>跟着这个学的：<a href="https://www.bilibili.com/video/BV12b411K7Zu">MySQL_尚硅谷_bilibili</a>  </p>
 <br>
@@ -729,7 +603,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>MySQL2：MySQL语法规范、图形化用户界面</title>
+    <title>MySQL-2：MySQL语法规范、图形化用户界面</title>
     <url>/2021/12/07/mysql2/</url>
     <content><![CDATA[<h2 id="SQL语法规范、图形化用户界面"><a href="#SQL语法规范、图形化用户界面" class="headerlink" title="SQL语法规范、图形化用户界面"></a><strong>SQL语法规范、图形化用户界面</strong></h2><p><strong>SQL语法规范</strong>：</p>
 <ol>
@@ -831,7 +705,7 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
       </tags>
   </entry>
   <entry>
-    <title>MySQL3：条件查询</title>
+    <title>MySQL-3：条件查询</title>
     <url>/2021/12/15/mysql3/</url>
     <content><![CDATA[<p><strong>条件查询</strong></p>
 <br>
@@ -4620,7 +4494,7 @@ body</span><span class="token punctuation">&#123;</span>
       </tags>
   </entry>
   <entry>
-    <title>Git5：哈希、Git的机制原理、Github、工作流、GitFlow、Gitlab</title>
+    <title>Git-5：哈希、Git的机制原理、Github、工作流、GitFlow、Gitlab</title>
     <url>/2021/12/20/git5/</url>
     <content><![CDATA[<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a><strong>哈希</strong></h2><p>所有文件本质上都是0和1，所以所有文件都可以加密。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-1.png" loading="lazy">   </p>
 <p>哈希是一个系列的加密算法，各个不同的哈希算法虽然加密强度不同，但是有以下几个共同点：</p>
@@ -4722,7 +4596,7 @@ body</span><span class="token punctuation">&#123;</span>
       </tags>
   </entry>
   <entry>
-    <title>Linux4：关机重启注销、用户管理、用户和组的相关文件</title>
+    <title>Linux-4：关机重启注销、用户管理、用户和组的相关文件</title>
     <url>/2021/12/20/linux4/</url>
     <content><![CDATA[<h2 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a><strong>关机、重启</strong></h2><p><code>shutdown -h now</code>：立即关机<br><code>shutdown -h 1</code>：1分钟后关机   </p>
 <p><code>shutdown -r now</code>：立即重启<br><code>shutdown -r 1</code>：1分钟后重启</p>
@@ -4906,7 +4780,7 @@ body</span><span class="token punctuation">&#123;</span>
       </tags>
   </entry>
   <entry>
-    <title>Java1：随便聊聊</title>
+    <title>Java-1：随便聊聊</title>
     <url>/2021/12/21/java1/</url>
     <content><![CDATA[<p><a href="https://www.bilibili.com/video/BV1Kb411W75N">Java_尚硅谷_bilibili</a></p>
 <br>
@@ -5757,6 +5631,237 @@ body</span><span class="token punctuation">&#123;</span>
       </categories>
       <tags>
         <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java-2：Java简史、技术体系、各领域应用、特点、两种核心机制、环境搭建</title>
+    <url>/2021/12/22/java2/</url>
+    <content><![CDATA[<p>Java是SUN（<span style="color:red">S</span>tanford <span style="color:red">U</span>niversity <span style="color:red">N</span>etwork，斯坦福大学网络公司）1995年推出的一门高级编程语言。</p>
+<br>
+
+<h2 id="Java简史"><a href="#Java简史" class="headerlink" title="Java简史"></a><strong>Java简史</strong></h2><ul>
+<li>1991年 Green项目，开发语言最初命名为Oak (橡树) </li>
+<li>1994年，开发组意识到Oak 非常适合于互联网</li>
+<li>1996年，发布JDK 1.0，约8.3万个网页应用Java技术来制作</li>
+<li>1997年，发布JDK 1.1，JavaOne会议召开，创当时全球同类会议规模之最</li>
+<li>1998年，发布JDK 1.2，同年发布企业平台J2EE</li>
+<li>1999年，Java分成J2SE、J2EE和J2ME，JSP/Servlet技术诞生</li>
+<li>2004年，发布里程碑式版本：<span style="color:red">JDK 1.5</span>，为突出此版本的重要性，<span style="color:red">更名为JDK 5.0</span></li>
+<li>2005年，J2SE -&gt; JavaSE，J2EE -&gt; JavaEE，J2ME -&gt; JavaME</li>
+<li>2009年，Oracle公司收购SUN，交易价格74亿美元</li>
+<li>2011年，发布JDK 7.0</li>
+<li>2014年，发布<span style="color:red">JDK 8.0</span>，是<span style="color:red">继JDK 5.0以来变化最大的版本</span></li>
+<li>2017年，发布JDK 9.0，最大限度实现模块化</li>
+<li>2018年3月，发布JDK 10.0，版本号也称为18.3</li>
+<li>2018年9月，发布JDK 11.0，版本号也称为18.9</li>
+</ul>
+<p>企业里用的一般不是最新版的。</p>
+<br>
+
+<h2 id="Java技术体系平台"><a href="#Java技术体系平台" class="headerlink" title="Java技术体系平台"></a><strong>Java技术体系平台</strong></h2><ul>
+<li><p>Java SE（<span style="color:red">S</span>tandard <span style="color:red">E</span>dition），Java标准版<br>支持面向桌面级应用（如Windows下的应用程序）的Java平台，提供了完整的Java核心API。   </p>
+</li>
+<li><p>Java EE（<span style="color:red">E</span>nterprise <span style="color:red">E</span>dition），Java企业版<br>是为开发企业环境下的应用程序提供的一套解决方案。该技术体系中包含的技术如Servlet 、Jsp等，主要针对于Web应用程序开发。   </p>
+</li>
+<li><p>Java ME（<span style="color:red">M</span>icro <span style="color:red">E</span>dition），Java小型版<br>支持Java程序运行在移动终端（手机、PDA）上的平台，对Java API有所精简，并加<br>入了针对移动终端的支持。   </p>
+</li>
+<li><p>Java Card<br>支持一些Java小程序（Applets）运行在小内存设备（如智能卡）上的平台。</p>
+</li>
+</ul>
+<br>
+
+<h2 id="Java在各领域的应用"><a href="#Java在各领域的应用" class="headerlink" title="Java在各领域的应用"></a><strong>Java在各领域的应用</strong></h2><ul>
+<li><p>企业级应用<br>主要指复杂的大企业的软件系统、各种类型的网站。Java的安全机制以及<br>它的跨平台的优势，使它在分布式系统领域开发中有广泛应用。应用领域包括金融、电<br>信、交通、电子商务等。  </p>
+</li>
+<li><p>Android平台应用<br>Android应用程序使用Java语言编写。Android开发水平的高低很大程度上取决于Java语言核心能力是否扎实。   </p>
+</li>
+<li><p>大数据平台开发<br>各类框架有Hadoop，spark，storm，flink等，就这类技术生态圈来讲，还有各种中间件如flume，kafka，sqoop等等 ，这些框架以及工具大多数是用Java编写而成，但提供诸如Java，scala，Python，R等各种语言API供编程。   </p>
+</li>
+<li><p>移动领域应用<br>主要表现在消费和嵌入式领域，是指在各种小型设备上的应用，包括手机、PDA、机顶盒、汽车通信设备等。   </p>
+</li>
+</ul>
+<br>
+
+<h2 id="Java语言的特点"><a href="#Java语言的特点" class="headerlink" title="Java语言的特点"></a><strong>Java语言的特点</strong></h2><ul>
+<li>面向对象<ul>
+<li>两个基本概念：类、对象</li>
+<li>三大特性：封装、继承、多态</li>
+</ul>
+</li>
+<li>健壮性<br>吸收了C/C++语言的优点，但去掉了其影响程序健壮性的部分（如指针、内存的申请与释放等），提供了一个相对安全的内存管理和访问机制。   </li>
+<li>跨平台性<ul>
+<li>通过Java语言编写的应用程序在不同的系统平台上都可以运行。<br>“Write once , Run Anywhere”</li>
+<li>原理：只要在需要运行 java 应用程序的操作系统上，先安装一个Java虚拟机（<span style="color:red">J</span>ava <span style="color:red">V</span>irtual <span style="color:red">M</span>achine，JVM）即可。由JVM来负责Java程序在该系统中的运行。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java2/java2-1.png" loading="lazy">   </p>
+<br>
+
+<h2 id="Java两种核心机制"><a href="#Java两种核心机制" class="headerlink" title="Java两种核心机制"></a><strong>Java两种核心机制</strong></h2><h3 id="Java虚拟机"><a href="#Java虚拟机" class="headerlink" title="Java虚拟机"></a><strong>Java虚拟机</strong></h3><p>JVM是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指令，管理数据、内存、寄存器。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java2/java2-2.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java2/java2-3.png" loading="lazy">   </p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a><strong>垃圾回收</strong></h3><ul>
+<li>不再使用的内存空间应回收——垃圾回收。<ul>
+<li>在C/C++等语言中，由程序员负责回收无用内存。</li>
+<li>Java 语言消除了程序员回收无用内存空间的责任：它提供一种系统级线程跟踪存储空间的分配情况。并在JVM空闲时，检查并释放那些可被释放的存储空间。</li>
+</ul>
+</li>
+<li>垃圾回收在Java程序运行过程中自动进行，程序员无法精确控制和干预。</li>
+<li>尽管使用了垃圾回收，Java程序还是会出现内存泄漏和内存溢出问题。   </li>
+</ul>
+<br>
+
+<h2 id="Java语言环境搭建"><a href="#Java语言环境搭建" class="headerlink" title="Java语言环境搭建"></a><strong>Java语言环境搭建</strong></h2><h3 id="JDK、JRE"><a href="#JDK、JRE" class="headerlink" title="JDK、JRE"></a><strong>JDK、JRE</strong></h3><ul>
+<li>JDK   ，<span style="color:red">J</span>ava <span style="color:red">D</span>evelopment <span style="color:red">K</span>it，Java开发工具包<br>JDK是提供给Java开发人员使用的，其中包含了java的开发工具，也包括了JRE。所以安装了JDK，就不用在单独安装JRE了。<br>其中的开发工具：编译工具（javac.exe）、打包工具（jar.exe）等。   </li>
+<li>JRE，<span style="color:red">J</span>ava <span style="color:red">R</span>untime <span style="color:red">E</span>nvironment，Java运行环境<br>包括 JVM 和Java程序所需的核心类库等。如果想要运行一个开发好的Java程序，计算机中只需要安装JRE即可。  </li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java2/java2-4.png" loading="lazy">   </p>
+<p>• JDK = JRE + 开发工具集（例如Javac编译工具等）<br>• JRE = JVM + Java SE标准类库</p>
+<h3 id="下载并安装JDK"><a href="#下载并安装JDK" class="headerlink" title="下载并安装JDK"></a><strong>下载并安装JDK</strong></h3><p>官方网址：<a href="https://www.oracle.com/downloads/">https://www.oracle.com/downloads/</a><br>IDEA在新建项目的窗口时候可以直接下载，不用去另下。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java2/java2-5.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java2/java2-6.png" loading="lazy">   </p>
+<ul>
+<li><code>bin</code>：一些开发工具，几个常用的有：<ul>
+<li><code>javac.exe</code></li>
+<li><code>java.exe</code></li>
+<li><code>javadoc.exe</code></li>
+</ul>
+</li>
+<li><code>include</code>：一些头文件</li>
+</ul>
+<h3 id="环境变量配置"><a href="#环境变量配置" class="headerlink" title="环境变量配置"></a><strong>环境变量配置</strong></h3><p>略。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java2/java2-7.png" loading="lazy">   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MATLAB 拼图游戏设计</title>
+    <url>/2021/01/15/matlab-jigsaw/</url>
+    <content><![CDATA[<p>这是我大三上学期《自动化软件工具》这门课的结课作业，也就是用MATLAB做一个项目出来。<br>参考于<a href="https://wuxian.blog.csdn.net/article/details/79219110">基于MATLAB的拼图游戏设计_思绪无限的博客-CSDN博客</a>。</p>
+<br>
+
+<h2 id="一-概述"><a href="#一-概述" class="headerlink" title="一. 概述"></a><strong>一. 概述</strong></h2><p>拼图是广为人知的一种游戏。这里的拼图游戏指的是华容道式的拼图，规则是有一幅3*3的打乱的拼图，包括8块拼图块，1格空白位置用来移动，点击空白处旁的拼图，则拼图将移动到空白处，游戏胜利条件是还原拼图。<br>MATLAB的图像处理和函数功能支持较为完善，本设计使用MATLAB通过m文件编程构造出了拼图游戏。有趣的是，MATLAB是matrix、laboratory两个词的组合，意为矩阵矩阵实验室，而本设计——拼图游戏的本质也是对矩阵进行操作，可以说是MATLAB的“灵魂”游戏。</p>
+<br>
+
+<h2 id="二-程序设计"><a href="#二-程序设计" class="headerlink" title="二. 程序设计"></a><strong>二. 程序设计</strong></h2><h3 id="2-1-分割拼图"><a href="#2-1-分割拼图" class="headerlink" title="2.1 分割拼图"></a><strong>2.1 分割拼图</strong></h3><p>首先要准备一张正方形图片用来拼，这里就拿我就读的中国矿业大学的校徽作为对象。校徽图片的宽度和高度都是300像素。因此，该jpeg图片在MATLAB工作区中的储存形式是一个300*300*3的矩阵。其中，“300*300”表示像素点的个数，“3”用来储存像素点的颜色，比如，这里我制作了一张只有一个白色像素点的图片（用mspaint制作的），在MATLAB中使用imread函数来读取这张图片，显示出数组信息如图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw1.png" loading="lazy"><br>(255，255，255)即表示白色。<br>接下来，为便于解释，现把整个图片分为9个部分，编号如图所示：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw2.png" loading="lazy"><br>其中最后一个位置用作空白块，所以为了显示出其特殊性，编号为0而非编号为9。这样一来，运行<code>x1 = image(1:100, 1:100, :);</code>赋值语句之后，x1即是表示拼图块1的矩阵。<br>同理，有：</p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab">x2 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">%拼图块2矩阵数据</span>
+x3 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">%拼图块3矩阵数据</span>
+x4 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">%拼图块4矩阵数据</span>
+x5 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%拼图块5矩阵数据</span>
+x6 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%拼图块6矩阵数据</span>
+x7 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>   <span class="token comment">%拼图块7矩阵数据</span>
+x8 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">101</span><span class="token operator">:</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%拼图块8矩阵数据</span>
+x0 <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">201</span><span class="token operator">:</span><span class="token number">300</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%拼图块0矩阵数据</span></code></pre>
+<p>可使用axis on函数显示出横纵坐标帮助理解：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw3.png" loading="lazy"><br>接下来定义一个从原图中分割拼图块并标记编号的函数，不妨命名为<code>split(image, index)</code>，其中<code>image</code>为原图的数据矩阵，<code>index</code>为要选择的拼图块的编号。split函数的输出为矩阵x，是序号为index的拼图块的数据矩阵。<br>比如，运行语句<code>x2 = split(image, 5);</code>后，x2即表示校徽图片的最中央的拼图块的数据矩阵。<br>split函数内容如下：  </p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> x <span class="token operator">=</span> <span class="token function">split</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> index<span class="token punctuation">)</span>
+  <span class="token keyword">if</span> index <span class="token operator">></span> <span class="token number">0</span>  <span class="token comment">%拼图块1~8</span>
+    <span class="token comment">% 计算出行数row以及列数column</span>
+    row <span class="token operator">=</span> <span class="token function">fix</span><span class="token punctuation">(</span><span class="token punctuation">(</span>index<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">%fix表示向零方向取整</span>
+    column <span class="token operator">=</span> <span class="token function">mod</span><span class="token punctuation">(</span>index<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    x <span class="token operator">=</span> <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span>row<span class="token operator">*</span><span class="token number">100</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token operator">*</span><span class="token punctuation">(</span>row<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">+</span>column<span class="token operator">*</span><span class="token number">100</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token operator">*</span><span class="token punctuation">(</span>column<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">else</span>  <span class="token comment">%拼图块0 </span>
+    x <span class="token operator">=</span> <span class="token function">uint8</span><span class="token punctuation">(</span><span class="token number">255</span> <span class="token operator">*</span> <span class="token function">ones</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span></code></pre>
+<h3 id="2-2-按编号矩阵显示拼图"><a href="#2-2-按编号矩阵显示拼图" class="headerlink" title="2.2 按编号矩阵显示拼图"></a><strong>2.2 按编号矩阵显示拼图</strong></h3><p>上一节已经实现通过序号获得小拼图块的数据矩阵。一幅拼图可以由一个3*3的矩阵A来表示，接下来编写一个根据编号矩阵A显示对应拼图图片的函数，命名为<code>drawmap(A)</code>，代码如下</p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> <span class="token function">drawmap</span><span class="token punctuation">(</span>A<span class="token punctuation">)</span>
+    origin <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'jigsawImage.jpeg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    image <span class="token operator">=</span> origin<span class="token punctuation">;</span> 
+    <span class="token keyword">for</span> row <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">3</span>   <span class="token comment">%根据编号矩阵A构建要显示的拼图数据矩阵image</span>
+      <span class="token keyword">for</span> col <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">3</span>
+        <span class="token function">image</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">+</span><span class="token punctuation">(</span>row<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token operator">*</span>row<span class="token punctuation">,</span> <span class="token number">1</span><span class="token operator">+</span><span class="token punctuation">(</span>col<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">100</span> <span class="token operator">:</span> <span class="token number">100</span><span class="token operator">*</span>col<span class="token punctuation">,</span> <span class="token operator">:</span> <span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token function">split</span><span class="token punctuation">(</span>origin<span class="token punctuation">,</span> <span class="token function">A</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span>col<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">end</span>
+    <span class="token keyword">end</span>
+    <span class="token function">imshow</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>  <span class="token comment">%显示拼图</span></code></pre>
+<p>比如，假设矩阵A为<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw4.png" loading="lazy">则运行<code>drawmap(A)</code>可得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw5.png" loading="lazy">  </p>
+<h3 id="2-3-移动拼图"><a href="#2-3-移动拼图" class="headerlink" title="2.3 移动拼图"></a><strong>2.3 移动拼图</strong></h3><p>移动拼图的过程是：点击空白处旁的拼图，则拼图将移动到空白处。而拼图块和空白块的相对位置只有四种，即上下左右四种位置，按照这个想法，定义函数为<code>function tag = movejig(tag, row, col)</code>。其中，<code>tag</code>表示当前拼图的编号矩阵，<code>row</code>和<code>col</code>分别表示鼠标点击位置的行数和列数。输出为移动后得到的编号矩阵。</p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> tag <span class="token operator">=</span> <span class="token function">movejig</span><span class="token punctuation">(</span>tag<span class="token punctuation">,</span> row<span class="token punctuation">,</span> col<span class="token punctuation">)</span>
+<span class="token comment">%4个if分4种情况对不同位置处的点坐标与矩阵行列式统一</span>
+  num <span class="token operator">=</span> <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token comment">%鼠标位置与号码牌一致</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>row<span class="token operator">></span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token comment">%点击位置在第2或3行，空白块在点击位置的上一行   </span>
+    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> num<span class="token punctuation">;</span> 
+    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>row<span class="token operator">&lt;</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token comment">%点击位置在第1或2行，空白块在点击位置的下一行</span>
+    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token operator">></span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token comment">%点击位置在第2或3列，空白块在点击位置的左边一列</span>
+    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>col<span class="token operator">&lt;</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span><span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span>
+  <span class="token comment">%点击位置在第2或3列，空白块在点击位置的右边一列</span>
+    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    <span class="token function">tag</span><span class="token punctuation">(</span>row<span class="token punctuation">,</span> col<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  <span class="token keyword">end</span></code></pre>
+<h3 id="2-4-打乱拼图"><a href="#2-4-打乱拼图" class="headerlink" title="2.4 打乱拼图"></a><strong>2.4 打乱拼图</strong></h3><p>这里需要注意，不可以使用<code>rand</code>函数生成一个由数字0~8随机排列构成的3*3的矩阵作为拼图矩阵，因为那样生成的矩阵大概率无法还原为原图，这在数学上是有证明的。<br>这里采取另一种想法来打乱拼图，即随机移动初始拼图使其打乱。取循环400次（也可以更多，但400次已经足够了），每次使用<code>rand</code>函数随机生成模拟点击的行列数，然后调用上述定义的<code>movejig</code>函数进行移动。定义函数为<code>function y = Disrupt()</code>，代码如下</p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> y <span class="token operator">=</span> <span class="token function">Disrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
+<span class="token comment">%随机打乱原拼图排列顺序</span>
+  y <span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">;</span> <span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">;</span> <span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>  <span class="token comment">%原始的拼图矩阵</span>
+  <span class="token keyword">for</span> <span class="token number">i</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">:</span><span class="token number">400</span>
+    row <span class="token operator">=</span> <span class="token function">randi</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    col <span class="token operator">=</span> <span class="token function">randi</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    y <span class="token operator">=</span> <span class="token function">movejig</span><span class="token punctuation">(</span>y<span class="token punctuation">,</span> row<span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token punctuation">;</span>  
+  <span class="token keyword">end</span></code></pre>
+<h3 id="2-5-拼图主函数和回调函数"><a href="#2-5-拼图主函数和回调函数" class="headerlink" title="2.5 拼图主函数和回调函数"></a><strong>2.5 拼图主函数和回调函数</strong></h3><p>主函数是一个整合中心，用来整合调用各已定义好的子函数。<br>另外，很明显主函数需要重复获得鼠标点击时的位置坐标来进行拼图游戏，也要有游戏胜利的终止条件。这里采用figure的<code>WindowButtonDownFcn</code>属性，MATLAB官方文件中对其介绍如下：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw6.png" loading="lazy"><br>据此可以结合<code>set</code>函数、gcf图形句柄和函数句柄定义一个获取鼠标点击坐标的回调函数。当在图上按下鼠标左键的时候，就自动执行回调函数来获取坐标值，同时在回调函数中判断游戏是否胜利。<br>主函数：</p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> <span class="token function">jigsaw</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">%主函数</span>
+  Tag_A <span class="token operator">=</span> <span class="token function">Disrupt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%获得打乱好的拼图编号矩阵</span>
+  <span class="token function">drawmap</span><span class="token punctuation">(</span>Tag_A<span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">%按照编号矩阵显示拼图</span>
+  global Tag<span class="token punctuation">;</span>        <span class="token comment">%Tag是游戏过程中的拼图编号矩阵，定义为全局变量以方便参 数传递</span>
+  Tag <span class="token operator">=</span> Tag_A<span class="token punctuation">;</span>
+  <span class="token function">set</span><span class="token punctuation">(</span>gcf<span class="token punctuation">,</span> <span class="token string">'WindowButtonDownFcn'</span><span class="token punctuation">,</span> <span class="token operator">@</span>ButtonDownFcn<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">%点击鼠标时调用ButtonDownFcn函数</span></code></pre>
+<p>回调函数：</p>
+<pre class="language-matlab" data-language="matlab"><code class="language-matlab"><span class="token keyword">function</span> <span class="token function">ButtonDownFcn</span><span class="token punctuation">(</span>src<span class="token punctuation">,</span>event<span class="token punctuation">)</span>
+<span class="token comment">%回调函数，鼠标点击事件发生时调用</span>
+  pt <span class="token operator">=</span> <span class="token function">get</span><span class="token punctuation">(</span>gca<span class="token punctuation">,</span> <span class="token string">'CurrentPoint'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">%获取当前鼠标点击位置坐标</span>
+  xpos <span class="token operator">=</span> <span class="token function">pt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment">%鼠标点击处的横坐标实际值</span>
+  ypos <span class="token operator">=</span> <span class="token function">pt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>                <span class="token comment">%鼠标点击处的纵坐标实际值</span>
+  col <span class="token operator">=</span> <span class="token function">ceil</span><span class="token punctuation">(</span>xpos<span class="token operator">/</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">%将横坐标值转换为列数,ceil表示向无穷大方向取整</span>
+  row <span class="token operator">=</span> <span class="token function">ceil</span><span class="token punctuation">(</span>ypos<span class="token operator">/</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>          <span class="token comment">%将纵坐标值转换为行数</span>
+  global Tag<span class="token punctuation">;</span>                    <span class="token comment">%全局变量声明</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>col <span class="token operator">&lt;=</span> <span class="token number">3</span> <span class="token operator">&amp;&amp;</span> col <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>row <span class="token operator">&lt;=</span> <span class="token number">3</span> <span class="token operator">&amp;&amp;</span> row <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token comment">%鼠标点击位置在有效范围内    </span>
+    Tag <span class="token operator">=</span> <span class="token function">movejig</span><span class="token punctuation">(</span>Tag<span class="token punctuation">,</span> row<span class="token punctuation">,</span> col<span class="token punctuation">)</span><span class="token punctuation">;</span>      　　　　　 <span class="token comment">%按点击位置移动拼图</span>
+    <span class="token function">drawmap</span><span class="token punctuation">(</span>Tag<span class="token punctuation">)</span>                     <span class="token comment">%显示拼图</span>
+    order <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span> <span class="token number">2</span> <span class="token number">3</span><span class="token punctuation">;</span> <span class="token number">4</span> <span class="token number">5</span> <span class="token number">6</span><span class="token punctuation">;</span> <span class="token number">7</span> <span class="token number">8</span> <span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>   <span class="token comment">%原图的编号矩阵</span>
+    zt <span class="token operator">=</span> <span class="token function">abs</span><span class="token punctuation">(</span>Tag <span class="token operator">-</span> order<span class="token punctuation">)</span><span class="token punctuation">;</span>           <span class="token comment">%比较两个矩阵,要加绝对值</span>
+    <span class="token keyword">if</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token function">zt</span><span class="token punctuation">(</span><span class="token operator">:</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span>               <span class="token comment">%与原图已吻合</span>
+　      image <span class="token operator">=</span> <span class="token function">imread</span><span class="token punctuation">(</span><span class="token string">'jigsawImage.jpeg'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+　      <span class="token function">imshow</span><span class="token punctuation">(</span>image<span class="token punctuation">)</span>                <span class="token comment">%游戏完成，显示全图</span>
+　      <span class="token function">msgbox</span><span class="token punctuation">(</span><span class="token string">'恭喜完成！'</span><span class="token punctuation">)</span>   
+　      <span class="token keyword">pause</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        
+　      close all 
+    <span class="token keyword">end</span>
+  <span class="token keyword">else</span>
+      <span class="token keyword">return</span>
+  <span class="token keyword">end</span></code></pre>
+<p>至此，拼图游戏设计完成。  </p>
+<br>
+
+<h2 id="三、结果分析"><a href="#三、结果分析" class="headerlink" title="三、结果分析"></a><strong>三、结果分析</strong></h2><p>点击运行程序，会显示打乱好的拼图：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw7.png" loading="lazy"><br>点击空白块旁边的拼图，会移动拼图块：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw8.png" loading="lazy"><br>完成拼图后会提示“恭喜完成”：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw9.png" loading="lazy"><br>稍作修改，也可以将该程序改为4*4、5*5、……的拼图游戏。主要需要修改循环次数、行列数、行列计算公式、原始数据矩阵等，disrupt函数中的随机点击的次数也应适当增加。我做了个10*10的拼图游戏，效果如图<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw10.png" loading="lazy"><br>另外，结合tic toc指令，还可以实现游戏计时功能：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/other/matlabJigsaw/matlabJigsaw11.png" loading="lazy">  </p>
+<br>
+
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a><strong>四、总结</strong></h2><p>通过本次课程设计，我对课堂上学过的函数的定义、if语句、for循环语句等内容掌握得更加熟练。也学会了一些MATLAB中的图像处理方法，以及将图片与矩阵结合进行操作的思想。<br>另外，我本身就对编程有着很大的兴趣，所以做这份课程设计对我来说是一件愉快的事情。</p>
+<br>
+
+<p>github：<a href="https://github.com/tangjan/MATLAB_jigsaw">tangjan/MATLAB_jigsaw</a></p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>未分类</category>
+      </categories>
+      <tags>
+        <tag>MATLAB</tag>
       </tags>
   </entry>
 </search>
