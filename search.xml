@@ -5864,4 +5864,128 @@ x0 <span class="token operator">=</span> <span class="token function">image</spa
         <tag>MATLAB</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Java-3：HelloWorld、API文档、编程风格、常用开发工具</title>
+    <url>/2021/12/22/java3/</url>
+    <content><![CDATA[<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a><strong>Hello World</strong></h2><p>步骤：</p>
+<ol>
+<li>将 Java 代码编写到扩展名为 .java 的文件中。</li>
+<li>通过 <code>javac</code> 命令对该 .java 文件进行编译。</li>
+<li>通过 <code>java</code> 命令对生成的 .class 文件进行运行。</li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-1.png" loading="lazy">   </p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">HelloWorld</span><span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Hello World!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-2.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-3.png" loading="lazy">    </p>
+<p>编译后生成的字节码文件的名字是 .java 文件中的类名，即 <code>HelloWorld</code> 。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-4.png" loading="lazy">    </p>
+<p>注：虽然 java 大小写敏感，但Windows cmd并不大小写敏感。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-5.png" loading="lazy">    </p>
+<br>
+
+<h2 id="HelloWorld小结"><a href="#HelloWorld小结" class="headerlink" title="HelloWorld小结"></a><strong>HelloWorld小结</strong></h2><ul>
+<li>Java源文件以“java”为扩展名。源文件的基本组成部分是类（class），如本例中的 <code>HelloWorld</code> 类。</li>
+<li>Java应用程序的执行入口是 main() 方法。它有固定的书写格式：<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">&#125;</span></code></pre>
+其中，中括号 <code>[]</code> 可以移到 <code>args</code> 后面，<code>args</code> 也可以改。就这两个地方能改。  </li>
+<li>Java语言严格区分大小写。</li>
+<li>Java方法由一条条语句构成，每个语句以“;”结束。</li>
+<li>大括号都是成对出现的，缺一不可。</li>
+<li>一个源文件中最多只能有一个 public 类。其它类的个数不限，如果源文件包含一个 public 类，则文件名必须按该类名命名。<br>有多少个类，编译后就会有多少个 .class 文件。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-11.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-12.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-13.png" loading="lazy">   </li>
+</ul>
+<ul>
+<li><code>System.out.println();</code> 行尾换行</li>
+<li><code>System.out.print()</code>; 行尾不换行</li>
+</ul>
+<br>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a><strong>注释</strong></h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a><strong>分类</strong></h3><p>单行注释和多行注释和C语言用法一样。</p>
+<ul>
+<li><p>单行注释：</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">//注释文字</span></code></pre></li>
+<li><p>多行注释：</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">/*
+注释
+文字
+*/</span></code></pre>
+<p>多行注释不能嵌套使用。   </p>
+</li>
+<li><p>文档注释（Java特有）：</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+  @author 指定java程序的作者
+  @version 指定源文件的版本
+*/</span></code></pre>
+<p>首两个 <code>*</code> ，末一个 <code>*</code> 。  </p>
+</li>
+</ul>
+<h3 id="文档注释的使用"><a href="#文档注释的使用" class="headerlink" title="文档注释的使用"></a><strong>文档注释的使用</strong></h3><p>文档注释的内容可以被JDK提供的工具 javadoc 所解析，生成一套以网页文件形式体现的该程序的说明文档。<br>命令格式：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-6.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-7.png" loading="lazy">    </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-8.png" loading="lazy">    </p>
+<p>然后就会生成 <code>mydoc</code> 文件夹：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-9.png" loading="lazy"><br>打开其中的 <code>index.html</code> 可以看到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java3/java3-10.png" loading="lazy">    </p>
+<br>
+
+<h2 id="API文档"><a href="#API文档" class="headerlink" title="API文档"></a><strong>API文档</strong></h2><p>API，<span style="color:red">A</span>pplication <span style="color:red">P</span>rogramming <span style="color:red">I</span>nterface，应用程序编程接口。是 Java 提供的基本编程接口。<br>Java语言提供了大量的基础类，因此 Oracle 也为这些基础类提供了相应的API文档，用于告诉开发者如何使用这些类，以及这些类里包含的方法。<br>就相当于中文的字典，不会就查。     </p>
+<p>在线查看：<a href="https://docs.oracle.com/en/java/javase/17/docs/api/index.html">https://docs.oracle.com/en/java/javase/17/docs/api/index.html</a></p>
+<p>下载地址：<a href="https://www.oracle.com/java/technologies/downloads/">https://www.oracle.com/java/technologies/downloads/</a></p>
+<br>
+
+<h2 id="良好的编程风格"><a href="#良好的编程风格" class="headerlink" title="良好的编程风格"></a><strong>良好的编程风格</strong></h2><ul>
+<li>正确的注释和注释风格<ul>
+<li>使用文档注释来注释整个类或整个方法。</li>
+<li>如果注释方法中的某一个步骤，使用单行或多行注释。</li>
+</ul>
+</li>
+<li>正确的缩进和空白<ul>
+<li>使用一次tab操作，实现缩进</li>
+<li>运算符两边习惯性各加一个空格。比如：<code>2 + 4 * 5</code> </li>
+</ul>
+</li>
+<li>块的风格<ul>
+<li>行尾风格<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">&#123;</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Block Style!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre></li>
+<li>次行风格<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> 
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> 
+  <span class="token punctuation">&#123;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Block Style!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">&#125;</span> 
+<span class="token punctuation">&#125;</span></code></pre>
+Java API 源代码选择了行尾风格。</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="常用的Java开发工具"><a href="#常用的Java开发工具" class="headerlink" title="常用的Java开发工具"></a><strong>常用的Java开发工具</strong></h2><p>文本编辑工具：</p>
+<ul>
+<li>记事本</li>
+<li>UltraEdit</li>
+<li>EditPlus </li>
+<li>TextPad</li>
+<li>NotePad</li>
+</ul>
+<p>Java集成开发环境（IDE)： </p>
+<ul>
+<li>IntelliJ IDEA</li>
+<li>Eclipse</li>
+<li>JBuilder</li>
+<li>NetBeans</li>
+<li>MyEclipse</li>
+</ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>
