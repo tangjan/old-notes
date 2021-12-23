@@ -5988,4 +5988,133 @@ Java API 源代码选择了行尾风格。</li>
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Web前端31：@规则、web字体和图标、块级格式化上下文</title>
+    <url>/2021/12/23/web31/</url>
+    <content><![CDATA[<p>从这里开始就是CSS进阶部分。    </p>
+<h2 id="规则"><a href="#规则" class="headerlink" title="@规则"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/At-rule">@规则</a></strong></h2><p>也叫@语句、CSS语句、CSS指令等。<br>不过归根结底都译自英文<span style="color:red">at-rule</span>。</p>
+<h3 id="import"><a href="#import" class="headerlink" title="@import"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@import">@import</a></strong></h3><p>写法：<code>@import &quot;路径&quot;;</code><br>作用是导入另外一个css文件。如<br>我们之前引入<code>reset.css</code>重置样式表都是通过<code>&lt;link&gt;</code>：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/css/reset.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/css/mystyle.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></code></pre>
+<p>通过@规则，可以只link一个<code>mystyle.css</code>，然后在<code>mystyle.css</code>中写：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token atrule"><span class="token rule">@import</span> <span class="token string">"reset.css"</span><span class="token punctuation">;</span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-1.png" loading="lazy">    </p>
+<h3 id="charset"><a href="#charset" class="headerlink" title="@charset"></a><strong><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/@charset">@charset</a></strong></h3><p>通常写为<code>@charset &quot;utf-8&quot;;</code><br>作用是告诉浏览器该css文件使用的字符编码集是<code>utf-8</code>。<br>这个指令必须写在第一行。<br>如果css文件中没出现中文、特殊符号等，可以省略不写。</p>
+<br>
+
+<h2 id="web字体和图标"><a href="#web字体和图标" class="headerlink" title="web字体和图标"></a><strong>web字体和图标</strong></h2><p>一个网站上有各种各样的图标，可以使用雪碧图，也可以使用专门的图标格式。    </p>
+<h3 id="web字体"><a href="#web字体" class="headerlink" title="web字体"></a><strong>web字体</strong></h3><p>当用户电脑上没有安装相应字体时，强制让用户下载该字体。<br>web字体就是指字体放在web服务器上，让用户去下载。<br>方法：在CSS文件中使用 <code>@font-face</code> 指令制作一个新字体，用户加载css文件时临时安装该字体，然后就可以显示了。    </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>How are you<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token atrule"><span class="token rule">@font-face</span></span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">"eufrak"</span><span class="token punctuation">;</span>
+    <span class="token property">src</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>/eufrak.ttf<span class="token punctuation">)</span></span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">p</span><span class="token punctuation">&#123;</span>
+    <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">"eufrak"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-2.png" loading="lazy">    </p>
+<p>实际上用得不是很多，因为字体文件加载是需要时间的，而于用户而言，加载时间直接影响体验。    </p>
+<h3 id="字体图标"><a href="#字体图标" class="headerlink" title="字体图标"></a><strong>字体图标</strong></h3><p>把需要用到的字制作为图片。    </p>
+<p>国内做的比较好的是<a href="https://www.iconfont.cn/">阿里巴巴矢量图标库</a>   </p>
+<p>把需要的图标添加到自己的账号后，点击“生成在线链接”，然后在html文件中 <code>link</code> 这个css文件，在元素的类名中写上 <code>iconfont</code> 和 <code>图标代码</code> 就可以了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-3.png" loading="lazy">    </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>//at.alicdn.com/t/font_3052657_8gsizbof93y.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>iconfont icon-xingxing<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-4.png" loading="lazy"><br>这个本质是一个文字，不过是做成了星星的样子。所以它也可以用css渲染颜色、背景、字体大小等：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-5.png" loading="lazy">    </p>
+<p>也可以下载到本地使用：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-6.png" loading="lazy">    </p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>css/iconfont.css<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>iconfont icon-xingxing<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">></span></span></code></pre>
+
+<p>也可以使用Unicode：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-7.png" loading="lazy"><br>css：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token atrule"><span class="token rule">@font-face</span></span> <span class="token punctuation">&#123;</span>
+  <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">'iconfont'</span><span class="token punctuation">;</span>  <span class="token comment">/* Project id 3052657 */</span>
+  <span class="token property">src</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'//at.alicdn.com/t/font_3052657_8gsizbof93y.woff2?t=1640237208245'</span><span class="token punctuation">)</span></span> <span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'woff2'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+       <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'//at.alicdn.com/t/font_3052657_8gsizbof93y.woff?t=1640237208245'</span><span class="token punctuation">)</span></span> <span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'woff'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+       <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span><span class="token string url">'//at.alicdn.com/t/font_3052657_8gsizbof93y.ttf?t=1640237208245'</span><span class="token punctuation">)</span></span> <span class="token function">format</span><span class="token punctuation">(</span><span class="token string">'truetype'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token selector">.inconfont</span><span class="token punctuation">&#123;</span>
+  <span class="token property">font-family</span><span class="token punctuation">:</span> <span class="token string">"iconfont"</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>html：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>iconfont<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token entity" title="&#xe718;">&amp;#xe718;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">></span></span></code></pre>
+
+<br>
+
+<h2 id="块级格式化上下文"><a href="#块级格式化上下文" class="headerlink" title="块级格式化上下文"></a><strong>块级格式化上下文</strong></h2><p>全称 <span style="color:red">B</span>lock <span style="color:red">F</span>ormatting <span style="color:red">C</span>ontext，BFC<br>它是一块独立的渲染区域，规定了在该区域中，常规流块盒的布局    </p>
+<p>常规流块盒:</p>
+<ul>
+<li>在水平方向上，必须撑满包含块  </li>
+<li>在包含块的垂直方向上依次摆放  </li>
+<li>若外边距无缝相邻，则进行外边距合并  </li>
+<li>自动高度和摆放位置，无视浮动元素</li>
+</ul>
+<p>BFC 渲染区域区域由某个 HTML 元素创建，以下元素会在其内部创建 BFC 区域：</p>
+<ul>
+<li>根元素 <code>&lt;html&gt;</code> ，覆盖了网页中所有的元素  </li>
+<li>浮动和绝对定位元素</li>
+<li>属性 <code>overflow</code> 不等于 <code>visible</code> 的块盒</li>
+</ul>
+<p>渲染区域：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-8.png" loading="lazy">    </p>
+<p>独立：不同的 BFC 区域，它们进行渲染时互不干扰。<br>创建 BFC 的元素，隔绝了它内部和外部的联系，内部的渲染不会影响到外部。<br>具体规则：</p>
+<ul>
+<li><p>创建 BFC 的元素，它的自动高度需要计算浮动元素。<br>之前遇到高度坍塌都是使用 <code>.clearfix::after</code> 的方式进行处理，而根据这条 BFC 规则，可以通过创建 BFC 来清除高度坍塌，如设置 <code>position: absolute</code> 或 <code>float: left</code>。但这两种方式改变了元素的布局方式，会有一定的副作用。所以创建 <code>BFC</code> 往往使用副作用最小的 <code>overflow: hidden</code> 来设置。<br>但归根结底还是推荐使用 <code>.clearfix::after</code> 来清除高度坍塌，专职专用，副作用最最小。   </p>
+</li>
+<li><p>创建BFC的元素，它的边框盒不会与浮动元素重叠。<br>如：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>float<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.float</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> gold<span class="token punctuation">;</span>
+    <span class="token property">float</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>正常情况下，常规流元素 <code>.container</code> 布局时无视浮动元素：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-9.png" loading="lazy"><br>而将 <code>.container</code> 元素变为 BFC之后：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-10.png" loading="lazy"><br>它就避开了浮动元素。  </p>
+</li>
+<li><p>创建 BFC 的元素，不会和它的子元素进行外边距合并。<br>处在不同 BFC 内的元素，外边距不会合并。只有处在同一 BFC 内的元素才会外边距合并。<br>如：</p>
+<pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>child<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+        
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> lightblue<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+    <span class="token property">margin-top</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">.child</span><span class="token punctuation">&#123;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 50px<span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> red<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>正常情况下，它们的上外边距是合并的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-11.png" loading="lazy"><br>而一旦给 <code>.container</code> 创建了 BFC 之后：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">.container</span><span class="token punctuation">&#123;</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web31/web31-12.png" loading="lazy"><br>它们的外边距就不合并了。<br>原因是 <code>.container</code> 属于根元素 <code>&lt;html&gt;</code> 的上下文，而 <code>.child</code> 属于 <code>.container</code> 的上下文。   </p>
+</li>
+</ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>
