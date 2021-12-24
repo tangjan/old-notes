@@ -6507,4 +6507,45 @@ d <span class="token operator">=</span> d <span class="token operator">+</span> 
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Packet Tracer仿真实验-1：Packet Tracer简单使用、访问Web服务器</title>
+    <url>/2021/12/24/net1/</url>
+    <content><![CDATA[<p><a href="https://www.bilibili.com/video/BV1At411f7hJ">计算机网络仿真实验_湖科大教书匠_bilibili</a></p>
+<br>
+
+<h2 id="Packet-Tracer简单使用"><a href="#Packet-Tracer简单使用" class="headerlink" title="Packet Tracer简单使用"></a><strong>Packet Tracer简单使用</strong></h2><p><a href="https://www.netacad.com/courses/packet-tracer">Cisco Packet Tracer 下载地址</a>   </p>
+<p>建议不要将软件汉化，<a href="https://mp.weixin.qq.com/s?src=11&timestamp=1640330365&ver=3515&signature=pfHj*uAMEUVEKB05jzoMsaivV9O-U6gmULX5qGwh2WFBPFhlo6zf*lY5COxshBrf1qBLnYgzYAyo1R36NX3kBC0eRckDKzrdRTonJQ4kfmx-m7m3rZ5w1*5FWJTlupbf&new=1">原因</a></p>
+<p>软件界面：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-1.png" loading="lazy">  </p>
+<h3 id="构建网络拓扑"><a href="#构建网络拓扑" class="headerlink" title="构建网络拓扑"></a><strong>构建网络拓扑</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-2.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-3.png" loading="lazy"><br>3台 pc + 1 个集线器<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-4.png" loading="lazy"><br>然后用自动连线连起来：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-5.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-6.png" loading="lazy">   </p>
+<h3 id="配置网络设备"><a href="#配置网络设备" class="headerlink" title="配置网络设备"></a><strong>配置网络设备</strong></h3><p>对 3 台主机的 IP 地址进行配置：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-7.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-8.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-9.png" loading="lazy"><br>至于为什么要用192.168.0.x，参见 <a href="https://www.ietf.org/rfc/rfc1918">RFC 1918</a>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-10.png" loading="lazy">   </p>
+<h3 id="跟踪数据包"><a href="#跟踪数据包" class="headerlink" title="跟踪数据包"></a><strong>跟踪数据包</strong></h3><p>切换到 Simulation （仿真）模式：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-11.png" loading="lazy">   </p>
+<p>点击 PDU 按键：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-12.png" loading="lazy"><br>然后依次点击 PDU （Protocol Data Unit，协议数据单元）的源主机、目的主机，这里我点的是 PC0、PC2<br>在这里就能看到每一步的数据传输情况<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-13.png" loading="lazy"><br>从仿真模式可以看到，数据包的传输过程是：  </p>
+<ul>
+<li>PC0 传给集线器</li>
+<li>集线器广播给 PC1 和 PC2</li>
+<li>PC2 收到数据包后发送确认报文给集线器，PC1 收到数据包后并不发送确认报文</li>
+<li>集线器把 PC2 的确认报文广播给 PC0 和 PC1，PC0 收到确认报文，传输过程完毕</li>
+</ul>
+<h3 id="查看数据包"><a href="#查看数据包" class="headerlink" title="查看数据包"></a><strong>查看数据包</strong></h3><p>拿第一步（PC0 → HUB）举例：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-14.png" loading="lazy"><br>Layer 3（网络层）细节：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-17.png" loading="lazy"><br>Layer 2（数据链路层）细节：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-16.png" loading="lazy"><br>Layer 1（物理层）细节：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-15.png" loading="lazy"><br>数据报封装情况：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-18.png" loading="lazy"><br>没涉及到网络层之上的层次。</p>
+<br>
+
+<h2 id="访问Web服务器"><a href="#访问Web服务器" class="headerlink" title="访问Web服务器"></a><strong>访问Web服务器</strong></h2><h3 id="拓扑搭建"><a href="#拓扑搭建" class="headerlink" title="拓扑搭建"></a><strong>拓扑搭建</strong></h3><p>网络拓扑：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-19.png" loading="lazy"><br>PC：192.168.0.1<br>Server：192.168.0.2   </p>
+<h3 id="HTTP过滤"><a href="#HTTP过滤" class="headerlink" title="HTTP过滤"></a><strong>HTTP过滤</strong></h3><p>过滤 HTTP 协议：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-20.png" loading="lazy">   </p>
+<h3 id="访问Web服务器-1"><a href="#访问Web服务器-1" class="headerlink" title="访问Web服务器"></a><strong>访问Web服务器</strong></h3><p>打开 PC 的浏览器：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-21.png" loading="lazy"><br>URL 输入 192.168.0.2，运行，可以得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-22.png" loading="lazy">   </p>
+<h3 id="详细解释"><a href="#详细解释" class="headerlink" title="详细解释"></a><strong>详细解释</strong></h3><h4 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a><strong>第一步</strong></h4><p>PC 将 HTTP 请求按照应用层（Layer 7）、传输层（Layer 4）、网络层（Layer 3）、数据链路层（Layer 2）、物理层（Layer 1）的顺序逐级封装。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-23.png" loading="lazy"><br>应用层（Layer 7）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-24.png" loading="lazy"><br>传输层（Layer 4）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-25.png" loading="lazy"><br>网络层（Layer 3）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-26.png" loading="lazy"><br>数据链路层（Layer 2）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-27.png" loading="lazy"><br>物理层（Layer 1）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-28.png" loading="lazy">   </p>
+<h4 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a><strong>第二步</strong></h4><p>取出缓存，发送。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-29.png" loading="lazy">   </p>
+<h4 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a><strong>第三步</strong></h4><p>服务器收到 HTTP 请求数据报，进行处理并回复 HTTP Reply 数据报。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-30.png" loading="lazy"><br>IN 方向 物理层（Layer 1）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-31.png" loading="lazy"><br>IN 方向 数据链路层（Layer 2）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-32.png" loading="lazy"><br>IN 方向 网络层（Layer 3）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-33.png" loading="lazy"><br>IN 方向 传输层（Layer 4）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-34.png" loading="lazy"><br>IN 方向 应用层（Layer 7）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-35.png" loading="lazy">   </p>
+<p>OUT 方向 应用层（Layer 7）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-36.png" loading="lazy"><br>OUT 方向 传输层（Layer 4）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-37.png" loading="lazy"><br>OUT 方向 数据链路层（Layer 2）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-38.png" loading="lazy"><br>OUT 方向 网络层（Layer 3）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-39.png" loading="lazy"><br>OUT 方向 物理层（Layer 1）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-40.png" loading="lazy">   </p>
+<h4 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a><strong>第四步</strong></h4><p>PC 收到服务器发回来的数据报，进行处理，显示网页。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-41.png" loading="lazy"><br>物理层（Layer 1）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-42.png" loading="lazy"><br>数据链路层（Layer 2）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-43.png" loading="lazy"><br>网络层（Layer 3）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-44.png" loading="lazy"><br>传输层（Layer 4）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-45.png" loading="lazy"><br>应用层（Layer 7）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/net/net1/net1-46.png" loading="lazy">   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Packet Tracer仿真实验</category>
+      </categories>
+      <tags>
+        <tag>计网</tag>
+        <tag>Packet Tracer</tag>
+      </tags>
+  </entry>
 </search>
