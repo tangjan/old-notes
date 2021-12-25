@@ -6580,4 +6580,112 @@ d <span class="token operator">=</span> d <span class="token operator">+</span> 
         <tag>Packet Tracer</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Web前端33：浮动细则、行高取值、&lt;body&gt;背景、行盒的垂直对齐、图片底部白边</title>
+    <url>/2021/12/25/web33/</url>
+    <content><![CDATA[<h2 id="浮动的细节规则"><a href="#浮动的细节规则" class="headerlink" title="浮动的细节规则"></a><strong>浮动的细节规则</strong></h2><ul>
+<li>浮动盒子的顶边不得高于上一个盒子的边</li>
+<li>若剩余空间无法放下浮动的盒子，则该盒子向下移动，直到具备足够的空间能容纳盒子，然后再向左或向右移动   </li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-1.png" loading="lazy"><br>但这样稀奇古怪的浮动排列极少见，也就出题会出。<br>常见的浮动结构是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-2.png" loading="lazy">   </p>
+<br>
+
+<h2 id="行高的取值"><a href="#行高的取值" class="headerlink" title="行高的取值"></a><strong>行高的取值</strong></h2><ul>
+<li>像素值 <code>px</code><br>行高固定为像素值的话，当文字过大时会出现重叠。  </li>
+<li><code>em</code><br>一般 <code>line-hight</code> 是设置在范围比较大的父元素上。<code>line-hight</code> 是先计算其像素值，再由子元素继承，而子元素的字体大小很可能各不一样，很容易出问题。  </li>
+<li>百分数<br>和 <code>em</code> 的弊端一样，如 <code>200%</code> 就相当于 <code>2em</code>，先计算再继承，容易出问题。  </li>
+<li>无单位数字<br>意思是行高是字体大小的 2 倍，不过无单位数字是先继承，再计算，不会出问题。所以这是最佳选项，行高尽量不要加单位。     </li>
+</ul>
+<br>
+
+<h2 id="lt-body-gt-的背景"><a href="#lt-body-gt-的背景" class="headerlink" title="&lt;body&gt;的背景"></a><strong>&lt;body&gt;的背景</strong></h2><p>随便给 &lt;body&gt; 设置个背景颜色：</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #008c8c<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-3.png" loading="lazy"><br>看上去是填满了网页。<br>然而……<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-4.png" loading="lazy"><br>&lt;body&gt; 的高度是 0。   </p>
+<p><code>&lt;body&gt;</code> 本质上也是一个普通元素，背景颜色填充的是边框盒，所以才会显得整个网页填满了。没有给 <code>&lt;body&gt;</code> 设置高度，当然就是0。    </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">html</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> #008c8c<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 100px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-5.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-6.png" loading="lazy">   </p>
+<p><strong>画布</strong>：一块区域，最小宽高为视口宽高。   </p>
+<p><code>&lt;html&gt;</code> 的背景覆盖画布。<br><code>&lt;body&gt;</code> 的背景：</p>
+<ul>
+<li>如果 <code>&lt;html&gt;</code> 有背景，<code>&lt;body&gt;</code> 的背景覆盖边框盒</li>
+<li>如果 <code>&lt;html&gt;</code> 无背景，<code>&lt;body&gt;</code> 的背景覆盖画布</li>
+</ul>
+<p>背景图片的规则和上面一样。   </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token url"><span class="token function">url</span><span class="token punctuation">(</span>/img/bg.jpg<span class="token punctuation">)</span></span> no-repeat<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-7.png" loading="lazy"><br><code>&lt;html&gt;</code> 无背景，<code>&lt;body&gt;</code> 覆盖画布。<br>如果再加上  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">html</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> orange<span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-8.png" loading="lazy"><br>背景图只显示了左上角一小部分。都符合上面的结论。      </p>
+<p>如果再加上  </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+    <span class="token property">background-size</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 3000px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-9.png" loading="lazy"><br>会发现，视口之外并没有按照设置的那样填满 <code>&lt;body&gt;</code> 的 <code>width</code>，也就是说，背景图的宽度百分比是相对于视口的。<br>然而，</p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">body</span><span class="token punctuation">&#123;</span>
+  <span class="token property">background-size</span><span class="token punctuation">:</span> 100% 100%<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>高度百分比却是相对于 <code>&lt;html&gt;</code> 的高度的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-10.png" loading="lazy">    </p>
+<p>同样的测试方法，会发现背景图片的横向位置相对于视口的，纵向位置相对于 <code>&lt;html&gt;</code> 高度。   </p>
+<p>综上，结论是，只有给 <code>&lt;html&gt;</code> 设置背景，<code>&lt;body&gt;</code> 的背景设置才符合认知，不然就很奇怪。     </p>
+<br>
+
+<h2 id="多个行盒垂直方向上的对齐"><a href="#多个行盒垂直方向上的对齐" class="headerlink" title="多个行盒垂直方向上的对齐"></a><strong>多个行盒垂直方向上的对齐</strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>checkbox<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">></span></span>我已阅读<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">input</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span>30px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-11.png" loading="lazy"><br>我们会发现这两个行盒在垂直方向上没有对齐。<br>处理方式：给没有对齐的元素设置个 <code>vertical-align</code> 属性。    </p>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">input</span><span class="token punctuation">&#123;</span>
+    <span class="token property">vertical-align</span><span class="token punctuation">:</span> middle<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-12.png" loading="lazy">    </p>
+<br>
+
+<h2 id="图片的底部白边"><a href="#图片的底部白边" class="headerlink" title="图片的底部白边"></a><strong>图片的底部白边</strong></h2><pre class="language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>img/monika.jpg<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span></code></pre>
+<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">div</span><span class="token punctuation">&#123;</span>
+    <span class="token property">border</span><span class="token punctuation">:</span> 2px solid blueviolet<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 500px<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token selector">img</span><span class="token punctuation">&#123;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-13.png" loading="lazy"><br>我们会发现图片底部和 <code>&lt;div&gt;</code> 的下 <code>border</code> 之间有白边。<br>当图片的父元素是一个块盒，块盒的高度自动，则图片底部往往会出现白边，看起来很不美观。<br>两种处理方式：</p>
+<ul>
+<li>设置父元素字体大小为0<br>副作用是字体看不见了，子元素们由于继承，字体也看不见了    </li>
+<li>将图片设置为块盒<pre class="language-css" data-language="css"><code class="language-css"><span class="token selector">img</span><span class="token punctuation">&#123;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/web/web33/web33-14.png" loading="lazy"><br>白边消失。    </li>
+</ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Web前端</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+      </tags>
+  </entry>
 </search>
