@@ -6957,4 +6957,296 @@ num1 <span class="token operator">=</span> num1 <span class="token operator">^</
         <tag>Java</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Java-6：项目1 - 家庭收支记账软件</title>
+    <url>/2021/12/25/java6/</url>
+    <content><![CDATA[<p>一个小小的项目。   </p>
+<p><strong>涉及知识点</strong>：</p>
+<ul>
+<li>局部变量、基本数据类型</li>
+<li>循环语句、分支语句</li>
+<li>方法声明、调用和返回值的接收</li>
+<li>简单的屏幕输出格式控制</li>
+</ul>
+<br>
+
+<h2 id="需求说明"><a href="#需求说明" class="headerlink" title="需求说明"></a><strong>需求说明</strong></h2><p>模拟实现基于文本界面的《家庭记账软件》，能够记录家庭的收入、支出，并能够打印收支明细表。<br><strong>主界面</strong>：</p>
+<pre class="language-none"><code class="language-none">-----------------家庭收支记账软件-----------------
+
+                   1 收支明细
+                   2 登记收入
+                   3 登记支出
+                   4 退    出
+
+                   请选择(1-4)：</code></pre>
+
+<br>
+
+<h2 id="功能演示"><a href="#功能演示" class="headerlink" title="功能演示"></a><strong>功能演示</strong></h2><h3 id="主界面"><a href="#主界面" class="headerlink" title="主界面"></a><strong>主界面</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java6/java6-1.png" loading="lazy">   </p>
+<h3 id="登记收入"><a href="#登记收入" class="headerlink" title="登记收入"></a><strong>登记收入</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java6/java6-2.png" loading="lazy"></p>
+<h3 id="登记支出"><a href="#登记支出" class="headerlink" title="登记支出"></a><strong>登记支出</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java6/java6-3.png" loading="lazy"></p>
+<h3 id="收支明细"><a href="#收支明细" class="headerlink" title="收支明细"></a><strong>收支明细</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java6/java6-4.png" loading="lazy"></p>
+<h3 id="异常情况"><a href="#异常情况" class="headerlink" title="异常情况"></a><strong>异常情况</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java6/java6-5.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java6/java6-6.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/java/java6/java6-7.png" loading="lazy">    </p>
+<br>
+
+<h2 id="工具类-Utility-java"><a href="#工具类-Utility-java" class="headerlink" title="工具类 Utility.java"></a><strong>工具类 Utility.java</strong></h2><p>将不同的功能封装为方法，就可以直接通过调用方法使用它的功能，而无需考虑具体的功能实现细节。   </p>
+<p>在 Utility.java 工具类中定义了以下静态方法：</p>
+<h3 id="readKeyBoard-int-limit"><a href="#readKeyBoard-int-limit" class="headerlink" title="readKeyBoard(int limit)"></a><code>readKeyBoard(int limit)</code></h3><p>读取键盘输入限制长度为 <code>limit</code> 的数据。</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token keyword">int</span> limit<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> line <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>scanner<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        line <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span> <span class="token operator">||</span> line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> limit<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"输入长度（不大于"</span> <span class="token operator">+</span> limit <span class="token operator">+</span> <span class="token string">"）错误，请重新输入："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">return</span> line<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="readMenuSelection"><a href="#readMenuSelection" class="headerlink" title="readMenuSelection()"></a><code>readMenuSelection()</code></h3><p>用于主菜单界面的选择。该方法读取键盘输入的 1-4，并返回 ，如果输入错误则输出错误信息。</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">char</span> <span class="token function">readMenuSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> c<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        c <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">!=</span> <span class="token string">'1'</span> <span class="token operator">&amp;&amp;</span> c <span class="token operator">!=</span> <span class="token string">'2'</span> <span class="token operator">&amp;&amp;</span> c <span class="token operator">!=</span> <span class="token string">'3'</span> <span class="token operator">&amp;&amp;</span> c <span class="token operator">!=</span> <span class="token string">'4'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"选择错误，请重新输入："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="readNumber"><a href="#readNumber" class="headerlink" title="readNumber()"></a><code>readNumber()</code></h3><p>用于收入和支出金额的输入。该方法从键盘读取一个不超过 4 位长度（可调）的整数，并将其作为方法的返回值。  </p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">readNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+            n <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NumberFormatException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"数字输入错误，请重新输入："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="readString"><a href="#readString" class="headerlink" title="readString()"></a><code>readString()</code></h3><p>用于收入和支出说明的输入。该方法从键盘读取一个不超过 8 位长度的字符串，并将其作为方法的返回值。</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> str<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<h3 id="readConfirmSelection"><a href="#readConfirmSelection" class="headerlink" title="readConfirmSelection()"></a><code>readConfirmSelection()</code></h3><p>用于确认选择的输入。该方法从键盘读取 ‘Y’ 或 ‘N’，并将其作为方法的返回值。</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">char</span> <span class="token function">readConfirmSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> c<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        c <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token string">'Y'</span> <span class="token operator">||</span> c <span class="token operator">==</span> <span class="token string">'N'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"选择错误，请重新输入："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+<br>
+
+<h2 id="主循环-FamilyAccount-java"><a href="#主循环-FamilyAccount-java" class="headerlink" title="主循环 FamilyAccount.java"></a><strong>主循环 FamilyAccount.java</strong></h2><p>定义一个字符串、一个整型变量和一个布尔变量。<br>字符串 <code>details</code> 存储收支明细。整型变量 <code>balance</code> 表示储蓄初始值。布尔变量 <code>loopFlag</code> 用来退出循环。<br>然后进入主程序循环，打印出主菜单界面，不断读取 <code>char key = Utility.readMenuSelection()</code> ，用 <code>switch()</code> 结构实现对应功能。    </p>
+<h3 id="主界面-1"><a href="#主界面-1" class="headerlink" title="主界面"></a><strong>主界面</strong></h3><pre class="language-java" data-language="java"><code class="language-java"><span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"\n-----------------家庭收支记账软件-----------------\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"                   1 收支明细"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"                   2 登记收入"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"                   3 登记支出"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"                   4 退    出\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"                   请选择(1-4)："</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+<h3 id="收支明细-1"><a href="#收支明细-1" class="headerlink" title="收支明细"></a><strong>收支明细</strong></h3><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">case</span> <span class="token string">'1'</span><span class="token operator">:</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"-----------------当前收支明细记录-----------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>details<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"--------------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">break</span><span class="token punctuation">;</span></code></pre>
+
+<h3 id="登记收入-1"><a href="#登记收入-1" class="headerlink" title="登记收入"></a><strong>登记收入</strong></h3><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">case</span> <span class="token string">'2'</span><span class="token operator">:</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"本次收入金额："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> amount1 <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"本次收入说明："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> desc1 <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    balance <span class="token operator">+=</span> amount1<span class="token punctuation">;</span>
+    details <span class="token operator">+=</span> <span class="token string">"收入\t"</span> <span class="token operator">+</span> balance <span class="token operator">+</span> <span class="token string">"\t\t"</span> <span class="token operator">+</span>
+                amount1 <span class="token operator">+</span> <span class="token string">"\t\t"</span> <span class="token operator">+</span> desc1 <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"---------------------登记完成---------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">break</span><span class="token punctuation">;</span></code></pre>
+
+<h3 id="登记支出-1"><a href="#登记支出-1" class="headerlink" title="登记支出"></a><strong>登记支出</strong></h3><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">case</span> <span class="token string">'3'</span><span class="token operator">:</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"本次支出金额："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> amount2 <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"本次支出说明："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">String</span> desc2 <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    balance <span class="token operator">-=</span> amount2<span class="token punctuation">;</span>
+    details <span class="token operator">+=</span> <span class="token string">"支出\t"</span> <span class="token operator">+</span> balance <span class="token operator">+</span> <span class="token string">"\t\t"</span> <span class="token operator">+</span>
+                amount2 <span class="token operator">+</span> <span class="token string">"\t\t"</span> <span class="token operator">+</span> desc2 <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"---------------------登记完成---------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">break</span><span class="token punctuation">;</span></code></pre>
+
+<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a><strong>退出</strong></h3><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">case</span> <span class="token string">'4'</span><span class="token operator">:</span>
+    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"确认是否退出(Y/N)："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> yn <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readConfirmSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>yn <span class="token operator">==</span> <span class="token string">'Y'</span><span class="token punctuation">)</span> loopFlag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword">break</span><span class="token punctuation">;</span></code></pre>
+
+<br>
+
+
+
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a><strong>完整代码</strong></h2><h3 id="FamilyAccount-java"><a href="#FamilyAccount-java" class="headerlink" title="FamilyAccount.java"></a><strong>FamilyAccount.java</strong></h3><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FamilyAccount</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> details <span class="token operator">=</span> <span class="token string">"收支\t账户金额\t收支金额\t说    明\n"</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> balance <span class="token operator">=</span> <span class="token number">10000</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">boolean</span> loopFlag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+		    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"\n-----------------家庭收支记账软件-----------------\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"                   1 收支明细"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"                   2 登记收入"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"                   3 登记支出"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"                   4 退    出\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"                   请选择(1-4)："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            
+            <span class="token keyword">char</span> key <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readMenuSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">switch</span> <span class="token punctuation">(</span>key<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">case</span> <span class="token string">'1'</span><span class="token operator">:</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"-----------------当前收支明细记录-----------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>details<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"--------------------------------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">'2'</span><span class="token operator">:</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"本次收入金额："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">int</span> amount1 <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"本次收入说明："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">String</span> desc1 <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    balance <span class="token operator">+=</span> amount1<span class="token punctuation">;</span>
+                    details <span class="token operator">+=</span> <span class="token string">"收入\t"</span> <span class="token operator">+</span> balance <span class="token operator">+</span> <span class="token string">"\t\t"</span> <span class="token operator">+</span>
+                               amount1 <span class="token operator">+</span> <span class="token string">"\t\t"</span> <span class="token operator">+</span> desc1 <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"---------------------登记完成---------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">'3'</span><span class="token operator">:</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"本次支出金额："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">int</span> amount2 <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"本次支出说明："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token class-name">String</span> desc2 <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+                    balance <span class="token operator">-=</span> amount2<span class="token punctuation">;</span>
+                    details <span class="token operator">+=</span> <span class="token string">"支出\t"</span> <span class="token operator">+</span> balance <span class="token operator">+</span> <span class="token string">"\t\t"</span> <span class="token operator">+</span>
+                               amount2 <span class="token operator">+</span> <span class="token string">"\t\t"</span> <span class="token operator">+</span> desc2 <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"---------------------登记完成---------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token keyword">case</span> <span class="token string">'4'</span><span class="token operator">:</span>
+                    <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"确认是否退出(Y/N)："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">char</span> yn <span class="token operator">=</span> <span class="token class-name">Utility</span><span class="token punctuation">.</span><span class="token function">readConfirmSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>yn <span class="token operator">==</span> <span class="token string">'Y'</span><span class="token punctuation">)</span> loopFlag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>loopFlag<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>    
+<span class="token punctuation">&#125;</span></code></pre>
+<h3 id="Utility-java"><a href="#Utility-java" class="headerlink" title="Utility.java"></a><strong>Utility.java</strong></h3><pre class="language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Scanner</span><span class="token punctuation">;</span>
+<span class="token comment">/**
+Utility工具类：
+将不同的功能封装为方法，就是可以直接通过调用方法使用它的功能，而无需考虑具体的功能实现细节。
+*/</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Utility</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">Scanner</span> scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">/**
+	用于界面菜单的选择。该方法读取键盘，如果用户键入’1’-’4’中的任意字符，则方法返回。返回值为用户键入字符。
+	*/</span>
+	<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">char</span> <span class="token function">readMenuSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">char</span> c<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            c <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">!=</span> <span class="token string">'1'</span> <span class="token operator">&amp;&amp;</span> c <span class="token operator">!=</span> <span class="token string">'2'</span> <span class="token operator">&amp;&amp;</span> c <span class="token operator">!=</span> <span class="token string">'3'</span> <span class="token operator">&amp;&amp;</span> c <span class="token operator">!=</span> <span class="token string">'4'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"选择错误，请重新输入："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+	<span class="token comment">/**
+	用于收入和支出金额的输入。该方法从键盘读取一个不超过4位长度的整数，并将其作为方法的返回值。
+	*/</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span> <span class="token function">readNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> n<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">try</span> <span class="token punctuation">&#123;</span>
+                n <span class="token operator">=</span> <span class="token class-name">Integer</span><span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NumberFormatException</span> e<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"数字输入错误，请重新输入："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+	<span class="token comment">/**
+	用于收入和支出说明的输入。该方法从键盘读取一个不超过8位长度的字符串，并将其作为方法的返回值。
+	*/</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">readString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> str<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+	
+	<span class="token comment">/**
+	用于确认选择的输入。该方法从键盘读取‘Y’或’N’，并将其作为方法的返回值。
+	*/</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">char</span> <span class="token function">readConfirmSelection</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">char</span> c<span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> <span class="token punctuation">;</span> <span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">String</span> str <span class="token operator">=</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            c <span class="token operator">=</span> str<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>c <span class="token operator">==</span> <span class="token string">'Y'</span> <span class="token operator">||</span> c <span class="token operator">==</span> <span class="token string">'N'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"选择错误，请重新输入："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> c<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+	
+	
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token class-name">String</span> <span class="token function">readKeyBoard</span><span class="token punctuation">(</span><span class="token keyword">int</span> limit<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">String</span> line <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>scanner<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            line <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">1</span> <span class="token operator">||</span> line<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> limit<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token string">"输入长度（不大于"</span> <span class="token operator">+</span> limit <span class="token operator">+</span> <span class="token string">"）错误，请重新输入："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">return</span> line<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
 </search>
