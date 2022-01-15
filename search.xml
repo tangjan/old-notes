@@ -1,325 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Git-1：课程大纲、版本控制、Git简介、本地库初始化、签名</title>
-    <url>/2021/12/17/git1/</url>
-    <content><![CDATA[<p>我目前图床是搭建在github上，用了一段时间的PicGo，但是发现PicGo上传图片很方便，想修改已上传的文件的名称、整理图片就不行了。<br>所以用git来管理图床更方便些，就这个原因来学一遍git。</p>
-<p>一些比较权威的git文档：</p>
-<ul>
-<li><a href="https://git-scm.com/book/zh">Git官方</a></li>
-<li><a href="https://docs.github.com/cn">Github</a></li>
-<li><a href="http://git.oschina.net/progit/">Gitee</a></li>
-</ul>
-<p>大致搞懂这几个文档就够用了，不过对于我这个小白，直接看文档入门有点耗神，所以我选择跟着<a href="https://www.bilibili.com/video/BV1pW411A7a5">Git&amp;Github_尚硅谷_bilibili</a>过一遍。 </p>
-<br>
-
-<h2 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a><strong>课程大纲</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-0.bmp" loading="lazy">  </p>
-<br>
-
-<h2 id="版本控制的功能"><a href="#版本控制的功能" class="headerlink" title="版本控制的功能"></a><strong>版本控制的功能</strong></h2><ul>
-<li>协同修改<ul>
-<li>多人并行不悖地修改服务器端的同一个文件。</li>
-</ul>
-</li>
-<li>数据备份<ul>
-<li>不仅保存目录和文件的当前状态，还能够保存每一个提交过的历史状态。</li>
-</ul>
-</li>
-<li>版本管理<ul>
-<li>在保存每一个版本的文件信息的同时做到不保存重复数据，以节约存储空间、提高运行效率。这方面SVN采用的是增量式管理的方式，而Git采取了文件系统快照的方式。   </li>
-</ul>
-</li>
-<li>权限控制<ul>
-<li>对团队中参与开发的人员进行权限控制。  </li>
-<li>对团队外开发者贡献的代码进行审核——Git独有。</li>
-</ul>
-</li>
-<li>历史记录<ul>
-<li>查看修改人、修改时间、修改内容、日志信息。</li>
-<li>将本地文件恢复到某一个历史状态。</li>
-</ul>
-</li>
-<li>分支管理<ul>
-<li>允许开发团队在工作过程中多条生产线同时推进任务，进一步提高效率。 </li>
-</ul>
-</li>
-</ul>
-<br>
-
-<h2 id="版本控制简介"><a href="#版本控制简介" class="headerlink" title="版本控制简介"></a><strong>版本控制简介</strong></h2><p>版本控制是一种思想，git等是实现版本控制的工具。  </p>
-<p>集中式版本控制（工具有cvs、svn、vss等）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-1.png" loading="lazy">  </p>
-<p>这种方式的缺点是单点故障，服务器一旦挂了，就都没了。   </p>
-<p>分布式版本控制（工具有<span style="color:red">Git</span>等）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-2.png" loading="lazy">  </p>
-<br>
-
-<h2 id="Git简史"><a href="#Git简史" class="headerlink" title="Git简史"></a><strong>Git简史</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-3.png" loading="lazy">  </p>
-<br>
-
-<h2 id="Git的logo、优势"><a href="#Git的logo、优势" class="headerlink" title="Git的logo、优势"></a><strong>Git的logo、优势</strong></h2><p><strong>logo</strong><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-4.png" loading="lazy">  </p>
-<p>这个图片就表达了“分支”这个意思。  </p>
-<p><strong>优势</strong>：  </p>
-<ul>
-<li>大部分操作在本地完成，不需要联网。</li>
-<li>完整性保证。对每一次提交进行hash操作，通过比较hash值是否相同就知道了项目是否完整。</li>
-<li>尽可能添加数据而不是删除或修改数据。删除往往就找不回来了，所以每提交一次，版本都会增加1个，随时有后悔药可吃。</li>
-<li>分支操作非常快捷流畅。</li>
-<li>与Linux命令全面兼容，毕竟git和linux都是林纳斯（Linus）开发的。</li>
-</ul>
-<br>
-
-<h2 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a><strong>Git的安装</strong></h2><p><a href="https://git-scm.com/">Git官网</a><br>下载慢的话可以去一些镜像网站<br>比如阿里云：<a href="https://developer.aliyun.com/mirror/">https://developer.aliyun.com/mirror/</a>   </p>
-<br>
-
-<h2 id="Git的结构"><a href="#Git的结构" class="headerlink" title="Git的结构"></a><strong>Git的结构</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-5.png" loading="lazy">  </p>
-<br>
-
-<h2 id="Git的代码托管中心"><a href="#Git的代码托管中心" class="headerlink" title="Git的代码托管中心"></a><strong>Git的代码托管中心</strong></h2><p>代码托管中心的任务：维护远程库。  </p>
-<ul>
-<li>局域网环境下：GitLab服务器</li>
-<li>外网环境下：Github、Gitee</li>
-</ul>
-<br>
-
-<h2 id="本地库和远程库"><a href="#本地库和远程库" class="headerlink" title="本地库和远程库"></a><strong>本地库和远程库</strong></h2><ol>
-<li>团队内部协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-6.png" loading="lazy">  </li>
-</ol>
-<ol start="2">
-<li>跨团队协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-7.png" loading="lazy">  </li>
-</ol>
-<br>
-
-<h2 id="本地库初始化"><a href="#本地库初始化" class="headerlink" title="本地库初始化"></a><strong>本地库初始化</strong></h2><p>命令：<code>git init</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-8.png" loading="lazy">  </p>
-<p>这样就会生成一个“.git”文件夹，其内容为：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-9.png" loading="lazy">  </p>
-<p>这里存放的是本地库相关的子目录和文件，不要删除，也不要轻易修改。</p>
-<br>
-
-<h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a><strong>签名</strong></h2><p><strong>形式</strong><br>用户名：tom<br>Email地址：<a href="mailto:&#x67;&#x6f;&#111;&#x64;&#x4d;&#111;&#x72;&#x6e;&#105;&#110;&#x67;&#x40;&#x61;&#116;&#103;&#117;&#x69;&#103;&#x75;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#x6f;&#111;&#x64;&#x4d;&#111;&#x72;&#x6e;&#105;&#110;&#x67;&#x40;&#x61;&#116;&#103;&#117;&#x69;&#103;&#x75;&#x2e;&#99;&#x6f;&#x6d;</a><br>用户名（tom）和Email地址的用户名（goodMorning）不一定一致，甚至Email地址可以省略。  </p>
-<p><strong>作用</strong><br>区分不同开发人员的身份。  </p>
-<p><strong>辨析</strong><br>这里设置的签名和登录远程库（代码托管中心）的账号、密码没有任何关系。</p>
-<p><strong>设置签名的命令</strong>  </p>
-<ul>
-<li><p>项目级别（仓库级别）：仅在当前本地库范围内有效。<br>命令： </p>
-<ul>
-<li><code>git config user.name 用户名</code>  </li>
-<li><code>git config user.email Email地址</code><br>信息保存位置：<code>./.git/config</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-10.png" loading="lazy">  </li>
-</ul>
-</li>
-<li><p>系统用户级别：登录当前操作系统的用户范围。<br>命令：   </p>
-<ul>
-<li><code>git config --global user.name 用户名</code></li>
-<li><code>git config --global user.email Email地址</code><br>信息保存位置：<code>~/.gitconfig</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-11.png" loading="lazy">  </li>
-</ul>
-</li>
-</ul>
-<p>通常实际开发时设置一个系统用户级别的签名就够了，不用再设置个项目级别的。</p>
-<ul>
-<li>级别优先级<ul>
-<li>就近原则：项目级别优先于系统用户级别，二者都有时采用项目级别的签名。</li>
-<li>如果只有系统用户级别的签名，就以系统用户级别的签名为准。</li>
-<li>二者都没有的情况不存在，会报错。</li>
-</ul>
-</li>
-</ul>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Git入门</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git-2：查看、添加、提交</title>
-    <url>/2021/12/18/git2/</url>
-    <content><![CDATA[<h2 id="状态查看：git-status"><a href="#状态查看：git-status" class="headerlink" title="状态查看：git status"></a><strong>状态查看</strong>：<code>git status</code></h2><p>查看工作区、暂存区状态<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-1.png" loading="lazy">  </p>
-<p>用vim编辑器随便新建个文件：<br>在vim编辑器里按i插入文本，按Esc退出，输入<code>:wq</code>回车即保存并退出<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-2.png" loading="lazy">  </p>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-3.png" loading="lazy">   </p>
-<p>结果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-4.png" loading="lazy"><br>可以看到新建了个<code>1.txt</code>文件<br>然后在用<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-5.png" loading="lazy"><br>可以看到有一个“Untracked files”，并且提示你用<code>git add</code>添加到暂存区</p>
-<br>
-
-<h2 id="添加：git-add-lt-file-gt"><a href="#添加：git-add-lt-file-gt" class="headerlink" title="添加：git add &lt;file&gt;"></a><strong>添加</strong>：<code>git add &lt;file&gt;</code></h2><p>接上文，继续<code>git add 1.txt</code>可得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-6.png" loading="lazy"><br>这有一个warning，意思是add到暂存区的文件中，行末换行符会由LF转换为CRLF，而工作区的仍是LF。行末换行符是文件底层自动加的。<br>这里没什么影响。<br>再来看一下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-7.png" loading="lazy"><br>字变成绿色了，不像红色那么引人注意了，说明文件已保存到了暂存区，有了一定的安全性。<br>这里有句提示   </p>
-<pre class="language-none"><code class="language-none">use git rm --cached &lt;file&gt;... to unstage</code></pre>
-<p>意思是告诉你可以执行这个命令把它移出暂存区，移回工作区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-8.png" loading="lazy">   </p>
-<br>
-
-<h2 id="提交：git-commit-lt-file-gt"><a href="#提交：git-commit-lt-file-gt" class="headerlink" title="提交：git commit &lt;file&gt;"></a><strong>提交</strong>：<code>git commit &lt;file&gt;</code></h2><h3 id="新建文件后的提交"><a href="#新建文件后的提交" class="headerlink" title="新建文件后的提交"></a><strong>新建文件后的提交</strong></h3><p>接上文，<code>git add</code>之后<code>git commit 1.txt</code>会进入到这个界面：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-9.png" loading="lazy"><br>这是vim编辑器，在这里输入本次提交的注释。<br>输入<code>:set nu</code>回车，显示行号：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-10.png" loading="lazy"><br>按i键输入文本，然后Ecs键退出，最后输入<code>:wq</code>回车提交：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-11.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-12.png" loading="lazy"><br>我们来看这3行：</p>
-<pre class="language-none"><code class="language-none">[master (root-commit) de4a738] first commit new file 1.txt
- 1 file changed, 1 insertion(+)
- create mode 100644 1.txt</code></pre>
-<p><code>master (root-commit)</code>：表示在master分支的根提交<br><code>de4a738</code>：现在不太方便解释，姑且可以认为是这次提交的版本号<br><code>first commit new file 1.txt</code>：就是我们刚刚在vim编辑器里写的注释<br><code>1 file changed, 1 insertion(+)</code>：1个文件被修改，这个文件里增加了1行文字<br><code>create mode 100644 1.txt</code>：100代表regular file，644代表文件权限  </p>
-<p><code>git commit</code>之后再来看一下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-13.png" loading="lazy"><br>这样一来暂存区和工作区都是干净的。   </p>
-<h3 id="修改文件后的提交"><a href="#修改文件后的提交" class="headerlink" title="修改文件后的提交"></a><strong>修改文件后的提交</strong></h3><p>接下来我们再用<code>vim 1.txt</code>进入1.txt文件编辑界面，增加几行文字：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-14.png" loading="lazy"><br>然后<code>:wq</code>保存，再查看以下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-15.png" loading="lazy"><br>还是红字，但是提示的是<code>modified</code>，表示文件被修改过。<br>并且括号中提示：</p>
-<pre class="language-none"><code class="language-none">(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</code></pre>
-<p>对比之前新建文件时的提示消息：</p>
-<pre class="language-none"><code class="language-none">(use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</code></pre>
-<p>一个是“include”，一个是“update”，很明显能体会到两者的区别。   </p>
-<p>接下来看这个：</p>
-<pre class="language-none"><code class="language-none">(use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)</code></pre>
-<p>意思是可以用<code>git restore &lt;file&gt;...</code>命令放弃修改，之后再细说。</p>
-<p>最后看这个：</p>
-<pre class="language-none"><code class="language-none">(use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</code></pre>
-<p>“and/or”的意思就是可以先add然后commit，也可以不add直接commit<br>和之前新建文件时比较：</p>
-<pre class="language-none"><code class="language-none">(use &quot;git add&quot; to track)</code></pre>
-
-<p>我们<code>git add 1.txt</code>之后再查看<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-16.png" loading="lazy"><br>这里提示变为了</p>
-<pre class="language-none"><code class="language-none">(use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)</code></pre>
-<p>意思是这次得用<code>git restore --staged &lt;file&gt;...</code>把1.txt移出暂存区，移回工作区，而不是新建文件时的<code>git rm --cached &lt;file&gt;...</code>。  </p>
-<p>然后是提交，可以和之前一样使用<code>git commit 1.txt</code>，但是那样会打开vim编辑器，让你输入本次提交的注释，那样比较麻烦。我们可以用<code>git commit -m &quot;注释内容&quot; 1.txt</code>直接提交：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-17.png" loading="lazy"><br>对比新建文件的提交：</p>
-<pre class="language-none"><code class="language-none">[master (root-commit) de4a738] first commit new file 1.txt
- 1 file changed, 1 insertion(+)
- create mode 100644 1.txt</code></pre>
-<p>可以看到这次少了<code>[master (root-commit) de4a738] first commit new file 1.txt</code>一行，因为根提交只能有一个<br><code>3 insertions(+)</code>，表示修改了文件中增加了3行</p>
-<br>
-
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h2><ul>
-<li><p>查看：<code>git status</code><br>查看工作区、暂存区的状态   </p>
-</li>
-<li><p>添加：<code>git add &lt;file&gt;</code><br>将工作区的“新建/修改”添加到暂存区<br>新建的文件commit之前必须add；而修改的文件（已经add过）可以直接commit，但这样就无法撤销了</p>
-</li>
-<li><p>提交：<code>git commit -m &quot;commit message&quot; &lt;file&gt;</code><br>将暂存区的内容提交到本地库</p>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-18.png" loading="lazy">   </p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Git入门</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git-3：历史记录、版本穿梭、reset命令的三个参数对比</title>
-    <url>/2021/12/19/git3/</url>
-    <content><![CDATA[<h2 id="查看历史记录"><a href="#查看历史记录" class="headerlink" title="查看历史记录"></a><strong>查看历史记录</strong></h2><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a><strong><code>git log</code></strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-1.png" loading="lazy"><br>其中，</p>
-<ul>
-<li><code>80555fa9114e1aa95eef4677fda4424829fd80a4</code>和<code>de4a738faba2b6c27ef69cf9295df79a95a852e8</code>是哈希值，表示索引。    </li>
-<li><code>(HEAD -&gt; master)</code>表示指针，指向当前的版本。   </li>
-<li><code>Author</code>是作者签名，<code>Date</code>是提交时间。</li>
-<li><code>second commit, modify 1.txt</code>和<code>first commit new file 1.txt</code>是我们自己写的提交注释。  </li>
-</ul>
-<h3 id="多屏显示"><a href="#多屏显示" class="headerlink" title="多屏显示"></a><strong>多屏显示</strong></h3><p>为了讲解接下来的内容，不断给1.txt文档增加内容，多添加一些提交（我添加了8次的样子），然后使用<code>git log</code>可以看到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-2.png" loading="lazy"><br>可以看到一屏已经放不下了，并且左下角多了个<code>:</code>，说明后面还有内容。<br>在这里和Linux一样，可以按键盘的上下箭头来浏览，也可以空格向下翻页、B键向上翻页，Q键退出。   </p>
-<h3 id="简要显示"><a href="#简要显示" class="headerlink" title="简要显示"></a><strong>简要显示</strong></h3><p>直接用<code>git log</code>显示的内容比较多，浏览起来比较麻烦，所以当日志多的时候可以给此命令附加一些参数：</p>
-<pre class="language-none"><code class="language-none">git log --pretty&#x3D;oneline</code></pre>
-<p>这样一来每条日志只显示简要的一行：<br>（增加一行“3”写错了，应该是增加一行4，对不住了强迫症朋友）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-3.png" loading="lazy">   </p>
-<p>还可以：</p>
-<pre class="language-none"><code class="language-none">git log --oneline</code></pre>
-<p>这样一来哈希值只显示一部分：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-4.png" loading="lazy">   </p>
-<br>
-
-<h2 id="版本穿梭"><a href="#版本穿梭" class="headerlink" title="版本穿梭"></a><strong>版本穿梭</strong></h2><pre class="language-none"><code class="language-none">git reflog</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-5.png" loading="lazy"><br>相比于之前的<code>git log</code>，多了一些<code>HEAD@&#123;$&#125;</code>的信息，表示回到<code>$</code>版本需要移动<code>$</code>步。<br>这里的<code>HEAD</code>之前介绍过，表示指针，默认指向时间上离我们最近的版本，可以操控指针移动来实现版本回退。<br>有3种方式：  </p>
-<h3 id="基于索引值操作（推荐）"><a href="#基于索引值操作（推荐）" class="headerlink" title="基于索引值操作（推荐）"></a><strong>基于索引值操作（推荐）</strong></h3><p>命令：<code>git reset --hard &lt;局部索引值&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-6.png" loading="lazy"><br>然后使用<code>cat 1.txt</code>查看1.txt的内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-7.png" loading="lazy"><br>可以看到版本回退成功。<br>然后再使用<code>git reflog</code>来看：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-8.png" loading="lazy"><br>可以看到指针指到了<code>HEAD@&#123;6&#125;</code>这条记录。<br>这种基于索引值的命令可以随意穿梭，前进后退都行。总之只要你知道你想去的那个版本，就可以穿梭到那。    </p>
-<p><span style="color:red">插曲小tip</span>：<br>在git bash窗口中，选中即复制，什么键都不用按。也就是说选中后直接粘贴就行。<br>而在Windows的cmd窗口中，选中之后按一下鼠标右键是复制。</p>
-<h3 id="使用-符号，只能后退"><a href="#使用-符号，只能后退" class="headerlink" title="使用^符号，只能后退"></a><strong>使用<code>^</code>符号，只能后退</strong></h3><p>命令：<code>git reset --hard HEAD^</code><br>我们再回到最新的版本，然后用<code>git log --oneline</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-9.png" loading="lazy"><br>然后使用<code>git reset --hard HEAD^</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-10.png" loading="lazy"><br>可以看到它回退到了上一个版本。   </p>
-<p><code>HEAD</code>后有几个<code>^</code>，就回退几个版本：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-11.png" loading="lazy"><br>但这样有很大的限制，如果是要回退好几十个版本，那写好几十个<code>^</code>岂不是要累坏……<br>所以就可以用<code>~</code>符号。</p>
-<h3 id="使用-符号，只能后退-1"><a href="#使用-符号，只能后退-1" class="headerlink" title="使用~符号，只能后退"></a><strong>使用<code>~</code>符号，只能后退</strong></h3><p>命令：<code>git reset --hard HEAD~&lt;回退步数&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-12.png" loading="lazy">   </p>
-<p>使用<code>^</code>或<code>~</code>，都需要数一下回退步数，如果是要回退几十次，很容易数错<br>所以还是推荐使用<code>git reset --hard &lt;局部索引值&gt;</code></p>
-<p>另外，使用<code>git reset --hard HEAD</code>，不加<code>^</code>和<code>~</code>，就表示统一工作区、暂存区到本地库HEAD指针指向的位置。相关内容见下面。   </p>
-<br>
-
-<h2 id="reset命令的三个参数对比"><a href="#reset命令的三个参数对比" class="headerlink" title="reset命令的三个参数对比"></a><strong>reset命令的三个参数对比</strong></h2><h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a><strong>解释</strong></h3><p>可以使用<code>git help &lt;命令名&gt;</code>查看帮助，比如输入<code>git help reset</code>就会在浏览器中弹出<code>git-reset.html</code>帮助文件，<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-13.png" loading="lazy"><br>在这里可以看到reset命令的3个参数解释：</p>
-<blockquote>
-<p>–soft<br>Does not touch the index file or the working tree at all (but resets the head to &lt;commit&gt;, just like all modes do). This leaves all your changed files “Changes to be committed”, as git status would put it.</p>
-</blockquote>
-<p><code>index file</code>指的是暂存区，<code>working tree</code>指的是工作区。也就是说<code>--soft</code>不涉及到暂存区和工作区，仅仅在本地库中移动HEAD指针。</p>
-<blockquote>
-<p>–mixed<br>Resets the index but not the working tree (i.e., the changed files are preserved but not marked for commit) and reports what has not been updated. This is the default action.<br>If -N is specified, removed paths are marked as intent-to-add (see git-add(1)).</p>
-</blockquote>
-<p>重置暂存区，但不涉及工作区。也就是在本地库移动HEAD指针的同时重置暂存区。   </p>
-<blockquote>
-<p>–hard<br>Resets the index and working tree. Any changes to tracked files in the working tree since &lt;commit&gt; are discarded. Any untracked files or directories in the way of writing any tracked files are simply deleted.</p>
-</blockquote>
-<p>在本地库移动HEAD指针的同时重置暂存区和工作区。可以感觉到“hard”的含义了，确实很hard。   </p>
-<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a><strong>演示</strong></h3><p>下面分别运行这3个参数体会一下。<br>先用<code>git reflog</code>查看一下当前HEAD指针的位置：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-14.png" loading="lazy"><br>可以看到HEAD是指在“增加一行7”的版本。  </p>
-<p><code>--soft</code>：<br>使用<code>git reset --soft 2a84e07</code>把HEAD指针移动到“增加一行B”的版本，然后使用<code>cat 1.txt</code>查看一下1.txt文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-15.png" loading="lazy"><br>可以看到1.txt并没有修改，也就是本地的工作区没被修改。<br>再用<code>git status</code>看一下暂存区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-16.png" loading="lazy"><br>字儿变成绿的了，提示<code>modified 1.txt</code>，这是因为本地库的版本变了，而暂存区的版本没变，导致暂存区和本地库不一致，所以它就提示“modified”。<br>也就是说不是因为我们修改而1.txt直接导致<code>modified</code>，而是因为本地库版本改变间接导致<code>modified</code>。   </p>
-<p><code>--mixed</code>：<br>和<code>--soft</code>上面一样的一套操作：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-17.png" loading="lazy"><br>移动到“增加一行8”的版本，然后用<code>cat 1.txt</code>发现本地工作区没被改变。<br>而使用<code>git status</code>查看暂存区，发现字儿变成红的了，也就是暂存区被改变了。   </p>
-<p><code>--hard</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-18.png" loading="lazy"><br>可以看见本地工作区文件被修改，并且暂存区没什么提示。<br>也就是说工作区、暂存区、本地库三者同步了。   </p>
-<p>实际上<code>--soft</code>和<code>--mixed</code>很少用到。   </p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Git入门</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git-4：删除找回、比较文件、分支</title>
-    <url>/2021/12/19/git4/</url>
-    <content><![CDATA[<h2 id="永久删除文件后找回"><a href="#永久删除文件后找回" class="headerlink" title="永久删除文件后找回"></a><strong>永久删除文件后找回</strong></h2><p>新建一个2.txt，并且提交到暂存区、本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-1.png" loading="lazy"><br>然后使用<code>rm 2.txt</code>删除2.txt<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-2.png" loading="lazy"><br>把删除2.txt的操作提交到暂存区、本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-3.png" loading="lazy"><br>现在2.txt已经被永久删除了。<br>但是版本提交的历史记录是一直存在的，每一个版本都有，也就是说<code>rm 2.txt</code>之前的版本也存在，所以2.txt是能找回来的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-4.png" loading="lazy"><br>可以看到2.txt被找回来了，后悔药服用成功。   </p>
-<p>但是.git这个文件夹你不能删掉，删掉就真没了。   </p>
-<br>
-
-<h2 id="添加到暂存区的删除文件找回"><a href="#添加到暂存区的删除文件找回" class="headerlink" title="添加到暂存区的删除文件找回"></a><strong>添加到暂存区的删除文件找回</strong></h2><p>新建一个3.txt，提交到暂存区和本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-5.png" loading="lazy"><br>然后删掉3.txt，提交到暂存区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-6.png" loading="lazy"><br>这时可以使用<code>git reset --hard HEAD</code>来找回3.txt文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-7.png" loading="lazy"><br>原理是同步工作区为本地库的指针<code>HEAD</code>指向的版本，刷新暂存区，而本地库的<code>HEAD</code>指向的是<code>new 3.txt</code>这个版本，所以文件找回来了。   </p>
-<br>
-
-<h2 id="删除找回总结"><a href="#删除找回总结" class="headerlink" title="删除找回总结"></a><strong>删除找回总结</strong></h2><p>前提：删除前，文件存在的版本提交到了本地库。<br>操作：<code>git reset --hard &lt;指针位置&gt;</code></p>
-<ul>
-<li>删除操作已经提交到本地库：指针位置指向历史记录   </li>
-<li>删除操作尚未提交到本地库：指针位置使用<code>HEAD</code>   </li>
-</ul>
-<br>
-
-<h2 id="比较文件"><a href="#比较文件" class="headerlink" title="比较文件"></a><strong>比较文件</strong></h2><p>修改一下1.txt的文件内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-8.png" loading="lazy"><br>然后使用<code>git diff 1.txt</code>把工作区文件和暂存区比较，查看文件的变动：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-9.png" loading="lazy"><br><code>-</code>红字表示删掉的内容，<code>+</code>绿字表示新增的内容，以行为单位。  </p>
-<p>如果执行<code>git add 1.txt</code>加到暂存区，就不会用什么显示，因为工作区和暂存区一致，没有变动：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-10.png" loading="lazy">   </p>
-<p>我们还可以把工作区文件和某一历史版本文件进行比较，如</p>
-<pre class="language-none"><code class="language-none">git diff b25b444 1.txt</code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-11.png" loading="lazy">   </p>
-<p>不带文件名，如<code>git diff head</code>，可以同时比较多个文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-12.png" loading="lazy">   </p>
-<p><strong>总结</strong>：</p>
-<ul>
-<li><p><code>git diff &lt;文件名&gt;</code><br>将工作区中的文件和暂存区进行比较</p>
-</li>
-<li><p><code>git diff &lt;本地库中历史版本&gt; &lt;文件名&gt;</code><br>将工作区中的文件和本地库历史记录比较</p>
-</li>
-<li><p>不带文件名比较多个文件</p>
-</li>
-</ul>
-<br>
-
-<h2 id="分支概述"><a href="#分支概述" class="headerlink" title="分支概述"></a><strong>分支概述</strong></h2><p>分支：在版本控制过程中，使用多条线同时推进多个任务。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-13.png" loading="lazy"><br><code>master</code>表示主干<br><code>feature_blue</code>表示开发一套蓝色的主题的分支<br><code>feature_game</code>表示开发一个小游戏的分支<br>这些分支彼此独立，如果不合并的话就互不影响。所以如果其中某一分支开发失败，删除分支即可，对整个项目没有影响，方便试错。对项目推进的效率也很有帮助，多个分支可以齐头并进，不必等项目主体开发完再开始。<br>分支开发完成后没有问题就可以合并到master主干，进行产品升级。<br>主干也可能出现bug，这时可以使用专门用来修复bug的<code>hot_fix</code>分支来修复，意思是热修复，因为服务器是不停运行的，在运行过程中修复就是热修复。相应地，停掉服务器再修复就是冷修复。     </p>
-<p>从上面的过程我们可以总结出分支的好处：</p>
-<ul>
-<li>同时并行推进多个功能开发，提高开发效率。  </li>
-<li>各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响。失败的分支删除重新开始即可。  </li>
-</ul>
-<p><span style="color:red">插曲小tip</span>：Ctrl + L 可以实现清屏的效果。（实际上不是清屏，只是翻页了而已）</p>
-<br>
-
-<h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a><strong>分支操作</strong></h2><ul>
-<li>查看分支：<code>git brach -v</code>   </li>
-<li>创建分支：<code>git branch &lt;分支名&gt;</code>   </li>
-<li>切换分支：<code>git checkout &lt;分支名&gt;</code>   </li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-14.png" loading="lazy">   </p>
-<p>我们新建了一个<code>hot_fix</code>分支，并切换到了这个分支。<br>在这个分支上进行操作并提交到本地库当然也会进行版本更新：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-15.png" loading="lazy"><br>这时<code>hot_fix</code>分支的版本就比<code>master</code>的版本更领先，假设这时说明<code>hot_fix</code>的功能已经实现了，需要合并到<code>master</code>主干，就需要进行分支合并。<br>进行分支合并时必须在接受合并的分支（master）上，然后再执行合并指令，也就是：</p>
-<ol>
-<li>第一步：<code>git checkout &lt;接受合并分支名&gt;</code>   </li>
-<li>第二步：<code>git merge &lt;有新内容分支名&gt;</code>  </li>
-</ol>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-16.png" loading="lazy">   </p>
-<br>
-
-<h2 id="分支合并时冲突的解决"><a href="#分支合并时冲突的解决" class="headerlink" title="分支合并时冲突的解决"></a><strong>分支合并时冲突的解决</strong></h2><p>当在两个分支分别修改时，恰好修改的是同一文件的同一位置，分支合并时就会出现冲突。<br>现在我们在<code>master</code>分支和<code>hot_fix</code>分支都修改<code>1.txt</code>文件中的同一行：<br>master中：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-17.png" loading="lazy"><br>hot_fix中：<br>（有句命令手残敲错了一次）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-18.png" loading="lazy">   </p>
-<p>这时再合并（往hot_fix上合并master也是可以的）就会出现：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-19.png" loading="lazy"><br>意思是自动合并失败，需要我们手动合并，<code>MERGING</code>就表示正在合并。<br>这时用<code>vim 1.txt</code>打开1.txt查看，会出现这样的内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-20.png" loading="lazy"><br>增加了一些特殊的标记。<br>以<code>=======</code>为分界，HEAD指向的，即<code>333333 edit bt bot_fix</code>（应该是by，敲错了）表示当前分支内容，<code>333333 edit bt master</code>表示master分支内容。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-21.png" loading="lazy"><br>处理方式很容易理解，在此vim编辑器中删掉不需要的内容、留下需要的，就行了。<br>现在我什么都不修改，假设已经决定好了，直接退出，然后<code>git add 1.txt</code>、<code>git commit</code>（注意<code>git commit</code>后不要带文件名）。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-22.png" loading="lazy"><br>冲突解决，合并完成。然后使用<code>cat 1.txt</code>看一下：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-23.png" loading="lazy"><br>可以看到其内容就是刚才<code>MERGING</code>过程中编辑的内容</p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Git入门</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux-1：课程内容介绍，Linux简介，VMware和CentOS的安装</title>
     <url>/2021/12/16/linux1/</url>
     <content><![CDATA[<p>在腾讯云买了台轻量应用服务器，安装的CentOS 7.6操作系统。这样一来手里就有了实践的对象，所以趁这个机会学一遍Linux。<br>跟着<a href="https://www.bilibili.com/video/BV1dW411M7xL">Linux_尚硅谷_bilibili</a>学的。    </p>
@@ -4494,108 +4175,6 @@ body</span><span class="token punctuation">&#123;</span>
       </tags>
   </entry>
   <entry>
-    <title>Git-5：哈希、Git的机制原理、Github、工作流、GitFlow、Gitlab</title>
-    <url>/2021/12/20/git5/</url>
-    <content><![CDATA[<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a><strong>哈希</strong></h2><p>所有文件本质上都是0和1，所以所有文件都可以加密。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-1.png" loading="lazy">   </p>
-<p>哈希是一个系列的加密算法，各个不同的哈希算法虽然加密强度不同，但是有以下几个共同点：</p>
-<ul>
-<li>不管输入数据的数据量有多大，输入同一个哈希算法，得到的加密结果长度固定  </li>
-<li>哈希算法确定，输入数据确定，输出数据能够保证不变  </li>
-<li>哈希算法确定，输入数据有变化，输出数据一定有变化，而且通常变化很大   </li>
-<li>哈希算法不可逆   </li>
-</ul>
-<p>常见的哈希算法有MD5、SHA、CRC等。<br>哈希算法可以被用来验证文件。原理如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-2.png" loading="lazy"><br>Git就是靠这种机制来从根本上保证数据完整性的。   </p>
-<br>
-
-<h2 id="Git保存版本的机制"><a href="#Git保存版本的机制" class="headerlink" title="Git保存版本的机制"></a><strong>Git保存版本的机制</strong></h2><h3 id="集中式版本控制工具的文件管理机制"><a href="#集中式版本控制工具的文件管理机制" class="headerlink" title="集中式版本控制工具的文件管理机制"></a><strong>集中式版本控制工具的文件管理机制</strong></h3><p>以文件变更列表的方式存储信息。这类系统将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-3.png" loading="lazy">   </p>
-<h3 id="Git的文件管理机制"><a href="#Git的文件管理机制" class="headerlink" title="Git的文件管理机制"></a><strong>Git的文件管理机制</strong></h3><p>Git把数据看作是小型文件系统的一组快照。每次提交更新时Git都会对当前的全部文件制作一个快照并保存这个快照的索引。<br>为了高效，如果文件没有修改， Git不再重新存储该文件，而是只保留一个链接指向之前存储的文件。所以Git的工作方式可以称之为快照流。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-4.png" loading="lazy">   </p>
-<h3 id="Git文件管理机制细节"><a href="#Git文件管理机制细节" class="headerlink" title="Git文件管理机制细节"></a><strong>Git文件管理机制细节</strong></h3><p>Git的“提交对象”<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-5.png" loading="lazy"><br>提交对象及其父对象形成的链条<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-6.png" loading="lazy">   </p>
-<br>
-
-<h2 id="Git分支管理机制"><a href="#Git分支管理机制" class="headerlink" title="Git分支管理机制"></a><strong>Git分支管理机制</strong></h2><h3 id="分支的创建"><a href="#分支的创建" class="headerlink" title="分支的创建"></a>分支的创建</h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-7.png" loading="lazy"><br><code>98ca9</code>是根提交</p>
-<h3 id="分支的切换"><a href="#分支的切换" class="headerlink" title="分支的切换"></a>分支的切换</h3><p>主干<code>master</code>和分支<code>testing</code>都可视作指向某一版本<span style="color:red">指针</span>，<code>HEAD</code>视作指向分支的指针，用来切换分支。<br>所以切换分支本质就是移动指针，切换起来简单高效。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-8.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-9.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-10.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-11.png" loading="lazy">   </p>
-<br>
-
-<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a><strong><a href="https://github.com/">Github</a></strong></h2><p>大名鼎鼎的 <del>同性</del> 程序员交友网站。<br>账号注册、在github创建远程库就不介绍了。   </p>
-<h3 id="本地库和远程库交互方式复习"><a href="#本地库和远程库交互方式复习" class="headerlink" title="本地库和远程库交互方式复习"></a><strong>本地库和远程库交互方式复习</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-12.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-13.png" loading="lazy"><br>用Github Desktop很容易实现本地库与远程库的交互，但我们要学习其本质的东西，所以下面介绍用git指令实现交互。   </p>
-<h3 id="创建本地库和远程库"><a href="#创建本地库和远程库" class="headerlink" title="创建本地库和远程库"></a><strong>创建本地库和远程库</strong></h3><p>先新建个本地库，初始化，并添加个文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-14.png" loading="lazy"><br>然后<code>git add</code>、<code>git commit</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-15.png" loading="lazy">   </p>
-<p>然后创建远程库，和本地库名字不一定非得一样，但最好还是同名，方便识别。<br>现在就做个练习，没必要用私有库。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-16.png" loading="lazy">   </p>
-<h3 id="远程库的地址和起别名"><a href="#远程库的地址和起别名" class="headerlink" title="远程库的地址和起别名"></a><strong>远程库的地址和起别名</strong></h3><p>这个是远程库的地址（SSH的也行）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-17.png" loading="lazy"><br>这个地址很长，每次都粘贴进去很不方便，所以要创建别名。<br>命令：   </p>
-<ul>
-<li><code>git remote -v</code>：查看当前所有远程库别名   </li>
-<li><code>git remote add &lt;别名&gt; &lt;远程地址&gt;</code>：给远程库起别名    </li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-18.png" loading="lazy">   </p>
-<h3 id="push"><a href="#push" class="headerlink" title="push"></a><strong>push</strong></h3><p>命令：<code>git push &lt;别名&gt; &lt;分支名&gt;</code><br>回车之后会弹出Github的登录框，登陆就行了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-19.png" loading="lazy"><br>现在的GitHub主分支改名为了<code>main</code>，下次注意一下。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-20.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-21.png" loading="lazy"><br>可以看到远程库更新成功。   </p>
-<h3 id="clone"><a href="#clone" class="headerlink" title="clone"></a><strong>clone</strong></h3><p>命令：<code>git clone &lt;远程库地址&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-22.png" loading="lazy">   </p>
-<h3 id="团队成员邀请"><a href="#团队成员邀请" class="headerlink" title="团队成员邀请"></a><strong>团队成员邀请</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-23.png" loading="lazy">   </p>
-<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a><strong>pull</strong></h3><p><code>pull</code> = <code>fetch</code> + <code>merge</code><br><code>fetch</code>只是把远程库分支的内容下载到本地，并没有合并到当前分支。  </p>
-<ul>
-<li><code>git fetch [远程库地址别名] [远程分支名]</code></li>
-<li><code>git merge [远程库地址别名/远程分支名]</code></li>
-<li><code>git pull [远程库地址别名]</code></li>
-</ul>
-<p>如果pull过来的库比较简单，直接pull就行，而如果比较复杂，为了保险慎重可以把pull分开为fetch和merge两步手动操作。   </p>
-<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a><strong>解决冲突</strong></h3><p>要点</p>
-<ul>
-<li>如果不是基于GitHub远程库的最新版所做的修改，不能推送，必须先拉取。</li>
-<li>拉取下来后如果进入冲突状态，则按照“分支冲突解决”操作解决即可。</li>
-</ul>
-<h3 id="跨团队协作"><a href="#跨团队协作" class="headerlink" title="跨团队协作"></a><strong>跨团队协作</strong></h3><p>这个比较麻烦，至少要两个账号，就不演示了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-13.png" loading="lazy">   </p>
-<br>
-
-<h3 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a><strong>SSH免密登录</strong></h3><p>用HTTPS与远程库进行交互经常需要GitHub的用户名密码，比较麻烦。<br>而SSH就不需要GitHub用户名密码，不过只能一个用户使用，事实上开发的时候大多时间都是自己一个人在本地开发的，所以用SSH也够了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-24.png" loading="lazy"><br>我的电脑之前已经连接过SSH，这个连接SSH的过程就就不截图了。   </p>
-<ul>
-<li>进入当前电脑用户的家目录 <code>cd ~</code>   </li>
-<li>运行命令生成.ssh密钥目录 <code>ssh-keygen -t rsa -C &lt;你的Github邮箱地址&gt;</code><br>注意C是大写的。 </li>
-<li>进入 .ssh 目录 <code>cd .ssh</code></li>
-<li>查看 id_rsa.pub 文件内容 <code>cat id_rsa.pub</code> </li>
-<li>复制 id_rsa.pub 文件内容</li>
-<li>登录 GitHub，点击用户头像 → Settings → SSH and GPG keys → New SSH Key</li>
-<li>输入复制的密钥信息  </li>
-<li>测试 <code>ssh -T git@github.com</code></li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-25.png" loading="lazy">   </p>
-<p>这样就是成功了。   </p>
-<br>
-
-<h2 id="Git-工作流"><a href="#Git-工作流" class="headerlink" title="Git 工作流"></a><strong>Git 工作流</strong></h2><p>工作流就是在项目开发过程中使用Git的方式。<br>分类</p>
-<ul>
-<li>集中式工作流</li>
-<li>GitFlow 工作流（用的最多）</li>
-<li>Forking 工作流  </li>
-</ul>
-<p><strong>集中式工作流</strong><br>简单说就是不分支，每个人有各自的本地库。就像 SVN 一样，集中式工作流以中央仓库作为项目所有修改的单点实体。所有修改都提交到 Master 这个分支上。 这种方式与 SVN 的主要区别就是开发人员有本地库。Git 很多特性并没有用到。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-26.png" loading="lazy">   </p>
-<p><strong>GitFlow 工作流</strong><br>充分利用了分支的特点，通过为功能开发、发布准备和维护设立了独立的分支，让发布迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-27.png" loading="lazy">   </p>
-<p><strong>Forking工作流</strong><br>在 GitFlow 基础上，充分利用了 Git 的 Fork 和 pull request 的 功能以达到代码审核的目的。更适合安全可靠地管理大团队的开发者，而且能接受不信任贡献者的提交。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-28.png" loading="lazy"><br><br></p>
-<h2 id="GitFlow工作流详解"><a href="#GitFlow工作流详解" class="headerlink" title="GitFlow工作流详解"></a><strong>GitFlow工作流详解</strong></h2><h3 id="分支种类"><a href="#分支种类" class="headerlink" title="分支种类"></a><strong>分支种类</strong></h3><ul>
-<li><p>主干分支 master<br>主要负责管理正在运行的生产环境代码。永远保持与正在运行的生产环境 完全一致。</p>
-</li>
-<li><p>开发分支 develop<br>主要负责管理正在开发过程中的代码。一般情况下应该是最新的代码。</p>
-</li>
-<li><p>bug修理分支 hotfix<br>主要负责管理生产环境下出现的紧急修复的代码。 从主干分支分出，修理完毕并测试上线后，并回主干分支。并回后，视情况可以删除该分支。</p>
-</li>
-<li><p>准生产分支（预发布分支） release<br>较大的版本上线前，会从开发分支中分出准生产分支，进行最后阶段的集成测试。该版本上线后，会合并到主干分支。生产环境运行一段阶段较稳定后 可以视情况删除。</p>
-</li>
-<li><p>功能分支 feature<br>为了不影响较短周期的开发工作，一般把中长期开发模块，会从开发分支中独立出来。开发完成后会合并到开发分支。</p>
-</li>
-</ul>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-29.png" loading="lazy">   </p>
-<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-30.png" loading="lazy">   </p>
-<br>
-
-<h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a><strong>Gitlab</strong></h2><p>Gitlab一般搭建在Linux上的，用来创建私有仓库。也可以用来创建局域网内的团队仓库，这样哪怕一个团队访问不了外网，也能做起项目来。<br>目前来看，对于我个人来说，Gitee就够用了，所以Gitlab等以后有需要再学。<br><a href="https://about.gitlab.com/">Gitlab官网</a></p>
-<p><br><br><br><br><br></p>
-<hr>
-]]></content>
-      <categories>
-        <category>Git入门</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linux-4：关机重启注销、用户管理、用户和组的相关文件</title>
     <url>/2021/12/20/linux4/</url>
     <content><![CDATA[<h2 id="关机、重启"><a href="#关机、重启" class="headerlink" title="关机、重启"></a><strong>关机、重启</strong></h2><p><code>shutdown -h now</code>：立即关机<br><code>shutdown -h 1</code>：1分钟后关机   </p>
@@ -7247,6 +6826,427 @@ Utility工具类：
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git-1：课程大纲、版本控制、Git简介、本地库初始化、签名</title>
+    <url>/2021/12/17/git/git1/</url>
+    <content><![CDATA[<p>我目前图床是搭建在github上，用了一段时间的PicGo，但是发现PicGo上传图片很方便，想修改已上传的文件的名称、整理图片就不行了。<br>所以用git来管理图床更方便些，就这个原因来学一遍git。</p>
+<p>一些比较权威的git文档：</p>
+<ul>
+<li><a href="https://git-scm.com/book/zh">Git官方</a></li>
+<li><a href="https://docs.github.com/cn">Github</a></li>
+<li><a href="http://git.oschina.net/progit/">Gitee</a></li>
+</ul>
+<p>大致搞懂这几个文档就够用了，不过对于我这个小白，直接看文档入门有点耗神，所以我选择跟着<a href="https://www.bilibili.com/video/BV1pW411A7a5">Git&amp;Github_尚硅谷_bilibili</a>过一遍。 </p>
+<br>
+
+<h2 id="课程大纲"><a href="#课程大纲" class="headerlink" title="课程大纲"></a><strong>课程大纲</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-0.bmp" loading="lazy">  </p>
+<br>
+
+<h2 id="版本控制的功能"><a href="#版本控制的功能" class="headerlink" title="版本控制的功能"></a><strong>版本控制的功能</strong></h2><ul>
+<li>协同修改<ul>
+<li>多人并行不悖地修改服务器端的同一个文件。</li>
+</ul>
+</li>
+<li>数据备份<ul>
+<li>不仅保存目录和文件的当前状态，还能够保存每一个提交过的历史状态。</li>
+</ul>
+</li>
+<li>版本管理<ul>
+<li>在保存每一个版本的文件信息的同时做到不保存重复数据，以节约存储空间、提高运行效率。这方面SVN采用的是增量式管理的方式，而Git采取了文件系统快照的方式。   </li>
+</ul>
+</li>
+<li>权限控制<ul>
+<li>对团队中参与开发的人员进行权限控制。  </li>
+<li>对团队外开发者贡献的代码进行审核——Git独有。</li>
+</ul>
+</li>
+<li>历史记录<ul>
+<li>查看修改人、修改时间、修改内容、日志信息。</li>
+<li>将本地文件恢复到某一个历史状态。</li>
+</ul>
+</li>
+<li>分支管理<ul>
+<li>允许开发团队在工作过程中多条生产线同时推进任务，进一步提高效率。 </li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="版本控制简介"><a href="#版本控制简介" class="headerlink" title="版本控制简介"></a><strong>版本控制简介</strong></h2><p>版本控制是一种思想，git等是实现版本控制的工具。  </p>
+<p>集中式版本控制（工具有cvs、svn、vss等）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-1.png" loading="lazy">  </p>
+<p>这种方式的缺点是单点故障，服务器一旦挂了，就都没了。   </p>
+<p>分布式版本控制（工具有<span style="color:red">Git</span>等）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-2.png" loading="lazy">  </p>
+<br>
+
+<h2 id="Git简史"><a href="#Git简史" class="headerlink" title="Git简史"></a><strong>Git简史</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-3.png" loading="lazy">  </p>
+<br>
+
+<h2 id="Git的logo、优势"><a href="#Git的logo、优势" class="headerlink" title="Git的logo、优势"></a><strong>Git的logo、优势</strong></h2><p><strong>logo</strong><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-4.png" loading="lazy">  </p>
+<p>这个图片就表达了“分支”这个意思。  </p>
+<p><strong>优势</strong>：  </p>
+<ul>
+<li>大部分操作在本地完成，不需要联网。</li>
+<li>完整性保证。对每一次提交进行hash操作，通过比较hash值是否相同就知道了项目是否完整。</li>
+<li>尽可能添加数据而不是删除或修改数据。删除往往就找不回来了，所以每提交一次，版本都会增加1个，随时有后悔药可吃。</li>
+<li>分支操作非常快捷流畅。</li>
+<li>与Linux命令全面兼容，毕竟git和linux都是林纳斯（Linus）开发的。</li>
+</ul>
+<br>
+
+<h2 id="Git的安装"><a href="#Git的安装" class="headerlink" title="Git的安装"></a><strong>Git的安装</strong></h2><p><a href="https://git-scm.com/">Git官网</a><br>下载慢的话可以去一些镜像网站<br>比如阿里云：<a href="https://developer.aliyun.com/mirror/">https://developer.aliyun.com/mirror/</a>   </p>
+<br>
+
+<h2 id="Git的结构"><a href="#Git的结构" class="headerlink" title="Git的结构"></a><strong>Git的结构</strong></h2><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-5.png" loading="lazy">  </p>
+<br>
+
+<h2 id="Git的代码托管中心"><a href="#Git的代码托管中心" class="headerlink" title="Git的代码托管中心"></a><strong>Git的代码托管中心</strong></h2><p>代码托管中心的任务：维护远程库。  </p>
+<ul>
+<li>局域网环境下：GitLab服务器</li>
+<li>外网环境下：Github、Gitee</li>
+</ul>
+<br>
+
+<h2 id="本地库和远程库"><a href="#本地库和远程库" class="headerlink" title="本地库和远程库"></a><strong>本地库和远程库</strong></h2><ol>
+<li>团队内部协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-6.png" loading="lazy">  </li>
+</ol>
+<ol start="2">
+<li>跨团队协作<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-7.png" loading="lazy">  </li>
+</ol>
+<br>
+
+<h2 id="本地库初始化"><a href="#本地库初始化" class="headerlink" title="本地库初始化"></a><strong>本地库初始化</strong></h2><p>命令：<code>git init</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-8.png" loading="lazy">  </p>
+<p>这样就会生成一个“.git”文件夹，其内容为：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-9.png" loading="lazy">  </p>
+<p>这里存放的是本地库相关的子目录和文件，不要删除，也不要轻易修改。</p>
+<br>
+
+<h2 id="签名"><a href="#签名" class="headerlink" title="签名"></a><strong>签名</strong></h2><p><strong>形式</strong><br>用户名：tom<br>Email地址：<a href="mailto:&#x67;&#x6f;&#x6f;&#x64;&#77;&#111;&#x72;&#x6e;&#x69;&#110;&#103;&#x40;&#97;&#116;&#x67;&#x75;&#105;&#103;&#117;&#46;&#x63;&#111;&#109;">&#x67;&#x6f;&#x6f;&#x64;&#77;&#111;&#x72;&#x6e;&#x69;&#110;&#103;&#x40;&#97;&#116;&#x67;&#x75;&#105;&#103;&#117;&#46;&#x63;&#111;&#109;</a><br>用户名（tom）和Email地址的用户名（goodMorning）不一定一致，甚至Email地址可以省略。  </p>
+<p><strong>作用</strong><br>区分不同开发人员的身份。  </p>
+<p><strong>辨析</strong><br>这里设置的签名和登录远程库（代码托管中心）的账号、密码没有任何关系。</p>
+<p><strong>设置签名的命令</strong>  </p>
+<ul>
+<li><p>项目级别（仓库级别）：仅在当前本地库范围内有效。<br>命令： </p>
+<ul>
+<li><code>git config user.name 用户名</code>  </li>
+<li><code>git config user.email Email地址</code><br>信息保存位置：<code>./.git/config</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-10.png" loading="lazy">  </li>
+</ul>
+</li>
+<li><p>系统用户级别：登录当前操作系统的用户范围。<br>命令：   </p>
+<ul>
+<li><code>git config --global user.name 用户名</code></li>
+<li><code>git config --global user.email Email地址</code><br>信息保存位置：<code>~/.gitconfig</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git1/git1-11.png" loading="lazy">  </li>
+</ul>
+</li>
+</ul>
+<p>通常实际开发时设置一个系统用户级别的签名就够了，不用再设置个项目级别的。</p>
+<ul>
+<li>级别优先级<ul>
+<li>就近原则：项目级别优先于系统用户级别，二者都有时采用项目级别的签名。</li>
+<li>如果只有系统用户级别的签名，就以系统用户级别的签名为准。</li>
+<li>二者都没有的情况不存在，会报错。</li>
+</ul>
+</li>
+</ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git-2：查看、添加、提交</title>
+    <url>/2021/12/18/git/git2/</url>
+    <content><![CDATA[<h2 id="状态查看：git-status"><a href="#状态查看：git-status" class="headerlink" title="状态查看：git status"></a><strong>状态查看</strong>：<code>git status</code></h2><p>查看工作区、暂存区状态<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-1.png" loading="lazy">  </p>
+<p>用vim编辑器随便新建个文件：<br>在vim编辑器里按i插入文本，按Esc退出，输入<code>:wq</code>回车即保存并退出<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-2.png" loading="lazy">  </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-3.png" loading="lazy">   </p>
+<p>结果：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-4.png" loading="lazy"><br>可以看到新建了个<code>1.txt</code>文件<br>然后在用<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-5.png" loading="lazy"><br>可以看到有一个“Untracked files”，并且提示你用<code>git add</code>添加到暂存区</p>
+<br>
+
+<h2 id="添加：git-add-lt-file-gt"><a href="#添加：git-add-lt-file-gt" class="headerlink" title="添加：git add &lt;file&gt;"></a><strong>添加</strong>：<code>git add &lt;file&gt;</code></h2><p>接上文，继续<code>git add 1.txt</code>可得到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-6.png" loading="lazy"><br>这有一个warning，意思是add到暂存区的文件中，行末换行符会由LF转换为CRLF，而工作区的仍是LF。行末换行符是文件底层自动加的。<br>这里没什么影响。<br>再来看一下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-7.png" loading="lazy"><br>字变成绿色了，不像红色那么引人注意了，说明文件已保存到了暂存区，有了一定的安全性。<br>这里有句提示   </p>
+<pre class="language-none"><code class="language-none">use git rm --cached &lt;file&gt;... to unstage</code></pre>
+<p>意思是告诉你可以执行这个命令把它移出暂存区，移回工作区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-8.png" loading="lazy">   </p>
+<br>
+
+<h2 id="提交：git-commit-lt-file-gt"><a href="#提交：git-commit-lt-file-gt" class="headerlink" title="提交：git commit &lt;file&gt;"></a><strong>提交</strong>：<code>git commit &lt;file&gt;</code></h2><h3 id="新建文件后的提交"><a href="#新建文件后的提交" class="headerlink" title="新建文件后的提交"></a><strong>新建文件后的提交</strong></h3><p>接上文，<code>git add</code>之后<code>git commit 1.txt</code>会进入到这个界面：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-9.png" loading="lazy"><br>这是vim编辑器，在这里输入本次提交的注释。<br>输入<code>:set nu</code>回车，显示行号：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-10.png" loading="lazy"><br>按i键输入文本，然后Ecs键退出，最后输入<code>:wq</code>回车提交：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-11.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-12.png" loading="lazy"><br>我们来看这3行：</p>
+<pre class="language-none"><code class="language-none">[master (root-commit) de4a738] first commit new file 1.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 1.txt</code></pre>
+<p><code>master (root-commit)</code>：表示在master分支的根提交<br><code>de4a738</code>：现在不太方便解释，姑且可以认为是这次提交的版本号<br><code>first commit new file 1.txt</code>：就是我们刚刚在vim编辑器里写的注释<br><code>1 file changed, 1 insertion(+)</code>：1个文件被修改，这个文件里增加了1行文字<br><code>create mode 100644 1.txt</code>：100代表regular file，644代表文件权限  </p>
+<p><code>git commit</code>之后再来看一下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-13.png" loading="lazy"><br>这样一来暂存区和工作区都是干净的。   </p>
+<h3 id="修改文件后的提交"><a href="#修改文件后的提交" class="headerlink" title="修改文件后的提交"></a><strong>修改文件后的提交</strong></h3><p>接下来我们再用<code>vim 1.txt</code>进入1.txt文件编辑界面，增加几行文字：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-14.png" loading="lazy"><br>然后<code>:wq</code>保存，再查看以下<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-15.png" loading="lazy"><br>还是红字，但是提示的是<code>modified</code>，表示文件被修改过。<br>并且括号中提示：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</code></pre>
+<p>对比之前新建文件时的提示消息：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</code></pre>
+<p>一个是“include”，一个是“update”，很明显能体会到两者的区别。   </p>
+<p>接下来看这个：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)</code></pre>
+<p>意思是可以用<code>git restore &lt;file&gt;...</code>命令放弃修改，之后再细说。</p>
+<p>最后看这个：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git add&quot; and&#x2F;or &quot;git commit -a&quot;)</code></pre>
+<p>“and/or”的意思就是可以先add然后commit，也可以不add直接commit<br>和之前新建文件时比较：</p>
+<pre class="language-none"><code class="language-none">(use &quot;git add&quot; to track)</code></pre>
+
+<p>我们<code>git add 1.txt</code>之后再查看<code>git status</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-16.png" loading="lazy"><br>这里提示变为了</p>
+<pre class="language-none"><code class="language-none">(use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)</code></pre>
+<p>意思是这次得用<code>git restore --staged &lt;file&gt;...</code>把1.txt移出暂存区，移回工作区，而不是新建文件时的<code>git rm --cached &lt;file&gt;...</code>。  </p>
+<p>然后是提交，可以和之前一样使用<code>git commit 1.txt</code>，但是那样会打开vim编辑器，让你输入本次提交的注释，那样比较麻烦。我们可以用<code>git commit -m &quot;注释内容&quot; 1.txt</code>直接提交：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-17.png" loading="lazy"><br>对比新建文件的提交：</p>
+<pre class="language-none"><code class="language-none">[master (root-commit) de4a738] first commit new file 1.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 1.txt</code></pre>
+<p>可以看到这次少了<code>[master (root-commit) de4a738] first commit new file 1.txt</code>一行，因为根提交只能有一个<br><code>3 insertions(+)</code>，表示修改了文件中增加了3行</p>
+<br>
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h2><ul>
+<li><p>查看：<code>git status</code><br>查看工作区、暂存区的状态   </p>
+</li>
+<li><p>添加：<code>git add &lt;file&gt;</code><br>将工作区的“新建/修改”添加到暂存区<br>新建的文件commit之前必须add；而修改的文件（已经add过）可以直接commit，但这样就无法撤销了</p>
+</li>
+<li><p>提交：<code>git commit -m &quot;commit message&quot; &lt;file&gt;</code><br>将暂存区的内容提交到本地库</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git2/git2-18.png" loading="lazy">   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git-3：历史记录、版本穿梭、reset命令的三个参数对比</title>
+    <url>/2021/12/19/git/git3/</url>
+    <content><![CDATA[<h2 id="查看历史记录"><a href="#查看历史记录" class="headerlink" title="查看历史记录"></a><strong>查看历史记录</strong></h2><h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a><strong><code>git log</code></strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-1.png" loading="lazy"><br>其中，</p>
+<ul>
+<li><code>80555fa9114e1aa95eef4677fda4424829fd80a4</code>和<code>de4a738faba2b6c27ef69cf9295df79a95a852e8</code>是哈希值，表示索引。    </li>
+<li><code>(HEAD -&gt; master)</code>表示指针，指向当前的版本。   </li>
+<li><code>Author</code>是作者签名，<code>Date</code>是提交时间。</li>
+<li><code>second commit, modify 1.txt</code>和<code>first commit new file 1.txt</code>是我们自己写的提交注释。  </li>
+</ul>
+<h3 id="多屏显示"><a href="#多屏显示" class="headerlink" title="多屏显示"></a><strong>多屏显示</strong></h3><p>为了讲解接下来的内容，不断给1.txt文档增加内容，多添加一些提交（我添加了8次的样子），然后使用<code>git log</code>可以看到：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-2.png" loading="lazy"><br>可以看到一屏已经放不下了，并且左下角多了个<code>:</code>，说明后面还有内容。<br>在这里和Linux一样，可以按键盘的上下箭头来浏览，也可以空格向下翻页、B键向上翻页，Q键退出。   </p>
+<h3 id="简要显示"><a href="#简要显示" class="headerlink" title="简要显示"></a><strong>简要显示</strong></h3><p>直接用<code>git log</code>显示的内容比较多，浏览起来比较麻烦，所以当日志多的时候可以给此命令附加一些参数：</p>
+<pre class="language-none"><code class="language-none">git log --pretty&#x3D;oneline</code></pre>
+<p>这样一来每条日志只显示简要的一行：<br>（增加一行“3”写错了，应该是增加一行4，对不住了强迫症朋友）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-3.png" loading="lazy">   </p>
+<p>还可以：</p>
+<pre class="language-none"><code class="language-none">git log --oneline</code></pre>
+<p>这样一来哈希值只显示一部分：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-4.png" loading="lazy">   </p>
+<br>
+
+<h2 id="版本穿梭"><a href="#版本穿梭" class="headerlink" title="版本穿梭"></a><strong>版本穿梭</strong></h2><pre class="language-none"><code class="language-none">git reflog</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-5.png" loading="lazy"><br>相比于之前的<code>git log</code>，多了一些<code>HEAD@&#123;$&#125;</code>的信息，表示回到<code>$</code>版本需要移动<code>$</code>步。<br>这里的<code>HEAD</code>之前介绍过，表示指针，默认指向时间上离我们最近的版本，可以操控指针移动来实现版本回退。<br>有3种方式：  </p>
+<h3 id="基于索引值操作（推荐）"><a href="#基于索引值操作（推荐）" class="headerlink" title="基于索引值操作（推荐）"></a><strong>基于索引值操作（推荐）</strong></h3><p>命令：<code>git reset --hard &lt;局部索引值&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-6.png" loading="lazy"><br>然后使用<code>cat 1.txt</code>查看1.txt的内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-7.png" loading="lazy"><br>可以看到版本回退成功。<br>然后再使用<code>git reflog</code>来看：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-8.png" loading="lazy"><br>可以看到指针指到了<code>HEAD@&#123;6&#125;</code>这条记录。<br>这种基于索引值的命令可以随意穿梭，前进后退都行。总之只要你知道你想去的那个版本，就可以穿梭到那。    </p>
+<p><span style="color:red">插曲小tip</span>：<br>在git bash窗口中，选中即复制，什么键都不用按。也就是说选中后直接粘贴就行。<br>而在Windows的cmd窗口中，选中之后按一下鼠标右键是复制。</p>
+<h3 id="使用-符号，只能后退"><a href="#使用-符号，只能后退" class="headerlink" title="使用^符号，只能后退"></a><strong>使用<code>^</code>符号，只能后退</strong></h3><p>命令：<code>git reset --hard HEAD^</code><br>我们再回到最新的版本，然后用<code>git log --oneline</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-9.png" loading="lazy"><br>然后使用<code>git reset --hard HEAD^</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-10.png" loading="lazy"><br>可以看到它回退到了上一个版本。   </p>
+<p><code>HEAD</code>后有几个<code>^</code>，就回退几个版本：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-11.png" loading="lazy"><br>但这样有很大的限制，如果是要回退好几十个版本，那写好几十个<code>^</code>岂不是要累坏……<br>所以就可以用<code>~</code>符号。</p>
+<h3 id="使用-符号，只能后退-1"><a href="#使用-符号，只能后退-1" class="headerlink" title="使用~符号，只能后退"></a><strong>使用<code>~</code>符号，只能后退</strong></h3><p>命令：<code>git reset --hard HEAD~&lt;回退步数&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-12.png" loading="lazy">   </p>
+<p>使用<code>^</code>或<code>~</code>，都需要数一下回退步数，如果是要回退几十次，很容易数错<br>所以还是推荐使用<code>git reset --hard &lt;局部索引值&gt;</code></p>
+<p>另外，使用<code>git reset --hard HEAD</code>，不加<code>^</code>和<code>~</code>，就表示统一工作区、暂存区到本地库HEAD指针指向的位置。相关内容见下面。   </p>
+<br>
+
+<h2 id="reset命令的三个参数对比"><a href="#reset命令的三个参数对比" class="headerlink" title="reset命令的三个参数对比"></a><strong>reset命令的三个参数对比</strong></h2><h3 id="解释"><a href="#解释" class="headerlink" title="解释"></a><strong>解释</strong></h3><p>可以使用<code>git help &lt;命令名&gt;</code>查看帮助，比如输入<code>git help reset</code>就会在浏览器中弹出<code>git-reset.html</code>帮助文件，<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-13.png" loading="lazy"><br>在这里可以看到reset命令的3个参数解释：</p>
+<blockquote>
+<p>–soft<br>Does not touch the index file or the working tree at all (but resets the head to &lt;commit&gt;, just like all modes do). This leaves all your changed files “Changes to be committed”, as git status would put it.</p>
+</blockquote>
+<p><code>index file</code>指的是暂存区，<code>working tree</code>指的是工作区。也就是说<code>--soft</code>不涉及到暂存区和工作区，仅仅在本地库中移动HEAD指针。</p>
+<blockquote>
+<p>–mixed<br>Resets the index but not the working tree (i.e., the changed files are preserved but not marked for commit) and reports what has not been updated. This is the default action.<br>If -N is specified, removed paths are marked as intent-to-add (see git-add(1)).</p>
+</blockquote>
+<p>重置暂存区，但不涉及工作区。也就是在本地库移动HEAD指针的同时重置暂存区。   </p>
+<blockquote>
+<p>–hard<br>Resets the index and working tree. Any changes to tracked files in the working tree since &lt;commit&gt; are discarded. Any untracked files or directories in the way of writing any tracked files are simply deleted.</p>
+</blockquote>
+<p>在本地库移动HEAD指针的同时重置暂存区和工作区。可以感觉到“hard”的含义了，确实很hard。   </p>
+<h3 id="演示"><a href="#演示" class="headerlink" title="演示"></a><strong>演示</strong></h3><p>下面分别运行这3个参数体会一下。<br>先用<code>git reflog</code>查看一下当前HEAD指针的位置：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-14.png" loading="lazy"><br>可以看到HEAD是指在“增加一行7”的版本。  </p>
+<p><code>--soft</code>：<br>使用<code>git reset --soft 2a84e07</code>把HEAD指针移动到“增加一行B”的版本，然后使用<code>cat 1.txt</code>查看一下1.txt文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-15.png" loading="lazy"><br>可以看到1.txt并没有修改，也就是本地的工作区没被修改。<br>再用<code>git status</code>看一下暂存区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-16.png" loading="lazy"><br>字儿变成绿的了，提示<code>modified 1.txt</code>，这是因为本地库的版本变了，而暂存区的版本没变，导致暂存区和本地库不一致，所以它就提示“modified”。<br>也就是说不是因为我们修改而1.txt直接导致<code>modified</code>，而是因为本地库版本改变间接导致<code>modified</code>。   </p>
+<p><code>--mixed</code>：<br>和<code>--soft</code>上面一样的一套操作：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-17.png" loading="lazy"><br>移动到“增加一行8”的版本，然后用<code>cat 1.txt</code>发现本地工作区没被改变。<br>而使用<code>git status</code>查看暂存区，发现字儿变成红的了，也就是暂存区被改变了。   </p>
+<p><code>--hard</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git3/git3-18.png" loading="lazy"><br>可以看见本地工作区文件被修改，并且暂存区没什么提示。<br>也就是说工作区、暂存区、本地库三者同步了。   </p>
+<p>实际上<code>--soft</code>和<code>--mixed</code>很少用到。   </p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git-4：删除找回、比较文件、分支</title>
+    <url>/2021/12/19/git/git4/</url>
+    <content><![CDATA[<h2 id="永久删除文件后找回"><a href="#永久删除文件后找回" class="headerlink" title="永久删除文件后找回"></a><strong>永久删除文件后找回</strong></h2><p>新建一个2.txt，并且提交到暂存区、本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-1.png" loading="lazy"><br>然后使用<code>rm 2.txt</code>删除2.txt<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-2.png" loading="lazy"><br>把删除2.txt的操作提交到暂存区、本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-3.png" loading="lazy"><br>现在2.txt已经被永久删除了。<br>但是版本提交的历史记录是一直存在的，每一个版本都有，也就是说<code>rm 2.txt</code>之前的版本也存在，所以2.txt是能找回来的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-4.png" loading="lazy"><br>可以看到2.txt被找回来了，后悔药服用成功。   </p>
+<p>但是.git这个文件夹你不能删掉，删掉就真没了。   </p>
+<br>
+
+<h2 id="添加到暂存区的删除文件找回"><a href="#添加到暂存区的删除文件找回" class="headerlink" title="添加到暂存区的删除文件找回"></a><strong>添加到暂存区的删除文件找回</strong></h2><p>新建一个3.txt，提交到暂存区和本地库：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-5.png" loading="lazy"><br>然后删掉3.txt，提交到暂存区：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-6.png" loading="lazy"><br>这时可以使用<code>git reset --hard HEAD</code>来找回3.txt文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-7.png" loading="lazy"><br>原理是同步工作区为本地库的指针<code>HEAD</code>指向的版本，刷新暂存区，而本地库的<code>HEAD</code>指向的是<code>new 3.txt</code>这个版本，所以文件找回来了。   </p>
+<br>
+
+<h2 id="删除找回总结"><a href="#删除找回总结" class="headerlink" title="删除找回总结"></a><strong>删除找回总结</strong></h2><p>前提：删除前，文件存在的版本提交到了本地库。<br>操作：<code>git reset --hard &lt;指针位置&gt;</code></p>
+<ul>
+<li>删除操作已经提交到本地库：指针位置指向历史记录   </li>
+<li>删除操作尚未提交到本地库：指针位置使用<code>HEAD</code>   </li>
+</ul>
+<br>
+
+<h2 id="比较文件"><a href="#比较文件" class="headerlink" title="比较文件"></a><strong>比较文件</strong></h2><p>修改一下1.txt的文件内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-8.png" loading="lazy"><br>然后使用<code>git diff 1.txt</code>把工作区文件和暂存区比较，查看文件的变动：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-9.png" loading="lazy"><br><code>-</code>红字表示删掉的内容，<code>+</code>绿字表示新增的内容，以行为单位。  </p>
+<p>如果执行<code>git add 1.txt</code>加到暂存区，就不会用什么显示，因为工作区和暂存区一致，没有变动：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-10.png" loading="lazy">   </p>
+<p>我们还可以把工作区文件和某一历史版本文件进行比较，如</p>
+<pre class="language-none"><code class="language-none">git diff b25b444 1.txt</code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-11.png" loading="lazy">   </p>
+<p>不带文件名，如<code>git diff head</code>，可以同时比较多个文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-12.png" loading="lazy">   </p>
+<p><strong>总结</strong>：</p>
+<ul>
+<li><p><code>git diff &lt;文件名&gt;</code><br>将工作区中的文件和暂存区进行比较</p>
+</li>
+<li><p><code>git diff &lt;本地库中历史版本&gt; &lt;文件名&gt;</code><br>将工作区中的文件和本地库历史记录比较</p>
+</li>
+<li><p>不带文件名比较多个文件</p>
+</li>
+</ul>
+<br>
+
+<h2 id="分支概述"><a href="#分支概述" class="headerlink" title="分支概述"></a><strong>分支概述</strong></h2><p>分支：在版本控制过程中，使用多条线同时推进多个任务。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-13.png" loading="lazy"><br><code>master</code>表示主干<br><code>feature_blue</code>表示开发一套蓝色的主题的分支<br><code>feature_game</code>表示开发一个小游戏的分支<br>这些分支彼此独立，如果不合并的话就互不影响。所以如果其中某一分支开发失败，删除分支即可，对整个项目没有影响，方便试错。对项目推进的效率也很有帮助，多个分支可以齐头并进，不必等项目主体开发完再开始。<br>分支开发完成后没有问题就可以合并到master主干，进行产品升级。<br>主干也可能出现bug，这时可以使用专门用来修复bug的<code>hot_fix</code>分支来修复，意思是热修复，因为服务器是不停运行的，在运行过程中修复就是热修复。相应地，停掉服务器再修复就是冷修复。     </p>
+<p>从上面的过程我们可以总结出分支的好处：</p>
+<ul>
+<li>同时并行推进多个功能开发，提高开发效率。  </li>
+<li>各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响。失败的分支删除重新开始即可。  </li>
+</ul>
+<p><span style="color:red">插曲小tip</span>：Ctrl + L 可以实现清屏的效果。（实际上不是清屏，只是翻页了而已）</p>
+<br>
+
+<h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a><strong>分支操作</strong></h2><ul>
+<li>查看分支：<code>git brach -v</code>   </li>
+<li>创建分支：<code>git branch &lt;分支名&gt;</code>   </li>
+<li>切换分支：<code>git checkout &lt;分支名&gt;</code>   </li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-14.png" loading="lazy">   </p>
+<p>我们新建了一个<code>hot_fix</code>分支，并切换到了这个分支。<br>在这个分支上进行操作并提交到本地库当然也会进行版本更新：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-15.png" loading="lazy"><br>这时<code>hot_fix</code>分支的版本就比<code>master</code>的版本更领先，假设这时说明<code>hot_fix</code>的功能已经实现了，需要合并到<code>master</code>主干，就需要进行分支合并。<br>进行分支合并时必须在接受合并的分支（master）上，然后再执行合并指令，也就是：</p>
+<ol>
+<li>第一步：<code>git checkout &lt;接受合并分支名&gt;</code>   </li>
+<li>第二步：<code>git merge &lt;有新内容分支名&gt;</code>  </li>
+</ol>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-16.png" loading="lazy">   </p>
+<br>
+
+<h2 id="分支合并时冲突的解决"><a href="#分支合并时冲突的解决" class="headerlink" title="分支合并时冲突的解决"></a><strong>分支合并时冲突的解决</strong></h2><p>当在两个分支分别修改时，恰好修改的是同一文件的同一位置，分支合并时就会出现冲突。<br>现在我们在<code>master</code>分支和<code>hot_fix</code>分支都修改<code>1.txt</code>文件中的同一行：<br>master中：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-17.png" loading="lazy"><br>hot_fix中：<br>（有句命令手残敲错了一次）<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-18.png" loading="lazy">   </p>
+<p>这时再合并（往hot_fix上合并master也是可以的）就会出现：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-19.png" loading="lazy"><br>意思是自动合并失败，需要我们手动合并，<code>MERGING</code>就表示正在合并。<br>这时用<code>vim 1.txt</code>打开1.txt查看，会出现这样的内容：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-20.png" loading="lazy"><br>增加了一些特殊的标记。<br>以<code>=======</code>为分界，HEAD指向的，即<code>333333 edit bt bot_fix</code>（应该是by，敲错了）表示当前分支内容，<code>333333 edit bt master</code>表示master分支内容。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-21.png" loading="lazy"><br>处理方式很容易理解，在此vim编辑器中删掉不需要的内容、留下需要的，就行了。<br>现在我什么都不修改，假设已经决定好了，直接退出，然后<code>git add 1.txt</code>、<code>git commit</code>（注意<code>git commit</code>后不要带文件名）。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-22.png" loading="lazy"><br>冲突解决，合并完成。然后使用<code>cat 1.txt</code>看一下：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git4/git4-23.png" loading="lazy"><br>可以看到其内容就是刚才<code>MERGING</code>过程中编辑的内容</p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git-5：哈希、Git的机制原理、Github、工作流、GitFlow、Gitlab</title>
+    <url>/2021/12/20/git/git5/</url>
+    <content><![CDATA[<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a><strong>哈希</strong></h2><p>所有文件本质上都是0和1，所以所有文件都可以加密。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-1.png" loading="lazy">   </p>
+<p>哈希是一个系列的加密算法，各个不同的哈希算法虽然加密强度不同，但是有以下几个共同点：</p>
+<ul>
+<li>不管输入数据的数据量有多大，输入同一个哈希算法，得到的加密结果长度固定  </li>
+<li>哈希算法确定，输入数据确定，输出数据能够保证不变  </li>
+<li>哈希算法确定，输入数据有变化，输出数据一定有变化，而且通常变化很大   </li>
+<li>哈希算法不可逆   </li>
+</ul>
+<p>常见的哈希算法有MD5、SHA、CRC等。<br>哈希算法可以被用来验证文件。原理如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-2.png" loading="lazy"><br>Git就是靠这种机制来从根本上保证数据完整性的。   </p>
+<br>
+
+<h2 id="Git保存版本的机制"><a href="#Git保存版本的机制" class="headerlink" title="Git保存版本的机制"></a><strong>Git保存版本的机制</strong></h2><h3 id="集中式版本控制工具的文件管理机制"><a href="#集中式版本控制工具的文件管理机制" class="headerlink" title="集中式版本控制工具的文件管理机制"></a><strong>集中式版本控制工具的文件管理机制</strong></h3><p>以文件变更列表的方式存储信息。这类系统将它们保存的信息看作是一组基本文件和每个文件随时间逐步累积的差异。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-3.png" loading="lazy">   </p>
+<h3 id="Git的文件管理机制"><a href="#Git的文件管理机制" class="headerlink" title="Git的文件管理机制"></a><strong>Git的文件管理机制</strong></h3><p>Git把数据看作是小型文件系统的一组快照。每次提交更新时Git都会对当前的全部文件制作一个快照并保存这个快照的索引。<br>为了高效，如果文件没有修改， Git不再重新存储该文件，而是只保留一个链接指向之前存储的文件。所以Git的工作方式可以称之为快照流。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-4.png" loading="lazy">   </p>
+<h3 id="Git文件管理机制细节"><a href="#Git文件管理机制细节" class="headerlink" title="Git文件管理机制细节"></a><strong>Git文件管理机制细节</strong></h3><p>Git的“提交对象”<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-5.png" loading="lazy"><br>提交对象及其父对象形成的链条<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-6.png" loading="lazy">   </p>
+<br>
+
+<h2 id="Git分支管理机制"><a href="#Git分支管理机制" class="headerlink" title="Git分支管理机制"></a><strong>Git分支管理机制</strong></h2><h3 id="分支的创建"><a href="#分支的创建" class="headerlink" title="分支的创建"></a>分支的创建</h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-7.png" loading="lazy"><br><code>98ca9</code>是根提交</p>
+<h3 id="分支的切换"><a href="#分支的切换" class="headerlink" title="分支的切换"></a>分支的切换</h3><p>主干<code>master</code>和分支<code>testing</code>都可视作指向某一版本<span style="color:red">指针</span>，<code>HEAD</code>视作指向分支的指针，用来切换分支。<br>所以切换分支本质就是移动指针，切换起来简单高效。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-8.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-9.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-10.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-11.png" loading="lazy">   </p>
+<br>
+
+<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a><strong><a href="https://github.com/">Github</a></strong></h2><p>大名鼎鼎的 <del>同性</del> 程序员交友网站。<br>账号注册、在github创建远程库就不介绍了。   </p>
+<h3 id="本地库和远程库交互方式复习"><a href="#本地库和远程库交互方式复习" class="headerlink" title="本地库和远程库交互方式复习"></a><strong>本地库和远程库交互方式复习</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-12.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-13.png" loading="lazy"><br>用Github Desktop很容易实现本地库与远程库的交互，但我们要学习其本质的东西，所以下面介绍用git指令实现交互。   </p>
+<h3 id="创建本地库和远程库"><a href="#创建本地库和远程库" class="headerlink" title="创建本地库和远程库"></a><strong>创建本地库和远程库</strong></h3><p>先新建个本地库，初始化，并添加个文件：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-14.png" loading="lazy"><br>然后<code>git add</code>、<code>git commit</code>：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-15.png" loading="lazy">   </p>
+<p>然后创建远程库，和本地库名字不一定非得一样，但最好还是同名，方便识别。<br>现在就做个练习，没必要用私有库。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-16.png" loading="lazy">   </p>
+<h3 id="远程库的地址和起别名"><a href="#远程库的地址和起别名" class="headerlink" title="远程库的地址和起别名"></a><strong>远程库的地址和起别名</strong></h3><p>这个是远程库的地址（SSH的也行）：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-17.png" loading="lazy"><br>这个地址很长，每次都粘贴进去很不方便，所以要创建别名。<br>命令：   </p>
+<ul>
+<li><code>git remote -v</code>：查看当前所有远程库别名   </li>
+<li><code>git remote add &lt;别名&gt; &lt;远程地址&gt;</code>：给远程库起别名    </li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-18.png" loading="lazy">   </p>
+<h3 id="push"><a href="#push" class="headerlink" title="push"></a><strong>push</strong></h3><p>命令：<code>git push &lt;别名&gt; &lt;分支名&gt;</code><br>回车之后会弹出Github的登录框，登陆就行了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-19.png" loading="lazy"><br>现在的GitHub主分支改名为了<code>main</code>，下次注意一下。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-20.png" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-21.png" loading="lazy"><br>可以看到远程库更新成功。   </p>
+<h3 id="clone"><a href="#clone" class="headerlink" title="clone"></a><strong>clone</strong></h3><p>命令：<code>git clone &lt;远程库地址&gt;</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-22.png" loading="lazy">   </p>
+<h3 id="团队成员邀请"><a href="#团队成员邀请" class="headerlink" title="团队成员邀请"></a><strong>团队成员邀请</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-23.png" loading="lazy">   </p>
+<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a><strong>pull</strong></h3><p><code>pull</code> = <code>fetch</code> + <code>merge</code><br><code>fetch</code>只是把远程库分支的内容下载到本地，并没有合并到当前分支。  </p>
+<ul>
+<li><code>git fetch [远程库地址别名] [远程分支名]</code></li>
+<li><code>git merge [远程库地址别名/远程分支名]</code></li>
+<li><code>git pull [远程库地址别名]</code></li>
+</ul>
+<p>如果pull过来的库比较简单，直接pull就行，而如果比较复杂，为了保险慎重可以把pull分开为fetch和merge两步手动操作。   </p>
+<h3 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a><strong>解决冲突</strong></h3><p>要点</p>
+<ul>
+<li>如果不是基于GitHub远程库的最新版所做的修改，不能推送，必须先拉取。</li>
+<li>拉取下来后如果进入冲突状态，则按照“分支冲突解决”操作解决即可。</li>
+</ul>
+<h3 id="跨团队协作"><a href="#跨团队协作" class="headerlink" title="跨团队协作"></a><strong>跨团队协作</strong></h3><p>这个比较麻烦，至少要两个账号，就不演示了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-13.png" loading="lazy">   </p>
+<br>
+
+<h3 id="SSH免密登录"><a href="#SSH免密登录" class="headerlink" title="SSH免密登录"></a><strong>SSH免密登录</strong></h3><p>用HTTPS与远程库进行交互经常需要GitHub的用户名密码，比较麻烦。<br>而SSH就不需要GitHub用户名密码，不过只能一个用户使用，事实上开发的时候大多时间都是自己一个人在本地开发的，所以用SSH也够了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-24.png" loading="lazy"><br>我的电脑之前已经连接过SSH，这个连接SSH的过程就就不截图了。   </p>
+<ul>
+<li>进入当前电脑用户的家目录 <code>cd ~</code>   </li>
+<li>运行命令生成.ssh密钥目录 <code>ssh-keygen -t rsa -C &lt;你的Github邮箱地址&gt;</code><br>注意C是大写的。 </li>
+<li>进入 .ssh 目录 <code>cd .ssh</code></li>
+<li>查看 id_rsa.pub 文件内容 <code>cat id_rsa.pub</code> </li>
+<li>复制 id_rsa.pub 文件内容</li>
+<li>登录 GitHub，点击用户头像 → Settings → SSH and GPG keys → New SSH Key</li>
+<li>输入复制的密钥信息  </li>
+<li>测试 <code>ssh -T git@github.com</code></li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-25.png" loading="lazy">   </p>
+<p>这样就是成功了。   </p>
+<br>
+
+<h2 id="Git-工作流"><a href="#Git-工作流" class="headerlink" title="Git 工作流"></a><strong>Git 工作流</strong></h2><p>工作流就是在项目开发过程中使用Git的方式。<br>分类</p>
+<ul>
+<li>集中式工作流</li>
+<li>GitFlow 工作流（用的最多）</li>
+<li>Forking 工作流  </li>
+</ul>
+<p><strong>集中式工作流</strong><br>简单说就是不分支，每个人有各自的本地库。就像 SVN 一样，集中式工作流以中央仓库作为项目所有修改的单点实体。所有修改都提交到 Master 这个分支上。 这种方式与 SVN 的主要区别就是开发人员有本地库。Git 很多特性并没有用到。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-26.png" loading="lazy">   </p>
+<p><strong>GitFlow 工作流</strong><br>充分利用了分支的特点，通过为功能开发、发布准备和维护设立了独立的分支，让发布迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-27.png" loading="lazy">   </p>
+<p><strong>Forking工作流</strong><br>在 GitFlow 基础上，充分利用了 Git 的 Fork 和 pull request 的 功能以达到代码审核的目的。更适合安全可靠地管理大团队的开发者，而且能接受不信任贡献者的提交。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-28.png" loading="lazy"><br><br></p>
+<h2 id="GitFlow工作流详解"><a href="#GitFlow工作流详解" class="headerlink" title="GitFlow工作流详解"></a><strong>GitFlow工作流详解</strong></h2><h3 id="分支种类"><a href="#分支种类" class="headerlink" title="分支种类"></a><strong>分支种类</strong></h3><ul>
+<li><p>主干分支 master<br>主要负责管理正在运行的生产环境代码。永远保持与正在运行的生产环境 完全一致。</p>
+</li>
+<li><p>开发分支 develop<br>主要负责管理正在开发过程中的代码。一般情况下应该是最新的代码。</p>
+</li>
+<li><p>bug修理分支 hotfix<br>主要负责管理生产环境下出现的紧急修复的代码。 从主干分支分出，修理完毕并测试上线后，并回主干分支。并回后，视情况可以删除该分支。</p>
+</li>
+<li><p>准生产分支（预发布分支） release<br>较大的版本上线前，会从开发分支中分出准生产分支，进行最后阶段的集成测试。该版本上线后，会合并到主干分支。生产环境运行一段阶段较稳定后 可以视情况删除。</p>
+</li>
+<li><p>功能分支 feature<br>为了不影响较短周期的开发工作，一般把中长期开发模块，会从开发分支中独立出来。开发完成后会合并到开发分支。</p>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-29.png" loading="lazy">   </p>
+<p><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/git/git5/git5-30.png" loading="lazy">   </p>
+<br>
+
+<h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a><strong>Gitlab</strong></h2><p>Gitlab一般搭建在Linux上的，用来创建私有仓库。也可以用来创建局域网内的团队仓库，这样哪怕一个团队访问不了外网，也能做起项目来。<br>目前来看，对于我个人来说，Gitee就够用了，所以Gitlab等以后有需要再学。<br><a href="https://about.gitlab.com/">Gitlab官网</a></p>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Git入门</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
       </tags>
   </entry>
 </search>
