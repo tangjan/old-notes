@@ -1,0 +1,127 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="糖加盐"><meta name="copyright" content="糖加盐"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>Linux-1：课程内容介绍，Linux简介，VMware和CentOS的安装 | 糖加盐的笔记站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/png" href="/favicon.png"><link rel="mask-icon" href="/favicon.png" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"tangjan.github.io","root":"/","title":"糖加盐的笔记站","version":"1.7.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="在腾讯云买了台轻量应用服务器，安装的CentOS 7.6操作系统。这样一来手里就有了实践的对象，所以趁这个机会学一遍Linux。跟着Linux_尚硅谷_bilibili学的。       Linux[ˈlɪnəks]   课程内容介绍基础篇：  Linux入门 vm和Linux的安装 Linux目录结构  实操篇：  远程登录（Xshell、XFtp） vi和Vim编辑器 开机、重启和用户登陆注销">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux-1：课程内容介绍，Linux简介，VMware和CentOS的安装">
+<meta property="og:url" content="https://tangjan.github.io/2021/12/16/linux/linux1/index.html">
+<meta property="og:site_name" content="糖加盐的笔记站">
+<meta property="og:description" content="在腾讯云买了台轻量应用服务器，安装的CentOS 7.6操作系统。这样一来手里就有了实践的对象，所以趁这个机会学一遍Linux。跟着Linux_尚硅谷_bilibili学的。       Linux[ˈlɪnəks]   课程内容介绍基础篇：  Linux入门 vm和Linux的安装 Linux目录结构  实操篇：  远程登录（Xshell、XFtp） vi和Vim编辑器 开机、重启和用户登陆注销">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-1.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-6.png">
+<meta property="article:published_time" content="2021-12-16T12:25:00.000Z">
+<meta property="article:modified_time" content="2021-12-22T07:15:25.514Z">
+<meta property="article:author" content="糖加盐">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-1.jpg"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的笔记站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">56</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">7</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BE%E7%A8%8B%E5%86%85%E5%AE%B9%E4%BB%8B%E7%BB%8D"><span class="toc-text">课程内容介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%AD%A6%E4%B9%A0%E6%96%B9%E5%90%91"><span class="toc-text">Linux学习方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E7%9A%84%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F"><span class="toc-text">Linux的应用领域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E9%AB%98%E6%89%8B%E8%BF%9B%E9%98%B6%E4%B9%8B%E8%B7%AF"><span class="toc-text">Linux高手进阶之路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95"><span class="toc-text">Linux学习方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E4%BB%8B%E7%BB%8D"><span class="toc-text">Linux介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%92%8CUnix%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-text">Linux和Unix的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%92%8CWindows%E6%AF%94%E8%BE%83"><span class="toc-text">Linux和Windows比较</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#VMWare%E4%B8%AD%E4%B8%80%E4%BA%9B%E7%9F%A5%E8%AF%86"><span class="toc-text">VMWare中一些知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">CentOS的安装</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2021/12/16/linux/linux1/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的笔记站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Linux-1：课程内容介绍，Linux简介，VMware和CentOS的安装</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2021-12-16 20:25:00" itemprop="dateCreated datePublished" datetime="2021-12-16T20:25:00+08:00">2021-12-16</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">1.5k</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Linux/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Linux</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Linux/" style="--text-color:var(--hty-text-color)"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Linux</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><p>在腾讯云买了台轻量应用服务器，安装的CentOS 7.6操作系统。这样一来手里就有了实践的对象，所以趁这个机会学一遍Linux。<br>跟着<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1dW411M7xL">Linux_尚硅谷_bilibili</a>学的。    </p>
+<br>
+
+<p>Linux<br>[ˈlɪnəks]</p>
+<br>
+
+<h2 id="课程内容介绍"><a href="#课程内容介绍" class="headerlink" title="课程内容介绍"></a><strong>课程内容介绍</strong></h2><p><strong>基础篇</strong>：</p>
+<ul>
+<li>Linux入门</li>
+<li>vm和Linux的安装</li>
+<li>Linux目录结构</li>
+</ul>
+<p><strong>实操篇</strong>：</p>
+<ul>
+<li>远程登录（Xshell、XFtp）</li>
+<li>vi和Vim编辑器</li>
+<li>开机、重启和用户登陆注销</li>
+<li>用户管理</li>
+<li>实用指令</li>
+<li>定时任务调度</li>
+<li>磁盘分区、挂载</li>
+<li>网络配置</li>
+<li>进程管理</li>
+<li>RPM和YUM</li>
+</ul>
+<p><strong>JavaEE定制篇</strong></p>
+<p><strong>大数据定制篇</strong></p>
+<p><strong>Python定制篇</strong></p>
+<br>
+
+<h2 id="Linux学习方向"><a href="#Linux学习方向" class="headerlink" title="Linux学习方向"></a><strong>Linux学习方向</strong></h2><p>三大方向：</p>
+<ul>
+<li><p>Linux运维工程师<br>比如一些BAT这样的大公司，它有很多服务器，上万甚至几十万台，保证这些服务器的稳定运行就是Linux运维工程师的工作。比如服务器的优化、数据监控、日志备份分析等。</p>
+</li>
+<li><p>Linux嵌入式工程师<br>在Linux下做驱动开发、嵌入式开发等。需求量相对不是很大。</p>
+</li>
+<li><p>Linux下开发项目<br>这个是需求最多的。Java程序一般是部署在Linux上面的，如果你只会Java而不会Linux，你就无法把Java部署到Linux上。所以要学Linux上开发环境相关的知识。<br>Linux上也可以部署Python、大数据、PHP、C/C++相关的内容。  </p>
+</li>
+</ul>
+<br>
+
+<h2 id="Linux的应用领域"><a href="#Linux的应用领域" class="headerlink" title="Linux的应用领域"></a><strong>Linux的应用领域</strong></h2><p><strong>1）</strong> 个人桌面领域<br>像Windows这样的。<br>不过这个领域的应用比较薄弱，被Windows所压制。</p>
+<p><strong>2）</strong> 服务器领域<br>Linux最强的领域。我的腾讯云轻量应用服务器就是属于Linux的CentOS系统。  </p>
+<p><strong>3）</strong> 嵌入式领域<br>可以根据需要进行软件裁剪，内核最小仅需几百KB。<br>以后在物联网中应用会更广泛。  </p>
+<br>
+
+<h2 id="Linux高手进阶之路"><a href="#Linux高手进阶之路" class="headerlink" title="Linux高手进阶之路"></a><strong>Linux高手进阶之路</strong></h2><p><strong>第1阶段</strong><br>Linux环境下的基本操作命令，包括文件操作命令（rm、mkdir、chmod、chown）、编译工具使用（vi vim）、Linux用户管理（useradd、userdel、usermod）等。<br>比如一个项目经理，他不应该把root用户给别人，这就需要用到用户管理。  </p>
+<p><strong>第2阶段</strong><br>Linux的各种配置（环境变量配置、网络配置、服务配置）</p>
+<p><strong>第3阶段</strong><br>Linux下搭建对应语言的开发环境（大数据、JavaEE、Python等）</p>
+<p><strong>第4阶段</strong><br>能编写shell脚本，对Linux服务器进行维护。  </p>
+<p><strong>第5阶段</strong><br>能进行安全设置，防止攻击，保障服务器正常运行，能对系统调优。  </p>
+<p><strong>第6阶段</strong><br>深入理解Linux系统，对内核有研究，熟练掌握大型网站应用架构组成、并熟悉各个环节的部署和维护方法。    </p>
+<br>
+
+<h2 id="Linux学习方法"><a href="#Linux学习方法" class="headerlink" title="Linux学习方法"></a><strong>Linux学习方法</strong></h2><ol>
+<li>高效愉快</li>
+<li>先建立整体框架，再研究细节</li>
+<li>不需要掌握所有的Linux指令，要学会查询手册和百度<br>Linux指令非常多，两千个应该是有的  </li>
+<li>先know how，再know why</li>
+<li>计算机是一门“做中学”的学科，不是会了再做，而是做了才会</li>
+<li>适当地囫囵吞枣</li>
+<li>Linux不是变成，重点是实际操作，各种常用指令要玩得溜</li>
+</ol>
+<br>
+
+<h2 id="Linux介绍"><a href="#Linux介绍" class="headerlink" title="Linux介绍"></a><strong>Linux介绍</strong></h2><p>1） Linux的读音<br>读法很多，里纽克斯、利尼克斯、利纳克斯<br>怎么读都行，不影响理解就行了。</p>
+<p>2）Linux是一款操作系统，免费、开源、安全、高效、稳定、高并发。<br>现在很多企业级项目都部署到Linux或Unix服务器上运行。<br>一般.NET开发的产品才会部署到Windows操作系统上。  </p>
+<p>3）创始人：林纳斯（Linus）   </p>
+<p>4）Linux的吉祥物：企鹅-tux。<br>很多技术都有吉祥物，像github-章鱼猫，mysql-海豚，PHP-大象，docker-鲸鱼……</p>
+<p>5）Linux主要发行版本<br>Linux内核并没有提供软件，很多厂商就根据自己的需求基于Linux开发了软件。<br>主要的版本有：CentOS、Redhat、Ubuntu、Suse、红旗Linux等。  </p>
+<p>6）目前主要的操作系统<br>windows、linux、android、ios、macOS等。</p>
+<br>
+
+<h2 id="Linux和Unix的关系"><a href="#Linux和Unix的关系" class="headerlink" title="Linux和Unix的关系"></a><strong>Linux和Unix的关系</strong></h2><p>Linux是从Unix演化而来的。<br>Unix的其他分支：IBM → AIX、Sun → Solaris、HP → HP-UX，不过这些类Unix操作系统都不是开源的，并且运行在高端服务器上。<br>GNU计划：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-1.jpg" loading="lazy">   </p>
+<br>
+
+<h2 id="Linux和Windows比较"><a href="#Linux和Windows比较" class="headerlink" title="Linux和Windows比较"></a><strong>Linux和Windows比较</strong></h2><ul>
+<li>Windows基本都是图形界面下操作的，而Linux的应用场景更多是远程登录，通过命令行控制，所以学习的时候更多的是学命令行，图形化用得很少很少。  </li>
+<li>Windows是封闭的，系统可定制性差。Linux开源，可定制化很强。     </li>
+<li>个人PC机用Windows最多，Linux更多用在企业服务器上。  </li>
+</ul>
+<br>
+
+<h2 id="VMWare中一些知识"><a href="#VMWare中一些知识" class="headerlink" title="VMWare中一些知识"></a><strong>VMWare中一些知识</strong></h2><p><strong>1.</strong> BIOS：基本输出输出系统。  </p>
+<p><strong>2.</strong> 任务管理器 - 性能 - 资源监视器 - CPU 可以看到CPU的数量。   </p>
+<p><strong>3.</strong> VMware中几种网络连接方式解释：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-2.png" loading="lazy"><br><strong>1）</strong> 桥接模式<br>就是直接给虚拟机安装的Linux系统分配一个专用地址，Linux就可以直接和其它计算机使用者通信。这样的弊端在于当使用者很多时，地址可能会冲突。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-3.png" loading="lazy">    </p>
+<p><strong>2）</strong> NAT模式<br>此时使用者有两个ip地址，一个用于和网络环境内的其它使用者通信，一个用来和Linux通信，这样Linux就不占用网络环境中的IP地址，不会出现冲突。但这样Linux就不能直接和其它使用者通信了。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-4.png" loading="lazy">    </p>
+<p><strong>3）</strong> 仅主机模式<br>这时Linux相当于一个独立的主机，不能访问外网。 </p>
+<br>
+
+<h2 id="CentOS的安装"><a href="#CentOS的安装" class="headerlink" title="CentOS的安装"></a><strong>CentOS的安装</strong></h2><p>CentOS镜像下载地址：在<a target="_blank" rel="noopener" href="https://www.centos.org/download/">CentOS官网</a>就可以下。<br>我是安装的最新版本的CentOS（8.5.2111），和尚硅谷老师用的版本不一样，所以我一开始安装的最小系统，等以后缺什么了再安装。<br>首先缺的就是GUI界面，百度了一下，安装指令是：</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">yum groupinstall &quot;Server with GUI&quot;</code></pre>
+<p>然后输入以下命令查询当前开机启动模式：</p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">systemctl get-default</code></pre>
+<p>查询结果中：<br><code>graphical.target</code>代表开机时启动图形化界面<br><code>multi-user.target</code>代表开机时启动dos界面<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-5.png" loading="lazy"><br>建议初学者弄个GUI界面，方便些。<br>成功之后CentOS的界面是这样的：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/linux/linux1/linux1-6.png" loading="lazy">    </p>
+<p>欢迎步入Linux的世界。</p>
+<p><br><br><br><br><br></p>
+<hr>
+</div></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2021/12/17/git/git1/" rel="prev" title="Git-1：课程大纲、版本控制、Git简介、本地库初始化、签名"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Git-1：课程大纲、版本控制、Git简介、本地库初始化、签名</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2021/12/15/web/web25/" rel="next" title="Web前端25：背景图练习"><span class="post-nav-text">Web前端25：背景图练习</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 糖加盐</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.7.0</span></div><div class="footer-custom-text"><a href="https://icp.gov.moe/?keyword=20210789" target="_blank">萌ICP备20210789号</a></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
