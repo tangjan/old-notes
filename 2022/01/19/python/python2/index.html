@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="糖加盐"><meta name="copyright" content="糖加盐"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>Python-2：编译 &amp; 解释、Python 特点、第一个程序、常见 bug、执行方式 | 糖加盐的笔记站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/png" href="/favicon.png"><link rel="mask-icon" href="/favicon.png" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"tangjan.github.io","root":"/","title":"糖加盐的笔记站","version":"1.7.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="Life is short, you need Python.  编译 &amp; 解释 编译型语言：程序在执行之前需要一个专门的编译过程，把程序编译成为机器语言的文件，运行时直接使用编译的结果。   解释型语言：解释型语言编写的程序不进行预先编译，以文本方式存储程序代码。在运行程序的时候，会将代码一句一句解释、运行。    编译型语言运行速度块，解释型语言跨平台性好。           Py">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-2：编译 &amp; 解释、Python 特点、第一个程序、常见 bug、执行方式">
+<meta property="og:url" content="https://tangjan.github.io/2022/01/19/python/python2/index.html">
+<meta property="og:site_name" content="糖加盐的笔记站">
+<meta property="og:description" content="Life is short, you need Python.  编译 &amp; 解释 编译型语言：程序在执行之前需要一个专门的编译过程，把程序编译成为机器语言的文件，运行时直接使用编译的结果。   解释型语言：解释型语言编写的程序不进行预先编译，以文本方式存储程序代码。在运行程序的时候，会将代码一句一句解释、运行。    编译型语言运行速度块，解释型语言跨平台性好。           Py">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-7.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-8.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-9.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-10.png">
+<meta property="article:published_time" content="2022-01-19T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-19T07:03:32.629Z">
+<meta property="article:author" content="糖加盐">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-1.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的笔记站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">57</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91-amp-%E8%A7%A3%E9%87%8A"><span class="toc-text">编译 &amp; 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">Python 的特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA-Python-%E7%A8%8B%E5%BA%8F"><span class="toc-text">第一个 Python 程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E7%A8%8B%E5%BA%8F-bug"><span class="toc-text">常见程序 bug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C-Python-%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">执行 Python 程序的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E9%87%8A%E5%99%A8"><span class="toc-text">解释器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E4%BA%92%E5%BC%8F%E8%BF%90%E8%A1%8C-Python-%E7%A8%8B%E5%BA%8F"><span class="toc-text">交互式运行 Python 程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%98%E6%96%B9-Shell"><span class="toc-text">官方 Shell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IPython"><span class="toc-text">IPython</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python-%E7%9A%84-IDE-%E2%80%94%E2%80%94-PyCharm"><span class="toc-text">Python 的 IDE —— PyCharm</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2022/01/19/python/python2/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的笔记站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Python-2：编译 &amp; 解释、Python 特点、第一个程序、常见 bug、执行方式</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-01-19 08:00:00" itemprop="dateCreated datePublished" datetime="2022-01-19T08:00:00+08:00">2022-01-19</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">725</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Python/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Python</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Python/" style="--text-color:#3776ab"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Python</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><blockquote>
+<p>Life is short, you need Python.</p>
+</blockquote>
+<h2 id="编译-amp-解释"><a href="#编译-amp-解释" class="headerlink" title="编译 &amp; 解释"></a><strong>编译 &amp; 解释</strong></h2><ul>
+<li><strong>编译型语言</strong>：程序在执行之前需要一个专门的编译过程，把程序编译成为机器语言的文件，运行时直接使用编译的结果。  </li>
+<li><strong>解释型语言</strong>：解释型语言编写的程序不进行预先编译，以文本方式存储程序代码。在运行程序的时候，会将代码一句一句解释、运行。   </li>
+<li>编译型语言运行速度块，解释型语言跨平台性好。   </li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-1.png" style="width:400px;" loading="lazy">  
+
+<br>
+
+<h2 id="Python-的特点"><a href="#Python-的特点" class="headerlink" title="Python 的特点"></a><strong>Python 的特点</strong></h2><ul>
+<li>优雅、明确、简单</li>
+<li>一种方法做一件事</li>
+<li>一切皆对象  <ul>
+<li><strong>面向对象</strong>：解决一个问题前，首先考虑由 <strong>谁</strong> 来做，<strong>对象</strong> 就是 <strong>谁</strong>。要解决复杂的问题，就可以找多个不同的对象，各司其职，最终完成需求。</li>
+</ul>
+</li>
+<li>强大的标准库、第三方模块</li>
+<li>可扩展性   <ul>
+<li>如果需要一段关键代码运行得更快，或者希望某些算法不公开，可以把这部分程序用 <code>C</code> 或 <code>C++</code> 编写，然后在 <code>Python</code> 程序中使用它们</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h2 id="第一个-Python-程序"><a href="#第一个-Python-程序" class="headerlink" title="第一个 Python 程序"></a><strong>第一个 Python 程序</strong></h2><p>Python 源程序就是一个特殊格式的文本文件，可以使用任意文本编辑软件做 Python 的开发。其文件扩展名通常是 <code>.py</code>。</p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-2.png" style="width:330px;" loading="lazy">  
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-3.png" style="width:410px;" loading="lazy">  
+
+<br>
+
+<h2 id="常见程序-bug"><a href="#常见程序-bug" class="headerlink" title="常见程序 bug"></a><strong>常见程序 bug</strong></h2><ul>
+<li>手误，如把 <code>print</code> 写成 <code>pirnt</code></li>
+<li>将多条 <code>print</code> 写在一行  <img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-4.png" style="width:410px;" loading="lazy">    
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-5.png" style="width:450px;" loading="lazy">    
+每行代码只能负责完成一个动作。</li>
+<li>缩进错误  <img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-6.png" style="width:350px;" loading="lazy">    
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-7.png" style="width:400px;" loading="lazy">    
+Python 是一个格式非常严格的程序设计语言。其缩进可类比为 C 语言中的大括号，缩进不匹配就相当于大括号不匹配，就会出错。      </li>
+</ul>
+<br>
+
+<h2 id="执行-Python-程序的方式"><a href="#执行-Python-程序的方式" class="headerlink" title="执行 Python 程序的方式"></a><strong>执行 Python 程序的方式</strong></h2><h3 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a><strong>解释器</strong></h3><ul>
+<li><code>Python</code> —— 官方解释器</li>
+<li><code>CPython</code> —— 官方版本的 C 语言实现</li>
+<li><code>Jython</code> —— 可以运行在 Java 平台</li>
+<li><code>IronPython</code> —— 可以运行在 .NET 和 Mono 平台</li>
+<li><code>PyPy</code> —— Python 实现的，支持 JIT 即时编译</li>
+</ul>
+<h3 id="交互式运行-Python-程序"><a href="#交互式运行-Python-程序" class="headerlink" title="交互式运行 Python 程序"></a><strong>交互式运行 Python 程序</strong></h3><h4 id="官方-Shell"><a href="#官方-Shell" class="headerlink" title="官方 Shell"></a><strong>官方 Shell</strong></h4><p>直接在终端中运行 <code>python</code> 解释器，不输入要执行的文件名，然后在 Python 的 <code>Shell</code> 中直接输入 Python 的代码，会立即看到程序执行结果。   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-8.png" style="width:850px;" loading="lazy">    
+
+<p>可以输入 <code>exit()</code> 退出解释器，也可以按 <code>ctrl + d</code> 或 <code>ctrl + z</code>。<br>交互式方式很适合验证一句句语法。   </p>
+<h4 id="IPython"><a href="#IPython" class="headerlink" title="IPython"></a><strong>IPython</strong></h4><p><code>I</code> 表示 <code>Interactive</code>，交互。   </p>
+<ul>
+<li>支持自动补全（按 <code>Tab</code> 键）</li>
+<li>自动缩进</li>
+<li>支持 <code>bash shell</code> 命令</li>
+<li>内置了许多很有用的功能和函数</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-9.png" style="width:600px;" loading="lazy">    
+
+<h3 id="Python-的-IDE-——-PyCharm"><a href="#Python-的-IDE-——-PyCharm" class="headerlink" title="Python 的 IDE —— PyCharm"></a><strong>Python 的 IDE —— PyCharm</strong></h3><ul>
+<li>图形用户界面</li>
+<li>代码编辑器（支持 <strong>代码补全</strong>、<strong>自动缩进</strong>）</li>
+<li>编译器、解释器</li>
+<li>调试器（<strong>断点</strong>、<strong>单步执行</strong>）  </li>
+</ul>
+<p>PyCharm 适合开发大型项目。<br>下载地址：<a target="_blank" rel="noopener" href="https://www.jetbrains.com/pycharm/">https://www.jetbrains.com/pycharm/</a></p>
+<p>我在腾讯云服务器上安装好了 PyCharm，运行个例程测试了一下：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python2/python2-10.png" style="width:auto;" loading="lazy">    </p>
+<p>我的云服务器配置不太行，运行起来好慢好慢的。<br>所以之后我大都用 Windows 下的 PyCahrm 进行操作。   </p>
+<p><br><br><br><br><br></p>
+<hr>
+</div></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/01/18/python/python1/" rel="next" title="Python-1：预备知识 —— Linux 基础"><span class="post-nav-text">Python-1：预备知识 —— Linux 基础</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 糖加盐</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.7.0</span></div><div class="footer-custom-text"><a href="https://icp.gov.moe/?keyword=20210789" target="_blank">萌ICP备20210789号</a></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
