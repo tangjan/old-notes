@@ -7663,4 +7663,144 @@ Python 是一个格式非常严格的程序设计语言。其缩进可类比为 
         <tag>Python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python-3：注释、运算符、Python 程序执行原理、变量及其输入 / 输出</title>
+    <url>/2022/01/20/python/python3/</url>
+    <content><![CDATA[<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a><strong>注释</strong></h2><ul>
+<li>单行注释<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 单行注释</span></code></pre>
+注意 <code>#</code> 后面要加个空格，不加空格虽然也不会出现错误，但影响代码的格式性。<br>PyCharm 也会提示应该加个空格：  <img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-1.png" style="width:auto;" loading="lazy">   
+
+在一行代码后面增加单行注释时，为了保证代码的可读性，注释和代码之间至少要有两个空格。  </li>
+<li>多行注释（块注释）<pre class="language-python" data-language="python"><code class="language-python"><span class="token triple-quoted-string string">"""
+多行
+注释
+"""</span> </code></pre>
+单引号或双引号都行。  </li>
+</ul>
+<p>注释要多写 <strong>为什么</strong>，为什么要写这段代码。<br><strong>代码规范</strong></p>
+<ul>
+<li><a href="https://www.python.org/dev/peps/pep-0008/">https://www.python.org/dev/peps/pep-0008/</a></li>
+<li><a href="http://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/">http://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/</a></li>
+</ul>
+<br>
+
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a><strong>运算符</strong></h2><ul>
+<li><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code>，加、减、乘、除、取余 <ul>
+<li>Python 的除法不像 C 语言，不会取整，如 <code>9/2</code> 就是 <code>4.5</code>，而在 C 语言中 <code>9/2</code> 是 <code>4</code>。</li>
+</ul>
+</li>
+<li><code>//</code>，取整除，如 <code>9//2</code> = <code>4</code></li>
+<li><code>**</code>，幂（次方、乘方）如 <code>2**3</code> = <code>8</code> </li>
+<li><code>*</code> 运算符还可以用于字符串，计算结果就是字符串重复指定次数的结果   <img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-2.png" style="width:350px;" loading="lazy">   </li>
+<li>优先级：<code>()</code> → <code>**</code> → <code>*</code> <code>/</code> <code>%</code> <code>//</code> → <code>+</code> <code>-</code></li>
+</ul>
+<br>
+
+<h2 id="Python-程序执行原理"><a href="#Python-程序执行原理" class="headerlink" title="Python 程序执行原理"></a><strong>Python 程序执行原理</strong></h2><p>操作系统会首先让 CPU 把 Python 解释器的程序复制到内存中，Python 解释器 再根据语法规则，从上到下让 CPU 翻译 Python 代码，然后再由 CPU 执行翻译完的代码。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-3.png" style="width:550px;" loading="lazy">   </p>
+<p><strong>Python 解释器的大小</strong><br>如 Python 2.7 的大小是 7.0 KB：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-4.png" style="width:550px;" loading="lazy"><br>这里之所以会建立软连接是为了方便用户使用，如果每次调用解释器都要带上版本号，是比较麻烦的。   </p>
+<br>
+
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a><strong>变量</strong></h2><h3 id="变量的定义"><a href="#变量的定义" class="headerlink" title="变量的定义"></a><strong>变量的定义</strong></h3><p>格式：<code>变量名 = 值</code><br>使用交互式方式时查看变量内容，直接输入变量名即可，不需要使用 <code>print</code> 函数。<br>使用解释器执行，如果要输出变量的内容，必须要要使用 <code>print</code> 函数。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-5.png" style="width:200px;" loading="lazy">   </p>
+<h3 id="变量的类型"><a href="#变量的类型" class="headerlink" title="变量的类型"></a><strong>变量的类型</strong></h3><p>在 Python 中定义变量不需要指定类型，Python 可以根据 = 等号右侧的值，自动推导出变量中存储数据的类型。  </p>
+<p><strong>例</strong>：定义变量保存小明的个人信息</p>
+<ul>
+<li>姓名：<strong>小明</strong></li>
+<li>年龄：<strong>18</strong> 岁</li>
+<li>性别：<strong>是</strong>男生</li>
+<li>身高：<strong>1.75</strong> 米<pre class="language-python" data-language="python"><code class="language-python">name <span class="token operator">=</span> <span class="token string">"小明"</span>
+age <span class="token operator">=</span> <span class="token number">18</span>
+gender <span class="token operator">=</span> <span class="token boolean">True</span>
+height <span class="token operator">=</span> <span class="token number">1.75</span></code></pre>
+注意 <code>True</code> 的 <code>T</code> 要大写。<br>在 PyCharm 的 Debug 模式下可以确认数据的类型：   <img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-6.png" style="width:200px;" loading="lazy">   </li>
+</ul>
+<p><strong>高级变量类型</strong>  </p>
+<ul>
+<li>字符串</li>
+<li>列表</li>
+<li>元组</li>
+<li>字典</li>
+</ul>
+<p>使用 <code>type</code> 函数也可以查看一个变量的类型，经常在 IPython 中使用。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-7.png" style="width:230px;" loading="lazy">   </p>
+<h3 id="变量间的运算"><a href="#变量间的运算" class="headerlink" title="变量间的运算"></a><strong>变量间的运算</strong></h3><ul>
+<li><p>对于 <code>bool</code> 型变量，在算数运算时，<code>True</code> 对应的数字是 1，<code>False</code> 对应的数字是 0   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-8.png" style="width:180px;" loading="lazy">   </li>
+<li><p> 字符串变量之间使用 + 拼接字符串  </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-9.png" style="width:300px;" loading="lazy">   </li>
+<li><p>字符串可以和整数使用 <code>*</code> 重复字符串</p>
+<pre class="language-python" data-language="python"><code class="language-python">In <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span>
+Out<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'--------------------------------------------------'</span></code></pre></li>
+<li><p>数字型变量和字符串之间不能运算   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-10.png" style="width:500px;" loading="lazy">   
+如果一定要运算的话，应该把数字变成字符串类型：  
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-11.png" style="width:200px;" loading="lazy">   </li>
+</ul>
+<h3 id="变量的输入"><a href="#变量的输入" class="headerlink" title="变量的输入"></a><strong>变量的输入</strong></h3><pre class="language-python" data-language="python"><code class="language-python">变量 <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"提示信息："</span><span class="token punctuation">)</span>
+```   
+用户输入的任何内容，Python 都认为是一个 <span class="token operator">**</span>字符串<span class="token operator">**</span>。  
+所以就需要类型转换函数，如
+<span class="token operator">-</span> `<span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>`，将 x 转换为一个整数  
+<span class="token operator">-</span> `<span class="token builtin">float</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span>`，将 x 转换到一个浮点数  
+
+```python
+price_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入价格："</span><span class="token punctuation">)</span>
+weight_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入重量："</span><span class="token punctuation">)</span>
+
+price <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span>price_str<span class="token punctuation">)</span>
+weight <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span>weight_str<span class="token punctuation">)</span>
+
+money <span class="token operator">=</span> price <span class="token operator">*</span> weight
+<span class="token keyword">print</span><span class="token punctuation">(</span>money<span class="token punctuation">)</span></code></pre>
+<p>可以简化为：</p>
+<pre class="language-python" data-language="python"><code class="language-python">price <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入价格:"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+weight <span class="token operator">=</span> <span class="token builtin">float</span><span class="token punctuation">(</span><span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入重量："</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+money <span class="token operator">=</span> price <span class="token operator">*</span> weight
+<span class="token keyword">print</span><span class="token punctuation">(</span>money<span class="token punctuation">)</span></code></pre>
+
+<h3 id="变量的格式化输出"><a href="#变量的格式化输出" class="headerlink" title="变量的格式化输出"></a><strong>变量的格式化输出</strong></h3><ul>
+<li><code>%s</code>，字符串</li>
+<li><code>%d</code>，有符号十进制整数<ul>
+<li><code>%06d</code>，输出的整数显示 6 位数，不足的地方使用 <code>0</code> 补齐  </li>
+</ul>
+</li>
+<li><code>%f</code>，浮点数<ul>
+<li><code>%.2f</code> 小数点后只显示两位</li>
+</ul>
+</li>
+<li><code>%%</code>，输出 <code>%</code> </li>
+</ul>
+<pre class="language-python" data-language="python"><code class="language-python">name <span class="token operator">=</span> <span class="token string">"Jane"</span>
+stu_id <span class="token operator">=</span> <span class="token number">28</span>
+price <span class="token operator">=</span> <span class="token number">0.9</span>
+weight <span class="token operator">=</span> <span class="token number">10.5</span>
+money <span class="token operator">=</span> price <span class="token operator">*</span> weight
+scale <span class="token operator">=</span> <span class="token number">0.25</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"我的名字叫 %s，请多多关照！"</span> <span class="token operator">%</span> name<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"我的学号是 %06d"</span> <span class="token operator">%</span> stu_id<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"苹果单价 %.2f 元／斤，购买 %.3f 斤，需要支付 %.4f 元"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>price<span class="token punctuation">,</span> weight<span class="token punctuation">,</span> money<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"百分含量是 %.02f %%"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>scale <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># 注意 print("百分含量是 %.02f %%" % scale * 100) 是不对的，会重复 print 100 次</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-12.png" style="width:440px;" loading="lazy">   
+
+<h3 id="变量的命名"><a href="#变量的命名" class="headerlink" title="变量的命名"></a><strong>变量的命名</strong></h3><ul>
+<li>大小写敏感</li>
+<li>大驼峰法</li>
+<li>小驼峰法</li>
+<li>下划线 <code>_</code> 连接多个单词</li>
+<li>不能与关键字同名<br>关键字列表：<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-13.png" style="width:700px;" loading="lazy">   </li>
+</ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
 </search>
