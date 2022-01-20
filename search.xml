@@ -7684,7 +7684,7 @@ Python 是一个格式非常严格的程序设计语言。其缩进可类比为 
 </ul>
 <br>
 
-<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a><strong>运算符</strong></h2><ul>
+<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a><strong>算术运算符</strong></h2><ul>
 <li><code>+</code> <code>-</code> <code>*</code> <code>/</code> <code>%</code>，加、减、乘、除、取余 <ul>
 <li>Python 的除法不像 C 语言，不会取整，如 <code>9/2</code> 就是 <code>4.5</code>，而在 C 语言中 <code>9/2</code> 是 <code>4</code>。</li>
 </ul>
@@ -7793,6 +7793,193 @@ scale <span class="token operator">=</span> <span class="token number">0.25</spa
 <li>下划线 <code>_</code> 连接多个单词</li>
 <li>不能与关键字同名<br>关键字列表：<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python3/python3-13.png" style="width:700px;" loading="lazy">   </li>
 </ul>
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python-4：if、随机数、while、函数、列表</title>
+    <url>/2022/01/20/python/python4/</url>
+    <content><![CDATA[<h2 id="if-语句"><a href="#if-语句" class="headerlink" title="if 语句"></a><strong>if 语句</strong></h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> 条件<span class="token number">1</span><span class="token punctuation">:</span>
+    代码<span class="token number">1</span>
+
+    <span class="token keyword">if</span> 条件<span class="token number">1.1</span><span class="token punctuation">:</span>
+        代码<span class="token number">1.1</span>
+
+<span class="token keyword">elif</span> 条件<span class="token number">2</span><span class="token punctuation">:</span>
+    代码<span class="token number">2</span>
+
+<span class="token keyword">elif</span> 条件<span class="token number">3</span><span class="token punctuation">:</span>
+    代码<span class="token number">3</span>
+
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+    其他代码</code></pre>
+<ul>
+<li>条件不需要加括号。   </li>
+<li>代码的缩进为一个 <code>tab</code> 键，或者 4 个空格，Tab 和空格是不同的，建议一律使用 4 个空格，不要混合着用。   </li>
+<li><strong>比较运算符</strong>：<code>==</code>、<code>!=</code>、<code>&gt;</code>、<code>&lt;</code>、<code>&gt;=</code>、<code>&lt;=</code>   </li>
+<li><strong>逻辑运算符</strong>：<code>and</code>、<code>or</code>、<code>not</code>   </li>
+</ul>
+<br>
+
+<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a><strong>随机数</strong></h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> random</code></pre>
+<p><code>random.randint(a, b)</code> ，返回 <code>[a, b]</code> 之间的整数（包括 <code>a</code> 和 <code>b</code>）</p>
+<pre class="language-python" data-language="python"><code class="language-python">random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>  <span class="token comment"># 生成 12~20 之内的随机数  </span>
+random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>  <span class="token comment"># 结果永远是 20   </span>
+random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>  <span class="token comment"># 错误，下限必须小于上限</span></code></pre>
+<ul>
+<li>导入模块后，可以直接在 <strong>模块名称</strong> 后面敲一个 <code>.</code> 然后按 <code>Tab</code> 键，会提示该模块中包含的所有函数<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-1.png" style="width:1000px;" loading="lazy"></li>
+</ul>
+<br>
+
+<h2 id="while-循环"><a href="#while-循环" class="headerlink" title="while 循环"></a><strong>while 循环</strong></h2><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">while</span> 条件 <span class="token number">1</span><span class="token punctuation">:</span>
+    代码<span class="token number">1</span>
+    
+    <span class="token keyword">while</span> 条件 <span class="token number">2</span><span class="token punctuation">:</span>
+        代码<span class="token number">2</span>
+        处理条件 <span class="token number">2</span>  <span class="token comment"># 如 j += 1</span>
+    
+    处理条件 <span class="token number">1</span>  <span class="token comment"># 如 i += 1</span></code></pre>
+<ul>
+<li><code>break</code></li>
+<li><code>continue</code></li>
+</ul>
+<br>
+
+<blockquote>
+<ul>
+<li><code>print(&quot;*&quot;, end=&quot;&quot;)</code>：向控制台输出内容结束之后，不会换行  </li>
+<li><code>print(&quot;&quot;)</code>：单纯的换行</li>
+</ul>
+</blockquote>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-2.png" style="width:180px;" loading="lazy">
+
+<br>
+
+<blockquote>
+<p><strong>制表符</strong> <code>\t</code> 的功能是在不使用表格的情况下在 <strong>垂直方向</strong> 按列对齐文本</p>
+</blockquote>
+<p>如：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"1 2 3"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"10 20 30"</span><span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-3.png" style="width:100px;" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"1\t2\t3"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"10\t20\t30"</span><span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-4.png" style="width:100px;" loading="lazy">
+
+<br>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a><strong>函数</strong></h2><h3 id="函数的参数和返回值"><a href="#函数的参数和返回值" class="headerlink" title="函数的参数和返回值"></a><strong>函数的参数和返回值</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">sum_2_num</span><span class="token punctuation">(</span>num1<span class="token punctuation">,</span> num2<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""两数求和"""</span>
+
+    <span class="token keyword">return</span> num1 <span class="token operator">+</span> num2
+
+result <span class="token operator">=</span> sum_2_num<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"计算结果是 %d"</span> <span class="token operator">%</span> result<span class="token punctuation">)</span></code></pre>
+<p><code>计算结果是 30</code></p>
+<h3 id="函数的注释"><a href="#函数的注释" class="headerlink" title="函数的注释"></a><strong>函数的注释</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">fun</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""函数注释"""</span>
+
+    函数内容</code></pre>
+<p>在 PyCharm 中，使用快捷键 <code>CTRL + Q</code> 就可以查看函数的注释信息了。   </p>
+<p>如</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">nine_nine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""打印九九乘法表"""</span>
+    
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-6.png" style="width:500px;" loading="lazy">   
+
+<p>对于有参数函数，可以使用 PyCharm 提供的函数注释功能：   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">print_line</span><span class="token punctuation">(</span>char<span class="token punctuation">,</span> times<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>char <span class="token operator">*</span> times<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-7.png" style="width:350px;" loading="lazy">   
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-8.png" style="width:310px;" loading="lazy">   
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-9.png" style="width:400px;" loading="lazy">    
+
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a><strong>模块</strong></h3><p>每一个以 <code>.py</code> 结尾的源代码文件都是一个模块。用 <code>import</code> 导入后，模块中的全局变量、函数就可以直接使用了。使用方法：<code>模块名.变量</code>、<code>模块名.函数</code>。   </p>
+<p>如：<br><code>九九乘法表.py</code> ：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">nine_nine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  
+    row <span class="token operator">=</span> <span class="token number">1</span>
+    <span class="token keyword">while</span> row <span class="token operator">&lt;=</span> <span class="token number">9</span><span class="token punctuation">:</span>
+        col <span class="token operator">=</span> <span class="token number">1</span>
+        <span class="token keyword">while</span> col <span class="token operator">&lt;=</span> row<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%d * %d = %d"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>col<span class="token punctuation">,</span> row<span class="token punctuation">,</span> row <span class="token operator">*</span> col<span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">"\t"</span><span class="token punctuation">)</span>
+            col <span class="token operator">+=</span> <span class="token number">1</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+        row <span class="token operator">+=</span> <span class="token number">1</span></code></pre>
+<p><code>test.py</code> ：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> 九九乘法表
+九九乘法表<span class="token punctuation">.</span>nine_nine<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-5.png" style="width:800px;" loading="lazy">   
+
+<blockquote>
+<p>PyCharm 中</p>
+<ul>
+<li><code>Step Over</code>：把函数调用看作是一行代码直接执行</li>
+<li><code>Step Into</code>：会进入函数内部</li>
+</ul>
+</blockquote>
+<p>模块名也是标识符，不能以数字开头，不能与关键字重名。   </p>
+<br>
+
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a><strong>列表</strong></h2><blockquote>
+<p>在 <code>Python</code> 中，所有 <strong>非数字型变量</strong> 都支持以下特点：</p>
+<ul>
+<li>都是一个 <strong>序列</strong> <code>sequence</code>，也可以理解为 <strong>容器</strong></li>
+<li><strong>取值</strong> <code>[]</code></li>
+<li><strong>遍历</strong> <code>for</code> <code>in</code></li>
+<li><strong>计算长度</strong>、<strong>最大/最小值</strong>、<strong>比较</strong>、<strong>删除</strong></li>
+<li><strong>链接</strong> <code>+</code> 和 <strong>重复</strong> <code>*</code></li>
+<li><strong>切片</strong></li>
+</ul>
+</blockquote>
+<h3 id="列表简介"><a href="#列表简介" class="headerlink" title="列表简介"></a><strong>列表简介</strong></h3><p>Python 的列表就相当于 C 语言中的数组。<br>列表用 <code>[]</code> 定义，数据之间使用 <code>,</code> 分隔。其索引（下标）从 <code>0</code> 开始。     </p>
+<pre class="language-python" data-language="python"><code class="language-python">name_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"Mary"</span><span class="token punctuation">,</span> <span class="token string">"Jane"</span><span class="token punctuation">,</span> <span class="token string">"Anne"</span><span class="token punctuation">]</span>
+
+num_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span></code></pre>
+<p>取列表元素：<code>列表名[下标]</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-10.png" style="width:300px;" loading="lazy">    </p>
+<p>一个列表可以同时存储不同类型的元素。  </p>
+<h3 id="列表常用方法"><a href="#列表常用方法" class="headerlink" title="列表常用方法"></a><strong>列表常用方法</strong></h3><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python4/python4-11.png" style="width:550px;" loading="lazy">    
+
+<ul>
+<li><code>append(x)</code>：在列表末尾追加数据 x</li>
+<li><code>count(x)</code>：数据 x 在列表中出现的次数</li>
+<li><code>insert(i, x)</code>：在第 i 个位置插入元素，负数就插到末尾</li>
+<li><code>reverse()</code>：反转列表</li>
+<li><code>clear()</code>：清空列表  </li>
+<li><code>extend(另一个列表)</code>：将另一个列表的数据追加到此列表末尾</li>
+<li><code>pop()</code>：删除列表末尾元素（也可以删除任意位置元素）</li>
+<li><code>sort()</code>：升序排序<ul>
+<li><code>sort(reverse=True)</code>：降序排序</li>
+</ul>
+</li>
+<li><code>copy()</code>：复制列表</li>
+<li><code>index(x)</code>：从列表中找与出数据 x 第一个匹配项的索引位置</li>
+<li><code>remove(x)</code>：移除列表中与数据 x 的第一个匹配项</li>
+</ul>
+<p>示例可参见 <a href="https://www.runoob.com/python3/python3-list.html">菜鸟教程</a> 。</p>
+<p><strong>使用 <code>del</code> 也可以删除列表元素</strong>，如</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">del</span> num_list<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span></code></pre>
+<p>但 <code>del</code> 本质上是用来将一个变量从内存中删除的，后续代码就不能再使用 <code>del</code> 删除掉的变量了。所以还是建议使用列表专用的删除方法。     </p>
+<p>方法是通过 <strong>对象</strong> 调用的。而普通的函数，名字是自己起的，记忆起来很耗神。所以方法是很便利的。  </p>
+<h3 id="列表的迭代遍历"><a href="#列表的迭代遍历" class="headerlink" title="列表的迭代遍历"></a><strong>列表的迭代遍历</strong></h3><p>迭代 即 重复。  </p>
+<pre class="language-python" data-language="python"><code class="language-python">num_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span>
+
+<span class="token keyword">for</span> num <span class="token keyword">in</span> num_list<span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span></code></pre>
+<p><code>num</code> 也可以改成其他的什么都行。   </p>
 <p><br><br><br><br><br></p>
 <hr>
 ]]></content>
