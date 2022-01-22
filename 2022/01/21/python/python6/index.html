@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="糖加盐"><meta name="copyright" content="糖加盐"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>Python-6：综合应用 —— 名片管理系统 | 糖加盐的笔记站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/png" href="/favicon.png"><link rel="mask-icon" href="/favicon.png" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"tangjan.github.io","root":"/","title":"糖加盐的笔记站","version":"1.7.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="功能概览************************************************** 欢迎使用【名片管理系统】V1.0  1. 新建名片 2. 显示全部 3. 查询名片  0. 退出系统 ************************************************** 文件准备 cards_main.py：主程序 cards_tools.py：各种子功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-6：综合应用 —— 名片管理系统">
+<meta property="og:url" content="https://tangjan.github.io/2022/01/21/python/python6/index.html">
+<meta property="og:site_name" content="糖加盐的笔记站">
+<meta property="og:description" content="功能概览************************************************** 欢迎使用【名片管理系统】V1.0  1. 新建名片 2. 显示全部 3. 查询名片  0. 退出系统 ************************************************** 文件准备 cards_main.py：主程序 cards_tools.py：各种子功能">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-3.png">
+<meta property="article:published_time" content="2022-01-21T13:10:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T13:09:21.068Z">
+<meta property="article:author" content="糖加盐">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-1.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的笔记站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">62</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%A6%82%E8%A7%88"><span class="toc-text">功能概览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%87%86%E5%A4%87"><span class="toc-text">文件准备</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cards-main-py"><span class="toc-text">cards_main.py</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E5%BE%AA%E7%8E%AF"><span class="toc-text">主循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TODO-%E6%B3%A8%E9%87%8A"><span class="toc-text">TODO 注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-text">导入模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cards-tools-py"><span class="toc-text">cards_tools.py</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E6%A6%82%E8%A7%88"><span class="toc-text">函数概览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#show-menu"><span class="toc-text">show_menu()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-card"><span class="toc-text">new_card()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#show-all"><span class="toc-text">show_all()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#search-card"><span class="toc-text">search_card()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deal-card-find-dict"><span class="toc-text">deal_card(find_dict)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#input-card-info-dict-value-tip-message"><span class="toc-text">input_card_info(dict_value, tip_message)</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2022/01/21/python/python6/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的笔记站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Python-6：综合应用 —— 名片管理系统</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-01-21 21:10:00" itemprop="dateCreated datePublished" datetime="2022-01-21T21:10:00+08:00">2022-01-21</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">796</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Python/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Python</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Python/" style="--text-color:#3776ab"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Python</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="功能概览"><a href="#功能概览" class="headerlink" title="功能概览"></a><strong>功能概览</strong></h2><pre class="language-none"><code class="language-none">**************************************************
+欢迎使用【名片管理系统】V1.0
+
+1. 新建名片
+2. 显示全部
+3. 查询名片
+
+0. 退出系统
+**************************************************</code></pre>
+<h3 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a><strong>文件准备</strong></h3><ul>
+<li><code>cards_main.py</code>：主程序</li>
+<li><code>cards_tools.py</code>：各种子功能函数</li>
+</ul>
+<br>
+
+<h2 id="cards-main-py"><a href="#cards-main-py" class="headerlink" title="cards_main.py"></a><strong>cards_main.py</strong></h2><h3 id="主循环"><a href="#主循环" class="headerlink" title="主循环"></a><strong>主循环</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+
+    action <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请选择操作功能："</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"您选择的操作是：%s"</span> <span class="token operator">%</span> action<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> action <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">elif</span> action <span class="token operator">==</span> <span class="token string">"0"</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"欢迎再次使用【名片管理系统】"</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"输入错误，请重新输入"</span><span class="token punctuation">)</span></code></pre>
+<p>如果在开发程序时，不希望立刻编写分支内部的代码，可以使用 <code>pass</code> 关键字表示一个占位符，不会执行任何的操作，只保证程序的代码结构正确。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> action <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">]</span><span class="token punctuation">:</span></code></pre>
+<p>也可以写为</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> action <span class="token operator">==</span> <span class="token string">"1"</span> <span class="token keyword">or</span> action <span class="token operator">==</span> <span class="token string">"2"</span> <span class="token keyword">or</span> action <span class="token operator">==</span> <span class="token string">"3"</span><span class="token punctuation">:</span></code></pre>
+<p>但是明显变得复杂，所以能用 <code>in</code> 就用 <code>in</code>，避免用 <code>or</code>。  </p>
+<h3 id="TODO-注释"><a href="#TODO-注释" class="headerlink" title="TODO 注释"></a><strong>TODO 注释</strong></h3><p>在 <code>#</code> 后跟上 <code>TODO</code>，用于标记需要去做的工作，如   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># TODO(作者/邮件) 显示系统菜单</span></code></pre>
+<p>在 PyCharm 的左下角可以点出 TODO 列表，这样就能很方便地</p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-1.png" style="width:180px" loading="lazy">   
+
+<h3 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a><strong>导入模块</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cards_tools</code></pre>
+<p>这样一来，主循环就修改为：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> action_str <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">if</span> action_str <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">:</span>
+            cards_tools<span class="token punctuation">.</span>new_card<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">elif</span> action_str <span class="token operator">==</span> <span class="token string">"2"</span><span class="token punctuation">:</span>
+            cards_tools<span class="token punctuation">.</span>show_all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">elif</span> action_str <span class="token operator">==</span> <span class="token string">"3"</span><span class="token punctuation">:</span>
+            cards_tools<span class="token punctuation">.</span>search_card<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<br>
+
+<h2 id="cards-tools-py"><a href="#cards-tools-py" class="headerlink" title="cards_tools.py"></a><strong>cards_tools.py</strong></h2><h3 id="函数概览"><a href="#函数概览" class="headerlink" title="函数概览"></a><strong>函数概览</strong></h3><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-2.png" style="width:380px" loading="lazy">   
+
+<p>其中，<code>card_list</code> 作为全局变量使用。<br>开发程序就是用来处理数据的，所以要事先考虑好数据结构。    </p>
+<h3 id="show-menu"><a href="#show-menu" class="headerlink" title="show_menu()"></a><strong>show_menu()</strong></h3><p>之所以专门定义一个函数用来显示功能界面，是为了尽量简化主函数，增加可读性。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"*"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"欢迎使用【名片管理系统】V 1.0"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"1. 新增名片"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"2. 显示全部"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"3. 搜索名片"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"0. 退出系统"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"*"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="new-card"><a href="#new-card" class="headerlink" title="new_card()"></a><strong>new_card()</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"新增名片"</span><span class="token punctuation">)</span>
+
+name_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入姓名："</span><span class="token punctuation">)</span>
+phone_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入电话："</span><span class="token punctuation">)</span>
+qq_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入QQ："</span><span class="token punctuation">)</span>
+email_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入邮箱："</span><span class="token punctuation">)</span>
+
+card_dict <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"name"</span><span class="token punctuation">:</span> name_str<span class="token punctuation">,</span>
+             <span class="token string">"phone"</span><span class="token punctuation">:</span> phone_str<span class="token punctuation">,</span>
+             <span class="token string">"qq"</span><span class="token punctuation">:</span> qq_str<span class="token punctuation">,</span>
+             <span class="token string">"email"</span><span class="token punctuation">:</span> email_str<span class="token punctuation">&#125;</span>
+
+card_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>card_dict<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>card_list<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"添加 %s 的名片成功！"</span> <span class="token operator">%</span> name_str<span class="token punctuation">)</span></code></pre>
+<p>PyCharm 中右键 → Refactor → Rename，可以方便地一次性修改单个变量的所有名字。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-3.png" style="width:500px" loading="lazy">   </p>
+<h3 id="show-all"><a href="#show-all" class="headerlink" title="show_all()"></a><strong>show_all()</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"显示所有名片"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>card_list<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"当前没有任何的名片记录，请使用新增功能添加名片！"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+
+    <span class="token keyword">for</span> title <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"姓名"</span><span class="token punctuation">,</span> <span class="token string">"电话"</span><span class="token punctuation">,</span> <span class="token string">"QQ"</span><span class="token punctuation">,</span> <span class="token string">"邮箱"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">"\t\t"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> card_dict <span class="token keyword">in</span> card_list<span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s\t\t%s\t\t%s\t\t%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>card_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"phone"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"qq"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"email"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="search-card"><a href="#search-card" class="headerlink" title="search_card()"></a><strong>search_card()</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"搜索名片"</span><span class="token punctuation">)</span>
+
+find_name <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入要搜索的姓名："</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> card_dict <span class="token keyword">in</span> card_list<span class="token punctuation">:</span>
+
+    <span class="token keyword">if</span> card_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span> <span class="token operator">==</span> find_name<span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"姓名\t\t电话\t\tQQ\t\t邮箱"</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s\t\t%s\t\t%s\t\t%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>card_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"phone"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"qq"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"email"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># 针对找到的名片记录执行修改和删除的操作</span>
+        deal_card<span class="token punctuation">(</span>card_dict<span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"抱歉，没有找到 %s"</span> <span class="token operator">%</span> find_name<span class="token punctuation">)</span></code></pre>
+
+<h3 id="deal-card-find-dict"><a href="#deal-card-find-dict" class="headerlink" title="deal_card(find_dict)"></a><strong>deal_card(find_dict)</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>find_dict<span class="token punctuation">)</span>
+
+action_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请选择要执行的操作 "</span>
+                    <span class="token string">"[1] 修改 [2] 删除 [0] 返回上级菜单"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> action_str <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">:</span>
+
+    find_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span> <span class="token operator">=</span> input_card_info<span class="token punctuation">(</span>find_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"姓名："</span><span class="token punctuation">)</span>
+    find_dict<span class="token punctuation">[</span><span class="token string">"phone"</span><span class="token punctuation">]</span> <span class="token operator">=</span> input_card_info<span class="token punctuation">(</span>find_dict<span class="token punctuation">[</span><span class="token string">"phone"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"电话："</span><span class="token punctuation">)</span>
+    find_dict<span class="token punctuation">[</span><span class="token string">"qq"</span><span class="token punctuation">]</span> <span class="token operator">=</span> input_card_info<span class="token punctuation">(</span>find_dict<span class="token punctuation">[</span><span class="token string">"qq"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"QQ："</span><span class="token punctuation">)</span>
+    find_dict<span class="token punctuation">[</span><span class="token string">"email"</span><span class="token punctuation">]</span> <span class="token operator">=</span> input_card_info<span class="token punctuation">(</span>find_dict<span class="token punctuation">[</span><span class="token string">"email"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"邮箱："</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"修改名片成功！"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">elif</span> action_str <span class="token operator">==</span> <span class="token string">"2"</span><span class="token punctuation">:</span>
+
+    card_list<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>find_dict<span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"删除名片成功！"</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="input-card-info-dict-value-tip-message"><a href="#input-card-info-dict-value-tip-message" class="headerlink" title="input_card_info(dict_value, tip_message)"></a><strong>input_card_info(dict_value, tip_message)</strong></h3><pre class="language-python" data-language="python"><code class="language-python">result_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span>tip_message<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>result_str<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">return</span> result_str
+<span class="token comment"># 如果用户没有输入内容，直接回车，则保持原数据不变</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">return</span> dict_value</code></pre>
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+</div></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/2022/01/22/python/python7/" rel="prev" title="Python-7：变量进阶、函数进阶"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-left-s-line"></use></svg><span class="post-nav-text">Python-7：变量进阶、函数进阶</span></a></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/01/21/python/python5/" rel="next" title="Python-5：元组、字典、字符串、公共方法"><span class="post-nav-text">Python-5：元组、字典、字符串、公共方法</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 糖加盐</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.7.0</span></div><div class="footer-custom-text"><a href="https://icp.gov.moe/?keyword=20210789" target="_blank">萌ICP备20210789号</a></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>

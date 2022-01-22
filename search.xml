@@ -8264,4 +8264,404 @@ find_name <span class="token operator">=</span> <span class="token string">"阿�
         <tag>Python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python-6：综合应用 —— 名片管理系统</title>
+    <url>/2022/01/21/python/python6/</url>
+    <content><![CDATA[<h2 id="功能概览"><a href="#功能概览" class="headerlink" title="功能概览"></a><strong>功能概览</strong></h2><pre class="language-none"><code class="language-none">**************************************************
+欢迎使用【名片管理系统】V1.0
+
+1. 新建名片
+2. 显示全部
+3. 查询名片
+
+0. 退出系统
+**************************************************</code></pre>
+<h3 id="文件准备"><a href="#文件准备" class="headerlink" title="文件准备"></a><strong>文件准备</strong></h3><ul>
+<li><code>cards_main.py</code>：主程序</li>
+<li><code>cards_tools.py</code>：各种子功能函数</li>
+</ul>
+<br>
+
+<h2 id="cards-main-py"><a href="#cards-main-py" class="headerlink" title="cards_main.py"></a><strong>cards_main.py</strong></h2><h3 id="主循环"><a href="#主循环" class="headerlink" title="主循环"></a><strong>主循环</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+
+    action <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请选择操作功能："</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"您选择的操作是：%s"</span> <span class="token operator">%</span> action<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> action <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">elif</span> action <span class="token operator">==</span> <span class="token string">"0"</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"欢迎再次使用【名片管理系统】"</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"输入错误，请重新输入"</span><span class="token punctuation">)</span></code></pre>
+<p>如果在开发程序时，不希望立刻编写分支内部的代码，可以使用 <code>pass</code> 关键字表示一个占位符，不会执行任何的操作，只保证程序的代码结构正确。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> action <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">]</span><span class="token punctuation">:</span></code></pre>
+<p>也可以写为</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> action <span class="token operator">==</span> <span class="token string">"1"</span> <span class="token keyword">or</span> action <span class="token operator">==</span> <span class="token string">"2"</span> <span class="token keyword">or</span> action <span class="token operator">==</span> <span class="token string">"3"</span><span class="token punctuation">:</span></code></pre>
+<p>但是明显变得复杂，所以能用 <code>in</code> 就用 <code>in</code>，避免用 <code>or</code>。  </p>
+<h3 id="TODO-注释"><a href="#TODO-注释" class="headerlink" title="TODO 注释"></a><strong>TODO 注释</strong></h3><p>在 <code>#</code> 后跟上 <code>TODO</code>，用于标记需要去做的工作，如   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># TODO(作者/邮件) 显示系统菜单</span></code></pre>
+<p>在 PyCharm 的左下角可以点出 TODO 列表，这样就能很方便地</p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-1.png" style="width:180px" loading="lazy">   
+
+<h3 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a><strong>导入模块</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> cards_tools</code></pre>
+<p>这样一来，主循环就修改为：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">if</span> action_str <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"1"</span><span class="token punctuation">,</span> <span class="token string">"2"</span><span class="token punctuation">,</span> <span class="token string">"3"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">if</span> action_str <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">:</span>
+            cards_tools<span class="token punctuation">.</span>new_card<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">elif</span> action_str <span class="token operator">==</span> <span class="token string">"2"</span><span class="token punctuation">:</span>
+            cards_tools<span class="token punctuation">.</span>show_all<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">elif</span> action_str <span class="token operator">==</span> <span class="token string">"3"</span><span class="token punctuation">:</span>
+            cards_tools<span class="token punctuation">.</span>search_card<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<br>
+
+<h2 id="cards-tools-py"><a href="#cards-tools-py" class="headerlink" title="cards_tools.py"></a><strong>cards_tools.py</strong></h2><h3 id="函数概览"><a href="#函数概览" class="headerlink" title="函数概览"></a><strong>函数概览</strong></h3><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-2.png" style="width:380px" loading="lazy">   
+
+<p>其中，<code>card_list</code> 作为全局变量使用。<br>开发程序就是用来处理数据的，所以要事先考虑好数据结构。    </p>
+<h3 id="show-menu"><a href="#show-menu" class="headerlink" title="show_menu()"></a><strong>show_menu()</strong></h3><p>之所以专门定义一个函数用来显示功能界面，是为了尽量简化主函数，增加可读性。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"*"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"欢迎使用【名片管理系统】V 1.0"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"1. 新增名片"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"2. 显示全部"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"3. 搜索名片"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"0. 退出系统"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"*"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="new-card"><a href="#new-card" class="headerlink" title="new_card()"></a><strong>new_card()</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"新增名片"</span><span class="token punctuation">)</span>
+
+name_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入姓名："</span><span class="token punctuation">)</span>
+phone_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入电话："</span><span class="token punctuation">)</span>
+qq_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入QQ："</span><span class="token punctuation">)</span>
+email_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入邮箱："</span><span class="token punctuation">)</span>
+
+card_dict <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"name"</span><span class="token punctuation">:</span> name_str<span class="token punctuation">,</span>
+             <span class="token string">"phone"</span><span class="token punctuation">:</span> phone_str<span class="token punctuation">,</span>
+             <span class="token string">"qq"</span><span class="token punctuation">:</span> qq_str<span class="token punctuation">,</span>
+             <span class="token string">"email"</span><span class="token punctuation">:</span> email_str<span class="token punctuation">&#125;</span>
+
+card_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>card_dict<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>card_list<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"添加 %s 的名片成功！"</span> <span class="token operator">%</span> name_str<span class="token punctuation">)</span></code></pre>
+<p>PyCharm 中右键 → Refactor → Rename，可以方便地一次性修改单个变量的所有名字。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python6/python6-3.png" style="width:500px" loading="lazy">   </p>
+<h3 id="show-all"><a href="#show-all" class="headerlink" title="show_all()"></a><strong>show_all()</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"显示所有名片"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>card_list<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"当前没有任何的名片记录，请使用新增功能添加名片！"</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+
+    <span class="token keyword">for</span> title <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token string">"姓名"</span><span class="token punctuation">,</span> <span class="token string">"电话"</span><span class="token punctuation">,</span> <span class="token string">"QQ"</span><span class="token punctuation">,</span> <span class="token string">"邮箱"</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span>title<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">"\t\t"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> card_dict <span class="token keyword">in</span> card_list<span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s\t\t%s\t\t%s\t\t%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>card_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"phone"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"qq"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"email"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="search-card"><a href="#search-card" class="headerlink" title="search_card()"></a><strong>search_card()</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"搜索名片"</span><span class="token punctuation">)</span>
+
+find_name <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入要搜索的姓名："</span><span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> card_dict <span class="token keyword">in</span> card_list<span class="token punctuation">:</span>
+
+    <span class="token keyword">if</span> card_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span> <span class="token operator">==</span> find_name<span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"姓名\t\t电话\t\tQQ\t\t邮箱"</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"="</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s\t\t%s\t\t%s\t\t%s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>card_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"phone"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"qq"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                        card_dict<span class="token punctuation">[</span><span class="token string">"email"</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># 针对找到的名片记录执行修改和删除的操作</span>
+        deal_card<span class="token punctuation">(</span>card_dict<span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"抱歉，没有找到 %s"</span> <span class="token operator">%</span> find_name<span class="token punctuation">)</span></code></pre>
+
+<h3 id="deal-card-find-dict"><a href="#deal-card-find-dict" class="headerlink" title="deal_card(find_dict)"></a><strong>deal_card(find_dict)</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>find_dict<span class="token punctuation">)</span>
+
+action_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请选择要执行的操作 "</span>
+                    <span class="token string">"[1] 修改 [2] 删除 [0] 返回上级菜单"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> action_str <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">:</span>
+
+    find_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span> <span class="token operator">=</span> input_card_info<span class="token punctuation">(</span>find_dict<span class="token punctuation">[</span><span class="token string">"name"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"姓名："</span><span class="token punctuation">)</span>
+    find_dict<span class="token punctuation">[</span><span class="token string">"phone"</span><span class="token punctuation">]</span> <span class="token operator">=</span> input_card_info<span class="token punctuation">(</span>find_dict<span class="token punctuation">[</span><span class="token string">"phone"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"电话："</span><span class="token punctuation">)</span>
+    find_dict<span class="token punctuation">[</span><span class="token string">"qq"</span><span class="token punctuation">]</span> <span class="token operator">=</span> input_card_info<span class="token punctuation">(</span>find_dict<span class="token punctuation">[</span><span class="token string">"qq"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"QQ："</span><span class="token punctuation">)</span>
+    find_dict<span class="token punctuation">[</span><span class="token string">"email"</span><span class="token punctuation">]</span> <span class="token operator">=</span> input_card_info<span class="token punctuation">(</span>find_dict<span class="token punctuation">[</span><span class="token string">"email"</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">"邮箱："</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"修改名片成功！"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">elif</span> action_str <span class="token operator">==</span> <span class="token string">"2"</span><span class="token punctuation">:</span>
+
+    card_list<span class="token punctuation">.</span>remove<span class="token punctuation">(</span>find_dict<span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"删除名片成功！"</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="input-card-info-dict-value-tip-message"><a href="#input-card-info-dict-value-tip-message" class="headerlink" title="input_card_info(dict_value, tip_message)"></a><strong>input_card_info(dict_value, tip_message)</strong></h3><pre class="language-python" data-language="python"><code class="language-python">result_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span>tip_message<span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>result_str<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">return</span> result_str
+<span class="token comment"># 如果用户没有输入内容，直接回车，则保持原数据不变</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">return</span> dict_value</code></pre>
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python-7：变量进阶、函数进阶</title>
+    <url>/2022/01/22/python/python7/</url>
+    <content><![CDATA[<h2 id="变量进阶"><a href="#变量进阶" class="headerlink" title="变量进阶"></a><strong>变量进阶</strong></h2><h3 id="变量的引用"><a href="#变量的引用" class="headerlink" title="变量的引用"></a><strong>变量的引用</strong></h3><p><strong>变量</strong> 和 <strong>数据</strong> 是分开存储的，数据保存在内存中的一个地址，变量中保存着数据在内存中的地址，即 <strong>引用</strong>。    </p>
+<p>使用 <code>id()</code> 函数可以查看变量中保存数据所在的内存地址。   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python7/python7-1.png" style="width:240px" loading="lazy">   
+
+
+<p>给变量赋值本质上就是修改数据的引用。   </p>
+<p>函数的 <strong>实参</strong> / <strong>返回值</strong> 就是靠 <strong>引用</strong> 来传递数据的。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">test</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%d 在函数内的内存地址是 %x"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>num<span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    result <span class="token operator">=</span> <span class="token number">100</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"返回值 %d 在内存中的地址是 %x"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>result<span class="token punctuation">,</span> <span class="token builtin">id</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"-"</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">return</span>  result
+
+a <span class="token operator">=</span> <span class="token number">10</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"调用函数前 a 的内存地址是 %x"</span> <span class="token operator">%</span> <span class="token builtin">id</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+r <span class="token operator">=</span> test<span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"调用函数后 a 的内存地址是 %x"</span> <span class="token operator">%</span> <span class="token builtin">id</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"调用函数后 返回值内存地址是 %x"</span> <span class="token operator">%</span> <span class="token builtin">id</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python7/python7-2.png" style="width:450px" loading="lazy">   
+
+<h3 id="可变类型-和-不可变类型"><a href="#可变类型-和-不可变类型" class="headerlink" title="可变类型 和 不可变类型"></a><strong>可变类型 和 不可变类型</strong></h3><p><strong>可变类型</strong>：列表、字典<br><strong>不可变类型</strong>：   </p>
+<ul>
+<li>数字类型 <code>int</code>、<code>bool</code>、<code>float</code>、<code>complex</code>、<code>long</code></li>
+<li>字符串 <code>str</code></li>
+<li>元组 <code>tuple</code></li>
+</ul>
+<p>字典的 <code>key</code> 只能使用不可变类型的数据。   </p>
+<p><strong>哈希</strong><br><code>哈希</code> 是一种 <strong>算法</strong>，其作用就是提取数据的 <strong>特征码（指纹）</strong>，相同的内容得到相同的结果，不同的内容得到不同的结果。    </p>
+<p><code>Python</code> 中内置有一个名字叫做 <code>hash(o)</code> 的函数。它接收一个 <strong>不可变类型</strong> 的数据作为 <strong>参数</strong>，返回一个整数。    </p>
+<p>设置字典的 <strong>键值对</strong> 时，会首先对 <code>key</code> 进行 <code>hash</code>，所以字典的 <code>key</code> 必须是不可变类型。    </p>
+<p>哈希决定了如何在内存中保存字典的数据，以方便后续对字典的增、删、改、查。    </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python7/python7-3.png" style="width:300px" loading="lazy">   
+
+<h3 id="局部变量-和-全局变量"><a href="#局部变量-和-全局变量" class="headerlink" title="局部变量 和 全局变量"></a><strong>局部变量 和 全局变量</strong></h3><p><strong>局部变量</strong>：定义在函数内部的变量，只能在函数内部使用。<br><strong>全局变量</strong>：在函数外部定义的变量，所有位置都可以使用这个变量。   </p>
+<ul>
+<li>局部变量的生命周期：函数执行期间。    </li>
+<li>不同函数内部可以定义同名的局部变量。    </li>
+<li>函数内部无法直接修改全局变量，只会修改局部变量。想在函数内部修改全局变量，需要用 <code>global</code> 关键字。      </li>
+<li>全局变量命名建议：前面增加 <code>g_</code> 或者 <code>gl_</code> 的前缀。   </li>
+<li>代码结构<ol>
+<li>shebang</li>
+<li><code>import</code></li>
+<li>全局变量</li>
+<li>函数</li>
+<li>代码</li>
+</ol>
+</li>
+</ul>
+<br>
+
+<h2 id="函数进阶"><a href="#函数进阶" class="headerlink" title="函数进阶"></a><strong>函数进阶</strong></h2><h3 id="函数参数和返回值"><a href="#函数参数和返回值" class="headerlink" title="函数参数和返回值"></a><strong>函数参数和返回值</strong></h3><ul>
+<li><p>想同时返回多个参数时，可以返回元组。返回元组时，小括号应省略，如</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">measure</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    temp <span class="token operator">=</span> <span class="token number">39</span>
+    wetness <span class="token operator">=</span> <span class="token number">10</span>
+
+    <span class="token keyword">return</span> temp<span class="token punctuation">,</span> wetness</code></pre>
+
+<p>但是通过元组传递结果时，需要找到准确的下标，才能得到想要的结果：</p>
+<pre class="language-python" data-language="python"><code class="language-python">result <span class="token operator">=</span> measure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+<p>因此可以定义全局变量来接收元组结果：</p>
+<pre class="language-python" data-language="python"><code class="language-python">gl_temp<span class="token punctuation">,</span> gl_wetness <span class="token operator">=</span> measure<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>gl_temp<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gl_wetness<span class="token punctuation">)</span></code></pre>
+<p>这种形式需要 变量数量 与 函数返回数量 一致。   </p>
+</li>
+</ul>
+<blockquote>
+<p>交换两个变量 —— Python 专用，利用元组<br><code>a, b = (b, a)</code><br>小括号可以省略。   </p>
+</blockquote>
+<h3 id="可变参数与不可变参数"><a href="#可变参数与不可变参数" class="headerlink" title="可变参数与不可变参数"></a><strong>可变参数与不可变参数</strong></h3><p>在函数内部，针对 <strong>参数</strong> 使用赋值语句，不会影响调用函数时传递的 <strong>实参变量</strong>。<br>针对参数使用赋值语句，会在函数内部修改局部变量的引用，不会影响到外部变量的引用。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">demo</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    num <span class="token operator">=</span> <span class="token number">200</span>
+
+gl_num <span class="token operator">=</span> <span class="token number">99</span>
+demo<span class="token punctuation">(</span>gl_num<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gl_num<span class="token punctuation">)</span></code></pre>
+<p>输出结果：<code>99</code>   </p>
+<p>如果传递的参数是 <strong>可变类型</strong>，在函数内部使用 <strong>方法</strong> 修改了数据的内容，会影响到外部的数据：  </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">mutable</span><span class="token punctuation">(</span>num_list<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    num_list<span class="token punctuation">.</span>extend<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>num_list<span class="token punctuation">)</span>
+
+gl_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">]</span>
+mutable<span class="token punctuation">(</span>gl_list<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gl_list<span class="token punctuation">)</span></code></pre>
+<p>输出结果：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span></code></pre>
+
+<p>另外，对于列表，<code>+=</code> 相当于 <code>extend</code>：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">demo</span><span class="token punctuation">(</span>num_list<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    num_list <span class="token operator">+=</span> num_list
+    <span class="token keyword">print</span><span class="token punctuation">(</span>num_list<span class="token punctuation">)</span>
+
+gl_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+demo<span class="token punctuation">(</span>gl_list<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>gl_list<span class="token punctuation">)</span></code></pre>
+<p>输出结果：</p>
+<pre class="language-none"><code class="language-none">[1, 2, 3, 1, 2, 3]
+[1, 2, 3, 1, 2, 3]</code></pre>
+
+<h3 id="缺省参数"><a href="#缺省参数" class="headerlink" title="缺省参数"></a><strong>缺省参数</strong></h3><p>定义函数时，可以给某个参数指定一个<strong>默认值</strong>，即 <strong>缺省参数</strong>。调用函数时，如果没有传入缺省参数的值，则在函数内部使用定义函数时指定的 <strong>参数默认值</strong>，否则使用传入的值。<br>如</p>
+<pre class="language-python" data-language="python"><code class="language-python">gl_num_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">]</span>
+gl_num_list<span class="token punctuation">.</span>sort<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment"># 缺省参数 reverse = False</span>
+gl_num_list<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span></code></pre>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">print_info</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> gender<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    gender_text <span class="token operator">=</span> <span class="token string">"男生"</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> gender<span class="token punctuation">:</span>
+        gender_text <span class="token operator">=</span> <span class="token string">"女生"</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s 是 %s"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>name<span class="token punctuation">,</span> gender_text<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>必须保证带有默认值的缺省参数在 <strong>参数列表末尾</strong>。<br>错误示例：   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">print_info</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> gender<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> title<span class="token punctuation">)</span><span class="token punctuation">:</span></code></pre>
+
+<h3 id="多值参数"><a href="#多值参数" class="headerlink" title="多值参数"></a><strong>多值参数</strong></h3><p>有时一个函数需要处理的参数个数可能是不确定的，这时就可以用多值参数。    </p>
+<ul>
+<li>参数名前增加 1个 <code>*</code> 可以接收 <strong>元组</strong></li>
+<li>参数名前增加 2个 <code>*</code> 可以接收 <strong>字典</strong>  </li>
+</ul>
+<p>在给多值参数命名时，习惯使用以下两个名字</p>
+<ul>
+<li><code>*args</code> —— 存放 <strong>元组</strong> 参数，前面有一个 <code>*</code><ul>
+<li><code>args</code> 是 <code>arguments</code> 的缩写，有变量的含义</li>
+</ul>
+</li>
+<li><code>**kwargs</code> —— 存放 <strong>字典</strong> 参数，前面有两个 <code>*</code><ul>
+<li><code>kw</code> 是 <code>keyword</code> 的缩写，<code>kwargs</code> 意即键值对参数<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">demo</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> <span class="token operator">*</span>nums<span class="token punctuation">,</span> <span class="token operator">**</span>person<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>person<span class="token punctuation">)</span>
+
+
+demo<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+demo<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"Anne"</span><span class="token punctuation">)</span></code></pre></li>
+</ul>
+</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python7/python7-4.png" style="width:170px" loading="lazy">   
+
+<p>多值参数案例 —— 计算任意多个数字的和：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">sum_numbers</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    num <span class="token operator">=</span> <span class="token number">0</span>
+
+    <span class="token keyword">for</span> n <span class="token keyword">in</span> args<span class="token punctuation">:</span>
+        num <span class="token operator">+=</span> n
+
+    <span class="token keyword">return</span> num
+
+
+result <span class="token operator">=</span> sum_numbers<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span></code></pre>
+
+<p><strong>元组和字典的拆包</strong>：<br>在调用带有多值参数的函数时，如果希望：</p>
+<ul>
+<li>将一个 <strong>元组</strong> 变量，直接传递给 <code>args</code></li>
+<li>将一个 <strong>字典</strong> 变量，直接传递给 <code>kwargs</code>   </li>
+</ul>
+<p>就可以使用 <strong>拆包</strong>，简化参数的传递，方法：</p>
+<ul>
+<li>在 <strong>元组</strong> 变量前，增加 <strong>一个</strong> <code>*</code></li>
+<li>在 <strong>字典</strong> 变量前，增加 <strong>两个</strong> <code>*</code><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">demo</span><span class="token punctuation">(</span><span class="token operator">*</span>args<span class="token punctuation">,</span> <span class="token operator">**</span>kwargs<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>args<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>kwargs<span class="token punctuation">)</span>
+
+
+gl_nums <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+gl_dict <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"小明"</span><span class="token punctuation">,</span> <span class="token string">"age"</span><span class="token punctuation">:</span> <span class="token number">18</span><span class="token punctuation">&#125;</span>
+
+demo<span class="token punctuation">(</span>gl_nums<span class="token punctuation">,</span> gl_dict<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'-'</span> <span class="token operator">*</span> <span class="token number">50</span><span class="token punctuation">)</span>
+demo<span class="token punctuation">(</span><span class="token operator">*</span>gl_nums<span class="token punctuation">,</span> <span class="token operator">**</span>gl_dict<span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python7/python7-5.png" style="width:450px" loading="lazy">    </li>
+</ul>
+<h3 id="函数的递归"><a href="#函数的递归" class="headerlink" title="函数的递归"></a><strong>函数的递归</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">sum_numbers</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">if</span> num <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token number">1</span>
+    
+    <span class="token keyword">return</span> num <span class="token operator">+</span> sum_numbers<span class="token punctuation">(</span>num <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>sum_numbers<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p>输出：<code>5050</code></p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python7/python7-6.png" style="width:900px" loading="lazy">      
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
 </search>
