@@ -8852,4 +8852,226 @@ tom <span class="token operator">=</span> Cat<span class="token punctuation">(</
         <tag>Python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python-9：面向对象案例：小明爱跑步、摆放家具、士兵突击；身份运算符</title>
+    <url>/2022/01/23/python/python9/</url>
+    <content><![CDATA[<h2 id="小明爱跑步"><a href="#小明爱跑步" class="headerlink" title="小明爱跑步"></a><strong>小明爱跑步</strong></h2><ol>
+<li><strong>小明</strong> <strong>体重</strong> <code>75.0</code> 公斤</li>
+<li>小明每次 <strong>跑步</strong> 会减肥 <code>0.5</code> 公斤</li>
+<li>小明每次 <strong>吃东西</strong> 体重增加 <code>1</code> 公斤</li>
+</ol>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""人 类"""</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> weight<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>weight <span class="token operator">=</span> weight
+
+    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">return</span> <span class="token string">"%s 的体重 %.2f 公斤"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>weight<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s 爱跑步，跑步锻炼身体"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>weight <span class="token operator">-=</span> <span class="token number">0.5</span>
+
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s 是吃货，吃完这顿再减肥"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>weight <span class="token operator">+=</span> <span class="token number">1</span>
+
+
+xiaoming <span class="token operator">=</span> Person<span class="token punctuation">(</span><span class="token string">"小明"</span><span class="token punctuation">,</span> <span class="token number">75</span><span class="token punctuation">)</span>
+
+xiaoming<span class="token punctuation">.</span>run<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xiaoming<span class="token punctuation">.</span>eat<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xiaoming<span class="token punctuation">.</span>eat<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xiaoming<span class="token punctuation">.</span>eat<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>xiaoming<span class="token punctuation">)</span></code></pre>
+<p>输出：</p>
+<pre class="language-none"><code class="language-none">小明 爱跑步，跑步锻炼身体
+小明 是吃货，吃完这顿再减肥
+小明 是吃货，吃完这顿再减肥
+小明 是吃货，吃完这顿再减肥
+小明 的体重 77.50 公斤</code></pre>
+
+<br>
+
+<h2 id="摆放家具"><a href="#摆放家具" class="headerlink" title="摆放家具"></a><strong>摆放家具</strong></h2><ul>
+<li><strong>房子</strong>（House）有 <strong>户型</strong>、<strong>总面积</strong> 和 <strong>家具列表</strong></li>
+<li>新房子没有任何的家具</li>
+<li><strong>家具</strong>（HouseItem） 有 <strong>名字</strong> 和 <strong>占地面积</strong>，其中<ul>
+<li> <strong>席梦思</strong>（bed） 占地 <code>4</code> 平米</li>
+<li> <strong>衣柜</strong>（chest） 占地 <code>2</code> 平米</li>
+<li> <strong>餐桌</strong>（table） 占地 <code>1.5</code> 平米</li>
+</ul>
+</li>
+<li>将以上三件家具 <strong>添加</strong> 到房子中</li>
+<li>打印房子时，要求输出：<strong>户型</strong>、<strong>总面积</strong>、<strong>剩余面积</strong>、<strong>家具名称列表</strong></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python9/python9-1.png" style="width:700px" loading="lazy">
+
+<p>房子要使用到家具，所以应该先开发家具类。   </p>
+<h3 id="家具类"><a href="#家具类" class="headerlink" title="家具类"></a><strong>家具类</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">HouseItem</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">,</span> area<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>area <span class="token operator">=</span> area
+
+    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">return</span> <span class="token string">"[%s] 占地面积 %.2f"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>area<span class="token punctuation">)</span>
+
+
+bed <span class="token operator">=</span> HouseItem<span class="token punctuation">(</span><span class="token string">"席梦思"</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+chest <span class="token operator">=</span> HouseItem<span class="token punctuation">(</span><span class="token string">"衣柜"</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+table <span class="token operator">=</span> HouseItem<span class="token punctuation">(</span><span class="token string">"餐桌"</span><span class="token punctuation">,</span> <span class="token number">1.5</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>bed<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>chest<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>table<span class="token punctuation">)</span></code></pre>
+
+<h3 id="房间类"><a href="#房间类" class="headerlink" title="房间类"></a><strong>房间类</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">House</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> house_type<span class="token punctuation">,</span> area<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>house_type <span class="token operator">=</span> house_type
+        self<span class="token punctuation">.</span>area <span class="token operator">=</span> area
+        self<span class="token punctuation">.</span>free_area <span class="token operator">=</span> area
+        self<span class="token punctuation">.</span>item_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+
+    <span class="token keyword">def</span> <span class="token function">__str__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token comment"># Python 能够自动将一对括号内的代码连接在一起，所以可增加换行来提高可读性</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token string">"户型：%s\n总面积：%.2f[剩余：%.2f]\n家具：%s"</span>
+                <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>house_type<span class="token punctuation">,</span> self<span class="token punctuation">.</span>area<span class="token punctuation">,</span>
+                   self<span class="token punctuation">.</span>free_area<span class="token punctuation">,</span> self<span class="token punctuation">.</span>item_list<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">add_item</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"要添加 %s"</span> <span class="token operator">%</span> item<span class="token punctuation">)</span>
+
+
+my_home <span class="token operator">=</span> House<span class="token punctuation">(</span><span class="token string">"两室一厅"</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">)</span>
+
+my_home<span class="token punctuation">.</span>add_item<span class="token punctuation">(</span>bed<span class="token punctuation">)</span>
+my_home<span class="token punctuation">.</span>add_item<span class="token punctuation">(</span>chest<span class="token punctuation">)</span>
+my_home<span class="token punctuation">.</span>add_item<span class="token punctuation">(</span>table<span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span>my_home<span class="token punctuation">)</span></code></pre>
+
+
+<h3 id="添加家具-add-item"><a href="#添加家具-add-item" class="headerlink" title="添加家具 add_item"></a><strong>添加家具 <code>add_item</code></strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">add_item</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"要添加 %s"</span> <span class="token operator">%</span> item<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> item<span class="token punctuation">.</span>area <span class="token operator">></span> self<span class="token punctuation">.</span>free_area<span class="token punctuation">:</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s 的面积太大，不能添加到房子中"</span> <span class="token operator">%</span> item<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+        <span class="token keyword">return</span>
+
+    self<span class="token punctuation">.</span>item_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>item<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>free_area <span class="token operator">-=</span> item<span class="token punctuation">.</span>area</code></pre>
+
+<br>
+
+<h2 id="士兵突击"><a href="#士兵突击" class="headerlink" title="士兵突击"></a><strong>士兵突击</strong></h2><ol>
+<li><strong>士兵</strong> <strong>许三多</strong> 有一把 <strong>AK47</strong></li>
+<li><strong>士兵</strong> 可以 <strong>开火</strong></li>
+<li><strong>枪</strong> 能够 <strong>发射</strong> 子弹</li>
+<li><strong>枪</strong> 装填 <strong>装填子弹</strong> —— <strong>增加子弹数量</strong></li>
+</ol>
+<p>一个对象的属性可以是另一个对象创建的类。   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python9/python9-2.png" style="width:600px" loading="lazy">
+
+<p>应该先开发枪类，因为士兵的属性要用到枪。    </p>
+<h3 id="枪类"><a href="#枪类" class="headerlink" title="枪类"></a><strong>枪类</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Gun</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>model <span class="token operator">=</span> model
+        self<span class="token punctuation">.</span>bullet_count <span class="token operator">=</span> <span class="token number">0</span>
+
+    <span class="token keyword">def</span> <span class="token function">add_bullet</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>bullet_count <span class="token operator">+=</span> count
+
+    <span class="token keyword">def</span> <span class="token function">shoot</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>bullet_count <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"没有子弹了..."</span><span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+
+        self<span class="token punctuation">.</span>bullet_count <span class="token operator">-=</span> <span class="token number">1</span>
+        
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%s 发射了 1 颗子弹，剩余子弹 [%d]..."</span> <span class="token operator">%</span> <span class="token punctuation">(</span>self<span class="token punctuation">.</span>model<span class="token punctuation">,</span> self<span class="token punctuation">.</span>bullet_count<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+ak47 <span class="token operator">=</span> Gun<span class="token punctuation">(</span><span class="token string">"ak47"</span><span class="token punctuation">)</span>
+ak47<span class="token punctuation">.</span>add_bullet<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span>
+ak47<span class="token punctuation">.</span>shoot<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="士兵类"><a href="#士兵类" class="headerlink" title="士兵类"></a><strong>士兵类</strong></h3><p>假设每一个新兵 都 <strong>没有枪</strong>。这种情况下，在定义属性时，可以设置为关键字 <code>None</code>。<br><code>None</code> 可以赋值给任何一个变量。     </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solider</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        self<span class="token punctuation">.</span>gun <span class="token operator">=</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">def</span> <span class="token function">fire</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>gun <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"[%s] 还没有枪..."</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"冲啊...[%s]"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+
+
+        self<span class="token punctuation">.</span>gun<span class="token punctuation">.</span>add_bullet<span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>gun<span class="token punctuation">.</span>shoot<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+X <span class="token operator">=</span> Solider<span class="token punctuation">(</span><span class="token string">"X"</span><span class="token punctuation">)</span>
+X<span class="token punctuation">.</span>fire<span class="token punctuation">(</span><span class="token punctuation">)</span>
+X<span class="token punctuation">.</span>gun <span class="token operator">=</span> ak47
+X<span class="token punctuation">.</span>fire<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<br>
+
+<h2 id="身份运算符"><a href="#身份运算符" class="headerlink" title="身份运算符"></a><strong>身份运算符</strong></h2><p>身份运算符用于比较两个对象的 <strong>内存地址</strong> 是否一致，即是否是对同一个对象的引用。    </p>
+<ul>
+<li><code>is</code>：判断两个标识符是不是引用同一个对象，类似于 <code>id(x) == id(y)</code> </li>
+<li><code>is not</code>：类似于 <code>id(a) != id(b)</code> </li>
+</ul>
+<p>当涉及到 <code>None</code> 的比较时，建议用 <code>is</code> 而不是 <code>==</code>。<br><code>is</code> 与 <code>==</code> 区别：    </p>
+<ul>
+<li><code>is</code> 用于判断两个变量 <strong>引用</strong> 对象是否为同一个   </li>
+<li><code>==</code> 用于判断 <strong>引用变量的值</strong> 是否相等</li>
+</ul>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token operator">>></span><span class="token operator">></span> a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span> b <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token operator">>></span><span class="token operator">></span> b <span class="token keyword">is</span> a 
+<span class="token boolean">False</span>
+<span class="token operator">>></span><span class="token operator">></span> b <span class="token operator">==</span> a
+<span class="token boolean">True</span></code></pre>
+
+
+
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
 </search>
