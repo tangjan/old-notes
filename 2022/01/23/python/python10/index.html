@@ -1,0 +1,213 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="糖加盐"><meta name="copyright" content="糖加盐"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>Python-10：私有属性 / 方法、单 / 多继承、新 / 旧式类 | 糖加盐的笔记站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/png" href="/favicon.png"><link rel="mask-icon" href="/favicon.png" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"tangjan.github.io","root":"/","title":"糖加盐的笔记站","version":"1.7.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="私有属性 &#x2F; 方法在实际开发中，一个对象的某些属性或方法可能只希望在对象的内部被使用，而不希望在外部被访问到，这就叫 私有属性 &#x2F; 私有方法。 在定义属性或方法时，在属性名或者方法名前增加 两个下划线，定义的就是私有属性或方法 class Women:      def __init__(self, name):          self.name &#x3D; name         # 不要问女生的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-10：私有属性 &#x2F; 方法、单 &#x2F; 多继承、新 &#x2F; 旧式类">
+<meta property="og:url" content="https://tangjan.github.io/2022/01/23/python/python10/index.html">
+<meta property="og:site_name" content="糖加盐的笔记站">
+<meta property="og:description" content="私有属性 &#x2F; 方法在实际开发中，一个对象的某些属性或方法可能只希望在对象的内部被使用，而不希望在外部被访问到，这就叫 私有属性 &#x2F; 私有方法。 在定义属性或方法时，在属性名或者方法名前增加 两个下划线，定义的就是私有属性或方法 class Women:      def __init__(self, name):          self.name &#x3D; name         # 不要问女生的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python10/python10-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python10/python10-2.png">
+<meta property="article:published_time" content="2022-01-23T10:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-23T09:54:26.438Z">
+<meta property="article:author" content="糖加盐">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python10/python10-1.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的笔记站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">65</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7-%E6%96%B9%E6%B3%95"><span class="toc-text">私有属性 &#x2F; 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%BB%A7%E6%89%BF"><span class="toc-text">单继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%BB%A7%E6%89%BF-1"><span class="toc-text">单继承</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E5%86%99"><span class="toc-text">方法的重写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A6%86%E7%9B%96"><span class="toc-text">覆盖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A9%E5%B1%95"><span class="toc-text">扩展</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="toc-text">多继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E5%BC%8F%E7%B1%BB%E4%B8%8E%E6%97%A7%E5%BC%8F%E7%B1%BB"><span class="toc-text">新式类与旧式类</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2022/01/23/python/python10/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的笔记站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Python-10：私有属性 / 方法、单 / 多继承、新 / 旧式类</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-01-23 18:00:00" itemprop="dateCreated datePublished" datetime="2022-01-23T18:00:00+08:00">2022-01-23</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">1.1k</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Python/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Python</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Python/" style="--text-color:#3776ab"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Python</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="私有属性-方法"><a href="#私有属性-方法" class="headerlink" title="私有属性 / 方法"></a><strong>私有属性 / 方法</strong></h2><p>在实际开发中，一个对象的某些属性或方法可能只希望在对象的内部被使用，而不希望在外部被访问到，这就叫 <strong>私有属性</strong> / <strong>私有方法</strong>。</p>
+<p>在定义属性或方法时，在属性名或者方法名前增加 <strong>两个下划线</strong>，定义的就是私有属性或方法</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Women</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        <span class="token comment"># 不要问女生的年龄</span>
+        self<span class="token punctuation">.</span>__age <span class="token operator">=</span> <span class="token number">18</span>
+
+    <span class="token keyword">def</span> <span class="token function">__secret</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"我的年龄是 %d"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>__age<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">secret</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"我的年龄是 %d"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>__age<span class="token punctuation">)</span>
+
+xiaofang <span class="token operator">=</span> Women<span class="token punctuation">(</span><span class="token string">"小芳"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># print(xiaofang.__age)</span>
+<span class="token comment"># xiaofang.__secret()</span>
+xiaofang<span class="token punctuation">.</span>secret<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><code>AttributeError: &#39;Women&#39; object has no attribute &#39;__age&#39;</code><br><code>AttributeError: &#39;Women&#39; object has no attribute &#39;__secret&#39;</code><br><code>我的年龄是 18</code></p>
+<p>实际上，是因为在 属性 / 方法名 前面增加了两个下划线 <code>__</code>，使得 Python 解释器进行了特殊处理，才会无法访问私有属性 / 方法。<br>所以只要知道 Python 解释器是怎样处理的，就可以访问私有属性 / 方法:   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>xiaofang<span class="token punctuation">.</span>_Women__age<span class="token punctuation">)</span></code></pre>
+<p><code>18</code></p>
+<br>
+
+<h2 id="单继承"><a href="#单继承" class="headerlink" title="单继承"></a><strong>单继承</strong></h2><p>面向对象三大特性：<strong>封装</strong>、<strong>继承</strong>、<strong>多态</strong>。      </p>
+<ul>
+<li><strong>封装</strong> 根据职责将属性和方法封装到一个抽象的类中</li>
+<li><strong>继承</strong> 可以实现代码的重用</li>
+<li><strong>多态</strong> 是指不同的对象调用相同的方法，将产生不同的结果</li>
+</ul>
+<h3 id="单继承-1"><a href="#单继承-1" class="headerlink" title="单继承"></a><strong>单继承</strong></h3><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python10/python10-1.png" style="width:750px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Animal</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"吃"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">drink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"喝"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"跑"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">sleep</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"睡"</span><span class="token punctuation">)</span></code></pre>
+<p>不使用继承定义 <code>Dog</code> 类：   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"吃"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">drink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"喝"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"跑"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">sleep</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"睡"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"汪汪叫"</span><span class="token punctuation">)</span></code></pre>
+<p>这种方式弊端很多，比如</p>
+<ul>
+<li>代码重复，冗余</li>
+<li>比如 <code>Animal</code> 中的 <code>eat</code> 方法修改时，<code>Dog</code> 中的 <code>eat</code> 方法也要修改，很麻烦</li>
+</ul>
+<p>使用继承定义 <code>Dog</code> 类，<strong>子类</strong>（派生类） 拥有 <strong>父类</strong>（基类） 的所有属性和方法：   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> 类名<span class="token punctuation">(</span>父类名<span class="token punctuation">)</span>
+    
+    <span class="token keyword">pass</span></code></pre>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Animal</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"吃"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">drink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"喝"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"跑"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">sleep</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"睡"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span>Animal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"汪汪叫"</span><span class="token punctuation">)</span></code></pre>
+<p><strong>继承的传递性</strong>：<code>C</code> 类从 <code>B</code> 类继承，<code>B</code> 类又从 <code>A</code> 类继承，那么 <code>C</code> 类就具有 <code>B</code> 类和 <code>A</code> 类的所有属性和方法</p>
+<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a><strong>方法的重写</strong></h3><p>当父类的方法不能满足子类需求时，可以对方法进行 <strong>重写</strong>，有两种方式：  </p>
+<ul>
+<li>覆盖</li>
+<li>扩展</li>
+</ul>
+<h4 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a><strong>覆盖</strong></h4><p>在子类中定义一个与父类同名的方法即可。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span>Animal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"汪汪叫"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">XiaoTianQuan</span><span class="token punctuation">(</span>Dog<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">fly</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"哮天犬会飞"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"叫得像神狗"</span><span class="token punctuation">)</span></code></pre>
+<p>重写之后，在运行时，会调用子类中重写的方法，而不会调用父类的方法,</p>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a><strong>扩展</strong></h4><p><code>super</code> 是 Python 中一个特殊的 <strong>类</strong>，在子类中常用 <code>super().父类方法</code> 来调用父类方法。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span>Animal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"汪汪叫"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">XiaoTianQuan</span><span class="token punctuation">(</span>Dog<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">fly</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"哮天犬会飞"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"叫得像神狗"</span><span class="token punctuation">)</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>bark<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%$##@#&amp;@$"</span><span class="token punctuation">)</span>
+
+
+xtq <span class="token operator">=</span> XiaoTianQuan<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xtq<span class="token punctuation">.</span>bark<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>输出：</p>
+<pre class="language-none"><code class="language-none">叫得像神狗
+汪汪叫
+%$##@#&amp;@$</code></pre>
+<p>也可以使用 <code>Dog.bark(self)</code> 调用父类方法。    </p>
+<p>子类对象不能在自己的方法内部 <strong>直接</strong> 访问父类的私有属性 / 方法，但仍可以通过父类的公有方法 <strong>间接</strong> 访问到其 私有属性 / 方法。     </p>
+<br>
+
+<h2 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a><strong>多继承</strong></h2><p>一个子类可以拥有多个父类，具有所有父类的属性和方法。    </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> 子类名<span class="token punctuation">(</span>父类名<span class="token number">1</span><span class="token punctuation">,</span> 父类名<span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token keyword">pass</span></code></pre>
+
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">test</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"A 的方法"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">demo</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"B 的方法"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">pass</span>
+
+
+c <span class="token operator">=</span> C<span class="token punctuation">(</span><span class="token punctuation">)</span>
+c<span class="token punctuation">.</span>test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+c<span class="token punctuation">.</span>demo<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>应尽量避免不同的父类中出现同名的方法。 </p>
+<p><strong>MRO</strong><br><code>__MRO__</code> 是类的一个内置属性。MRO 即 Method Resolution Order，直译就是方法解决顺序，主要用于在多继承时判断方法 / 属性的调用路径。    </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>C<span class="token punctuation">.</span>__mro__<span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python10/python10-2.png" style="width:750px" loading="lazy">
+
+<br>
+
+<h2 id="新式类与旧式类"><a href="#新式类与旧式类" class="headerlink" title="新式类与旧式类"></a><strong>新式类与旧式类</strong></h2><p><code>object</code> 是 <code>Python</code> 为所有对象提供的 <strong>基类</strong>，提供有一些内置的属性和方法，可以使用 <code>dir</code> 函数查看。  </p>
+<p>以 <code>object</code> 为基类的类就是 <strong>新式类</strong>，否则即为 <strong>旧式类</strong>。   </p>
+<p>在新版本 Python 中，默认使用 <code>object</code> 作为所定义类的基类。     </p>
+<p>为了保证编写的代码能够同时在 旧版本 和 新版本的 Python 运行，在定义类时，建议统一继承自 <code>object</code>:</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> 类名<span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+</div></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/01/23/python/python9/" rel="next" title="Python-9：面向对象案例：小明爱跑步、摆放家具、士兵突击；身份运算符"><span class="post-nav-text">Python-9：面向对象案例：小明爱跑步、摆放家具、士兵突击；身份运算符</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 糖加盐</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.7.0</span></div><div class="footer-custom-text"><a href="https://icp.gov.moe/?keyword=20210789" target="_blank">萌ICP备20210789号</a></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>

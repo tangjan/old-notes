@@ -9074,4 +9074,203 @@ X<span class="token punctuation">.</span>fire<span class="token punctuation">(</
         <tag>Python</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Python-10：私有属性 / 方法、单 / 多继承、新 / 旧式类</title>
+    <url>/2022/01/23/python/python10/</url>
+    <content><![CDATA[<h2 id="私有属性-方法"><a href="#私有属性-方法" class="headerlink" title="私有属性 / 方法"></a><strong>私有属性 / 方法</strong></h2><p>在实际开发中，一个对象的某些属性或方法可能只希望在对象的内部被使用，而不希望在外部被访问到，这就叫 <strong>私有属性</strong> / <strong>私有方法</strong>。</p>
+<p>在定义属性或方法时，在属性名或者方法名前增加 <strong>两个下划线</strong>，定义的就是私有属性或方法</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Women</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>name <span class="token operator">=</span> name
+        <span class="token comment"># 不要问女生的年龄</span>
+        self<span class="token punctuation">.</span>__age <span class="token operator">=</span> <span class="token number">18</span>
+
+    <span class="token keyword">def</span> <span class="token function">__secret</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"我的年龄是 %d"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>__age<span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">secret</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"我的年龄是 %d"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>__age<span class="token punctuation">)</span>
+
+xiaofang <span class="token operator">=</span> Women<span class="token punctuation">(</span><span class="token string">"小芳"</span><span class="token punctuation">)</span>
+
+<span class="token comment"># print(xiaofang.__age)</span>
+<span class="token comment"># xiaofang.__secret()</span>
+xiaofang<span class="token punctuation">.</span>secret<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p><code>AttributeError: &#39;Women&#39; object has no attribute &#39;__age&#39;</code><br><code>AttributeError: &#39;Women&#39; object has no attribute &#39;__secret&#39;</code><br><code>我的年龄是 18</code></p>
+<p>实际上，是因为在 属性 / 方法名 前面增加了两个下划线 <code>__</code>，使得 Python 解释器进行了特殊处理，才会无法访问私有属性 / 方法。<br>所以只要知道 Python 解释器是怎样处理的，就可以访问私有属性 / 方法:   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>xiaofang<span class="token punctuation">.</span>_Women__age<span class="token punctuation">)</span></code></pre>
+<p><code>18</code></p>
+<br>
+
+<h2 id="单继承"><a href="#单继承" class="headerlink" title="单继承"></a><strong>单继承</strong></h2><p>面向对象三大特性：<strong>封装</strong>、<strong>继承</strong>、<strong>多态</strong>。      </p>
+<ul>
+<li><strong>封装</strong> 根据职责将属性和方法封装到一个抽象的类中</li>
+<li><strong>继承</strong> 可以实现代码的重用</li>
+<li><strong>多态</strong> 是指不同的对象调用相同的方法，将产生不同的结果</li>
+</ul>
+<h3 id="单继承-1"><a href="#单继承-1" class="headerlink" title="单继承"></a><strong>单继承</strong></h3><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python10/python10-1.png" style="width:750px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Animal</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"吃"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">drink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"喝"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"跑"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">sleep</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"睡"</span><span class="token punctuation">)</span></code></pre>
+<p>不使用继承定义 <code>Dog</code> 类：   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"吃"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">drink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"喝"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"跑"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">sleep</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"睡"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"汪汪叫"</span><span class="token punctuation">)</span></code></pre>
+<p>这种方式弊端很多，比如</p>
+<ul>
+<li>代码重复，冗余</li>
+<li>比如 <code>Animal</code> 中的 <code>eat</code> 方法修改时，<code>Dog</code> 中的 <code>eat</code> 方法也要修改，很麻烦</li>
+</ul>
+<p>使用继承定义 <code>Dog</code> 类，<strong>子类</strong>（派生类） 拥有 <strong>父类</strong>（基类） 的所有属性和方法：   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> 类名<span class="token punctuation">(</span>父类名<span class="token punctuation">)</span>
+    
+    <span class="token keyword">pass</span></code></pre>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Animal</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">eat</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"吃"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">drink</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"喝"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">run</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"跑"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">sleep</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"睡"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span>Animal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"汪汪叫"</span><span class="token punctuation">)</span></code></pre>
+<p><strong>继承的传递性</strong>：<code>C</code> 类从 <code>B</code> 类继承，<code>B</code> 类又从 <code>A</code> 类继承，那么 <code>C</code> 类就具有 <code>B</code> 类和 <code>A</code> 类的所有属性和方法</p>
+<h3 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a><strong>方法的重写</strong></h3><p>当父类的方法不能满足子类需求时，可以对方法进行 <strong>重写</strong>，有两种方式：  </p>
+<ul>
+<li>覆盖</li>
+<li>扩展</li>
+</ul>
+<h4 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a><strong>覆盖</strong></h4><p>在子类中定义一个与父类同名的方法即可。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span>Animal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"汪汪叫"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">XiaoTianQuan</span><span class="token punctuation">(</span>Dog<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">fly</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"哮天犬会飞"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"叫得像神狗"</span><span class="token punctuation">)</span></code></pre>
+<p>重写之后，在运行时，会调用子类中重写的方法，而不会调用父类的方法,</p>
+<h4 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a><strong>扩展</strong></h4><p><code>super</code> 是 Python 中一个特殊的 <strong>类</strong>，在子类中常用 <code>super().父类方法</code> 来调用父类方法。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Dog</span><span class="token punctuation">(</span>Animal<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"汪汪叫"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">XiaoTianQuan</span><span class="token punctuation">(</span>Dog<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">fly</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"哮天犬会飞"</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">bark</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"叫得像神狗"</span><span class="token punctuation">)</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>bark<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"%$##@#&amp;@$"</span><span class="token punctuation">)</span>
+
+
+xtq <span class="token operator">=</span> XiaoTianQuan<span class="token punctuation">(</span><span class="token punctuation">)</span>
+xtq<span class="token punctuation">.</span>bark<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>输出：</p>
+<pre class="language-none"><code class="language-none">叫得像神狗
+汪汪叫
+%$##@#&amp;@$</code></pre>
+<p>也可以使用 <code>Dog.bark(self)</code> 调用父类方法。    </p>
+<p>子类对象不能在自己的方法内部 <strong>直接</strong> 访问父类的私有属性 / 方法，但仍可以通过父类的公有方法 <strong>间接</strong> 访问到其 私有属性 / 方法。     </p>
+<br>
+
+<h2 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a><strong>多继承</strong></h2><p>一个子类可以拥有多个父类，具有所有父类的属性和方法。    </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> 子类名<span class="token punctuation">(</span>父类名<span class="token number">1</span><span class="token punctuation">,</span> 父类名<span class="token number">2</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+    <span class="token keyword">pass</span></code></pre>
+
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">test</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"A 的方法"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">B</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">def</span> <span class="token function">demo</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"B 的方法"</span><span class="token punctuation">)</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">C</span><span class="token punctuation">(</span>A<span class="token punctuation">,</span> B<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token keyword">pass</span>
+
+
+c <span class="token operator">=</span> C<span class="token punctuation">(</span><span class="token punctuation">)</span>
+c<span class="token punctuation">.</span>test<span class="token punctuation">(</span><span class="token punctuation">)</span>
+c<span class="token punctuation">.</span>demo<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>应尽量避免不同的父类中出现同名的方法。 </p>
+<p><strong>MRO</strong><br><code>__MRO__</code> 是类的一个内置属性。MRO 即 Method Resolution Order，直译就是方法解决顺序，主要用于在多继承时判断方法 / 属性的调用路径。    </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>C<span class="token punctuation">.</span>__mro__<span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python10/python10-2.png" style="width:750px" loading="lazy">
+
+<br>
+
+<h2 id="新式类与旧式类"><a href="#新式类与旧式类" class="headerlink" title="新式类与旧式类"></a><strong>新式类与旧式类</strong></h2><p><code>object</code> 是 <code>Python</code> 为所有对象提供的 <strong>基类</strong>，提供有一些内置的属性和方法，可以使用 <code>dir</code> 函数查看。  </p>
+<p>以 <code>object</code> 为基类的类就是 <strong>新式类</strong>，否则即为 <strong>旧式类</strong>。   </p>
+<p>在新版本 Python 中，默认使用 <code>object</code> 作为所定义类的基类。     </p>
+<p>为了保证编写的代码能够同时在 旧版本 和 新版本的 Python 运行，在定义类时，建议统一继承自 <code>object</code>:</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> 类名<span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span></code></pre>
+
+
+
+
+
+
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
 </search>
