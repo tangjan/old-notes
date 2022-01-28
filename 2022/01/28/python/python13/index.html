@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="糖加盐"><meta name="copyright" content="糖加盐"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>Python-13：包、发布模块、文件、eval | 糖加盐的笔记站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/png" href="/favicon.png"><link rel="mask-icon" href="/favicon.png" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"tangjan.github.io","root":"/","title":"糖加盐的笔记站","version":"1.7.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="包包 是一个包含多个模块的特殊目录，使用 import 包名 可以一次性导入包中的 所有模块，简化程序。      包目录下有一个特殊的文件 __init__.py，需要在该文件中中指定对外界提供的模块列表。      test.py： import pack1  pack1.send_message.send(&quot;hello&quot;)  text &#x3D; pack1.receive.message.rece">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-13：包、发布模块、文件、eval">
+<meta property="og:url" content="https://tangjan.github.io/2022/01/28/python/python13/index.html">
+<meta property="og:site_name" content="糖加盐的笔记站">
+<meta property="og:description" content="包包 是一个包含多个模块的特殊目录，使用 import 包名 可以一次性导入包中的 所有模块，简化程序。      包目录下有一个特殊的文件 __init__.py，需要在该文件中中指定对外界提供的模块列表。      test.py： import pack1  pack1.send_message.send(&quot;hello&quot;)  text &#x3D; pack1.receive.message.rece">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-1.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-6.png">
+<meta property="article:published_time" content="2022-01-28T03:10:00.000Z">
+<meta property="article:modified_time" content="2022-01-28T03:08:38.030Z">
+<meta property="article:author" content="糖加盐">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-1.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的笔记站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">68</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85"><span class="toc-text">包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E6%A8%A1%E5%9D%97"><span class="toc-text">发布模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E5%8E%8B%E7%BC%A9%E5%8C%85"><span class="toc-text">制作压缩包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-%E5%8D%B8%E8%BD%BD%E6%A8%A1%E5%9D%97"><span class="toc-text">安装 &#x2F; 卸载模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pip-%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E6%A8%A1%E5%9D%97"><span class="toc-text">使用 pip 安装第三方模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6"><span class="toc-text">文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6"><span class="toc-text">文本文件和二进制文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="toc-text">文件操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88"><span class="toc-text">文件指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E8%AF%A6%E8%A7%A3"><span class="toc-text">文件读写详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E8%A1%8C%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-text">按行读取文件内容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E4%BD%BF%E7%94%A8%E8%AF%BB%E5%86%99%E6%9D%A5%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6"><span class="toc-text">案例：使用读写来复制文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6-%E7%9B%AE%E5%BD%95%E7%9A%84%E5%B8%B8%E7%94%A8%E7%AE%A1%E7%90%86%E6%93%8D%E4%BD%9C"><span class="toc-text">文件&#x2F;目录的常用管理操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#eval-%E5%87%BD%E6%95%B0"><span class="toc-text">eval 函数</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2022/01/28/python/python13/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的笔记站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Python-13：包、发布模块、文件、eval</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-01-28 11:10:00" itemprop="dateCreated datePublished" datetime="2022-01-28T11:10:00+08:00">2022-01-28</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">1.5k</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Python/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Python</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Python/" style="--text-color:#3776ab"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Python</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="包"><a href="#包" class="headerlink" title="包"></a><strong>包</strong></h2><p><strong>包</strong> 是一个包含多个模块的特殊目录，使用 <code>import 包名</code> 可以一次性导入包中的 所有模块，简化程序。   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-1.png" style="width:500px" loading="lazy">
+
+<p>包目录下有一个特殊的文件 <code>__init__.py</code>，需要在该文件中中指定对外界提供的模块列表。   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-2.png" style="width:700px" loading="lazy">
+
+<p><code>test.py</code>：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pack1
+
+pack1<span class="token punctuation">.</span>send_message<span class="token punctuation">.</span>send<span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span>
+
+text <span class="token operator">=</span> pack1<span class="token punctuation">.</span>receive<span class="token punctuation">.</span>message<span class="token punctuation">.</span>receive<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span></code></pre>
+
+<br>
+
+<h2 id="发布模块"><a href="#发布模块" class="headerlink" title="发布模块"></a><strong>发布模块</strong></h2><p>可以将自己开发的模块打包分享给其他人。     </p>
+<h3 id="制作压缩包"><a href="#制作压缩包" class="headerlink" title="制作压缩包"></a><strong>制作压缩包</strong></h3><p>首先在模块同目录下创建一个 <code>setup.py</code> 文件，内容如下（参阅 <a target="_blank" rel="noopener" href="https://docs.python.org/3/distutils/apiref.html">https://docs.python.org/3/distutils/apiref.html</a> ）：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> distutils<span class="token punctuation">.</span>core <span class="token keyword">import</span> setup
+
+setup<span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">"pack1"</span><span class="token punctuation">,</span>  <span class="token comment"># 包名</span>
+      version<span class="token operator">=</span><span class="token string">"1.0"</span><span class="token punctuation">,</span>  <span class="token comment"># 版本</span>
+      description<span class="token operator">=</span><span class="token string">"发送和接收消息模块"</span><span class="token punctuation">,</span>  <span class="token comment"># 描述信息</span>
+      long_description<span class="token operator">=</span><span class="token string">"完整的发送和接收消息模块"</span><span class="token punctuation">,</span>  <span class="token comment"># 完整描述信息</span>
+      author<span class="token operator">=</span><span class="token string">"X"</span><span class="token punctuation">,</span>  <span class="token comment"># 作者</span>
+      author_email<span class="token operator">=</span><span class="token string">"xxx@xx.com"</span><span class="token punctuation">,</span>  <span class="token comment"># 作者邮箱</span>
+      url<span class="token operator">=</span><span class="token string">"www.tangjiayan.com"</span><span class="token punctuation">,</span>  <span class="token comment"># 主页</span>
+      py_modules<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"pack1.send_message"</span><span class="token punctuation">,</span>
+                  <span class="token string">"pack1.receive_message"</span><span class="token punctuation">]</span><span class="token punctuation">)</span></code></pre>
+
+<p><strong>构建模块</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ python setup.py build</code></pre>
+
+<p><strong>生成发布压缩包</strong></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ python setup.py sdist</code></pre>
+<p>执行完这步就会生成 <code>.tar.gz</code> 文件，就可以分享给别人用了。   </p>
+<h3 id="安装-卸载模块"><a href="#安装-卸载模块" class="headerlink" title="安装 / 卸载模块"></a><strong>安装 / 卸载模块</strong></h3><p><strong>安装模块</strong>：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">tar</span> -zxvf pack1.tar.gz 
+$ <span class="token function">sudo</span> python setup.py <span class="token function">install</span></code></pre>
+
+<p><strong>卸载模块</strong>：  </p>
+<p>直接从安装目录下，把安装模块的 <strong>目录</strong> 删除就可以</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">rm</span> -r pack1*</code></pre>
+
+<h3 id="使用-pip-安装第三方模块"><a href="#使用-pip-安装第三方模块" class="headerlink" title="使用 pip 安装第三方模块"></a><strong>使用 <code>pip</code> 安装第三方模块</strong></h3><p><strong>第三方模块</strong> 通常是由知名的第三方团队开发的、被广泛使用的 <code>Python</code> 包 / 模块<br>，例如 <code>pygame</code> 是一套成熟的游戏开发模块。   </p>
+<p><code>pip</code> 是一个现代的，通用的 <code>Python</code> 包管理工具，提供了对 <code>Python</code> 包的查找、下载、安装、卸载等功能。   </p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> pip <span class="token function">install</span> pygame
+$ <span class="token function">sudo</span> pip uninstall pygame</code></pre>
+
+<p>再如，在 <code>Linux</code> 下安装 <code>iPython</code>：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> ipython
+$ <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> ipython3</code></pre>
+
+<p>使用 PyCharm 也可以直接安装第三方模块：  </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-3.png" style="width:900px" loading="lazy">
+
+<br>
+
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a><strong>文件</strong></h2><h3 id="文本文件和二进制文件"><a href="#文本文件和二进制文件" class="headerlink" title="文本文件和二进制文件"></a><strong>文本文件和二进制文件</strong></h3><p><strong>文本文件</strong>：使用 <strong>文本编辑软件</strong> 查看，本质上还是二进制文件。   </p>
+<p><strong>二进制文件</strong>：不是直接阅读的，不能使用文本编辑软件查看，而是提供给其他软件使用的，如图片文件、音频文件、视频文件等。   </p>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a><strong>文件操作</strong></h3><ul>
+<li><code>open</code>：打开文件，并且返回文件操作对象   </li>
+<li><code>read</code>：将文件内容读取到内存   </li>
+<li><code>write</code>：将指定内容写入文件   </li>
+<li><code>close</code>：关闭文件    <ul>
+<li> 如果忘记关闭文件，会造成系统资源消耗，并且影响到后续对文件的访问</li>
+</ul>
+</li>
+</ul>
+<p>在开发中，通常会先编写 <strong>打开</strong> 和 <strong>关闭</strong> 的代码，再编写中间针对文件的 <strong>读 / 写</strong> 操作，以防止不小心忘记文件关闭指令。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token builtin">file</span> <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"README"</span><span class="token punctuation">)</span>
+
+text <span class="token operator">=</span> <span class="token builtin">file</span><span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+
+<span class="token builtin">file</span><span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="文件指针"><a href="#文件指针" class="headerlink" title="文件指针"></a><strong>文件指针</strong></h3><p><strong>文件指针</strong> 标记从哪个位置开始读取数据。<br>第一次打开** 文件时，通常文件指针会指向文件的开始位置，当执行了 <code>read</code> 方法后，<strong>文件指针</strong> 会移动到 <strong>读取内容的末尾</strong>，默认情况下会移动到 <strong>文件末尾</strong>。   </p>
+<p>所以执行了一次 <code>read</code> 方法后，再次调用 <code>read</code> 方法，就获取不到内容了，因为文件指针已经移动到了文件末尾。    </p>
+<h3 id="文件读写详解"><a href="#文件读写详解" class="headerlink" title="文件读写详解"></a><strong>文件读写详解</strong></h3><p><code>open</code> 函数默认以 <strong>只读方式</strong> 打开文件。</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token builtin">file</span> <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"文件名"</span><span class="token punctuation">,</span> <span class="token string">"访问方式"</span><span class="token punctuation">)</span></code></pre>
+
+<ul>
+<li><code>r</code>：以 <strong>只读</strong> 方式打开文件，文件的指针会放在文件的开头。   </li>
+<li><code>w</code>：以 <strong>只写</strong> 方式打开文件。<ul>
+<li>如果文件存在，执行完 <code>write</code> 命令后会覆盖原文件。</li>
+<li>如果文件不存在，则创建新文件。  </li>
+</ul>
+</li>
+<li><code>a</code>：以 <strong>追加</strong> （append）方式打开文件。<ul>
+<li>如果该文件已存在，文件指针会放在文件的结尾。</li>
+<li>如果文件不存在，创建新文件进行写入。</li>
+</ul>
+</li>
+<li><code>r+</code>：以<strong>读写</strong>方式打开文件，文件的指针会放在文件的开头。   </li>
+<li><code>w+</code>：以<strong>读写</strong>方式打开文件。<ul>
+<li>如果文件存在，执行完 <code>write</code> 命令后会覆盖原文件。</li>
+<li>如果文件不存在，创建新文件。</li>
+</ul>
+</li>
+<li><code>a+</code>：以<strong>读写</strong>方式打开文件。<ul>
+<li>如果该文件已存在，文件指针会放在文件的结尾。</li>
+<li>如果文件不存在，创建新文件进行写入。    </li>
+</ul>
+</li>
+</ul>
+<p>频繁地移动文件指针会影响文件的读写效率，所以开发中更多的时候会以 <strong>只读</strong>、<strong>只写</strong> 的方式来操作文件，而不是读写方式。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">f <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"README"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span>
+
+f<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"hello python！\n"</span><span class="token punctuation">)</span>
+f<span class="token punctuation">.</span>write<span class="token punctuation">(</span><span class="token string">"今天天气真好"</span><span class="token punctuation">)</span>
+
+f<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="按行读取文件内容"><a href="#按行读取文件内容" class="headerlink" title="按行读取文件内容"></a><strong>按行读取文件内容</strong></h3><p><code>read</code> 方法默认会把文件的 <strong>所有内容</strong> 一次性读取到内存，如果文件太大，对内存的占用会非常严重。   </p>
+<p><code>readline</code> 方法可以一次读取一行内容，方法执行后，会把 <strong>文件指针</strong> 移动到下一行，准备再次读取。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token builtin">file</span> <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"README"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    text <span class="token operator">=</span> <span class="token builtin">file</span><span class="token punctuation">.</span>readline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token keyword">not</span> text<span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>text<span class="token punctuation">,</span> end<span class="token operator">=</span><span class="token string">""</span><span class="token punctuation">)</span>
+
+<span class="token builtin">file</span><span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="案例：使用读写来复制文件"><a href="#案例：使用读写来复制文件" class="headerlink" title="案例：使用读写来复制文件"></a><strong>案例：使用读写来复制文件</strong></h3><p><strong>小文件</strong>：</p>
+<pre class="language-python" data-language="python"><code class="language-python">file_read <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"README"</span><span class="token punctuation">)</span>
+file_write <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"README[复件]"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span>
+
+text <span class="token operator">=</span> file_read<span class="token punctuation">.</span>read<span class="token punctuation">(</span><span class="token punctuation">)</span>
+file_write<span class="token punctuation">.</span>write<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+
+file_read<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+file_write<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<p><strong>大文件</strong>：</p>
+<pre class="language-python" data-language="python"><code class="language-python">file_read <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"README"</span><span class="token punctuation">)</span>
+file_write <span class="token operator">=</span> <span class="token builtin">open</span><span class="token punctuation">(</span><span class="token string">"README[复件]"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+
+    text <span class="token operator">=</span> file_read<span class="token punctuation">.</span>readline<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> <span class="token keyword">not</span> text<span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+
+    file_write<span class="token punctuation">.</span>write<span class="token punctuation">(</span>text<span class="token punctuation">)</span>
+
+
+file_read<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span>
+file_write<span class="token punctuation">.</span>close<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="文件-目录的常用管理操作"><a href="#文件-目录的常用管理操作" class="headerlink" title="文件/目录的常用管理操作"></a><strong>文件/目录的常用管理操作</strong></h3><p>首先需要导入 <code>os</code> 模块。以下函数都是在 <code>os</code> 模块下调用的，即 <code>os.函数名</code>。   </p>
+<ul>
+<li><code>rename</code>：重命名文件</li>
+<li><code>remove</code>：删除文件</li>
+<li><code>listdir</code>：目录列表</li>
+<li><code>mkdir</code>：创建目录</li>
+<li><code>rmdir</code>：删除目录</li>
+<li><code>getcwd</code>：获取当前目录</li>
+<li><code>chdir</code>：修改工作目录</li>
+<li><code>path.isdir</code>：判断是否是文件</li>
+</ul>
+<br>
+
+<h2 id="eval-函数"><a href="#eval-函数" class="headerlink" title="eval 函数"></a><strong>eval 函数</strong></h2><p><code>eval()</code> 函数可以将字符串当成有效的表达式来求值，返回计算结果。    </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 基本的数学计算</span>
+In <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token string">"1 + 1"</span><span class="token punctuation">)</span>
+Out<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">2</span>
+
+<span class="token comment"># 字符串重复</span>
+In <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token string">"'*' * 10"</span><span class="token punctuation">)</span>
+Out<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token string">'**********'</span>
+
+<span class="token comment"># 将字符串转换成列表</span>
+In <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token builtin">type</span><span class="token punctuation">(</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token string">"[1, 2, 3, 4, 5]"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Out<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token builtin">list</span>
+
+<span class="token comment"># 将字符串转换成字典</span>
+In <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token builtin">type</span><span class="token punctuation">(</span><span class="token builtin">eval</span><span class="token punctuation">(</span><span class="token string">"&#123;'name': 'xiaoming', 'age': 18&#125;"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+Out<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token builtin">dict</span></code></pre>
+
+<p>例：计算器</p>
+<pre class="language-python" data-language="python"><code class="language-python">input_str <span class="token operator">=</span> <span class="token builtin">input</span><span class="token punctuation">(</span><span class="token string">"请输入一个算术题："</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">eval</span><span class="token punctuation">(</span>input_str<span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-4.png" style="width:220px" loading="lazy">
+
+<p>不要滥用 <code>eval</code> 函数，程序中千万不要出现用 <code>eval</code> 直接转换 <code>input</code> 的结果，很容易被注入攻击：</p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-5.png" style="width:420px" loading="lazy">
+
+<p>等价于：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> os
+
+os<span class="token punctuation">.</span>system<span class="token punctuation">(</span><span class="token string">"终端命令"</span><span class="token punctuation">)</span></code></pre>
+
+<p>这就相当于输入直接控制了系统命令行，很危险。     </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python13/python13-6.png" style="width:350px" loading="lazy">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+</div></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/01/27/python/python12/" rel="next" title="Python-12：异常、模块"><span class="post-nav-text">Python-12：异常、模块</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 糖加盐</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.7.0</span></div><div class="footer-custom-text"><a href="https://icp.gov.moe/?keyword=20210789" target="_blank">萌ICP备20210789号</a></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
