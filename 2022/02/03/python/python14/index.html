@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#0078E7"><meta name="author" content="糖加盐"><meta name="copyright" content="糖加盐"><meta name="generator" content="Hexo 5.4.0"><meta name="theme" content="hexo-theme-yun"><title>Python-14：飞机大战(1)：使用 pygame 创建图形窗口、图像、游戏循环和游戏时钟、精灵组 | 糖加盐的笔记站</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&amp;display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/star-markdown-css@0.1.25/dist/yun/yun-markdown.min.css"><script src="//at.alicdn.com/t/font_1140697_dxory92pb0h.js" async></script><script src="https://cdn.jsdelivr.net/npm/scrollreveal/dist/scrollreveal.min.js" defer></script><script>function initScrollReveal() {
+  [".post-card",".post-content img"].forEach((target)=> {
+    ScrollReveal().reveal(target);
+  })
+}
+document.addEventListener("DOMContentLoaded", initScrollReveal);
+document.addEventListener("pjax:success", initScrollReveal);
+</script><link id="light-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism.css" media="(prefers-color-scheme: light)"><link id="dark-prism-css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@latest/themes/prism-tomorrow.css" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/png" href="/favicon.png"><link rel="mask-icon" href="/favicon.png" color="#0078E7"><link rel="preload" href="/css/hexo-theme-yun.css" as="style"><link rel="preload" href="/js/utils.js" as="script"><link rel="preload" href="/js/hexo-theme-yun.js" as="script"><link rel="prefetch" href="/js/sidebar.js" as="script"><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><script id="yun-config">
+    const Yun = window.Yun || {};
+    window.CONFIG = {"hostname":"tangjan.github.io","root":"/","title":"糖加盐的笔记站","version":"1.7.0","mode":"auto","copycode":true,"page":{"isPost":true},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）"},"anonymous_image":"https://cdn.jsdelivr.net/gh/YunYouJun/cdn/img/avatar/none.jpg","say":{"api":"https://v1.hitokoto.cn","hitokoto":true},"fireworks":{"colors":["102, 167, 221","62, 131, 225","33, 78, 194"]}};
+  </script><link rel="stylesheet" href="/css/hexo-theme-yun.css"><script src="/js/utils.js"></script><script src="/js/hexo-theme-yun.js"></script><meta name="description" content="项目描述：基于面向对象思想，使用 pygame 模块开发一个飞机大战小游戏。     最终目标：         使用 pygame 创建图形窗口pygame 的初始化和退出import pygame  pygame.init()  # 游戏代码 pass  pygame.quit()   游戏中的坐标系类似于 web 开发中的坐标系，原点在左上角，向右是 x 轴正方向，向下是 y 轴正方向。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-14：飞机大战(1)：使用 pygame 创建图形窗口、图像、游戏循环和游戏时钟、精灵组">
+<meta property="og:url" content="https://tangjan.github.io/2022/02/03/python/python14/index.html">
+<meta property="og:site_name" content="糖加盐的笔记站">
+<meta property="og:description" content="项目描述：基于面向对象思想，使用 pygame 模块开发一个飞机大战小游戏。     最终目标：         使用 pygame 创建图形窗口pygame 的初始化和退出import pygame  pygame.init()  # 游戏代码 pass  pygame.quit()   游戏中的坐标系类似于 web 开发中的坐标系，原点在左上角，向右是 x 轴正方向，向下是 y 轴正方向。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-1.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-3.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-4.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-5.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-2.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-6.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-7.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-8.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-9.gif">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-10.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-11.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-12.gif">
+<meta property="article:published_time" content="2022-02-03T10:10:00.000Z">
+<meta property="article:modified_time" content="2022-02-03T10:10:27.962Z">
+<meta property="article:author" content="糖加盐">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-1.gif"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的笔记站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">69</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">8</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-pygame-%E5%88%9B%E5%BB%BA%E5%9B%BE%E5%BD%A2%E7%AA%97%E5%8F%A3"><span class="toc-text">使用 pygame 创建图形窗口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#pygame-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E9%80%80%E5%87%BA"><span class="toc-text">pygame 的初始化和退出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E4%B8%AD%E7%9A%84%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="toc-text">游戏中的坐标系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%B8%B8%E6%88%8F%E4%B8%BB%E7%AA%97%E5%8F%A3"><span class="toc-text">创建游戏主窗口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E5%BE%AA%E7%8E%AF"><span class="toc-text">游戏循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F"><span class="toc-text">图像</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%BE%E5%83%8F%E7%B4%A0%E6%9D%90"><span class="toc-text">图像素材</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%83%8C%E6%99%AF%E5%9B%BE%E5%83%8F"><span class="toc-text">背景图像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8B%B1%E9%9B%84%E5%9B%BE%E5%83%8F"><span class="toc-text">英雄图像</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E5%BE%AA%E7%8E%AF%E5%92%8C%E6%B8%B8%E6%88%8F%E6%97%B6%E9%92%9F"><span class="toc-text">游戏循环和游戏时钟</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E5%BE%AA%E7%8E%AF-1"><span class="toc-text">游戏循环</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%B8%E6%88%8F%E6%97%B6%E9%92%9F"><span class="toc-text">游戏时钟</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8B%B1%E9%9B%84%E7%9A%84%E7%AE%80%E5%8D%95%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0"><span class="toc-text">英雄的简单动画实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%B8%B8%E6%88%8F%E5%BE%AA%E7%8E%AF%E4%B8%AD%E7%9B%91%E5%90%AC%E4%BA%8B%E4%BB%B6"><span class="toc-text">在游戏循环中监听事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B2%BE%E7%81%B5%E5%92%8C%E7%B2%BE%E7%81%B5%E7%BB%84"><span class="toc-text">精灵和精灵组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%BE%E7%94%9F%E7%B2%BE%E7%81%B5%E5%AD%90%E7%B1%BB"><span class="toc-text">派生精灵子类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%8C%E6%9C%BA"><span class="toc-text">创建敌机</span></a></li></ol></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2022/02/03/python/python14/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的笔记站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Python-14：飞机大战(1)：使用 pygame 创建图形窗口、图像、游戏循环和游戏时钟、精灵组</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-02-03 18:10:00" itemprop="dateCreated datePublished" datetime="2022-02-03T18:10:00+08:00">2022-02-03</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">1.5k</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Python/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Python</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Python/" style="--text-color:#3776ab"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Python</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><p>项目描述：基于面向对象思想，使用 <code>pygame</code> 模块开发一个飞机大战小游戏。    </p>
+<p>最终目标：</p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-1.gif" style="width:400px" loading="lazy">    
+
+<br>
+
+<h2 id="使用-pygame-创建图形窗口"><a href="#使用-pygame-创建图形窗口" class="headerlink" title="使用 pygame 创建图形窗口"></a><strong>使用 <code>pygame</code> 创建图形窗口</strong></h2><h3 id="pygame-的初始化和退出"><a href="#pygame-的初始化和退出" class="headerlink" title="pygame 的初始化和退出"></a><strong>pygame 的初始化和退出</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pygame
+
+pygame<span class="token punctuation">.</span>init<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 游戏代码</span>
+<span class="token keyword">pass</span>
+
+pygame<span class="token punctuation">.</span>quit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+
+<h3 id="游戏中的坐标系"><a href="#游戏中的坐标系" class="headerlink" title="游戏中的坐标系"></a><strong>游戏中的坐标系</strong></h3><p>类似于 web 开发中的坐标系，原点在左上角，向右是 x 轴正方向，向下是 y 轴正方向。    </p>
+<p>在游戏中，所有元素都是以 <strong>矩形区域</strong> 来描述位置的，共有四个要素：<code>(x, y) (width, height)</code>，分别表示矩形左上角坐标、矩形宽高。    </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-3.png" style="width:370px" loading="lazy">    
+
+<p><code>pygame</code> 专门提供了一个类 <code>pygame.Rect</code>，用此类创建出矩形对象，就可以很方便地描述矩形区域。      </p>
+<pre class="language-python" data-language="python"><code class="language-python">hero_rect <span class="token operator">=</span> pygame<span class="token punctuation">.</span>Rect<span class="token punctuation">(</span><span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">499</span><span class="token punctuation">,</span> <span class="token number">119</span><span class="token punctuation">,</span> <span class="token number">124</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"坐标原点 %d %d"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>hero_rect<span class="token punctuation">.</span>x<span class="token punctuation">,</span> hero_rect<span class="token punctuation">.</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"英雄大小 %d %d"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>hero_rect<span class="token punctuation">.</span>width<span class="token punctuation">,</span> hero_rect<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"英雄大小 %d %d"</span> <span class="token operator">%</span> hero_rect<span class="token punctuation">.</span>size<span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-4.png" style="width:170px" loading="lazy">    
+
+<h3 id="创建游戏主窗口"><a href="#创建游戏主窗口" class="headerlink" title="创建游戏主窗口"></a><strong>创建游戏主窗口</strong></h3><p><code>pygame.display</code> 用于创建、管理游戏窗口。   </p>
+<ul>
+<li><code>pygame.display.set_mode()</code> ：初始化游戏显示窗口    <pre class="language-python" data-language="python"><code class="language-python">set_mode<span class="token punctuation">(</span>resolution<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> flags<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> depth<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span></code></pre>
+<code>=</code> 表示缺省值。    <ul>
+<li><code>resolution</code> 指定屏幕的 <code>宽</code> 和 <code>高</code>，默认创建的窗口大小和屏幕大小一致</li>
+<li><code>flags</code> 参数指定屏幕的附加选项，例如是否全屏等等，默认不需要传递</li>
+<li><code>depth</code> 参数表示颜色的位数，默认自动匹配<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># 创建游戏主窗口</span>
+screen <span class="token operator">=</span> pygame<span class="token punctuation">.</span>display<span class="token punctuation">.</span>set_mode<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">480</span><span class="token punctuation">,</span> <span class="token number">700</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre></li>
+</ul>
+</li>
+<li><code>pygame.display.update()</code>：刷新屏幕内容显示，稍后使用    </li>
+</ul>
+<h3 id="游戏循环"><a href="#游戏循环" class="headerlink" title="游戏循环"></a><strong>游戏循环</strong></h3><p>游戏窗口创建完后，就可以基于这个窗口变量进行游戏主循环，设计一些游戏对象、函数了。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">screen <span class="token operator">=</span> pygame<span class="token punctuation">.</span>display<span class="token punctuation">.</span>set_mode<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">480</span><span class="token punctuation">,</span> <span class="token number">700</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 游戏循环</span>
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    <span class="token keyword">pass</span></code></pre>
+<p>运行之后，会出现一个没有内容的游戏窗口：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-5.png" style="width:350px" loading="lazy">   </p>
+<br>
+
+<h2 id="图像"><a href="#图像" class="headerlink" title="图像"></a><strong>图像</strong></h2><h3 id="图像素材"><a href="#图像素材" class="headerlink" title="图像素材"></a><strong>图像素材</strong></h3><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-2.png" style="width:auto" loading="lazy">   
+
+<p>飞机大战游戏就是通过对这些图片的组合处理实现的。     </p>
+<h3 id="背景图像"><a href="#背景图像" class="headerlink" title="背景图像"></a><strong>背景图像</strong></h3><p>图像文件初始是保存在磁盘上的，如果想在游戏内调用，需要加载到内存。    </p>
+<pre class="language-python" data-language="python"><code class="language-python">bg <span class="token operator">=</span> pygame<span class="token punctuation">.</span>image<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"./images/background.png"</span><span class="token punctuation">)</span>
+
+screen<span class="token punctuation">.</span>blit<span class="token punctuation">(</span>bg<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment"># (0, 0) 表示坐标</span>
+
+pygame<span class="token punctuation">.</span>display<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span>  </code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-6.png" style="width:350px" loading="lazy">   
+
+<h3 id="英雄图像"><a href="#英雄图像" class="headerlink" title="英雄图像"></a><strong>英雄图像</strong></h3><pre class="language-python" data-language="python"><code class="language-python">hero <span class="token operator">=</span> pygame<span class="token punctuation">.</span>image<span class="token punctuation">.</span>load<span class="token punctuation">(</span><span class="token string">"./images/me1.png"</span><span class="token punctuation">)</span>
+
+screen<span class="token punctuation">.</span>blit<span class="token punctuation">(</span>hero<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">189</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+pygame<span class="token punctuation">.</span>display<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<p>可以在 <code>screen</code> 对象完成所有 <code>blit</code> 方法之后，统一调用一次 <code>display.update</code> 方法，不必每绘制一张图像更新一次。</p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-7.png" style="width:350px" loading="lazy">   
+
+<p><code>.png</code> 格式的图片支持透明，所以显示出的飞机不会呈正方形，飞机图片的背景不会遮挡游戏背景。    </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-8.png" style="width:130px" loading="lazy">   
+
+<br>
+
+<h2 id="游戏循环和游戏时钟"><a href="#游戏循环和游戏时钟" class="headerlink" title="游戏循环和游戏时钟"></a><strong>游戏循环和游戏时钟</strong></h2><h3 id="游戏循环-1"><a href="#游戏循环-1" class="headerlink" title="游戏循环"></a><strong>游戏循环</strong></h3><p>现在英雄飞机已经绘制到屏幕上了，接下来怎么能让飞机移动呢？   </p>
+<p>原理很简单：将多张图片快速地在屏幕上绘制，以产生连贯的视觉效果。<br>每次绘制的画面也称为 <strong>帧</strong>。每秒绘制画面的次数称为 <strong>帧数</strong>，亦即 fps。<br>帧数在 60 左右就足够流畅了。      </p>
+<p>游戏循环即游戏的主体。    </p>
+<p><strong>游戏初始化</strong>：</p>
+<ul>
+<li>设置游戏窗口</li>
+<li>绘制图像初始位置</li>
+<li>设置游戏时钟</li>
+</ul>
+<p><strong>游戏循环</strong>：</p>
+<ul>
+<li>设置刷新频率<ul>
+<li>按 60 fps 来，即每秒刷新 60 次</li>
+</ul>
+</li>
+<li>检测用户交互<ul>
+<li>键盘、鼠标等</li>
+</ul>
+</li>
+<li>更新所有图像位置</li>
+<li>更新屏幕显示<ul>
+<li> <code>pygame.display.update()</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="游戏时钟"><a href="#游戏时钟" class="headerlink" title="游戏时钟"></a><strong>游戏时钟</strong></h3><p>类 <code>pygame.time.Clock</code> 可以方便地设置屏幕刷新帧率，即游戏时钟。    </p>
+<pre class="language-python" data-language="python"><code class="language-python">clock <span class="token operator">=</span> pygame<span class="token punctuation">.</span>time<span class="token punctuation">.</span>Clock<span class="token punctuation">(</span><span class="token punctuation">)</span>
+i <span class="token operator">=</span> <span class="token number">0</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+
+    clock<span class="token punctuation">.</span>tick<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span>
+    i <span class="token operator">+=</span> <span class="token number">1</span></code></pre>
+
+<h3 id="英雄的简单动画实现"><a href="#英雄的简单动画实现" class="headerlink" title="英雄的简单动画实现"></a><strong>英雄的简单动画实现</strong></h3><pre class="language-python" data-language="python"><code class="language-python">hero_rect <span class="token operator">=</span> pygame<span class="token punctuation">.</span>Rect<span class="token punctuation">(</span><span class="token number">150</span><span class="token punctuation">,</span> <span class="token number">500</span><span class="token punctuation">,</span> <span class="token number">102</span><span class="token punctuation">,</span> <span class="token number">126</span><span class="token punctuation">)</span>
+
+<span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+
+    clock<span class="token punctuation">.</span>tick<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span>
+
+    hero_rect<span class="token punctuation">.</span>y <span class="token operator">-=</span> <span class="token number">1</span>
+
+    <span class="token keyword">if</span> hero_rect<span class="token punctuation">.</span>y <span class="token operator">+</span> hero_rect<span class="token punctuation">.</span>height <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">:</span>
+        hero_rect<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token number">700</span>
+
+    screen<span class="token punctuation">.</span>blit<span class="token punctuation">(</span>bg<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    screen<span class="token punctuation">.</span>blit<span class="token punctuation">(</span>hero<span class="token punctuation">,</span> hero_rect<span class="token punctuation">)</span>
+
+    pygame<span class="token punctuation">.</span>display<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-9.gif" style="width:350px" loading="lazy">    
+
+<p>注意这里的背景图像也需要更新，即 <code>screen.blit(bg, (0, 0))</code>，否则只更新英雄的话会出现下面这种情况：   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-10.png" style="width:350px" loading="lazy">    
+
+
+
+<h3 id="在游戏循环中监听事件"><a href="#在游戏循环中监听事件" class="headerlink" title="在游戏循环中监听事件"></a><strong>在游戏循环中监听事件</strong></h3><p><strong>事件</strong> <code>event</code> 就是游戏启动后，用户所做的操作。如：点击关闭按钮、点击鼠标、按下键盘 等。</p>
+<p><strong>监听</strong> 就是在游戏循环中，捕获用户的具体操作，针对性地做出响应。   </p>
+<p><code>pygame.event.get()</code> 可以获得用户当前所做动作的事件 <strong>列表</strong></p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+
+    clock<span class="token punctuation">.</span>tick<span class="token punctuation">(</span><span class="token number">60</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span> event <span class="token keyword">in</span> pygame<span class="token punctuation">.</span>event<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token keyword">if</span> event<span class="token punctuation">.</span><span class="token builtin">type</span> <span class="token operator">==</span> pygame<span class="token punctuation">.</span>QUIT<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"退出游戏..."</span><span class="token punctuation">)</span>
+            pygame<span class="token punctuation">.</span>quit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            exit<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<br>
+
+<h2 id="精灵和精灵组"><a href="#精灵和精灵组" class="headerlink" title="精灵和精灵组"></a><strong>精灵和精灵组</strong></h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h3><p>到此为止，<strong>图像加载</strong>、<strong>位置变化</strong>、<strong>绘制图像</strong> 都需要程序员分别编写代码进行处理，这是很麻烦的事情。<br>为了简化开发步骤，<code>pygame</code> 提供了两个 <strong>类</strong>，即 <strong>精灵</strong> 和 <strong>精灵组</strong>：</p>
+<ul>
+<li><code>pygame.sprite.Sprite</code><ul>
+<li>第一个 <code>spirte</code> 是模块的名称，第二个 <code>Spirte</code> 是类的名称</li>
+</ul>
+</li>
+<li><code>pygame.sprite.Group</code></li>
+</ul>
+<p>在游戏开发中，通常把 <strong>显示图像的对象</strong> 叫做 <strong>精灵</strong> <code>Sprite</code>。它有两个重要的属性：</p>
+<ul>
+<li><code>image</code>：要显示的图像</li>
+<li><code>rect</code>：图像要显示在屏幕的位置</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-11.png" style="width:630px" loading="lazy">    
+
+
+<p>默认的 <code>update()</code> 方法什么事情也没做，子类可以重写此方法，在每次刷新屏幕时，更新精灵位置。   </p>
+<p><code>pygame.sprite.Sprite</code> 并没有提供 <code>image</code> 和 <code>rect</code> 两个属性，需要程序员从 <code>pygame.sprite.Sprite</code> 派生子类，并在子类的 <strong>初始化方法</strong> 中，设置 <code>image</code> 和 <code>rect</code> 属性。   </p>
+<p>一个 <strong>精灵组</strong> 可以包含多个 <strong>精灵</strong> 对象。</p>
+<p>调用 <strong>精灵组</strong> 对象的 <code>update()</code> 方法可以自动调用组内每一个精灵的 <code>update()</code> 方法。    </p>
+<p>调用 <strong>精灵组</strong> 对象的 <code>draw(屏幕对象)</code> 方法，可以将组内每一个精灵的 <code>image</code> 绘制在 <code>rect</code> 位置。   </p>
+<p><strong>注意</strong>：仍然需要调用 <code>pygame.display.update()</code> 才能在屏幕看到最终结果</p>
+<h3 id="派生精灵子类"><a href="#派生精灵子类" class="headerlink" title="派生精灵子类"></a><strong>派生精灵子类</strong></h3><ol>
+<li>新建 <code>plane_sprites.py</code> 文件</li>
+<li>定义 <code>GameSprite</code> 继承自 <code>pygame.sprite.Sprite</code></li>
+</ol>
+<p>如果一个类的 <strong>父类</strong> 不是 <code>object</code>，在重写 <strong>初始化方法</strong> 时，一定要先使用 <code>super()</code> 调用一下父类的 <code>__init__</code> 方法，保证父类中实现的初始化代码能够被正常执行。     </p>
+<p><code>plane_sprites.py</code> 文件：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pygame
+
+
+<span class="token keyword">class</span> <span class="token class-name">GameSprite</span><span class="token punctuation">(</span>pygame<span class="token punctuation">.</span>sprite<span class="token punctuation">.</span>Sprite<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""游戏精灵基类"""</span>
+    
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> image_name<span class="token punctuation">,</span> speed<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+        self<span class="token punctuation">.</span>image <span class="token operator">=</span> pygame<span class="token punctuation">.</span>image<span class="token punctuation">.</span>load<span class="token punctuation">(</span>image_name<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>rect <span class="token operator">=</span> self<span class="token punctuation">.</span>image<span class="token punctuation">.</span>get_rect<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>speed <span class="token operator">=</span> speed
+
+    <span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        
+        self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>y <span class="token operator">+=</span> self<span class="token punctuation">.</span>speed</code></pre>
+
+<h3 id="创建敌机"><a href="#创建敌机" class="headerlink" title="创建敌机"></a><strong>创建敌机</strong></h3><p>初始化部分：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> plane_sprites <span class="token keyword">import</span> <span class="token operator">*</span>
+
+enemy1 <span class="token operator">=</span> GameSprite<span class="token punctuation">(</span><span class="token string">"./images/enemy1.png"</span><span class="token punctuation">)</span>
+enemy2 <span class="token operator">=</span> GameSprite<span class="token punctuation">(</span><span class="token string">"./images/enemy1.png"</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
+enemy2<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>x <span class="token operator">=</span> <span class="token number">200</span>
+enemy_group <span class="token operator">=</span> pygame<span class="token punctuation">.</span>sprite<span class="token punctuation">.</span>Group<span class="token punctuation">(</span>enemy1<span class="token punctuation">,</span> enemy2<span class="token punctuation">)</span></code></pre>
+<p>游戏循环内：</p>
+<pre class="language-python" data-language="python"><code class="language-python">enemy_group<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span>
+enemy_group<span class="token punctuation">.</span>draw<span class="token punctuation">(</span>screen<span class="token punctuation">)</span>
+
+pygame<span class="token punctuation">.</span>display<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python14/python14-12.gif" style="width:350px" loading="lazy">    
+
+
+
+
+
+
+
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+</div></section></article><div class="post-nav"><div class="post-nav-item"></div><div class="post-nav-item"><a class="post-nav-next" href="/2022/01/28/python/python13/" rel="next" title="Python-13：包、发布模块、文件、eval"><span class="post-nav-text">Python-13：包、发布模块、文件、eval</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-right-s-line"></use></svg></a></div></div></div></main><footer class="sidebar-translate" id="footer"><div class="copyright"><span>&copy; 2021 – 2022 </span><span class="with-love" id="animate"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cloud-line"></use></svg></span><span class="author"> 糖加盐</span></div><div class="powered"><span>由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.0</span><span class="footer-separator">|</span><span>主题 - <a rel="noopener" href="https://github.com/YunYouJun/hexo-theme-yun" target="_blank"><span>Yun</span></a> v1.7.0</span></div><div class="footer-custom-text"><a href="https://icp.gov.moe/?keyword=20210789" target="_blank">萌ICP备20210789号</a></div></footer><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-arrow-up-s-line"></use></svg><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></div></body></html>
