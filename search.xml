@@ -9992,7 +9992,7 @@ os<span class="token punctuation">.</span>system<span class="token punctuation">
       </tags>
   </entry>
   <entry>
-    <title>Python-14：飞机大战(1)：使用 pygame 创建图形窗口、图像、游戏循环和游戏时钟、精灵组</title>
+    <title>Python-14：飞机大战(1) - 使用 pygame 创建图形窗口、图像、游戏循环和游戏时钟、精灵组</title>
     <url>/2022/02/03/python/python14/</url>
     <content><![CDATA[<p>项目描述：基于面向对象思想，使用 <code>pygame</code> 模块开发一个飞机大战小游戏。    </p>
 <p>最终目标：</p>
@@ -10212,6 +10212,255 @@ pygame<span class="token punctuation">.</span>display<span class="token punctuat
 
 
 
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python-15：飞机大战(2) - 游戏框架、背景图像、敌机</title>
+    <url>/2022/02/04/python/python15/</url>
+    <content><![CDATA[<h2 id="游戏框架"><a href="#游戏框架" class="headerlink" title="游戏框架"></a><strong>游戏框架</strong></h2><p>整体来看，飞机大战游戏只需要两个文件：</p>
+<ul>
+<li><code>plane_main.py</code> <ul>
+<li>封装 <strong>主游戏类</strong></li>
+<li>创建 <strong>游戏对象</strong></li>
+<li><strong>启动游戏</strong></li>
+</ul>
+</li>
+<li><code>plane_sprites.py</code><ul>
+<li>封装游戏中所有需要使用的 <strong>精灵子类</strong></li>
+<li>提供精灵的 <strong>相关工具</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="主游戏类"><a href="#主游戏类" class="headerlink" title="主游戏类"></a><strong>主游戏类</strong></h3><p>飞机大战主游戏类命名为 <code>PlaneGame</code>，这个类应包含的函数为：   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python15/python15-1.png" style="width:500px" loading="lazy">
+
+<p>其中：   </p>
+<ul>
+<li><code>__init__</code>：游戏初始化<ul>
+<li><code>__create_sprites(self)</code>：创建精灵和精灵组   </li>
+</ul>
+</li>
+<li><code>start_game()</code>：游戏循环<ul>
+<li><code>__event_handler(self)</code>：事件监听 </li>
+<li><code>__check_collide(self)</code>：碰撞检测 —— 子弹销毁敌机、敌机撞毁英雄 </li>
+<li><code>__update_sprites(self)</code>：精灵组更新和绘制 </li>
+<li><code>__game_over()</code>：游戏结束 </li>
+</ul>
+</li>
+</ul>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pygame
+<span class="token keyword">from</span> plane_sprites <span class="token keyword">import</span> <span class="token operator">*</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">PlaneGame</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""飞机大战主游戏"""</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"游戏初始化..."</span><span class="token punctuation">)</span>
+        <span class="token keyword">pass</span>
+
+    <span class="token keyword">def</span> <span class="token function">start_game</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"开始游戏..."</span><span class="token punctuation">)</span>
+        <span class="token keyword">pass</span>
+
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span>
+    PlaneGame<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>start_game<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="init-self"><a href="#init-self" class="headerlink" title="__init__(self)"></a><code>__init__(self)</code></h3><pre class="language-python" data-language="python"><code class="language-python">SCREEN_RECT <span class="token operator">=</span> pygame<span class="token punctuation">.</span>Rect<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">480</span><span class="token punctuation">,</span> <span class="token number">700</span><span class="token punctuation">)</span></code></pre>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"游戏初始化"</span><span class="token punctuation">)</span>
+    
+    self<span class="token punctuation">.</span>screen <span class="token operator">=</span> pygame<span class="token punctuation">.</span>display<span class="token punctuation">.</span>set_mode<span class="token punctuation">(</span>SCREEN_RECT<span class="token punctuation">.</span>size<span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>clock <span class="token operator">=</span> pygame<span class="token punctuation">.</span>time<span class="token punctuation">.</span>Clock<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>__create_sprites<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>这里使用到了 <strong>常量</strong>，一般约定是全部字母大写。</p>
+<h3 id="start-game"><a href="#start-game" class="headerlink" title="start_game()"></a><code>start_game()</code></h3><pre class="language-python" data-language="python"><code class="language-python">FPS <span class="token operator">=</span> <span class="token number">60</span></code></pre>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">start_game</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""游戏循环"""</span>
+    
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"开始游戏..."</span><span class="token punctuation">)</span>
+       
+    <span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>clock<span class="token punctuation">.</span>tick<span class="token punctuation">(</span>FPS<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>__event_handler<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>__check_collide<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>__update_sprites<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        pygame<span class="token punctuation">.</span>display<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>其中，事件监听和游戏结束的代码如下：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__event_handler</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""事件监听"""</span>
+    
+    <span class="token keyword">for</span> event <span class="token keyword">in</span> pygame<span class="token punctuation">.</span>event<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    
+        <span class="token keyword">if</span> event<span class="token punctuation">.</span><span class="token builtin">type</span> <span class="token operator">==</span> pygame<span class="token punctuation">.</span>QUIT<span class="token punctuation">:</span>
+            PlaneGame<span class="token punctuation">.</span>__game_over<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token decorator annotation punctuation">@staticmethod</span>
+<span class="token keyword">def</span> <span class="token function">__game_over</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+   <span class="token triple-quoted-string string">"""游戏结束"""</span>
+
+   <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"游戏结束"</span><span class="token punctuation">)</span>
+   pygame<span class="token punctuation">.</span>quit<span class="token punctuation">(</span><span class="token punctuation">)</span>
+   exit<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+<p>碰撞检测 和 更新精灵组 之后再细说。    </p>
+<h3 id="准备精灵组"><a href="#准备精灵组" class="headerlink" title="准备精灵组"></a><strong>准备精灵组</strong></h3><h4 id="创建精灵组"><a href="#创建精灵组" class="headerlink" title="创建精灵组"></a><strong>创建精灵组</strong></h4><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__create_sprites</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""创建精灵组"""</span>
+    
+    self<span class="token punctuation">.</span>back_group <span class="token operator">=</span> pygame<span class="token punctuation">.</span>sprite<span class="token punctuation">.</span>Group<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>enemy_group <span class="token operator">=</span> pygame<span class="token punctuation">.</span>sprite<span class="token punctuation">.</span>Group<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>hero_group <span class="token operator">=</span> pygame<span class="token punctuation">.</span>sprite<span class="token punctuation">.</span>Group<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<h4 id="更新精灵组"><a href="#更新精灵组" class="headerlink" title="更新精灵组"></a><strong>更新精灵组</strong></h4><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__update_sprites</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""更新精灵组"""</span>
+    
+    <span class="token keyword">for</span> group <span class="token keyword">in</span> <span class="token punctuation">[</span>self<span class="token punctuation">.</span>back_group<span class="token punctuation">,</span> self<span class="token punctuation">.</span>enemy_group<span class="token punctuation">,</span> self<span class="token punctuation">.</span>hero_group<span class="token punctuation">]</span><span class="token punctuation">:</span>
+    
+        group<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        group<span class="token punctuation">.</span>draw<span class="token punctuation">(</span>self<span class="token punctuation">.</span>screen<span class="token punctuation">)</span></code></pre>
+
+<br>
+
+<h2 id="背景图像"><a href="#背景图像" class="headerlink" title="背景图像"></a><strong>背景图像</strong></h2><p>背景图像应不断地向下方移动，这样在视觉上就是英雄的飞机不断向上方飞行。这是很多跑酷游戏常用的套路。        </p>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a><strong>实现思路</strong></h3><p>两张背景图纵向拼接到一起，一起向下移动。当其中一张的 <code>rect.y</code> &gt;= 屏幕的高度，则说明已经移动到了屏幕下方，此时将另一张图像设置回屏幕的上方 <code>rect.y = -rect.height</code> 即可。   </p>
+<p>之前已经设计了一个游戏精灵类 <code>GameSpirte</code>：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">GameSprite</span><span class="token punctuation">(</span>pygame<span class="token punctuation">.</span>sprite<span class="token punctuation">.</span>Sprite<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""游戏精灵基类"""</span>
+
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> image_name<span class="token punctuation">,</span> speed<span class="token operator">=</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        self<span class="token punctuation">.</span>image <span class="token operator">=</span> pygame<span class="token punctuation">.</span>image<span class="token punctuation">.</span>load<span class="token punctuation">(</span>image_name<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>rect <span class="token operator">=</span> self<span class="token punctuation">.</span>image<span class="token punctuation">.</span>get_rect<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>speed <span class="token operator">=</span> speed
+
+    <span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> <span class="token operator">*</span>args<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>y <span class="token operator">+=</span> self<span class="token punctuation">.</span>speed</code></pre>
+
+<p>因此，只需创建一个 <strong>背景类</strong>，继承父类 <code>GameSpirte</code> 的方法，适当重写即可。<br><code>plane_spirtes.py</code>：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Background</span><span class="token punctuation">(</span>GameSprite<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""游戏背景精灵"""</span>
+
+    <span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>y <span class="token operator">>=</span> SCREEN_RECT<span class="token punctuation">.</span>height<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token operator">-</span>self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>height</code></pre>
+<p><code>plane_main.py</code>：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__create_sprites</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token comment"># 创建背景精灵和精灵组</span>
+    bg1 <span class="token operator">=</span> Background<span class="token punctuation">(</span><span class="token string">"./images/background.png"</span><span class="token punctuation">)</span>
+    bg2 <span class="token operator">=</span> Background<span class="token punctuation">(</span><span class="token string">"./images/background.png"</span><span class="token punctuation">)</span>
+    bg2<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token operator">-</span>bg2<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>height
+    
+    self<span class="token punctuation">.</span>back_group <span class="token operator">=</span> pygame<span class="token punctuation">.</span>sprite<span class="token punctuation">.</span>Group<span class="token punctuation">(</span>bg1<span class="token punctuation">,</span> bg2<span class="token punctuation">)</span></code></pre>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__update_sprites</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    self<span class="token punctuation">.</span>back_group<span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    self<span class="token punctuation">.</span>back_group<span class="token punctuation">.</span>draw<span class="token punctuation">(</span>self<span class="token punctuation">.</span>screen<span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python15/python15-2.gif" style="width:350px" loading="lazy">
+
+<h3 id="简化"><a href="#简化" class="headerlink" title="简化"></a><strong>简化</strong></h3><p>根据面向对象设计原则，应该将对象的职责封装到类内部，并且尽量简化程序调用。   </p>
+<p>因此可进行如下改进：</p>
+<p><code>plane_sprites.py</code> 中 <code>Background</code> 的初始化方法：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> is_alt<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+
+    <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token string">"./images/background.png"</span><span class="token punctuation">)</span>
+       
+    <span class="token keyword">if</span> is_alt<span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>y <span class="token operator">=</span> <span class="token operator">-</span>self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>height     </code></pre>
+
+<p><code>plane_main</code> 中的 <code>__create_sprites</code> 方法：</p>
+<pre class="language-python" data-language="python"><code class="language-python">bg1 <span class="token operator">=</span> Background<span class="token punctuation">(</span><span class="token punctuation">)</span>
+bg2 <span class="token operator">=</span> Background<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+self<span class="token punctuation">.</span>back_group <span class="token operator">=</span> pygame<span class="token punctuation">.</span>sprite<span class="token punctuation">.</span>Group<span class="token punctuation">(</span>bg1<span class="token punctuation">,</span> bg2<span class="token punctuation">)</span></code></pre>
+
+<br>
+
+<h2 id="敌机"><a href="#敌机" class="headerlink" title="敌机"></a><strong>敌机</strong></h2><p>设计 <code>Enemy</code> 类，然后使用 <strong>定时器</strong> 添加敌机。    </p>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a><strong>定时器</strong></h3><p>使用 <code>pygame.time.set_timer(eventid, milliseconds)</code> 创建定时器。    </p>
+<ul>
+<li><code>eventid</code>：事件代号，基于常量 <code>pygame.USEREVENT</code> 来指定<ul>
+<li><code>USEREVENT</code> 是一个整数，再增加的事件可以使用 <code>USEREVENT + 1</code> 指定</li>
+</ul>
+</li>
+<li><code>milliseconds</code>：事件触发间隔的毫秒值</li>
+</ul>
+<p>创建定时器步骤：</p>
+<ul>
+<li>定义定时器常量 <code>eventid</code></li>
+<li>在初始化方法中调用 <code>set_timer</code> 创建定时器事件</li>
+<li>在游戏循环中监听</li>
+</ul>
+<p><code>plane_sprites.py</code>：</p>
+<pre class="language-python" data-language="python"><code class="language-python">CREATE_ENEMY_EVENT <span class="token operator">=</span> pygame<span class="token punctuation">.</span>USEREVENT</code></pre>
+
+<p>在 <code>plane_main.py</code> 中 <code>PlaneGame</code> 的 <strong>初始化方法</strong> 中创建事件：</p>
+<pre class="language-python" data-language="python"><code class="language-python">pygame<span class="token punctuation">.</span>time<span class="token punctuation">.</span>set_timer<span class="token punctuation">(</span>CREATE_ENEMY_EVENT<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span></code></pre>
+
+<p>在 <code>plane_main.py</code> 中 <code>__event_handler</code> 的方法中进行监听：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__event_handler</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    
+    <span class="token keyword">for</span> event <span class="token keyword">in</span> pygame<span class="token punctuation">.</span>event<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    
+        <span class="token keyword">if</span> event<span class="token punctuation">.</span><span class="token builtin">type</span> <span class="token operator">==</span> pygame<span class="token punctuation">.</span>QUIT<span class="token punctuation">:</span>
+            PlaneGame<span class="token punctuation">.</span>__game_over<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">elif</span> event<span class="token punctuation">.</span><span class="token builtin">type</span> <span class="token operator">==</span> CREATE_ENEMY_EVENT<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"敌机出场..."</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>enemy_group<span class="token punctuation">.</span>add<span class="token punctuation">(</span>Enemy<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+
+<h3 id="敌机类的设计"><a href="#敌机类的设计" class="headerlink" title="敌机类的设计"></a><strong>敌机类的设计</strong></h3><ul>
+<li>每隔 1 秒会出现一架敌机</li>
+<li>敌机向屏幕下方飞行，速度各不相同，水平位置也不尽相同</li>
+<li>当敌机从屏幕下方飞出，销毁  </li>
+</ul>
+<p><code>plane_sprites.py</code>：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> random</code></pre>
+
+<ul>
+<li>在导入模块时，建议按照以下顺序导入  <pre class="language-python" data-language="python"><code class="language-python"><span class="token number">1</span><span class="token punctuation">.</span> 官方标准模块导入
+<span class="token number">2</span><span class="token punctuation">.</span> 第三方模块导入
+<span class="token number">3</span><span class="token punctuation">.</span> 应用程序模块导入</code></pre></li>
+</ul>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Enemy</span><span class="token punctuation">(</span>GameSprite<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">"""敌机精灵"""</span>
+    
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token string">"./images/enemy1.png"</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>speed <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>bottom <span class="token operator">=</span> <span class="token number">0</span>
+        max_x <span class="token operator">=</span> SCREEN_RECT<span class="token punctuation">.</span>width <span class="token operator">-</span> self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>width
+        self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>x <span class="token operator">=</span> random<span class="token punctuation">.</span>randint<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> max_x<span class="token punctuation">)</span>
+    
+    <span class="token keyword">def</span> <span class="token function">update</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        
+        <span class="token builtin">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>update<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>rect<span class="token punctuation">.</span>y <span class="token operator">>=</span> SCREEN_RECT<span class="token punctuation">.</span>height<span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"敌机飞出屏幕..."</span><span class="token punctuation">)</span>   
+            self<span class="token punctuation">.</span>kill<span class="token punctuation">(</span><span class="token punctuation">)</span> </code></pre>
+<p>敌机飞出屏幕之后，为节省内存，应将其从敌机组删除。<br><code>__del__</code> 内置方法会在对象被销毁前调用，可用于判断对象是否被销毁。   </p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">__del__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"敌机挂了 %s"</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>rect<span class="token punctuation">)</span></code></pre>
+<p>在 <code>plane_game.py</code> 文件中，创建敌机精灵组并更新，代码略。    </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python15/python15-3.gif" style="width:350px" loading="lazy">
 
 
 
