@@ -10610,7 +10610,7 @@ img <span class="token operator">=</span> cv2<span class="token punctuation">.</
 <li><p><code>cv2.IMREAD_GRAYSCALE</code>：灰度图像</p>
 <ul>
 <li>把白色与黑色之间按对数关系分为若干等级，称为 <strong>灰度</strong></li>
-<li>灰度图与黑白图不同，黑白图只有黑与白两种颜色   </li>
+<li>灰度图与黑白图不同，黑白图只有黑与白两种颜色</li>
 </ul>
 </li>
 </ul>
@@ -10754,22 +10754,19 @@ sky1 <span class="token operator">=</span> sky <span class="token operator">+</s
 <img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv1/opencv1-11.png" style="width:150px" loading="lazy">
 
 <p>两张图像宽高相同时，也可以进行相加。如果宽高不相同，可以用 <code>cv2.resize()</code> 方法来调整大小，如 </p>
-<pre class="language-python" data-language="python"><code class="language-python">img_fix <span class="token operator">=</span> cv2<span class="token punctuation">.</span>resize<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-```   
+<pre class="language-python" data-language="python"><code class="language-python">img_fix <span class="token operator">=</span> cv2<span class="token punctuation">.</span>resize<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">400</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
 
-加出的结果如果越界（<span class="token number">0</span><span class="token operator">~</span><span class="token number">255</span>），会对 <span class="token number">256</span> 取模。   
+<p>加出的结果如果越界（0~255），会对 256 取模。   </p>
+<p>OpenCV 也提供了 <code>cv2.add</code> 用来进行加法运算，不过这个方法在越界时会取最大值 255。    </p>
+<br>
 
-OpenCV 也提供了 `cv2<span class="token punctuation">.</span>add` 用来进行加法运算，不过这个方法在越界时会取最大值 <span class="token number">255</span>。    
+<h2 id="图像融合"><a href="#图像融合" class="headerlink" title="图像融合"></a><strong>图像融合</strong></h2><p>图像相加和图像融合是不同的，图像融合有专门的函数，其公式为：</p>
+<div style="text-align:center;">
 
-<span class="token operator">&lt;</span>br<span class="token operator">></span>
+<p>$result &#x3D; αx_1 + βx_2 + b$</p>
+</div>
 
-<span class="token comment">## **图像融合**</span>
-图像相加和图像融合是不同的，图像融合有专门的函数，其公式为：   
-$
-result <span class="token operator">=</span> αx_1 <span class="token operator">+</span> βx_2 <span class="token operator">+</span> b
-$
-```python
-yuki <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/yuki.jpg'</span><span class="token punctuation">)</span>
+<pre class="language-python" data-language="python"><code class="language-python">yuki <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/yuki.jpg'</span><span class="token punctuation">)</span>
 sky <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/sky.jpg'</span><span class="token punctuation">)</span>
 result1 <span class="token operator">=</span> yuki <span class="token operator">+</span> sky
 result2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>addWeighted<span class="token punctuation">(</span>yuki<span class="token punctuation">,</span> <span class="token number">0.4</span><span class="token punctuation">,</span> sky<span class="token punctuation">,</span> <span class="token number">0.6</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
