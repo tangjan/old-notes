@@ -10787,4 +10787,205 @@ cv_show<span class="token punctuation">(</span><span class="token string">"resul
         <tag>OpenCV</tag>
       </tags>
   </entry>
+  <entry>
+    <title>OpenCV-2：图像阈值、图像平滑、形态学运算</title>
+    <url>/2022/02/07/opencv/opencv2/</url>
+    <content><![CDATA[<h2 id="图像阈值"><a href="#图像阈值" class="headerlink" title="图像阈值"></a><strong><a href="https://docs.opencv.org/4.x/d7/d1b/group__imgproc__misc.html#gaa9e58d2860d4afa658ef70a9b1115576">图像阈值</a></strong></h2><p>图像的每一个像素点的 RGB 值都是 0~255 之间的一个数字，我们可以设定一个阈值，当RGB 值大于（小于）这个数就分别进行相应的处理。     </p>
+<pre class="language-python" data-language="python"><code class="language-python">ret<span class="token punctuation">,</span> dst <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>src<span class="token punctuation">,</span> thresh<span class="token punctuation">,</span> maxval<span class="token punctuation">,</span> <span class="token builtin">type</span><span class="token punctuation">)</span></code></pre>
+
+<ul>
+<li><code>src</code>：输入图，通常来说为单通道的灰度图</li>
+<li><code>dst</code>：输出图</li>
+<li><code>thresh</code>：阈值</li>
+<li><code>maxval</code>：当像素值超过了阈值（或者小于阈值，根据 type 来决定），所赋予的值</li>
+<li><code>type</code>：二值化操作的类型，包含以下5种类型：<ul>
+<li><code>cv2.THRESH_BINARY</code>：超过阈值部分取maxval（最大值），否则取 0</li>
+<li><code>cv2.THRESH_BINARY_INV</code>：THRESH_BINARY 的反转</li>
+<li><code>cv2.THRESH_TRUNC</code>：大于阈值部分设为阈值，否则不变</li>
+<li><code>cv2.THRESH_TOZERO</code>：大于阈值部分不改变，否则取 0</li>
+<li><code>cv2.THRESH_TOZERO_INV</code>：THRESH_TOZERO的反转</li>
+</ul>
+</li>
+</ul>
+<p>例：   </p>
+<pre class="language-python" data-language="python"><code class="language-python">sky <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/sky.jpg'</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>IMREAD_GRAYSCALE<span class="token punctuation">)</span>
+
+ret<span class="token punctuation">,</span> thresh1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>sky<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>THRESH_BINARY<span class="token punctuation">)</span>
+ret<span class="token punctuation">,</span> thresh2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>sky<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>THRESH_BINARY_INV<span class="token punctuation">)</span>
+ret<span class="token punctuation">,</span> thresh3 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>sky<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>THRESH_TRUNC<span class="token punctuation">)</span>
+ret<span class="token punctuation">,</span> thresh4 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>sky<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>THRESH_TOZERO<span class="token punctuation">)</span>
+ret<span class="token punctuation">,</span> thresh5 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>sky<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>THRESH_TOZERO_INV<span class="token punctuation">)</span>
+
+titles <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Original Image'</span><span class="token punctuation">,</span> <span class="token string">'BINARY'</span><span class="token punctuation">,</span> <span class="token string">'BINARY_INV'</span><span class="token punctuation">,</span> <span class="token string">'TRUNC'</span><span class="token punctuation">,</span> <span class="token string">'TOZERO'</span><span class="token punctuation">,</span> <span class="token string">'TOZERO_INV'</span><span class="token punctuation">]</span>
+images <span class="token operator">=</span> <span class="token punctuation">[</span>sky<span class="token punctuation">,</span> thresh1<span class="token punctuation">,</span> thresh2<span class="token punctuation">,</span> thresh3<span class="token punctuation">,</span> thresh4<span class="token punctuation">,</span> thresh5<span class="token punctuation">]</span>
+
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> i <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>images<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">'gray'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>title<span class="token punctuation">(</span>titles<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>yticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-1.png" style="width:500px" loading="lazy">
+
+<br>
+
+<h2 id="图像平滑"><a href="#图像平滑" class="headerlink" title="图像平滑"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html">图像平滑</a></strong></h2><p>也称滤波。<br>如图，这张图片上有很多噪音点，图像平滑的目标就是消除这些噪音点。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-2.png" style="width:450px" loading="lazy"></p>
+<h3 id="均值滤波"><a href="#均值滤波" class="headerlink" title="均值滤波"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga8c45db9afe636703801b0b2e440fce37">均值滤波</a></strong></h3><p>也称模糊，就是简单的平均卷积操作。    </p>
+<p>关于 <strong>卷积</strong> 可以参阅 <a href="https://blog.csdn.net/chaipp0607/article/details/72236892?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164421878516781685342760%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164421878516781685342760&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-72236892.first_rank_v2_pc_rank_v29&utm_term=%E5%9B%BE%E5%83%8F%E5%8D%B7%E7%A7%AF&spm=1018.2226.3001.4187">理解图像卷积操作的意义_zxucver_CSDN</a> 。</p>
+<pre class="language-python" data-language="python"><code class="language-python">blur <span class="token operator">=</span> cv2<span class="token punctuation">.</span>blur<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+<p><code>(3, 3)</code> 是规定的 <strong>卷积核</strong> 大小。    </p>
+<ul>
+<li><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-8.png" style="width:300px" loading="lazy">
+
+橙色区域就是卷积核。</li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-3.png" style="width:400px" loading="lazy">
+
+<h3 id="方框滤波"><a href="#方框滤波" class="headerlink" title="方框滤波"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gad533230ebf2d42509547d514f7d3fbc3">方框滤波</a></strong></h3><p>基本和均值滤波相同，可以选择是否归一化。    </p>
+<pre class="language-python" data-language="python"><code class="language-python">box <span class="token operator">=</span> cv2<span class="token punctuation">.</span>boxFilter<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> normalize<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-4.png" style="width:600px" loading="lazy">
+
+<p>如果不归一化，RGB 值很容易越界，就会取 255，图片就会很白。   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-5.png" style="width:400px" loading="lazy">
+
+<h3 id="高斯滤波"><a href="#高斯滤波" class="headerlink" title="高斯滤波"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gaabe8c836e97159a9193fb0b11ac52cf1">高斯滤波</a></strong></h3><p>离卷积核中心最近，权值越大。比如：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-6.jpg" style="width:200px" loading="lazy"></p>
+<pre class="language-python" data-language="python"><code class="language-python">gaussian <span class="token operator">=</span> cv2<span class="token punctuation">.</span>GaussianBlur<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>  </code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-7.png" style="width:400px" loading="lazy">
+
+<h3 id="中值滤波"><a href="#中值滤波" class="headerlink" title="中值滤波"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga564869aa33e58769b4469101aac458f9">中值滤波</a></strong></h3><p>用卷积核的中值代替。    </p>
+<pre class="language-python" data-language="python"><code class="language-python">median <span class="token operator">=</span> cv2<span class="token punctuation">.</span>medianBlur<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-9.png" style="width:400px" loading="lazy">   
+
+<h3 id="对比展示"><a href="#对比展示" class="headerlink" title="对比展示"></a><strong>对比展示</strong></h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> numpy <span class="token keyword">as</span> np</code></pre>
+
+<pre class="language-python" data-language="python"><code class="language-python">res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>blur<span class="token punctuation">,</span> gaussian<span class="token punctuation">,</span> median<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'blur, gaussian, median'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-10.png" style="width:auto" loading="lazy">
+
+<p>可以看到中值滤波是效果最好的。    </p>
+<br>
+
+<h2 id="形态学运算"><a href="#形态学运算" class="headerlink" title="形态学运算"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga67493776e3ad1a3df63883829375201f">形态学运算</a></strong></h2><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-20.png" style="width:800px" loading="lazy">
+
+<p>从上到下分别是：   </p>
+<ol>
+<li>腐蚀</li>
+<li>膨胀</li>
+<li>开运算</li>
+<li>闭运算</li>
+<li>梯度运算</li>
+<li>礼帽（顶帽）</li>
+<li>黑帽</li>
+<li>击中击不中</li>
+</ol>
+<h3 id="腐蚀"><a href="#腐蚀" class="headerlink" title="腐蚀"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gaeb1e0c1033e3f6b891a25d0511362aeb">腐蚀</a></strong></h3><p>正如 “腐蚀” 的含义，图像腐蚀就是把图像（通常是二值图像）中的一部分黑色或白色区域缩减细化。      </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-11.png" style="width:400px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/dige.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+
+erosion_1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>erode<span class="token punctuation">(</span>img<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+erosion_2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>erode<span class="token punctuation">(</span>img<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> erosion_1<span class="token punctuation">,</span> erosion_2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'img, erosion_1, erosion_2'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-12.png" style="width:900px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python">pie <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/pie.png'</span><span class="token punctuation">)</span>
+
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+
+erosion_1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>erode<span class="token punctuation">(</span>pie<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+erosion_2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>erode<span class="token punctuation">(</span>pie<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>pie<span class="token punctuation">,</span> erosion_1<span class="token punctuation">,</span> erosion_2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'pie, erosion_1, erosion_2'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-13.png" style="width:900px" loading="lazy">
+
+<h3 id="膨胀"><a href="#膨胀" class="headerlink" title="膨胀"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#ga4ff0f3318642c4f469d0e11f242f3b6c">膨胀</a></strong></h3><p>膨胀就是和腐蚀相反。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/dige.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+
+dige_erosion <span class="token operator">=</span> cv2<span class="token punctuation">.</span>erode<span class="token punctuation">(</span>img<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+dige_dilate_1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>dilate<span class="token punctuation">(</span>dige_erosion<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+dige_dilate_2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>dilate<span class="token punctuation">(</span>dige_erosion<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>dige_erosion<span class="token punctuation">,</span> dige_dilate_1<span class="token punctuation">,</span> dige_dilate_2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'dige_erosion, dige_dilate_1, dige_dilate_2'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-14.png" style="width:900px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python">pie <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/pie.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+
+dilate_1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>dilate<span class="token punctuation">(</span>pie<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+dilate_2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>dilate<span class="token punctuation">(</span>pie<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>pie<span class="token punctuation">,</span> dilate_1<span class="token punctuation">,</span> dilate_2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'pie, dilate_1, dilate_2'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-15.png" style="width:900px" loading="lazy">
+
+<h3 id="开运算与闭运算"><a href="#开运算与闭运算" class="headerlink" title="开运算与闭运算"></a><strong>开运算与闭运算</strong></h3><p>开运算：先腐蚀再膨胀。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/dige.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+opening <span class="token operator">=</span> cv2<span class="token punctuation">.</span>morphologyEx<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>MORPH_OPEN<span class="token punctuation">,</span> kernel<span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'opening'</span><span class="token punctuation">,</span> opening<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-16.png" style="width:300px" loading="lazy">
+
+
+<p>闭运算：先膨胀再腐蚀。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/dige.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+closing <span class="token operator">=</span> cv2<span class="token punctuation">.</span>morphologyEx<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>MORPH_CLOSE<span class="token punctuation">,</span> kernel<span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'opening'</span><span class="token punctuation">,</span> closing<span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-17.png" style="width:300px" loading="lazy">
+
+<h3 id="梯度运算"><a href="#梯度运算" class="headerlink" title="梯度运算"></a><strong>梯度运算</strong></h3><p>梯度运算 &#x3D; 膨胀 - 腐蚀</p>
+<pre class="language-python" data-language="python"><code class="language-python">pie <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/pie.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+dilate <span class="token operator">=</span> cv2<span class="token punctuation">.</span>dilate<span class="token punctuation">(</span>pie<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+erosion <span class="token operator">=</span> cv2<span class="token punctuation">.</span>erode<span class="token punctuation">(</span>pie<span class="token punctuation">,</span> kernel<span class="token punctuation">,</span> iterations<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>dilate<span class="token punctuation">,</span> erosion<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'res'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-19.png" style="width:600px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python">pie <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/pie.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+gradient <span class="token operator">=</span> cv2<span class="token punctuation">.</span>morphologyEx<span class="token punctuation">(</span>pie<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>MORPH_GRADIENT<span class="token punctuation">,</span> kernel<span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'gradient'</span><span class="token punctuation">,</span> gradient<span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-18.png" style="width:300px" loading="lazy">
+
+<h3 id="礼帽与黑帽"><a href="#礼帽与黑帽" class="headerlink" title="礼帽与黑帽"></a><strong>礼帽与黑帽</strong></h3><p>礼帽 &#x3D; 原始 - 开运算   </p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/dige.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+tophat <span class="token operator">=</span> cv2<span class="token punctuation">.</span>morphologyEx<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>MORPH_TOPHAT<span class="token punctuation">,</span> kernel<span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'tophat'</span><span class="token punctuation">,</span> tophat<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-21.png" style="width:400px" loading="lazy">
+
+<p>黑帽 &#x3D; 闭运算 - 原始   </p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/dige.png'</span><span class="token punctuation">)</span>
+kernel <span class="token operator">=</span> np<span class="token punctuation">.</span>ones<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+tophat <span class="token operator">=</span> cv2<span class="token punctuation">.</span>morphologyEx<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>MORPH_BLACKHAT<span class="token punctuation">,</span> kernel<span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'tophat'</span><span class="token punctuation">,</span> tophat<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv2/opencv2-22.png" style="width:400px" loading="lazy">
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+      </tags>
+  </entry>
 </search>
