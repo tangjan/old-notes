@@ -10988,4 +10988,306 @@ cv_show<span class="token punctuation">(</span><span class="token string">'topha
         <tag>OpenCV</tag>
       </tags>
   </entry>
+  <entry>
+    <title>OpenCV-3：Soble / Scharr / Laplacian 算子、Canny 边缘检测、图像金字塔、图像轮廓</title>
+    <url>/2022/02/23/opencv/opencv3/</url>
+    <content><![CDATA[<h2 id="Sobel-算子"><a href="#Sobel-算子" class="headerlink" title="Sobel 算子"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gacea54f142e81b6758cb6f375ce782c8d">Sobel 算子</a></strong></h2><p>Sobel 算子是计算图像 <strong>梯度</strong> 的方法之一。常用于图像边缘检测。     </p>
+<p>参阅：<a href="https://blog.csdn.net/saltriver/article/details/78987096?ops_request_misc=&request_id=&biz_id=102&utm_term=%E5%9B%BE%E5%83%8F%E6%A2%AF%E5%BA%A6&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-78987096.nonecase&spm=1018.2226.3001.4187">图像梯度_saltriver_CSDN</a></p>
+<p>一般用 3*3 的Sobel 算子来计算，水平方向上的灰度值为：   </p>
+<div>
+$$
+G_x =
+\begin{bmatrix}
+-1 & 0 & +1 \\
+-2 & 0 & +2 \\
+-1 & 0 & +1
+\end{bmatrix}
+*
+A
+$$
+</div>
+
+<p>垂直方向上的灰度值为：</p>
+<div>
+$$
+G_y = 
+\begin{bmatrix}
+-1 & -2 & -1 \\
+0 & 0 & 0 \\
++1 & +2 & +1
+\end{bmatrix}
+*
+A
+$$
+</div>
+
+<pre class="language-python" data-language="python"><code class="language-python">dst <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>src<span class="token punctuation">,</span> ddepth<span class="token punctuation">,</span> dx<span class="token punctuation">,</span> dy<span class="token punctuation">,</span> ksize<span class="token punctuation">)</span></code></pre>
+<ul>
+<li><code>ddepth</code>：图像的深度</li>
+<li><code>dx</code>, <code>dy</code>：水平和竖直方向</li>
+<li><code>ksize</code>：Sobel 算子的大小</li>
+</ul>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/pie.png'</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>IMREAD_GRAYSCALE<span class="token punctuation">)</span>
+sobelx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> ksize<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+sobely <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> ksize<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 负数默认会被截断成0，所以要取绝对值</span>
+sobelx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>sobelx<span class="token punctuation">)</span>
+sobely <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>sobely<span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> sobelx<span class="token punctuation">,</span> sobely<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'img, sobelx, sobely'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-1.png" style="width:850px" loading="lazy">
+
+<p>可以用 <code>cv2.addWeighted</code> 将两个方向的梯度结果融合在一起：</p>
+<pre class="language-python" data-language="python"><code class="language-python">sobelxy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>addWeighted<span class="token punctuation">(</span>sobelx<span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> sobely<span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'sobelxy'</span><span class="token punctuation">,</span> sobelxy<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-2.png" style="width:350px" loading="lazy">
+
+<p>不建议使用：</p>
+<pre class="language-python" data-language="python"><code class="language-python">sobelxy<span class="token operator">=</span>cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>img<span class="token punctuation">,</span>cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span>ksize<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+sobelxy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>sobelxy<span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'sobelxy_direct'</span><span class="token punctuation">,</span> sobelxy<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-3.png" style="width:350px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python">lena <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/lena.jpg'</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>IMREAD_GRAYSCALE<span class="token punctuation">)</span>
+sobelx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>lena<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> ksize<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+sobelx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>sobelx<span class="token punctuation">)</span>
+
+sobely <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>lena<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> ksize<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+sobely <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>sobely<span class="token punctuation">)</span>
+
+sobelxy_direct <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>lena<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> ksize<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+sobelxy_direct <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>sobelxy_direct<span class="token punctuation">)</span>
+
+sobelxy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>addWeighted<span class="token punctuation">(</span>sobelx<span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> sobely<span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>lena<span class="token punctuation">,</span> sobelxy<span class="token punctuation">,</span> sobelxy_direct<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">"lena, sobelxy, sobelxy_direct"</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-4.png" style="width:800px" loading="lazy">
+
+<br>
+
+<h2 id="Scharr-算子、Laplacian-算子"><a href="#Scharr-算子、Laplacian-算子" class="headerlink" title="Scharr 算子、Laplacian 算子"></a><strong><a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gaa13106761eedf14798f37aa2d60404c9">Scharr 算子</a>、<a href="https://docs.opencv.org/4.x/d4/d86/group__imgproc__filter.html#gad78703e4c8fe703d479c1860d76429e6">Laplacian 算子</a></strong></h2><p>Scharr 算子：</p>
+<div>
+$$
+G_x = 
+\begin{bmatrix}
+-3 & 0 & +3 \\
+-10 & 0 & +10 \\
+-3 & 0 & +3
+\end{bmatrix}
+$$
+</div>
+
+<div>
+$$
+G_y = 
+\begin{bmatrix}
+-3 & -10 & -3 \\
+0 & 0 & 0 \\
++3 & +10 & +3
+\end{bmatrix}
+$$
+</div>
+
+<p>Laplacian 算子：</p>
+<div>
+$$
+G = 
+\begin{bmatrix}
+0 & 1 & 0 \\
+1 & -4 & 1 \\
+0 & 1 & 0
+\end{bmatrix}
+$$
+</div>
+
+<p><strong>不同算子对比</strong>：</p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/lena.jpg'</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>IMREAD_GRAYSCALE<span class="token punctuation">)</span>
+sobelx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> ksize<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+sobely <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Sobel<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> ksize<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">)</span>
+sobelx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>sobelx<span class="token punctuation">)</span>
+sobely <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>sobely<span class="token punctuation">)</span>
+sobelxy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>addWeighted<span class="token punctuation">(</span>sobelx<span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> sobely<span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+scharrx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Scharr<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+scharry <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Scharr<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+scharrx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>scharrx<span class="token punctuation">)</span>
+scharry <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>scharry<span class="token punctuation">)</span>
+scharrxy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>addWeighted<span class="token punctuation">(</span>scharrx<span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> scharry<span class="token punctuation">,</span> <span class="token number">0.5</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+laplacian <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Laplacian<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CV_64F<span class="token punctuation">)</span>
+laplacian <span class="token operator">=</span> cv2<span class="token punctuation">.</span>convertScaleAbs<span class="token punctuation">(</span>laplacian<span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>sobelxy<span class="token punctuation">,</span> scharrxy<span class="token punctuation">,</span> laplacian<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'sobelxy, scharrxy, laplacian'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-5.png" style="width:800px" loading="lazy">
+
+<p>可以看到，敏感度：scharr &gt; sobel &gt; laplacian</p>
+<br>
+
+<h2 id="Canny-边缘检测"><a href="#Canny-边缘检测" class="headerlink" title="Canny 边缘检测"></a><strong><a href="https://docs.opencv.org/4.x/dd/d1a/group__imgproc__feature.html#ga04723e007ed888ddf11d9ba04e2232de">Canny</a> 边缘检测</strong></h2><p>Canny 边缘检测算法是澳洲计算机科学家 John F. Canny 于 1986 年开发出来的一个多级边缘检测算法。  </p>
+<p>参阅：</p>
+<ul>
+<li><a href="https://blog.csdn.net/saltriver/article/details/80545571?ops_request_misc=&request_id=&biz_id=102&utm_term=Canny&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-80545571.first_rank_v2_pc_rank_v29&spm=1018.2226.3001.4187">Canny 边缘检测_saltriver_CSDN</a></li>
+<li><a href="https://blog.csdn.net/dieju8330/article/details/82814529?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164558373616780366553799%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164558373616780366553799&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-7-82814529.first_rank_v2_pc_rank_v29&utm_term=Canny&spm=1018.2226.3001.4187">Canny 算法_dieju8330_CSDN</a></li>
+</ul>
+<p>算法步骤：</p>
+<ol>
+<li>图像降噪：高斯滤波器</li>
+<li>计算图像梯度大小和方向：Sobel 算子</li>
+<li>非极大值抑制</li>
+<li>双阈值筛选  <img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-6.png" style="width:600px" loading="lazy"></li>
+</ol>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"media/lena.jpg"</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>IMREAD_GRAYSCALE<span class="token punctuation">)</span>
+
+Canny1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Canny<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token number">80</span><span class="token punctuation">,</span> <span class="token number">150</span><span class="token punctuation">)</span>
+Canny2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Canny<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>Canny1<span class="token punctuation">,</span> Canny2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'Canny1, Canny2'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<p><code>Canny()</code> 中两个数字的是双阈值检测中的两个阈值，这个阈值范围影响边缘检测的灵敏度。    </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-7.png" style="width:500px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"media/car.png"</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>IMREAD_GRAYSCALE<span class="token punctuation">)</span>
+Canny1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Canny<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token number">120</span><span class="token punctuation">,</span> <span class="token number">250</span><span class="token punctuation">)</span>
+Canny2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>Canny<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> Canny1<span class="token punctuation">,</span> Canny2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'img, Canny1, Canny2'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-8.png" style="width:auto" loading="lazy">
+
+<br>
+
+<h2 id="图像金字塔"><a href="#图像金字塔" class="headerlink" title="图像金字塔"></a><strong>图像金字塔</strong></h2><p>将同一张图片制作为不同大小，摞在一起就成了图像金字塔。   </p>
+<p>参阅：</p>
+<ul>
+<li><a href="https://blog.csdn.net/zhu_hongji/article/details/81536820?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164558734416780357291568%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164558734416780357291568&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-81536820.first_rank_v2_pc_rank_v29&utm_term=%E5%9B%BE%E5%83%8F%E9%87%91%E5%AD%97%E5%A1%94&spm=1018.2226.3001.4187">图像金字塔_点滴成海~_CSDN</a></li>
+<li><a href="https://baike.baidu.com/item/%E5%9B%BE%E5%83%8F%E9%87%91%E5%AD%97%E5%A1%94/306277">图像金字塔_百度百科</a></li>
+</ul>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-9.webp" style="width:450px" loading="lazy">
+
+<h3 id="高斯金字塔"><a href="#高斯金字塔" class="headerlink" title="高斯金字塔"></a><strong>高斯金字塔</strong></h3><p>向下采样（逐步<strong>缩小</strong>）：</p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"media/nanami.jpg"</span><span class="token punctuation">)</span>
+down <span class="token operator">=</span> cv2<span class="token punctuation">.</span>pyrDown<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">,</span> img<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'down'</span><span class="token punctuation">,</span> down<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-10.png" style="width:650px" loading="lazy">
+
+
+<p>向上采样（逐步<strong>放大</strong>）：</p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"media/nanami.jpg"</span><span class="token punctuation">)</span>
+up <span class="token operator">=</span> cv2<span class="token punctuation">.</span>pyrUp<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'img'</span><span class="token punctuation">,</span> img<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'up'</span><span class="token punctuation">,</span> up<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-11.png" style="width:750px" loading="lazy">
+
+<p>（图片出自《summer pockets》）</p>
+<p>向上采样或向下采样都是不可逆的，也就是说先执行向上采样再执行向下采样得到的图片相较于原图丢失了信息，会模糊许多。  </p>
+<h3 id="拉普拉斯金字塔"><a href="#拉普拉斯金字塔" class="headerlink" title="拉普拉斯金字塔"></a><strong>拉普拉斯金字塔</strong></h3><p>参阅：<a href="https://blog.csdn.net/u013165921/article/details/78156202?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164559783316780366510822%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=164559783316780366510822&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-2-78156202.first_rank_v2_pc_rank_v29&utm_term=%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E9%87%91%E5%AD%97%E5%A1%94&spm=1018.2226.3001.4187">拉普拉斯金字塔_笔尖bj_CSDN</a></p>
+<br>
+
+<h2 id="图像轮廓"><a href="#图像轮廓" class="headerlink" title="图像轮廓"></a><strong><a href="https://docs.opencv.org/4.x/d3/dc0/group__imgproc__shape.html#gadf1ad6a0b82947fa1fe3c3d497f260e0">图像轮廓</a></strong></h2><h3 id="绘制轮廓"><a href="#绘制轮廓" class="headerlink" title="绘制轮廓"></a><strong>绘制轮廓</strong></h3><pre class="language-python" data-language="python"><code class="language-python">cv2<span class="token punctuation">.</span>findContours<span class="token punctuation">(</span>img<span class="token punctuation">,</span> mode<span class="token punctuation">,</span> method<span class="token punctuation">)</span></code></pre>
+<ul>
+<li><code>img</code>：输入图像</li>
+<li><code>mode</code>：轮廓检测模式，详见 <a href="https://docs.opencv.org/4.x/d3/dc0/group__imgproc__shape.html#ga819779b9857cc2f8601e6526a3a5bc71">RetrievalModes_OpenCV docs</a>，常用的是 <code>RETR_TREE</code>，即检索所有的轮廓</li>
+<li><code>method</code>：轮廓逼近方式，详见 <a href="https://docs.opencv.org/4.x/d3/dc0/group__imgproc__shape.html#ga4303f45752694956374734a03c54d5ff">ContourApproximationModes_OpenCV docs</a><ul>
+<li><code>CHAIN_APPROX_NONE</code>：保存轮廓上所有的点</li>
+<li><code>CHAIN_APPROX_SIMPLE</code>：压缩简化轮廓，最终只保留轮廓的终点部分，如矩形只保留四个顶点</li>
+</ul>
+</li>
+</ul>
+<p>通常使用二值图像来进行图像轮廓检测。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"media/figure.png"</span><span class="token punctuation">)</span>
+gray <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
+ret<span class="token punctuation">,</span> thresh <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>gray<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>THRESH_BINARY<span class="token punctuation">)</span>
+
+contours<span class="token punctuation">,</span> hierarchy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>findContours<span class="token punctuation">(</span>thresh<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>RETR_TREE<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CHAIN_APPROX_NONE<span class="token punctuation">)</span>
+
+<span class="token comment"># 因为轮廓是画在传入图片上的，所以最好复制一份，不然原图会变</span>
+img_contour <span class="token operator">=</span> img<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 传入参数依次是：输入图像，轮廓，轮廓索引，颜色模式，线条粗细</span>
+contour <span class="token operator">=</span> cv2<span class="token punctuation">.</span>drawContours<span class="token punctuation">(</span>img_contour<span class="token punctuation">,</span> contours<span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> contour<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'img, contour'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-12.png" style="width:700px" loading="lazy">
+
+<h3 id="轮廓特征"><a href="#轮廓特征" class="headerlink" title="轮廓特征"></a><strong>轮廓特征</strong></h3><pre class="language-python" data-language="python"><code class="language-python">cnt <span class="token operator">=</span> contours<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+<span class="token comment"># 面积</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>contourArea<span class="token punctuation">(</span>cnt<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 周长，True 表示闭合</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>cv2<span class="token punctuation">.</span>arcLength<span class="token punctuation">(</span>cnt<span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-13.png" style="width:220px" loading="lazy">
+
+<h3 id="轮廓近似"><a href="#轮廓近似" class="headerlink" title="轮廓近似"></a><strong>轮廓近似</strong></h3><p>原理：设定一个阈值，然后将图像轮廓上的点逐个两两作差，如果其差值小于设定的阈值，就连接两点作为原轮廓的近似。所以这个阈值越接近于 0，近似出的轮廓就越接近原轮廓。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"media/figure2.png"</span><span class="token punctuation">)</span>
+gray <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
+ret<span class="token punctuation">,</span> thresh <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>gray<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>THRESH_BINARY<span class="token punctuation">)</span>
+
+contours<span class="token punctuation">,</span> hierarchy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>findContours<span class="token punctuation">(</span>thresh<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>RETR_TREE<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CHAIN_APPROX_NONE<span class="token punctuation">)</span>
+cnt <span class="token operator">=</span> contours<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+img_copy1 <span class="token operator">=</span> img<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+res1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>drawContours<span class="token punctuation">(</span>img_copy1<span class="token punctuation">,</span> <span class="token punctuation">[</span>cnt<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+<span class="token comment"># 阈值设定，一般取轮廓周长的小数倍</span>
+epsilon <span class="token operator">=</span> <span class="token number">0.1</span> <span class="token operator">*</span> cv2<span class="token punctuation">.</span>arcLength<span class="token punctuation">(</span>cnt<span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+approx <span class="token operator">=</span> cv2<span class="token punctuation">.</span>approxPolyDP<span class="token punctuation">(</span>cnt<span class="token punctuation">,</span> epsilon<span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">)</span>
+img_copy2 <span class="token operator">=</span> img<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+res2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>drawContours<span class="token punctuation">(</span>img_copy2<span class="token punctuation">,</span> <span class="token punctuation">[</span>approx<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> res1<span class="token punctuation">,</span> res2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'img, res1, res2'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-14.png" style="width:1000px" loading="lazy">
+
+<h3 id="外接图形"><a href="#外接图形" class="headerlink" title="外接图形"></a><strong>外接图形</strong></h3><p>如外接矩形、外接圆等。</p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">"media/figure.png"</span><span class="token punctuation">)</span>
+gray <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>img<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
+ret<span class="token punctuation">,</span> thresh <span class="token operator">=</span> cv2<span class="token punctuation">.</span>threshold<span class="token punctuation">(</span>gray<span class="token punctuation">,</span> <span class="token number">127</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>THRESH_BINARY<span class="token punctuation">)</span>
+contours<span class="token punctuation">,</span> hierarchy <span class="token operator">=</span> cv2<span class="token punctuation">.</span>findContours<span class="token punctuation">(</span>thresh<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>RETR_TREE<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>CHAIN_APPROX_NONE<span class="token punctuation">)</span>
+cnt <span class="token operator">=</span> contours<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+
+img_copy1 <span class="token operator">=</span> img<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> w<span class="token punctuation">,</span> h <span class="token operator">=</span> cv2<span class="token punctuation">.</span>boundingRect<span class="token punctuation">(</span>cnt<span class="token punctuation">)</span>
+res1 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>img_copy1<span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x <span class="token operator">+</span> w<span class="token punctuation">,</span> y <span class="token operator">+</span> h<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+img_copy2 <span class="token operator">=</span> img<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span><span class="token punctuation">,</span> radius <span class="token operator">=</span> cv2<span class="token punctuation">.</span>minEnclosingCircle<span class="token punctuation">(</span>cnt<span class="token punctuation">)</span>
+center <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">int</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">)</span>
+radius <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>radius<span class="token punctuation">)</span>
+res2 <span class="token operator">=</span> cv2<span class="token punctuation">.</span>circle<span class="token punctuation">(</span>img_copy2<span class="token punctuation">,</span> center<span class="token punctuation">,</span> radius<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>res1<span class="token punctuation">,</span> res2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'res1, res2'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv3/opencv3-15.png" style="width:850px" loading="lazy">
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+      </tags>
+  </entry>
 </search>
