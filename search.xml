@@ -11290,4 +11290,171 @@ cv_show<span class="token punctuation">(</span><span class="token string">'res1,
         <tag>OpenCV</tag>
       </tags>
   </entry>
+  <entry>
+    <title>OpenCV-4：模板匹配、直方图</title>
+    <url>/2022/02/24/opencv/opencv4/</url>
+    <content><![CDATA[<h2 id="模板匹配"><a href="#模板匹配" class="headerlink" title="模板匹配"></a><strong>模板匹配</strong></h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a><strong>介绍</strong></h3><p>所谓模板匹配就是找到原图像上与模板图像相似的部分。    </p>
+<p>模板在原图像上从原点开始滑动，每一步都计算差别程度，计算方法有 6 种，参见 <a href="https://docs.opencv.org/3.3.1/df/dfb/group__imgproc__object.html#ga3a7850640f1fe1f58fe91a2d7583695d">TemplateMatchModes_OpenCV docs</a>：</p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-1.png" style="width:750px" loading="lazy">
+
+<p>然后将每次计算的结果放入一个矩阵里，作为结果输出。    </p>
+<p>假如原图形是 AxB 大小，而模板是 axb 大小，那么容易知道输出结果的矩阵是 (A-a+1)x(B-b+1) 大小。   </p>
+<p>对这个输出矩阵使用 <a href="https://docs.opencv.org/3.3.1/d2/de8/group__core__array.html#gab473bf2eb6d14ff97e89b355dac20707">minMaxLoc()</a> 函数，就可以得到矩阵中最大值、最小值的位置，也就对应于原图像的位置，就很容易知道是哪里匹配度最高了，就可以圈出来 ROI 了。   </p>
+<h3 id="例"><a href="#例" class="headerlink" title="例"></a><strong>例</strong></h3><pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/lena.jpg'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+template <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/face.jpg'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+h<span class="token punctuation">,</span> w <span class="token operator">=</span> template<span class="token punctuation">.</span>shape
+methods <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'cv2.TM_CCOEFF'</span><span class="token punctuation">,</span> <span class="token string">'cv2.TM_CCOEFF_NORMED'</span><span class="token punctuation">,</span> <span class="token string">'cv2.TM_CCORR'</span><span class="token punctuation">,</span>
+           <span class="token string">'cv2.TM_CCORR_NORMED'</span><span class="token punctuation">,</span> <span class="token string">'cv2.TM_SQDIFF'</span><span class="token punctuation">,</span> <span class="token string">'cv2.TM_SQDIFF_NORMED'</span><span class="token punctuation">]</span>
+<span class="token keyword">for</span> meth <span class="token keyword">in</span> methods<span class="token punctuation">:</span>
+    img2 <span class="token operator">=</span> img<span class="token punctuation">.</span>copy<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    method <span class="token operator">=</span> <span class="token builtin">eval</span><span class="token punctuation">(</span>meth<span class="token punctuation">)</span>
+    res <span class="token operator">=</span> cv2<span class="token punctuation">.</span>matchTemplate<span class="token punctuation">(</span>img<span class="token punctuation">,</span> template<span class="token punctuation">,</span> method<span class="token punctuation">)</span>
+    min_val<span class="token punctuation">,</span> max_val<span class="token punctuation">,</span> min_loc<span class="token punctuation">,</span> max_loc <span class="token operator">=</span> cv2<span class="token punctuation">.</span>minMaxLoc<span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+
+    <span class="token keyword">if</span> method <span class="token keyword">in</span> <span class="token punctuation">[</span>cv2<span class="token punctuation">.</span>TM_SQDIFF<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>TM_SQDIFF_NORMED<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        top_left <span class="token operator">=</span> min_loc
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        top_left <span class="token operator">=</span> max_loc
+
+    bottom_right <span class="token operator">=</span> <span class="token punctuation">(</span>top_left<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> w<span class="token punctuation">,</span> top_left<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> h<span class="token punctuation">)</span>
+    cv2<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>img2<span class="token punctuation">,</span> top_left<span class="token punctuation">,</span> bottom_right<span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+    plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">121</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>res<span class="token punctuation">,</span> cmap<span class="token operator">=</span><span class="token string">'gray'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>yticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">122</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img2<span class="token punctuation">,</span> cmap<span class="token operator">=</span><span class="token string">'gray'</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>xticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>yticks<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>suptitle<span class="token punctuation">(</span>meth<span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<p>模板：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-2.jpg" style="width:100px" loading="lazy"></p>
+<p>匹配结果：<br>左边图中最亮或者最暗的地方就对应着最佳匹配区域。<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-3.png" style="width:400px" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-4.png" style="width:400px" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-5.png" style="width:400px" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-6.png" style="width:400px" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-7.png" style="width:400px" loading="lazy"><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-8.png" style="width:400px" loading="lazy"></p>
+<h3 id="匹配多个对象"><a href="#匹配多个对象" class="headerlink" title="匹配多个对象"></a><strong>匹配多个对象</strong></h3><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-9.jpg" style="width:50px" loading="lazy">    
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-10.jpg" style="width:370px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python">img_rgb <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/mario.jpg'</span><span class="token punctuation">)</span>
+img_gray <span class="token operator">=</span> cv2<span class="token punctuation">.</span>cvtColor<span class="token punctuation">(</span>img_rgb<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>COLOR_BGR2GRAY<span class="token punctuation">)</span>
+template <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/mario_coin.jpg'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+h<span class="token punctuation">,</span> w <span class="token operator">=</span> template<span class="token punctuation">.</span>shape
+
+res <span class="token operator">=</span> cv2<span class="token punctuation">.</span>matchTemplate<span class="token punctuation">(</span>img_gray<span class="token punctuation">,</span> template<span class="token punctuation">,</span> cv2<span class="token punctuation">.</span>TM_CCOEFF_NORMED<span class="token punctuation">)</span>
+
+threshold <span class="token operator">=</span> <span class="token number">0.8</span>  <span class="token comment"># 取匹配程度大于%80的坐标</span>
+loc <span class="token operator">=</span> np<span class="token punctuation">.</span>where<span class="token punctuation">(</span>res <span class="token operator">>=</span> threshold<span class="token punctuation">)</span>
+
+<span class="token keyword">for</span> pt <span class="token keyword">in</span> <span class="token builtin">zip</span><span class="token punctuation">(</span><span class="token operator">*</span>loc<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment"># *号表示可选参数</span>
+    bottom_right <span class="token operator">=</span> <span class="token punctuation">(</span>pt<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">+</span> w<span class="token punctuation">,</span> pt<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> h<span class="token punctuation">)</span>
+    cv2<span class="token punctuation">.</span>rectangle<span class="token punctuation">(</span>img_rgb<span class="token punctuation">,</span> pt<span class="token punctuation">,</span> bottom_right<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">255</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+
+cv2<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span><span class="token string">'res'</span><span class="token punctuation">,</span> img_rgb<span class="token punctuation">)</span>
+cv2<span class="token punctuation">.</span>waitKey<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-11.png" style="width:370px" loading="lazy">
+
+<br>
+
+<h2 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a><strong><a href="https://docs.opencv.org/3.3.1/d6/dc7/group__imgproc__hist.html#ga4b2b5fd75503ff9e6844cc4dcdaed35d">直方图</a></strong></h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a><strong>基本使用</strong></h3><p>直方图是一种统计用的图，对于图像，就是用于像素点的统计。     </p>
+<p>直方图中，横坐标是 0~255，纵坐标是个数。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">cv2<span class="token punctuation">.</span>calcHist<span class="token punctuation">(</span>images<span class="token punctuation">,</span> channels<span class="token punctuation">,</span> mask<span class="token punctuation">,</span> histSize<span class="token punctuation">,</span> ranges<span class="token punctuation">)</span></code></pre>
+
+<ul>
+<li><code>images</code>：通常为灰度图，或者对图像 BGR 中的某一个通道进行统计。要用中括号 <code>[]</code> 括上，如 <code>[img]</code></li>
+<li><code>channels</code>：如果入图像是灰度图，该值就是 <code>[0]</code>；如果是彩色图像，该值可以是 <code>[0]</code>、<code>[1]</code> 或 <code>[2]</code>，分别对应 B、G、R   </li>
+<li><code>mask</code>：图像的掩模。如果统计整幅图像的直方图就设为 <code>None</code>   </li>
+<li><code>histSize</code>：BIN（直方图中的每个长方体）的数目。也要用中括号   </li>
+<li><code>ranges</code>：像素值范围，常为 <code>[0, 256] </code></li>
+</ul>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/yuki.jpg'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment"># 0表示灰度图</span>
+hist <span class="token operator">=</span> cv2<span class="token punctuation">.</span>calcHist<span class="token punctuation">(</span><span class="token punctuation">[</span>img<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>hist<span class="token punctuation">(</span>img<span class="token punctuation">.</span>ravel<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-12.png" style="width:500px" loading="lazy">
+
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/yuki.jpg'</span><span class="token punctuation">)</span>
+color <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'g'</span><span class="token punctuation">,</span> <span class="token string">'r'</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> i<span class="token punctuation">,</span> col <span class="token keyword">in</span> <span class="token builtin">enumerate</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    histr <span class="token operator">=</span> cv2<span class="token punctuation">.</span>calcHist<span class="token punctuation">(</span><span class="token punctuation">[</span>img<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token boolean">None</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>histr<span class="token punctuation">,</span> color<span class="token operator">=</span>col<span class="token punctuation">)</span>
+    plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-13.png" style="width:500px" loading="lazy">
+
+<h3 id="mask-的使用"><a href="#mask-的使用" class="headerlink" title="mask 的使用"></a><strong>mask 的使用</strong></h3><pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/sky.jpg'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+mask <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span>img<span class="token punctuation">.</span>shape<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> np<span class="token punctuation">.</span>uint8<span class="token punctuation">)</span>
+mask<span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">:</span><span class="token number">500</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">:</span><span class="token number">600</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">255</span>
+
+masked_img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>bitwise_and<span class="token punctuation">(</span>img<span class="token punctuation">,</span> img<span class="token punctuation">,</span> mask<span class="token operator">=</span>mask<span class="token punctuation">)</span>  <span class="token comment"># 与操作</span>
+
+hist_mask <span class="token operator">=</span> cv2<span class="token punctuation">.</span>calcHist<span class="token punctuation">(</span><span class="token punctuation">[</span>img<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> mask<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">221</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token string">'gray'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">222</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>mask<span class="token punctuation">,</span> <span class="token string">'gray'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">223</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>imshow<span class="token punctuation">(</span>masked_img<span class="token punctuation">,</span> <span class="token string">'gray'</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>subplot<span class="token punctuation">(</span><span class="token number">224</span><span class="token punctuation">)</span><span class="token punctuation">,</span> plt<span class="token punctuation">.</span>plot<span class="token punctuation">(</span>hist_mask<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>xlim<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-14.png" style="width:550px" loading="lazy">
+
+<h3 id="均衡化"><a href="#均衡化" class="headerlink" title="均衡化"></a><strong>均衡化</strong></h3><p>参阅：<a href="https://blog.csdn.net/qq_15971883/article/details/88699218?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164568540116780264096297%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.%2522%257D&request_id=164568540116780264096297&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-2-88699218.pc_search_result_cache&utm_term=%E5%9D%87%E8%A1%A1%E5%8C%96&spm=1018.2226.3001.4187">直方图均衡化_桂哥317_CSDN</a></p>
+<p>一些图片的直方图分布可能是很不均匀的，也就是很 “瘦高”，直方图均衡化就是让直方图变得均匀一些，也就是 “矮胖” 一些。   </p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-15.png" style="width:450px" loading="lazy">
+
+<p>均衡方法示意：<br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-17.png" style="width:550px" loading="lazy"></p>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-16.png" style="width:550px" loading="lazy">
+
+<p><strong>例</strong>：</p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/clahe.jpg'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>hist<span class="token punctuation">(</span>img<span class="token punctuation">.</span>ravel<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>suptitle<span class="token punctuation">(</span><span class="token string">"origin"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+equ <span class="token operator">=</span> cv2<span class="token punctuation">.</span>equalizeHist<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>hist<span class="token punctuation">(</span>equ<span class="token punctuation">.</span>ravel<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>suptitle<span class="token punctuation">(</span><span class="token string">"equ"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> equ<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'origin, equ'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-18.png" style="width:400px" loading="lazy">
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-19.png" style="width:400px" loading="lazy">
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-20.png" style="width:750px" loading="lazy">
+
+<h3 id="自适应均衡化"><a href="#自适应均衡化" class="headerlink" title="自适应均衡化"></a><strong>自适应均衡化</strong></h3><p>相比于上述的 <code>cv2.equalizeHist</code> 均衡化方法，自适应均衡化方法 <code>cv2.createCLAHE</code> 更适合于改进图像的局部对比度以及获得更多的图像细节。   </p>
+<pre class="language-python" data-language="python"><code class="language-python">img <span class="token operator">=</span> cv2<span class="token punctuation">.</span>imread<span class="token punctuation">(</span><span class="token string">'media/clahe.jpg'</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
+
+equ <span class="token operator">=</span> cv2<span class="token punctuation">.</span>equalizeHist<span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+clahe <span class="token operator">=</span> cv2<span class="token punctuation">.</span>createCLAHE<span class="token punctuation">(</span>clipLimit<span class="token operator">=</span><span class="token number">2.0</span><span class="token punctuation">,</span> tileGridSize<span class="token operator">=</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+res_clahe <span class="token operator">=</span> clahe<span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>img<span class="token punctuation">)</span>
+
+plt<span class="token punctuation">.</span>hist<span class="token punctuation">(</span>res_clahe<span class="token punctuation">.</span>ravel<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">256</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>suptitle<span class="token punctuation">(</span><span class="token string">"clahe"</span><span class="token punctuation">)</span>
+plt<span class="token punctuation">.</span>show<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> np<span class="token punctuation">.</span>hstack<span class="token punctuation">(</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> equ<span class="token punctuation">,</span> res_clahe<span class="token punctuation">)</span><span class="token punctuation">)</span>
+cv_show<span class="token punctuation">(</span><span class="token string">'img, equ, clahe'</span><span class="token punctuation">,</span> res<span class="token punctuation">)</span></code></pre>
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-22.png" style="width:450px" loading="lazy">
+
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/opencv/opencv4/opencv4-21.png" style="width:auto" loading="lazy">
+
+
+
+<p><br><br><br><br><br></p>
+<hr>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>OpenCV</tag>
+      </tags>
+  </entry>
 </search>
