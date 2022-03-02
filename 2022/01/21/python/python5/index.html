@@ -31,7 +31,7 @@ document.addEventListener("pjax:success", initScrollReveal);
 <meta property="article:author" content="糖加盐">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-1.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的笔记站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">75</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">9</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">9</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E7%AE%80%E4%BB%8B"><span class="toc-text">元组简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">元组常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E7%9A%84%E5%BE%AA%E7%8E%AF%E9%81%8D%E5%8E%86"><span class="toc-text">元组的循环遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">元组的应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E5%92%8C%E5%88%97%E8%A1%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">元组和列表之间的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E4%BB%8B%E7%BB%8D"><span class="toc-text">字典介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">字典的常用方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E7%9A%84%E5%BE%AA%E7%8E%AF%E9%81%8D%E5%8E%86"><span class="toc-text">字典的循环遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%80%E4%BB%8B"><span class="toc-text">字符串简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">字符串常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD"><span class="toc-text">判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2"><span class="toc-text">查找和替换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%AF%B9%E9%BD%90"><span class="toc-text">文本对齐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%BB%E9%99%A4%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="toc-text">去除空白字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%86%E5%88%86%E5%92%8C%E8%BF%9E%E6%8E%A5"><span class="toc-text">拆分和连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87"><span class="toc-text">字符串的切片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E6%96%B9%E6%B3%95"><span class="toc-text">公共方法</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2022/01/21/python/python5/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的笔记站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Python-5：元组、字典、字符串、公共方法</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-01-21 15:05:00" itemprop="dateCreated datePublished" datetime="2022-01-21T15:05:00+08:00">2022-01-21</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">1.8k</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Python/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Python</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Python/" style="--text-color:#3776ab"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Python</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a><strong>元组</strong></h2><h3 id="元组简介"><a href="#元组简介" class="headerlink" title="元组简介"></a><strong>元组简介</strong></h3><p>元组（Tuple）与列表类似，最大的不同之处在于元组的元素不能修改。常用于存储一组固定的信息。<br>元组使用 <code>()</code> 定义，索引从 0 开始。<br>如：</p>
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-1.png"><script src="/js/ui/mode.js"></script></head><body><script defer src="https://cdn.jsdelivr.net/npm/animejs@latest"></script><script defer src="/js/ui/fireworks.js"></script><canvas class="fireworks"></canvas><div class="container"><a class="sidebar-toggle hty-icon-button" id="menu-btn"><div class="hamburger hamburger--spin" type="button"><span class="hamburger-box"><span class="hamburger-inner"></span></span></div></a><div class="sidebar-toggle sidebar-overlay"></div><aside class="sidebar"><script src="/js/sidebar.js"></script><ul class="sidebar-nav"><li class="sidebar-nav-item sidebar-nav-toc hty-icon-button sidebar-nav-active" data-target="post-toc-wrap" title="文章目录"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-list-ordered"></use></svg></li><li class="sidebar-nav-item sidebar-nav-overview hty-icon-button" data-target="site-overview-wrap" title="站点概览"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-passport-line"></use></svg></li></ul><div class="sidebar-panel" id="site-overview-wrap"><div class="site-info fix-top"><a class="site-author-avatar" href="/about/" title="糖加盐"><img width="96" loading="lazy" src="/avatar.png" alt="糖加盐"></a><div class="site-author-name"><a href="/about/">糖加盐</a></div><span class="site-name">糖加盐的笔记站</span><sub class="site-subtitle"></sub><div class="site-desciption">欢迎光临</div></div><nav class="site-state"><a class="site-state-item hty-icon-button icon-home" href="/" title="首页"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a><div class="site-state-item"><a href="/archives/" title="归档"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-archive-line"></use></svg></span><span class="site-state-item-count">76</span></a></div><div class="site-state-item"><a href="/categories/" title="分类"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-2-line"></use></svg></span><span class="site-state-item-count">9</span></a></div><div class="site-state-item"><a href="/tags/" title="标签"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="site-state-item-count">9</span></a></div><a class="site-state-item hty-icon-button" href="/"><span class="site-state-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home-4-line"></use></svg></span></a></nav><hr style="margin-bottom:0.5rem"><br><a class="links-item hty-icon-button" id="toggle-mode-btn" href="javascript:;" title="Mode" style="color: #f1cb64"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-contrast-2-line"></use></svg></a></div><div class="sidebar-panel sidebar-panel-active" id="post-toc-wrap"><div class="post-toc"><div class="post-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%83%E7%BB%84"><span class="toc-text">元组</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E7%AE%80%E4%BB%8B"><span class="toc-text">元组简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">元组常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E7%9A%84%E5%BE%AA%E7%8E%AF%E9%81%8D%E5%8E%86"><span class="toc-text">元组的循环遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">元组的应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%83%E7%BB%84%E5%92%8C%E5%88%97%E8%A1%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">元组和列表之间的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E5%85%B8"><span class="toc-text">字典</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E4%BB%8B%E7%BB%8D"><span class="toc-text">字典介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">字典的常用方法：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E7%9A%84%E5%BE%AA%E7%8E%AF%E9%81%8D%E5%8E%86"><span class="toc-text">字典的循环遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AE%80%E4%BB%8B"><span class="toc-text">字符串简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-text">字符串常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A4%E6%96%AD"><span class="toc-text">判断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E5%92%8C%E6%9B%BF%E6%8D%A2"><span class="toc-text">查找和替换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%AF%B9%E9%BD%90"><span class="toc-text">文本对齐</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%BB%E9%99%A4%E7%A9%BA%E7%99%BD%E5%AD%97%E7%AC%A6"><span class="toc-text">去除空白字符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%86%E5%88%86%E5%92%8C%E8%BF%9E%E6%8E%A5"><span class="toc-text">拆分和连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%88%87%E7%89%87"><span class="toc-text">字符串的切片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%85%B1%E6%96%B9%E6%B3%95"><span class="toc-text">公共方法</span></a></li></ol></div></div></div></aside><main class="sidebar-translate" id="content"><div id="post"><article class="hty-card post-block" itemscope itemtype="https://schema.org/Article"><link itemprop="mainEntityOfPage" href="https://tangjan.github.io/2022/01/21/python/python5/"><span hidden itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="name" content="糖加盐"><meta itemprop="description"></span><span hidden itemprop="publisher" itemscope itemtype="https://schema.org/Organization"><meta itemprop="name" content="糖加盐的笔记站"></span><header class="post-header"><h1 class="post-title" itemprop="name headline">Python-5：元组、字典、字符串、公共方法</h1><div class="post-meta"><div class="post-time" style="display:block"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-calendar-line"></use></svg></span> <time title="创建时间：2022-01-21 15:05:00" itemprop="dateCreated datePublished" datetime="2022-01-21T15:05:00+08:00">2022-01-21</time></div><span class="post-count"><span class="post-symbolcount"><span class="post-meta-item-icon" title="本文字数"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-file-word-line"></use></svg></span> <span title="本文字数">1.8k</span></span></span><div class="post-classify"><span class="post-category"> <span class="post-meta-item-icon" style="margin-right:3px;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-folder-line"></use></svg></span><span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a class="category-item" href="/categories/Python/" style="--text-color:var(--hty-text-color)" itemprop="url" rel="index"><span itemprop="text">Python</span></a></span></span><span class="post-tag"><span class="post-meta-divider">-</span><a class="tag-item" href="/tags/Python/" style="--text-color:#3776ab"><span class="post-meta-item-icon"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-price-tag-3-line"></use></svg></span><span class="tag-name">Python</span></a></span></div></div></header><section class="post-body" itemprop="articleBody"><div class="post-content markdown-body" style="--smc-primary:#0078E7;"><h2 id="元组"><a href="#元组" class="headerlink" title="元组"></a><strong>元组</strong></h2><h3 id="元组简介"><a href="#元组简介" class="headerlink" title="元组简介"></a><strong>元组简介</strong></h3><p>元组（Tuple）与列表类似，最大的不同之处在于元组的元素不能修改。常用于存储一组固定的信息。<br>元组使用 <code>()</code> 定义，索引从 0 开始。<br>如：</p>
 <pre class="language-python" data-language="python"><code class="language-python">info_tuple <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">"Anne"</span><span class="token punctuation">,</span> <span class="token number">18</span><span class="token punctuation">,</span> <span class="token number">1.7</span><span class="token punctuation">)</span></code></pre>
 <p>创建空元组：</p>
 <pre class="language-python" data-language="python"><code class="language-python">info_tuple <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
@@ -77,14 +77,14 @@ info_str <span class="token operator">=</span> <span class="token string">"%s �
 <h3 id="字典的常用方法："><a href="#字典的常用方法：" class="headerlink" title="字典的常用方法："></a><strong>字典的常用方法：</strong></h3><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-3.png" style="width:600px" loading="lazy">   
 
 <p><strong>取值</strong>：<code>字典名[key]</code><br><img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-4.png" style="width:350px" loading="lazy">   </p>
-<p><strong>增加 / 修改</strong>：<code>字典名[key] = value</code>  </p>
+<p><strong>增加 &#x2F; 修改</strong>：<code>字典名[key] = value</code>  </p>
 <ul>
 <li>如果键值对不存在，则是增加</li>
 <li>如果键值对已存在，则是修改</li>
 </ul>
 <p><strong>删除</strong>：<code>字典名.pop(key)</code></p>
 <p><strong>统计键值对数量</strong>：<code>len(字典名)</code></p>
-<p><strong>合并 / 更新字典</strong>：<code>字典名.update(新字典名)</code></p>
+<p><strong>合并 &#x2F; 更新字典</strong>：<code>字典名.update(新字典名)</code></p>
 <p><strong>清空字典</strong>：<code>字典名.clear()</code></p>
 <h3 id="字典的循环遍历"><a href="#字典的循环遍历" class="headerlink" title="字典的循环遍历"></a><strong>字典的循环遍历</strong></h3><pre class="language-python" data-language="python"><code class="language-python">xiaoming <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"小明"</span><span class="token punctuation">,</span>
             <span class="token string">"qq"</span><span class="token punctuation">:</span> <span class="token string">"12345"</span><span class="token punctuation">,</span>
@@ -121,13 +121,16 @@ info_str <span class="token operator">=</span> <span class="token string">"%s �
 <li><code>count(字符串)</code>：子字符串 在 字符串 中出现的次数</li>
 </ul>
 <h4 id="判断"><a href="#判断" class="headerlink" title="判断"></a><strong>判断</strong></h4><ul>
-<li><code>string.isspace()</code>：如果 string 中只包含 <strong>空白字符</strong>（如 空格、<code>\t</code>、<code>\n</code>、<code>\r</code>），则返回 <code>True</code> <pre class="language-python" data-language="python"><code class="language-python">string <span class="token operator">=</span> <span class="token string">" \t\n\r"</span>
+<li><p><code>string.isspace()</code>：如果 string 中只包含 <strong>空白字符</strong>（如 空格、<code>\t</code>、<code>\n</code>、<code>\r</code>），则返回 <code>True</code> </p>
+<pre class="language-python" data-language="python"><code class="language-python">string <span class="token operator">=</span> <span class="token string">" \t\n\r"</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span>string<span class="token punctuation">.</span>isspace<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span></code></pre>
-<pre class="language-python" data-language="python"><code class="language-python"><span class="token boolean">True</span></code></pre></li>
-</ul>
-<ul>
-<li><code>string.isalnum()</code>：所有字符都是 字母 或 数字 则返回 True </li>
-<li><code>string.isalpha()</code>：所有字符都是字母则返回 True </li>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token boolean">True</span></code></pre>
+
+</li>
+<li><p><code>string.isalnum()</code>：所有字符都是 字母 或 数字 则返回 True </p>
+</li>
+<li><p><code>string.isalpha()</code>：所有字符都是字母则返回 True</p>
+</li>
 </ul>
 <br>
 
@@ -142,7 +145,7 @@ info_str <span class="token operator">=</span> <span class="token string">"%s �
 <li><code>string.endswith(str)</code>：若字符串以 str 结束则返回 True </li>
 <li><code>string.find(str, start=0, end=len(string))</code>：检测 str 是否包含在指定范围的 string 中，没找到则返回 <code>-1</code> </li>
 <li><code>string.index(str, start=0, end=len(string))</code>：跟 find() 方法类似，不过没找到则会报错 </li>
-<li><code>string.replace(old_str, new_str, num=string.count(old))</code>：把 string 中的 old_str 替换成 new_str，如果 num 指定，则替换不超过 num 次。<br>该方法不是修改原有的字符换，而是创建一个新的字符串。 </li>
+<li><code>string.replace(old_str, new_str, num=string.count(old))</code>：把 string 中的 old_str 替换成 new_str，如果 num 指定，则替换不超过 num 次。<br>该方法不是修改原有的字符换，而是创建一个新的字符串。</li>
 </ul>
 <h4 id="文本对齐"><a href="#文本对齐" class="headerlink" title="文本对齐"></a><strong>文本对齐</strong></h4><ul>
 <li><code>string.center(width)</code>：返回一个原字符串居中，并使用指定字符填充至长度 width 的新字符串 <ul>
@@ -166,7 +169,7 @@ info_str <span class="token operator">=</span> <span class="token string">"%s �
 <h4 id="去除空白字符"><a href="#去除空白字符" class="headerlink" title="去除空白字符"></a><strong>去除空白字符</strong></h4><ul>
 <li><code>string.strip()</code>：截掉 string 左右两边的空白字符  <ul>
 <li><code>string.lstrip()</code>：截掉左边（开始）的空白字符  </li>
-<li><code>string.rstrip()</code>：截掉右边（末尾）的空白字符  </li>
+<li><code>string.rstrip()</code>：截掉右边（末尾）的空白字符</li>
 </ul>
 </li>
 </ul>
@@ -177,12 +180,13 @@ info_str <span class="token operator">=</span> <span class="token string">"%s �
 poem_list <span class="token operator">=</span> poem_str<span class="token punctuation">.</span>split<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>poem_list<span class="token punctuation">)</span></code></pre>
-<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-8.png" style="width:770px" loading="lazy">   </li>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-8.png" style="width:770px" loading="lazy">   
+</li>
 <li><p><code>string.join(seq)</code>：以 string 作为分隔符，将 seq 列表中所有的元素合并为一个新的字符串  </p>
 <pre class="language-python" data-language="python"><code class="language-python">result <span class="token operator">=</span> <span class="token string">" "</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span>poem_list<span class="token punctuation">)</span>
 
 <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span></code></pre>
-<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-9.png" style="width:570px" loading="lazy">   </li>
+<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-9.png" style="width:570px" loading="lazy"></li>
 </ul>
 <p>爬虫时，这些函数很有用。   </p>
 <h3 id="字符串的切片"><a href="#字符串的切片" class="headerlink" title="字符串的切片"></a><strong>字符串的切片</strong></h3><p><strong>切片</strong> 方法适用于 <strong>字符串</strong>、<strong>列表</strong>、<strong>元组</strong>。    </p>
@@ -217,34 +221,28 @@ poem_list <span class="token operator">=</span> poem_str<span class="token punct
 
 <h2 id="公共方法"><a href="#公共方法" class="headerlink" title="公共方法"></a><strong>公共方法</strong></h2><p>列表、字典、元组、字符串都能使用的方法就是公共方法。    </p>
 <ul>
-<li><p><code>len(item)</code>：计算容器中元素个数</p>
-</li>
-<li><p><code>del(item)</code>：删除变量<br><code>del</code> 既能当作函数，又能当作关键字</p>
-<ul>
+<li><code>len(item)</code>：计算容器中元素个数</li>
+<li><code>del(item)</code>：删除变量<br><code>del</code> 既能当作函数，又能当作关键字<ul>
 <li>函数：<code>del(a[1])</code></li>
 <li>关键字：<code>del a[1]</code></li>
 </ul>
 </li>
-<li><p><code>max(item)</code>：返回容器中元素最大值</p>
-</li>
-<li><p><code>min(item)</code>：返回容器中元素最小值</p>
-<ul>
+<li><code>max(item)</code>：返回容器中元素最大值</li>
+<li><code>min(item)</code>：返回容器中元素最小值<ul>
 <li>对于字典，<code>max</code> 和 <code>min</code> 是针对 <code>key</code> 进行比较的</li>
 </ul>
 </li>
-<li><p>切片</p>
-</li>
-<li><p>运算符</p>
-<ul>
+<li>切片</li>
+<li>运算符<ul>
 <li><p><code>+</code>：合并   </p>
 <ul>
 <li><code>+</code> 是生成新的列表，而 <code>list.extend()</code> 是直接追加在原列表后面</li>
-<li><code>list.extend()</code> 和 <code>list.append()</code> 又有区别：<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-11.png" style="width:300px" loading="lazy">   </li>
+<li><code>list.extend()</code> 和 <code>list.append()</code> 又有区别：<img src="https://cdn.jsdelivr.net/gh/tangjan/imgBed/posts/python/python5/python5-11.png" style="width:300px" loading="lazy"></li>
 </ul>
 </li>
 <li><p><code>*</code>：重复   </p>
 <ul>
-<li>字典不能重复，因为须保证 <code>key</code> 是唯一的   </li>
+<li>字典不能重复，因为须保证 <code>key</code> 是唯一的</li>
 </ul>
 </li>
 <li><p>成员运算符</p>
@@ -256,8 +254,7 @@ poem_list <span class="token operator">=</span> poem_str<span class="token punct
 </li>
 </ul>
 </li>
-<li><p>完整的 <code>for</code> 循环语法</p>
-<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> 变量 <span class="token keyword">in</span> 集合<span class="token punctuation">:</span>
+<li>完整的 <code>for</code> 循环语法<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">for</span> 变量 <span class="token keyword">in</span> 集合<span class="token punctuation">:</span>
     
     循环体代码
 <span class="token keyword">else</span><span class="token punctuation">:</span>
